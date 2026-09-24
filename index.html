@@ -364,6 +364,41 @@ body{
   .ctaBox:before{width:70%;opacity:.08}
 }
 
+
+/* Infinite creatives / reviews */
+.showcaseSection,.reviewSection{overflow:hidden}
+.loopViewport{overflow:hidden;width:100%;padding:8px 0 26px;mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
+.loopTrack{display:flex;width:max-content;will-change:transform;animation:loopLeft 52s linear infinite}
+.loopViewport:hover .loopTrack{animation-play-state:paused}
+.loopGroup{display:flex;gap:14px;padding-right:14px}
+@keyframes loopLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.creativeCard{position:relative;width:280px;height:370px;border-radius:26px;overflow:hidden;border:1px solid rgba(255,255,255,.84);box-shadow:0 22px 70px rgba(35,29,24,.12);background:#dcd6cf;flex:none}
+.creativeCard img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.02);transition:.45s}
+.creativeCard:hover img{transform:scale(1.035)}
+.creativeShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,13,.03),rgba(10,11,13,.72) 88%)}
+.creativeNo{position:absolute;top:15px;right:15px;color:#fff;font:italic 18px/1 Georgia,serif;background:rgba(13,14,16,.38);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(12px);padding:8px 10px;border-radius:999px}
+.creativeCopy{position:absolute;left:19px;right:19px;bottom:18px;color:#fff}.creativeCopy b{display:block;font-size:23px;letter-spacing:-.035em}.creativeCopy span{font-size:9px;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase}
+.reviewSection{padding-top:40px}
+.reviewsTrack{animation-duration:46s;animation-direction:reverse}
+.reviewCard{width:340px;min-height:245px;padding:20px;border-radius:24px;flex:none;border:1px solid rgba(255,255,255,.85);background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.42));box-shadow:0 20px 65px rgba(37,31,25,.09);backdrop-filter:blur(22px)}
+.reviewTop{display:flex;align-items:center;gap:12px}.reviewAvatar{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#151619;color:#fff;font:italic 17px/1 Georgia,serif}.reviewTop b{display:block;font-size:12px}.reviewTop small{display:block;color:#817a73;font-size:9px;margin-top:2px}
+.reviewMock{margin:22px 0 20px;display:grid;gap:9px}.reviewMock i{display:block;height:10px;border-radius:999px;background:linear-gradient(90deg,rgba(108,125,144,.19),rgba(189,143,98,.11))}.reviewMock i:nth-child(1){width:91%}.reviewMock i:nth-child(2){width:76%}.reviewMock i:nth-child(3){width:84%}.reviewMock i:nth-child(4){width:54%}
+.reviewFooter{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(20,20,20,.08);padding-top:13px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#736d67}
+
+/* City finder */
+.cityFinder{display:grid;grid-template-columns:.92fr 1.08fr;gap:18px;padding:18px}
+.cityFinderLeft{padding:22px}.cityFinderLabel{display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#746f69;margin-bottom:11px}
+.citySelectWrap{position:relative}.citySelectWrap select{appearance:none;-webkit-appearance:none;width:100%;min-height:66px;padding:0 52px 0 18px;border-radius:17px;border:1px solid rgba(20,20,20,.11);background:rgba(255,255,255,.72);color:#151619;font:800 18px/1 system-ui;outline:none}.citySelectWrap select:focus{border-color:rgba(90,115,145,.44);box-shadow:0 0 0 4px rgba(120,148,181,.09)}
+.selectArrow{position:absolute;right:18px;top:50%;transform:translateY(-52%);pointer-events:none;font-size:22px}.cityHint{font-size:11px;color:#78716b;margin:12px 0 0}
+.cityResult{min-height:240px;padding:27px;border-radius:23px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;position:relative;overflow:hidden;background:linear-gradient(145deg,#131416,#2a2c2f);color:#fff}
+.cityResult:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-60px;top:-70px;background:rgba(120,148,181,.20);filter:blur(8px)}
+.cityResult.freeResult{background:linear-gradient(145deg,#e9e4dd,#faf8f4);color:#151619}.cityResult.freeResult:after{background:rgba(142,164,132,.18)}
+.resultEyebrow{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#a8adb4}.freeResult .resultEyebrow{color:#716a64}.cityResult strong{position:relative;z-index:2;font-size:39px;letter-spacing:-.05em;line-height:1;margin:9px 0 13px}.resultBadge{position:relative;z-index:2;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);padding:7px 10px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.12em}.freeResult .resultBadge{color:#4d6f54;border-color:rgba(73,111,82,.18);background:rgba(88,128,96,.10)}.cityResult p{position:relative;z-index:2;color:#b9bdc3;font-size:12px;margin:13px 0 19px}.freeResult p{color:#69635d}.cityResult .pill{position:relative;z-index:2}
+.cityTicker{overflow:hidden;margin-top:20px;border-top:1px solid rgba(15,16,18,.07);border-bottom:1px solid rgba(15,16,18,.07);padding:12px 0}.cityTickerTrack{display:flex;width:max-content;gap:8px;animation:cityLoop 38s linear infinite}.cityTicker:hover .cityTickerTrack{animation-play-state:paused}@keyframes cityLoop{to{transform:translateX(-50%)}}
+.tickerCity{display:flex;align-items:center;gap:10px;flex:none;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(20,20,20,.07);font-size:10px}.tickerCity i{font-style:normal;font-size:8px;text-transform:uppercase;letter-spacing:.1em}.tickerBusy i{color:#8e5d54}.tickerFree i{color:#4f7758}
+
+@media(max-width:900px){.cityFinder{grid-template-columns:1fr}.creativeCard{width:240px;height:330px}.reviewCard{width:300px}}
+
 </style>
 </head>
 <body>
@@ -376,7 +411,9 @@ body{
     </a>
     <nav class="navlinks">
       <a href="#approach">Підхід</a>
-      <a href="#case">Кейс</a>
+      <a href="#case">Кейси</a>
+      <a href="#creatives">Креативи</a>
+      <a href="#reviews">Відгуки</a>
       <a href="#process">Процес</a>
       <a href="#cities">Міста</a>
     </nav>
@@ -390,18 +427,18 @@ body{
 <main id="top">
 <section class="hero">
   <div class="wrap heroShell">
-    <img class="heroImage" src="https://github.com/VAdym9083.png?size=1200" alt="Vadym — Performance Marketer">
+    <img class="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88" alt="Premium marketing workspace">
     <div class="heroVeil"></div>
 
     <div class="heroContent">
       <div class="heroCopy">
         <div class="eyebrow">Meta Ads · Canada / USA</div>
         <h1>Вам потрібні <span>заявки.</span> Не просто реклама.</h1>
-        <p class="heroLead">Стратегія, креативи, запуск і оптимізація Meta Ads для локального бізнесу та cleaning companies. Моя задача — не «відкрутити бюджет», а знайти зв’язку, яка приводить нормальні звернення.</p>
+        <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Також працюю з іншими нішами локального бізнесу. Стратегія, креативи, запуск і оптимізація Meta Ads без «відкрутити бюджет і чекати дива».</p>
 
         <div class="heroButtons">
           <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
-          <a class="heroBtn" href="#case">Подивитися кейс</a>
+          <a class="heroBtn" href="#case">Подивитися кейси</a>
           <a class="heroBtn" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko</a>
         </div>
 
@@ -513,8 +550,8 @@ body{
     <div class="sectionHead reveal">
       <div class="label">Кейси / Results</div>
       <div>
-        <h2>Не один кейс. Результати в різних містах і нішах.</h2>
-        <p>Показую лише цифри, які вже є в моїх матеріалах і рекламних звітах. Без намальованого ROAS і без «1000 клієнтів за ніч».</p>
+        <h2>Більшість кейсів і результатів — прямо тут.</h2>
+        <p>Клінінг — моя основна спеціалізація, але нижче є результати й з інших ніш. Показую лише цифри з реальних запусків, без намальованого ROAS і маркетингової акробатики.</p>
       </div>
     </div>
 
@@ -585,8 +622,251 @@ body{
     </div>
 
     <div class="casesFoot reveal">
-      <p>Це лише частина проєктів. Більше запусків, скринів і результатів зібрано в Instagram Highlights.</p>
+      <p>Більшість ключових кейсів і цифр уже зібрано на цій сторінці. Додаткові скрини запусків і результати — в Instagram Highlights.</p>
       <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити кейси в Instagram →</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="section showcaseSection" id="creatives">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="label">Креативи</div>
+      <div>
+        <h2>Реклама має зупиняти погляд ще до першого кліку.</h2>
+        <p>Блок уже готовий під 7–10 ваших реальних креативів. Картки йдуть по колу без кінця: остання змінюється першою, а стрічка не «закінчується».</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="loopViewport creativeViewport">
+    <div class="loopTrack">
+      <div class="loopGroup">
+        <article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=82" alt="Cleaning offer">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">01</span>
+          <div class="creativeCopy"><b>Cleaning offer</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=82" alt="Before / After">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">02</span>
+          <div class="creativeCopy"><b>Before / After</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=82" alt="Price card">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">03</span>
+          <div class="creativeCopy"><b>Price card</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82" alt="Story 9:16">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">04</span>
+          <div class="creativeCopy"><b>Story 9:16</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=82" alt="Local service">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">05</span>
+          <div class="creativeCopy"><b>Local service</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=82" alt="Detailing">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">06</span>
+          <div class="creativeCopy"><b>Detailing</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=82" alt="Beauty">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">07</span>
+          <div class="creativeCopy"><b>Beauty</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=82" alt="Lead gen">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">08</span>
+          <div class="creativeCopy"><b>Lead gen</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=82" alt="Carousel">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">09</span>
+          <div class="creativeCopy"><b>Carousel</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82" alt="Retargeting">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">10</span>
+          <div class="creativeCopy"><b>Retargeting</b><span>місце під ваш реальний креатив</span></div>
+        </article>
+      </div>
+      <div class="loopGroup" aria-hidden="true">
+        <article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">01</span>
+          <div class="creativeCopy"><b>Cleaning offer</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">02</span>
+          <div class="creativeCopy"><b>Before / After</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">03</span>
+          <div class="creativeCopy"><b>Price card</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">04</span>
+          <div class="creativeCopy"><b>Story 9:16</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">05</span>
+          <div class="creativeCopy"><b>Local service</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">06</span>
+          <div class="creativeCopy"><b>Detailing</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">07</span>
+          <div class="creativeCopy"><b>Beauty</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">08</span>
+          <div class="creativeCopy"><b>Lead gen</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">09</span>
+          <div class="creativeCopy"><b>Carousel</b><span>місце під ваш реальний креатив</span></div>
+        </article><article class="creativeCard">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82" alt="">
+          <div class="creativeShade"></div>
+          <span class="creativeNo">10</span>
+          <div class="creativeCopy"><b>Retargeting</b><span>місце під ваш реальний креатив</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reviewSection" id="reviews">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="label">Відгуки</div>
+      <div>
+        <h2>Соціальний доказ без вигаданих цитат.</h2>
+        <p>Каркас під скріншоти відгуків уже готовий. Коли завантажите реальні відгуки, вони автоматично підуть по нескінченному колу так само, як креативи.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="loopViewport reviewsViewport">
+    <div class="loopTrack reviewsTrack">
+      <div class="loopGroup">
+        <article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">A</span><div><b>Client feedback</b><small>Review 01</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">B</span><div><b>Client feedback</b><small>Review 02</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">C</span><div><b>Client feedback</b><small>Review 03</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">D</span><div><b>Client feedback</b><small>Review 04</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">E</span><div><b>Client feedback</b><small>Review 05</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">F</span><div><b>Client feedback</b><small>Review 06</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">G</span><div><b>Client feedback</b><small>Review 07</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">H</span><div><b>Client feedback</b><small>Review 08</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article>
+      </div>
+      <div class="loopGroup" aria-hidden="true">
+        <article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">A</span><div><b>Client feedback</b><small>Review 01</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">B</span><div><b>Client feedback</b><small>Review 02</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">C</span><div><b>Client feedback</b><small>Review 03</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">D</span><div><b>Client feedback</b><small>Review 04</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">E</span><div><b>Client feedback</b><small>Review 05</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">F</span><div><b>Client feedback</b><small>Review 06</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">G</span><div><b>Client feedback</b><small>Review 07</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article><article class="reviewCard">
+          <div class="reviewTop"><span class="reviewAvatar">H</span><div><b>Client feedback</b><small>Review 08</small></div></div>
+          <div class="reviewMock">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="reviewFooter"><span>скрін відгуку</span><strong>↗</strong></div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -626,19 +906,63 @@ body{
   </div>
 </section>
 
+
 <section class="section availabilitySection" id="cities">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <div class="label">Доступність</div>
+      <div class="label">1 місто = 1 cleaning-клієнт</div>
       <div>
-        <h2>Перевірте, чи вільне ваше місто.</h2>
-        <p>Toronto і Calgary уже зайняті. Інші міста перевіряю перед стартом, щоб не створювати конфлікт між клієнтами.</p>
+        <h2>Виберіть своє місто й одразу перевірте статус.</h2>
+        <p>Toronto / GTA і Calgary уже зайняті. Інші міста зі списку зараз відкриті для обговорення; фінально статус підтверджую перед стартом.</p>
       </div>
     </div>
-    <div class="cityList">
-      <article class="cityItem glassLight busyCity reveal"><div class="status">Зайнято</div><div><div class="cityName">Toronto / GTA</div><p>Активний residential cleaning-проєкт.</p></div></article>
-      <article class="cityItem glassLight busyCity reveal"><div class="status">Зайнято</div><div><div class="cityName">Calgary</div><p>Cleaning-напрям уже закріплений за чинним клієнтом.</p></div></article>
-      <article class="cityItem glassLight reveal"><div class="status">Перевірити</div><div><div class="cityName">Ваше місто</div><p>Edmonton, Vancouver, Ottawa, Winnipeg, Montreal або місто в США.</p></div></article>
+
+    <div class="cityFinder glassLight reveal">
+      <div class="cityFinderLeft">
+        <span class="cityFinderLabel">Ваше місто</span>
+        <div class="citySelectWrap">
+          <select id="citySelect" aria-label="Виберіть місто">
+            <optgroup label="Canada">
+              <option value="Toronto / GTA">Toronto / GTA</option>
+              <option value="Calgary">Calgary</option>
+              <option value="Edmonton">Edmonton</option>
+              <option value="Vancouver">Vancouver</option>
+              <option value="Ottawa">Ottawa</option>
+              <option value="Montreal">Montreal</option>
+              <option value="Winnipeg">Winnipeg</option>
+              <option value="Hamilton">Hamilton</option>
+              <option value="Kitchener / Waterloo">Kitchener / Waterloo</option>
+            </optgroup>
+            <optgroup label="USA">
+              <option value="New York">New York</option>
+              <option value="Miami">Miami</option>
+              <option value="Chicago">Chicago</option>
+              <option value="Los Angeles">Los Angeles</option>
+              <option value="Philadelphia">Philadelphia</option>
+              <option value="Boston">Boston</option>
+              <option value="Seattle">Seattle</option>
+              <option value="Denver">Denver</option>
+            </optgroup>
+          </select>
+          <span class="selectArrow">⌄</span>
+        </div>
+        <p class="cityHint">Не бачите місто? Напишіть у Telegram — перевірю вручну.</p>
+      </div>
+
+      <div class="cityResult busyResult" id="cityResult">
+        <span class="resultEyebrow">Статус</span>
+        <strong id="cityResultName">Toronto / GTA</strong>
+        <div class="resultBadge" id="cityResultBadge">ЗАЙНЯТО</div>
+        <p id="cityResultText">У цьому регіоні вже працює cleaning-клієнт.</p>
+        <a id="cityResultCta" class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Перевірити інше місто →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cityTicker">
+    <div class="cityTickerTrack">
+      <span class="tickerCity tickerBusy"><b>Toronto / GTA</b><i>Зайнято</i></span><span class="tickerCity tickerBusy"><b>Calgary</b><i>Зайнято</i></span><span class="tickerCity tickerFree"><b>Edmonton</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Vancouver</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Ottawa</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Montreal</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Winnipeg</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>New York</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Miami</b><i>Вільно</i></span>
+      <span class="tickerCity tickerBusy"><b>Toronto / GTA</b><i>Зайнято</i></span><span class="tickerCity tickerBusy"><b>Calgary</b><i>Зайнято</i></span><span class="tickerCity tickerFree"><b>Edmonton</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Vancouver</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Ottawa</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Montreal</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Winnipeg</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>New York</b><i>Вільно</i></span><span class="tickerCity tickerFree"><b>Miami</b><i>Вільно</i></span>
     </div>
   </div>
 </section>
@@ -672,6 +996,29 @@ const io=new IntersectionObserver((entries)=>{
   entries.forEach((e)=>{if(e.isIntersecting)e.target.classList.add('show')})
 },{threshold:.08});
 document.querySelectorAll('.reveal').forEach((el)=>io.observe(el));
+
+const citySelect=document.getElementById('citySelect');
+const cityResult=document.getElementById('cityResult');
+const cityResultName=document.getElementById('cityResultName');
+const cityResultBadge=document.getElementById('cityResultBadge');
+const cityResultText=document.getElementById('cityResultText');
+const cityResultCta=document.getElementById('cityResultCta');
+const occupiedCities=new Set(['Toronto / GTA','Calgary']);
+function renderCityStatus(){
+  if(!citySelect)return;
+  const city=citySelect.value;
+  const busy=occupiedCities.has(city);
+  cityResultName.textContent=city;
+  cityResultBadge.textContent=busy?'ЗАЙНЯТО':'ВІЛЬНО';
+  cityResultText.textContent=busy
+    ? 'У цьому регіоні вже працює cleaning-клієнт. Другого конкурента не беру.'
+    : 'Місто зараз відкрите для обговорення. Фінально підтверджую статус перед стартом.';
+  cityResult.classList.toggle('busyResult',busy);
+  cityResult.classList.toggle('freeResult',!busy);
+  cityResultCta.textContent=busy?'Перевірити інше місто →':'Забронювати місто →';
+}
+if(citySelect){citySelect.addEventListener('change',renderCityStatus);renderCityStatus();}
+
 </script>
 </body>
 </html>
