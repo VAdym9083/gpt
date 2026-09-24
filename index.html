@@ -334,6 +334,42 @@ body{
   box-shadow:0 0 0 4px rgba(120,148,181,.12)
 }
 .caseProofLink:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,18,16,.14)}
+.caseProofModal{
+  position:fixed;inset:0;z-index:120;display:none;place-items:center;
+  padding:24px;background:rgba(7,8,10,.68);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+.caseProofModal.isOpen{display:grid}
+.caseProofDialog{
+  width:min(1120px,calc(100vw - 32px));max-height:calc(100svh - 32px);overflow:auto;
+  border-radius:28px;padding:18px;
+  background:linear-gradient(145deg,rgba(248,246,242,.97),rgba(236,232,226,.96));
+  border:1px solid rgba(255,255,255,.82);
+  box-shadow:0 34px 120px rgba(0,0,0,.34)
+}
+.caseProofTop{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:4px 4px 16px}
+.caseProofTop div{min-width:0}
+.caseProofTop span{display:block;font-size:8px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#7a746e}
+.caseProofTop h3{margin:5px 0 0;font-size:28px;line-height:1;letter-spacing:-.045em}
+.caseProofClose{
+  width:42px;height:42px;flex:none;border:1px solid rgba(17,18,20,.10);border-radius:50%;
+  background:#111214;color:#fff;font-size:22px;line-height:1;cursor:pointer
+}
+.caseProofGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.caseProofMedia{min-width:0}
+.caseProofMedia b{display:block;margin:0 0 7px 4px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#6f6a64}
+.caseProofFrame{
+  position:relative;overflow:hidden;min-height:420px;border-radius:20px;
+  background:#d9d4cd;border:1px solid rgba(20,20,20,.08)
+}
+.caseProofFrame img{width:100%;height:100%;min-height:420px;object-fit:contain;background:#ece8e2}
+.caseProofMissing{
+  position:absolute;inset:0;display:none;place-items:center;padding:28px;text-align:center;
+  color:#6f6a64;font-size:12px;background:linear-gradient(145deg,#efebe5,#ddd7cf)
+}
+.caseProofFrame.isMissing .caseProofMissing{display:grid}
+body.proofModalOpen{overflow:hidden}
+
 .casesFoot{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
 .casesFoot p{margin:0;color:var(--muted);font-size:13px}
 
@@ -741,6 +777,16 @@ body{
   .caseStat strong{font-size:16px}
   .caseStat span{font-size:6.5px;line-height:1.15}
   .caseProofLink{min-height:36px;margin-top:10px;padding:0 11px;font-size:8.5px}
+  .caseProofModal{padding:10px}
+  .caseProofDialog{width:calc(100vw - 20px);max-height:calc(100svh - 20px);padding:12px;border-radius:21px}
+  .caseProofTop{padding:2px 2px 12px}
+  .caseProofTop h3{font-size:22px}
+  .caseProofClose{width:38px;height:38px;font-size:19px}
+  .caseProofGrid{grid-template-columns:1fr;gap:12px}
+  .caseProofFrame,.caseProofFrame img{min-height:0}
+  .caseProofFrame{height:auto;aspect-ratio:4/5}
+  .caseProofFrame img{height:100%;object-fit:contain}
+
   .casesToggleLabel{min-height:48px!important;margin-top:14px!important;padding:0 17px!important}
   .extraCaseGrid{margin-top:14px!important}
 
@@ -1035,14 +1081,14 @@ if(caseToggle&&caseGrid){
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Residential Cleaning"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Residential Cleaning</h3><p>Локальний офер, статичний креатив і кампанія під повідомлення.</p>
     <div class="caseStats"><div class="caseStat"><strong>93</strong><span>діалоги</span></div><div class="caseStat"><strong>$4.40</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$409.35</strong><span>CAD spend</span></div></div>
-    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Residential Cleaning">Переглянути підтвердження →</a>
+    <button class="caseProofLink" type="button" data-proof-title="Residential Cleaning" data-proof-creative="assets/proofs/toronto-cleaning-creative.jpg" data-proof-ads="assets/proofs/toronto-cleaning-ads-manager.jpg">Переглянути підтвердження →</button>
   </div>
 </article>
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=84" alt="Cleaning у США"><span class="caseTag">Cleaning · USA</span></div>
   <div class="caseBody"><h3>Cleaning у США</h3><p>Стабільний потік звернень через Meta Ads для локального сервісного бізнесу.</p>
     <div class="caseStats"><div class="caseStat"><strong>244</strong><span>розмови</span></div><div class="caseStat"><strong>$5</strong><span>за звернення</span></div><div class="caseStat"><strong>$1,220</strong><span>budget</span></div></div>
-    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Cleaning у США">Переглянути підтвердження →</a>
+    <button class="caseProofLink" type="button" data-proof-title="Cleaning у США" data-proof-creative="assets/proofs/usa-cleaning-creative.jpg" data-proof-ads="assets/proofs/usa-cleaning-ads-manager.jpg">Переглянути підтвердження →</button>
   </div>
 </article></div>
 
@@ -1058,28 +1104,28 @@ if(caseToggle&&caseGrid){
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Автодетейлінг"><span class="caseTag">Detailing · Netherlands</span></div>
   <div class="caseBody"><h3>Автодетейлінг</h3><p>Лідогенерація для detailing-бізнесу в Нідерландах.</p>
     <div class="caseStats"><div class="caseStat"><strong>34</strong><span>заявки</span></div><div class="caseStat"><strong>€12.35</strong><span>ціна заявки</span></div><div class="caseStat"><strong>€420</strong><span>budget</span></div></div>
-    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Автодетейлінг">Переглянути підтвердження →</a>
+    <button class="caseProofLink" type="button" data-proof-title="Автодетейлінг" data-proof-creative="assets/proofs/autodetailing-netherlands-creative.jpg" data-proof-ads="assets/proofs/autodetailing-netherlands-ads-manager.jpg">Переглянути підтвердження →</button>
   </div>
 </article>
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг у Лондоні"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг у Лондоні</h3><p>Трафік на сайт + заявки з форми; додаткові звернення в Direct не включені в CPL.</p>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>315</strong><span>link clicks</span></div></div>
-    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Клінінг у Лондоні">Переглянути підтвердження →</a>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг у Лондоні" data-proof-creative="assets/proofs/london-cleaning-creative.jpg" data-proof-ads="assets/proofs/london-cleaning-ads-manager.jpg">Переглянути підтвердження →</button>
   </div>
 </article>
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=84" alt="Чистка меблів у NYC"><span class="caseTag">Upholstery · New York</span></div>
   <div class="caseBody"><h3>Чистка меблів у NYC</h3><p>Локальна кампанія на sofa / rug / mattress cleaning з переходом у повідомлення.</p>
     <div class="caseStats"><div class="caseStat"><strong>8</strong><span>переписок</span></div><div class="caseStat"><strong>1</strong><span>бронювання</span></div><div class="caseStat"><strong>$20/day</strong><span>стартовий бюджет</span></div></div>
-    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Чистка меблів у NYC">Переглянути підтвердження →</a>
+    <button class="caseProofLink" type="button" data-proof-title="Чистка меблів у NYC" data-proof-creative="assets/proofs/nyc-upholstery-creative.jpg" data-proof-ads="assets/proofs/nyc-upholstery-ads-manager.jpg">Переглянути підтвердження →</button>
   </div>
 </article>
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=84" alt="Beauty у Midtown Toronto"><span class="caseTag">Beauty · Toronto</span></div>
   <div class="caseBody"><h3>Beauty у Midtown Toronto</h3><p>Keratin, Botox і Reconstruction: локальне гео, before/after-креативи та Direct.</p>
     <div class="caseStats"><div class="caseStat"><strong>3</strong><span>ключові послуги</span></div><div class="caseStat"><strong>5 км</strong><span>локальне GEO</span></div><div class="caseStat"><strong>Direct</strong><span>ціль кампанії</span></div></div>
-    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Beauty у Midtown Toronto">Переглянути підтвердження →</a>
+    <button class="caseProofLink" type="button" data-proof-title="Beauty у Midtown Toronto" data-proof-creative="assets/proofs/beauty-toronto-creative.jpg" data-proof-ads="assets/proofs/beauty-toronto-ads-manager.jpg">Переглянути підтвердження →</button>
   </div>
 </article></div>
 
@@ -1440,6 +1486,34 @@ if(caseToggle&&caseGrid){
 </section>
 </main>
 
+<div class="caseProofModal" id="caseProofModal" aria-hidden="true">
+  <div class="caseProofDialog" role="dialog" aria-modal="true" aria-labelledby="caseProofTitle">
+    <div class="caseProofTop">
+      <div>
+        <span>Підтвердження кейсу</span>
+        <h3 id="caseProofTitle">Кейс</h3>
+      </div>
+      <button class="caseProofClose" id="caseProofClose" type="button" aria-label="Закрити">×</button>
+    </div>
+    <div class="caseProofGrid">
+      <div class="caseProofMedia">
+        <b>Креатив</b>
+        <div class="caseProofFrame" id="caseCreativeFrame">
+          <img id="caseProofCreative" alt="Креатив кейсу">
+          <div class="caseProofMissing">Креатив для цього кейсу ще не завантажений у assets</div>
+        </div>
+      </div>
+      <div class="caseProofMedia">
+        <b>Ads Manager</b>
+        <div class="caseProofFrame" id="caseAdsFrame">
+          <img id="caseProofAds" alt="Скріншот результатів з Ads Manager">
+          <div class="caseProofMissing">Скріншот Ads Manager для цього кейсу ще не завантажений у assets</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footer">
     <span>© 2026 Vadym · Performance Marketer</span>
@@ -1474,6 +1548,47 @@ function renderCityStatus(){
   cityResultCta.textContent=busy?'Перевірити інше місто →':'Забронювати місто →';
 }
 if(citySelect){citySelect.addEventListener('change',renderCityStatus);renderCityStatus();}
+
+const proofModal=document.getElementById('caseProofModal');
+const proofClose=document.getElementById('caseProofClose');
+const proofTitle=document.getElementById('caseProofTitle');
+const proofCreative=document.getElementById('caseProofCreative');
+const proofAds=document.getElementById('caseProofAds');
+const creativeFrame=document.getElementById('caseCreativeFrame');
+const adsFrame=document.getElementById('caseAdsFrame');
+
+function setProofImage(img,frame,src){
+  frame.classList.remove('isMissing');
+  img.style.display='block';
+  img.onerror=()=>{
+    img.style.display='none';
+    frame.classList.add('isMissing');
+  };
+  img.src=src;
+}
+function openProofModal(button){
+  proofTitle.textContent=button.dataset.proofTitle||'Кейс';
+  setProofImage(proofCreative,creativeFrame,button.dataset.proofCreative||'');
+  setProofImage(proofAds,adsFrame,button.dataset.proofAds||'');
+  proofModal.classList.add('isOpen');
+  proofModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('proofModalOpen');
+}
+function closeProofModal(){
+  proofModal.classList.remove('isOpen');
+  proofModal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('proofModalOpen');
+}
+document.querySelectorAll('.caseProofLink').forEach((button)=>{
+  button.addEventListener('click',()=>openProofModal(button));
+});
+if(proofClose)proofClose.addEventListener('click',closeProofModal);
+if(proofModal)proofModal.addEventListener('click',(event)=>{
+  if(event.target===proofModal)closeProofModal();
+});
+document.addEventListener('keydown',(event)=>{
+  if(event.key==='Escape'&&proofModal?.classList.contains('isOpen'))closeProofModal();
+});
 
 </script>
 </body>
