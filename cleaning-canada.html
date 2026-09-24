@@ -10,16 +10,16 @@
 <meta property="og:description" content="1 місто = 1 клієнт. Toronto і Calgary уже зайняті.">
 <style>
 :root{
-  --paper:#f4f0ea;
-  --paper-2:#fbfaf7;
-  --ink:#0b0c0e;
-  --muted:#66635f;
+  --paper:#f2eee7;
+  --paper-2:#faf8f4;
+  --ink:#111214;
+  --muted:#66615b;
   --line:rgba(16,17,20,.12);
   --glass:rgba(255,255,255,.34);
   --glass-dark:rgba(10,11,13,.72);
-  --accent:#85b7ff;
-  --accent-warm:#e8b77f;
-  --accent-mint:#a6d7c7;
+  --accent:#7894b5;
+  --accent-warm:#bd8f62;
+  --accent-mint:#9d9082;
   --max:1320px;
   --radius:30px;
   --shadow:0 24px 90px rgba(23,20,16,.12);
@@ -275,6 +275,95 @@ footer{padding:26px 0 44px}
   .process{grid-template-columns:1fr}.cityList{grid-template-columns:1fr}
   .ctaBox{padding:27px 20px}.footer{flex-direction:column}
 }
+
+/* 2026 premium editorial refinements */
+body{
+  background:
+    radial-gradient(circle at 7% 5%,rgba(120,148,181,.16),transparent 25%),
+    radial-gradient(circle at 88% 9%,rgba(189,143,98,.16),transparent 24%),
+    radial-gradient(circle at 52% 72%,rgba(116,105,94,.08),transparent 26%),
+    var(--paper);
+}
+.heroImage{object-position:70% 42%;filter:contrast(1.03) saturate(.78) sepia(.045)}
+.heroShell{background:linear-gradient(135deg,#17191d 0%,#7d776f 55%,#d7c9b9 100%)}
+.hero h1 span{background:linear-gradient(92deg,#fff 0%,#c7d3df 48%,#f1e8dd 100%);-webkit-background-clip:text;background-clip:text}
+.glassLight{
+  background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(255,255,255,.32));
+  border-color:rgba(255,255,255,.84);
+  box-shadow:0 26px 90px rgba(38,30,23,.095),inset 0 1px 0 rgba(255,255,255,.85)
+}
+.valueNum{background:rgba(120,148,181,.11);border-color:rgba(120,148,181,.18);color:#5e7896}
+.manifesto .big span{color:#6f8299}
+.photoCard.blue:before{background:linear-gradient(135deg,rgba(110,140,176,.17),transparent 56%)}
+.photoCard.warm:before{background:linear-gradient(135deg,rgba(189,143,98,.16),transparent 54%)}
+.photoCard.mint:before{background:linear-gradient(135deg,rgba(119,106,94,.13),transparent 56%)}
+.colorDot.blue{background:#7894b5}.colorDot.warm{background:#bd8f62}.colorDot.mint{background:#9d9082}
+.availabilitySection{
+  background:
+    radial-gradient(circle at 18% 8%,rgba(120,148,181,.13),transparent 28%),
+    radial-gradient(circle at 83% 85%,rgba(189,143,98,.11),transparent 24%),
+    linear-gradient(180deg,#eee9e2,#f7f4ef)
+}
+.ctaBox{
+  background:
+    radial-gradient(circle at 84% 4%,rgba(120,148,181,.20),transparent 31%),
+    radial-gradient(circle at 8% 92%,rgba(189,143,98,.12),transparent 27%),
+    rgba(255,255,255,.52)
+}
+.ctaBox:before{
+  content:"";position:absolute;right:-2%;top:0;width:42%;height:100%;
+  background:
+    linear-gradient(90deg,rgba(242,238,231,1),rgba(242,238,231,.1)),
+    url("https://github.com/VAdym9083.png?size=1200") center 32%/cover no-repeat;
+  opacity:.13;filter:grayscale(.15) contrast(1.08);pointer-events:none
+}
+
+/* Multi-case gallery */
+.caseGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.caseCard{
+  position:relative;overflow:hidden;min-height:455px;border-radius:28px;
+  border:1px solid rgba(255,255,255,.78);
+  background:rgba(255,255,255,.46);
+  box-shadow:0 26px 86px rgba(35,29,24,.10);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)
+}
+.casePhoto{position:absolute;inset:0 0 42%;overflow:hidden}
+.casePhoto img{width:100%;height:100%;object-fit:cover;transition:.55s ease}
+.caseCard:hover .casePhoto img{transform:scale(1.03)}
+.casePhoto:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,13,15,.02),rgba(12,13,15,.32))}
+.caseTag{
+  position:absolute;left:18px;top:18px;z-index:3;padding:7px 10px;border-radius:999px;
+  color:#fff;background:rgba(11,12,14,.62);border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(12px);font-size:9px;letter-spacing:.14em;text-transform:uppercase
+}
+.caseBody{
+  position:absolute;left:0;right:0;bottom:0;min-height:60%;
+  padding:24px;background:linear-gradient(180deg,rgba(250,248,244,.91),rgba(250,248,244,.99));
+  border-top:1px solid rgba(255,255,255,.75)
+}
+.caseBody h3{font-size:31px;line-height:1;letter-spacing:-.045em;margin:0 0 8px}
+.caseBody p{font-size:12px;color:var(--muted);margin:0}
+.caseStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:19px}
+.caseStat{padding:12px 10px;border-radius:14px;background:rgba(255,255,255,.72);border:1px solid rgba(20,20,20,.07)}
+.caseStat strong{display:block;font-size:22px;letter-spacing:-.045em;color:#27313d}
+.caseStat span{font-size:8px;color:#7c766f;text-transform:uppercase;letter-spacing:.07em}
+.casesFoot{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.casesFoot p{margin:0;color:var(--muted);font-size:13px}
+
+/* Photo-rich process */
+.step{overflow:hidden;padding:0}
+.stepVisual{height:104px;position:relative;overflow:hidden;border-bottom:1px solid rgba(15,16,18,.07)}
+.stepVisual img{width:100%;height:100%;object-fit:cover;filter:saturate(.74) contrast(1.02)}
+.stepVisual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(18,18,20,.16))}
+.stepContent{padding:20px 22px 24px;min-height:142px;display:flex;flex-direction:column;justify-content:space-between}
+.step .n{margin-bottom:24px;color:#6f7f92}
+
+@media(max-width:1020px){.caseGrid{grid-template-columns:1fr}.caseCard{min-height:430px}}
+@media(max-width:680px){
+  .caseCard{min-height:420px}.caseStats{grid-template-columns:1fr 1fr}.casesFoot{align-items:flex-start;flex-direction:column}
+  .ctaBox:before{width:70%;opacity:.08}
+}
+
 </style>
 </head>
 <body>
@@ -301,7 +390,7 @@ footer{padding:26px 0 44px}
 <main id="top">
 <section class="hero">
   <div class="wrap heroShell">
-    <img class="heroImage" src="https://avatars.githubusercontent.com/u/211505407?v=4" alt="Vadym — Performance Marketer">
+    <img class="heroImage" src="https://github.com/VAdym9083.png?size=1200" alt="Vadym — Performance Marketer">
     <div class="heroVeil"></div>
 
     <div class="heroContent">
@@ -422,36 +511,82 @@ footer{padding:26px 0 44px}
 <section class="section" id="case">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <div class="label">Реальний кейс</div>
+      <div class="label">Кейси / Results</div>
       <div>
-        <h2>Не намальований ROAS. Реальна кампанія.</h2>
-        <p>Toronto & GTA, residential cleaning. Нижче — фактичні цифри робочої кампанії, а не декоративна статистика для красивого сайту.</p>
+        <h2>Не один кейс. Результати в різних містах і нішах.</h2>
+        <p>Показую лише цифри, які вже є в моїх матеріалах і рекламних звітах. Без намальованого ROAS і без «1000 клієнтів за ніч».</p>
       </div>
     </div>
 
-    <div class="caseFeature reveal">
-      <div class="caseMain">
-        <div class="caseKicker">Toronto / GTA · Residential cleaning</div>
-        <h3>93 початі діалоги</h3>
-        <p>Локальний офер, статичний креатив і системна оптимізація кампанії під повідомлення.</p>
-        <div class="metrics">
-          <div class="metric"><strong>93</strong><span>STARTED CONVERSATIONS</span></div>
-          <div class="metric"><strong>$4.40</strong><span>CAD / CONVERSATION</span></div>
-          <div class="metric"><strong>$409.35</strong><span>CAD SPEND</span></div>
+    <div class="caseGrid">
+      <article class="caseCard reveal">
+        <div class="casePhoto">
+          <img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Toronto cleaning case">
+          <span class="caseTag">Cleaning · Toronto / GTA</span>
         </div>
-      </div>
-      <div class="caseSide">
-        <div class="script">+41%</div>
-        <div>
-          <h4>Сильніша зв’язка, а не «магічний інтерес»</h4>
-          <p>Порівняно з попередньою сильною кампанією ця зв’язка дала кращий CTR і нижчу вартість кліку та діалогу.</p>
-          <div class="deltaGrid">
-            <div class="delta"><strong>-12%</strong><span>ціна діалогу</span></div>
-            <div class="delta"><strong>+41%</strong><span>link CTR</span></div>
-            <div class="delta"><strong>-10%</strong><span>link CPC</span></div>
+        <div class="caseBody">
+          <h3>Residential Cleaning</h3>
+          <p>Локальний офер, статичний креатив і кампанія під повідомлення.</p>
+          <div class="caseStats">
+            <div class="caseStat"><strong>93</strong><span>діалоги</span></div>
+            <div class="caseStat"><strong>$4.40</strong><span>CAD / діалог</span></div>
+            <div class="caseStat"><strong>$409.35</strong><span>CAD spend</span></div>
           </div>
         </div>
-      </div>
+      </article>
+
+      <article class="caseCard reveal">
+        <div class="casePhoto">
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=84" alt="Cleaning company in USA">
+          <span class="caseTag">Cleaning · USA</span>
+        </div>
+        <div class="caseBody">
+          <h3>Cleaning у США</h3>
+          <p>Стабільний потік звернень через Meta Ads для локального сервісного бізнесу.</p>
+          <div class="caseStats">
+            <div class="caseStat"><strong>244</strong><span>розмови</span></div>
+            <div class="caseStat"><strong>$5</strong><span>за звернення</span></div>
+            <div class="caseStat"><strong>$1,220</strong><span>budget</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="caseCard reveal">
+        <div class="casePhoto">
+          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Auto detailing Netherlands">
+          <span class="caseTag">Detailing · Netherlands</span>
+        </div>
+        <div class="caseBody">
+          <h3>Автодетейлінг</h3>
+          <p>Лідогенерація для detailing-бізнесу в Нідерландах.</p>
+          <div class="caseStats">
+            <div class="caseStat"><strong>34</strong><span>заявки</span></div>
+            <div class="caseStat"><strong>€12.35</strong><span>ціна заявки</span></div>
+            <div class="caseStat"><strong>€420</strong><span>budget</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="caseCard reveal">
+        <div class="casePhoto">
+          <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="London cleaning case">
+          <span class="caseTag">Cleaning · London</span>
+        </div>
+        <div class="caseBody">
+          <h3>Клінінг у Лондоні</h3>
+          <p>Трафік на сайт + заявки з форми; додаткові звернення в Direct не включені в CPL.</p>
+          <div class="caseStats">
+            <div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div>
+            <div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div>
+            <div class="caseStat"><strong>315</strong><span>link clicks</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="casesFoot reveal">
+      <p>Це лише частина проєктів. Більше запусків, скринів і результатів зібрано в Instagram Highlights.</p>
+      <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити кейси в Instagram →</a>
     </div>
   </div>
 </section>
@@ -465,12 +600,28 @@ footer{padding:26px 0 44px}
         <p>Без хаотичних тестів і постійного «ще трохи почекаємо». Є зрозумілий процес від першого розбору до оптимізації.</p>
       </div>
     </div>
+
     <div class="process">
-      <article class="step glassLight reveal"><div class="n">01</div><div><h3>Розбір</h3><p>Послуги, ціни, гео, поточні заявки та попередня реклама.</p></div></article>
-      <article class="step glassLight reveal"><div class="n">02</div><div><h3>Стратегія</h3><p>Офер, аудиторія, позиціонування та структура кампанії.</p></div></article>
-      <article class="step glassLight reveal"><div class="n">03</div><div><h3>Креативи</h3><p>Статика, відео, тексти й рекламні кути під конкретний сегмент.</p></div></article>
-      <article class="step glassLight reveal"><div class="n">04</div><div><h3>Запуск</h3><p>Meta Ads, Direct / Messages, плейсменти та перші сигнали.</p></div></article>
-      <article class="step glassLight reveal"><div class="n">05</div><div><h3>Оптимізація</h3><p>Залишаю сильні зв’язки й прибираю витрати, які не дають нормальних звернень.</p></div></article>
+      <article class="step glassLight reveal">
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80" alt="Аналіз бізнесу"></div>
+        <div class="stepContent"><div class="n">01</div><div><h3>Розбір</h3><p>Послуги, ціни, гео, поточні заявки та попередня реклама.</p></div></div>
+      </article>
+      <article class="step glassLight reveal">
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=80" alt="Стратегія"></div>
+        <div class="stepContent"><div class="n">02</div><div><h3>Стратегія</h3><p>Офер, аудиторія, позиціонування та структура кампанії.</p></div></div>
+      </article>
+      <article class="step glassLight reveal">
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=700&q=80" alt="Рекламні креативи"></div>
+        <div class="stepContent"><div class="n">03</div><div><h3>Креативи</h3><p>Статика, відео, тексти й рекламні кути під конкретний сегмент.</p></div></div>
+      </article>
+      <article class="step glassLight reveal">
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80" alt="Запуск реклами"></div>
+        <div class="stepContent"><div class="n">04</div><div><h3>Запуск</h3><p>Meta Ads, Direct / Messages, плейсменти та перші сигнали.</p></div></div>
+      </article>
+      <article class="step glassLight reveal">
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="Оптимізація реклами"></div>
+        <div class="stepContent"><div class="n">05</div><div><h3>Оптимізація</h3><p>Залишаю сильні зв’язки й прибираю витрати, які не дають нормальних звернень.</p></div></div>
+      </article>
     </div>
   </div>
 </section>
