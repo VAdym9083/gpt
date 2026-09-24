@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="360" viewBox="0 0 1260 360">
+<defs>
+  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#87d6e7"/><stop offset=".55" stop-color="#66bfd1"/><stop offset="1" stop-color="#d9f0f4"/></linearGradient>
+  <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fbfaf4"/><stop offset=".55" stop-color="#e7eddf"/><stop offset="1" stop-color="#cfdcc7"/></linearGradient>
+  <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c6ebf6"/><stop offset=".58" stop-color="#95d3e8"/><stop offset="1" stop-color="#f0cba8"/></linearGradient>
+  <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d6f0f3"/><stop offset=".55" stop-color="#9fd6df"/><stop offset="1" stop-color="#cce7d5"/></linearGradient>
+  <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c3e2ff"/><stop offset=".58" stop-color="#91c7f7"/><stop offset="1" stop-color="#ecf6ff"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".12"/></filter>
+</defs>
+<rect width="1260" height="360" rx="28" fill="#fff"/>
+<g font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+  <g transform="translate(140 30)">
+    <circle cx="0" cy="100" r="78" fill="#fff" stroke="#d8dde2" stroke-width="5" filter="url(#shadow)"/>
+    <circle cx="0" cy="100" r="68" fill="url(#g1)"/>
+    <text x="0" y="86" fill="#fff" font-size="31" font-weight="900">КРЕА</text><text x="0" y="119" fill="#fff" font-size="31" font-weight="900">ТИВИ</text>
+    <text x="0" y="222" fill="#111" font-size="22" font-weight="700">КРЕАТИВИ</text>
+  </g>
+  <g transform="translate(385 30)">
+    <circle cx="0" cy="100" r="78" fill="#fff" stroke="#d8dde2" stroke-width="5" filter="url(#shadow)"/>
+    <circle cx="0" cy="100" r="68" fill="url(#g2)"/>
+    <path d="M-48 65 C-5 45 22 54 52 88 C20 74 -7 80 -45 118" fill="none" stroke="#d5dfca" stroke-width="7" opacity=".75"/>
+    <text x="0" y="108" fill="#222" font-size="34" font-weight="900">КЕЙСИ</text>
+    <text x="0" y="222" fill="#111" font-size="22" font-weight="700">КЕЙСИ</text>
+    <line x1="-55" x2="55" y1="250" y2="250" stroke="#ff4856" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(630 30)">
+    <circle cx="0" cy="100" r="78" fill="#fff" stroke="#d8dde2" stroke-width="5" filter="url(#shadow)"/>
+    <circle cx="0" cy="100" r="68" fill="url(#g3)"/>
+    <rect x="-38" y="63" width="76" height="54" rx="5" fill="#f4f5f4" stroke="#7d8a8f" stroke-width="3"/>
+    <path d="M-55 125 L55 125" stroke="#c99267" stroke-width="10"/>
+    <text x="0" y="104" fill="#151515" font-size="30" font-weight="900">САЙТИ</text>
+    <text x="0" y="222" fill="#111" font-size="22" font-weight="700">САЙТИ</text>
+  </g>
+  <g transform="translate(875 30)">
+    <circle cx="0" cy="100" r="78" fill="#fff" stroke="#d8dde2" stroke-width="5" filter="url(#shadow)"/>
+    <circle cx="0" cy="100" r="68" fill="url(#g4)"/>
+    <text x="0" y="88" fill="#fff" font-size="24" font-weight="900">ПОСЛУГИ ТА</text><text x="0" y="119" fill="#fff" font-size="31" font-weight="900">ЦІНИ</text>
+    <text x="0" y="222" fill="#111" font-size="22" font-weight="700">ПОСЛУГИ</text>
+  </g>
+  <g transform="translate(1120 30)">
+    <circle cx="0" cy="100" r="78" fill="#fff" stroke="#d8dde2" stroke-width="5" filter="url(#shadow)"/>
+    <circle cx="0" cy="100" r="68" fill="url(#g5)"/>
+    <text x="0" y="86" fill="#fff" font-size="24" font-weight="900">РЕАЛЬНІ</text><text x="0" y="117" fill="#fff" font-size="31" font-weight="900">ВІДГУКИ</text>
+    <text x="0" y="222" fill="#111" font-size="22" font-weight="700">ВІДГУКИ</text>
+  </g>
+</g>
+</svg>
