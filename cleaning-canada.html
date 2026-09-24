@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<title>Meta Ads для клининга в Канаде — 1 город = 1 клиент</title>
+<meta name="description" content="Настройка Facebook и Instagram Ads для клининговых компаний в Канаде. Работаю по модели: один город — один клиент. Toronto и Calgary уже заняты.">
+<style>
+:root{
+  --bg:#0d1117;--card:#131a22;--soft:#18222d;--text:#f7f9fb;--muted:#9eabb9;
+  --line:rgba(255,255,255,.10);--accent:#5ce1a6;--accent2:#8ad8ff;--warn:#ffd166;
+  --max:1160px;--r:28px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(circle at 8% 3%,rgba(92,225,166,.15),transparent 27%),
+  radial-gradient(circle at 92% 16%,rgba(138,216,255,.12),transparent 24%),
+  var(--bg);
+  color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.5
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(calc(100% - 32px),var(--max));margin:auto}
+.nav{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.navin{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900}
+.mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07110d;font-weight:950}
+.navlinks{display:flex;gap:22px;color:#c2cad2;font-size:14px}
+.navcta,.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:850}
+.navcta{padding:10px 16px;background:#fff;color:#0c1116}
+.hero{padding:78px 0 42px}
+.heroGrid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:#d2d9e0;font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.08em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 16px rgba(92,225,166,.9)}
+h1{font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:-.06em;margin:22px 0}
+h1 .accent{color:var(--accent)}
+.lead{font-size:clamp(18px,2vw,22px);color:#b7c1cc;max-width:720px;margin:0}
+.heroActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:29px}
+.btn{min-height:52px;padding:0 22px;border:1px solid var(--line)}
+.primary{background:var(--accent);color:#06110d;border-color:transparent}
+.secondary{background:rgba(255,255,255,.035)}
+.exclusive{margin-top:25px;padding:14px 16px;border:1px solid rgba(92,225,166,.25);background:rgba(92,225,166,.07);border-radius:16px;color:#d7eee4;font-size:14px}
+.exclusive strong{color:var(--accent)}
+.availability{border:1px solid var(--line);border-radius:32px;padding:25px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 25px 80px rgba(0,0,0,.28)}
+.availability h3{font-size:26px;letter-spacing:-.03em;margin:0 0 8px}
+.availability>p{margin:0 0 20px;color:var(--muted)}
+.city{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-top:1px solid var(--line)}
+.cityName{font-weight:800}
+.status{font-size:12px;font-weight:900;padding:7px 10px;border-radius:999px}
+.busy{background:rgba(255,209,102,.11);color:var(--warn);border:1px solid rgba(255,209,102,.25)}
+.open{background:rgba(92,225,166,.11);color:var(--accent);border:1px solid rgba(92,225,166,.25)}
+.small{font-size:12px;color:#8794a2;margin-top:13px}
+.trustbar{margin-top:42px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;color:#8895a2;text-align:center;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;word-spacing:18px}
+.section{padding:96px 0}
+.head{display:grid;grid-template-columns:.72fr 1.28fr;gap:52px;align-items:end;margin-bottom:42px}
+.head h2,.ctaBox h2{font-size:clamp(40px,6vw,70px);line-height:.98;letter-spacing:-.055em;margin:0}
+.head p,.ctaBox p{font-size:18px;color:var(--muted);margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{padding:27px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
+.card b{color:var(--accent);font-size:13px}
+.card h3{font-size:26px;line-height:1.05;letter-spacing:-.035em;margin:42px 0 14px}
+.card p{color:var(--muted);margin:0}
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.case{border:1px solid var(--line);border-radius:30px;overflow:hidden;background:var(--card)}
+.caseHero{padding:30px;min-height:270px;background:linear-gradient(135deg,#5ce1a6 0%,#2db37f 100%);color:#06110d}
+.caseHero span{font-size:12px;font-weight:950;letter-spacing:.08em}
+.caseHero h3{font-size:clamp(34px,4vw,54px);line-height:.98;letter-spacing:-.055em;margin:50px 0 0}
+.caseBody{padding:25px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.metric{padding:13px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
+.metric strong{font-size:21px;display:block}
+.metric small{color:var(--muted)}
+.rulebox{border:1px solid var(--line);border-radius:30px;padding:31px;background:linear-gradient(145deg,rgba(138,216,255,.10),rgba(255,255,255,.02))}
+.rulebox h3{font-size:36px;letter-spacing:-.045em;line-height:1;margin:0 0 17px}
+.rulebox p{color:var(--muted)}
+.rule{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.rule strong{color:var(--accent)}
+.steps{border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:80px .9fr 1.1fr;gap:25px;padding:29px 0;border-bottom:1px solid var(--line)}
+.step b{color:var(--accent)}
+.step h3{font-size:27px;margin:0}
+.step p{color:var(--muted);margin:0}
+.ctaBox{display:grid;grid-template-columns:1fr 1fr;gap:38px;padding:42px;border:1px solid rgba(92,225,166,.24);border-radius:32px;background:radial-gradient(circle at 90% 0%,rgba(92,225,166,.13),transparent 35%),var(--card)}
+.ctaBox h2{margin:15px 0 16px}
+form{display:grid;gap:10px}
+label{display:grid;gap:6px;font-size:13px;font-weight:800;color:#ccd4dc}
+input,select,textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#0d141b;color:#fff;font:inherit}
+textarea{min-height:90px;resize:vertical}
+.formStatus{min-height:18px;color:var(--accent);font-size:13px}
+.faq{display:grid;gap:10px}
+details{border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.025);padding:0 20px}
+summary{min-height:68px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:850}
+summary::after{content:"+";font-size:24px;color:var(--accent)}
+details[open] summary::after{content:"−"}
+details p{color:var(--muted);margin:-3px 0 20px}
+footer{padding:34px 0 42px;border-top:1px solid var(--line);color:#8794a2}
+.footer{display:flex;justify-content:space-between;gap:20px}
+@media(max-width:900px){
+  .navlinks{display:none}.heroGrid,.head,.ctaBox{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.proof{grid-template-columns:1fr}
+  .step{grid-template-columns:58px 1fr}.step p{grid-column:2}.hero{padding-top:54px}
+}
+@media(max-width:580px){
+  .container{width:min(calc(100% - 22px),var(--max))}.section{padding:72px 0}.brand span:last-child{display:none}
+  .metrics{grid-template-columns:1fr}.ctaBox{padding:24px 17px}.footer{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="container navin">
+    <a class="brand" href="#top"><span class="mark">VL</span><span>Вадим Лебеденко · Meta Ads</span></a>
+    <nav class="navlinks"><a href="#proof">Кейс</a><a href="#why">Почему так</a><a href="#process">Как работаем</a><a href="#faq">FAQ</a></nav>
+    <a class="navcta" href="#check">Проверить город</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="container heroGrid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Meta Ads для клининговых компаний в Канаде</span>
+      <h1>Один город — <span class="accent">один клиент.</span></h1>
+      <p class="lead">Настраиваю Facebook и Instagram Ads для клининговых компаний. Не беру две конкурирующие компании в одном городе, чтобы не запускать одинаковую стратегию против собственных клиентов.</p>
+      <div class="heroActions">
+        <a class="btn primary" href="#check">Проверить, свободен ли ваш город ↗</a>
+        <a class="btn secondary" href="#proof">Посмотреть кейс</a>
+      </div>
+      <div class="exclusive"><strong>Toronto и Calgary уже заняты.</strong> Новые клининговые компании в этих городах сейчас не беру.</div>
+    </div>
+
+    <aside class="availability">
+      <h3>Доступность по городам</h3>
+      <p>Один город закрепляется за одной клининговой компанией.</p>
+      <div class="city"><span class="cityName">Toronto / GTA</span><span class="status busy">ЗАНЯТО</span></div>
+      <div class="city"><span class="cityName">Calgary</span><span class="status busy">ЗАНЯТО</span></div>
+      <div class="city"><span class="cityName">Edmonton</span><span class="status open">МОЖНО ОБСУДИТЬ</span></div>
+      <div class="city"><span class="cityName">Vancouver</span><span class="status open">МОЖНО ОБСУДИТЬ</span></div>
+      <div class="city"><span class="cityName">Ottawa / другие города</span><span class="status open">ПРОВЕРИТЬ</span></div>
+      <div class="small">Статус города подтверждается перед стартом. Я не обещаю эксклюзивность задним числом.</div>
+    </aside>
+  </div>
+
+  <div class="trustbar">Креативы ✦ Аудитория ✦ Запуск ✦ Оптимизация ✦ Аналитика ✦ Meta Ads</div>
+</section>
+
+<section class="section" id="why">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">Почему 1 город = 1 клиент</span>
+      <div><h2>Ваш рекламщик не должен работать против вас.</h2><p>Если один специалист ведёт несколько одинаковых клинингов в одном городе, он фактически помогает конкурентам бороться за ту же аудиторию. Я так не работаю.</p></div>
+    </div>
+    <div class="cards">
+      <article class="card"><b>01 / ЭКСКЛЮЗИВНОСТЬ</b><h3>Не беру прямого конкурента рядом</h3><p>Пока работаем вместе, второй клининг в этом же городе не подключаю.</p></article>
+      <article class="card"><b>02 / ЛОКАЛЬНАЯ СТРАТЕГИЯ</b><h3>Оффер под ваш рынок</h3><p>Гео, цены, услуги, сезонность и конкуренты отличаются. Реклама тоже должна отличаться.</p></article>
+      <article class="card"><b>03 / ОПТИМИЗАЦИЯ</b><h3>Смотрим на качество заявок</h3><p>Не гонюсь за красивым CTR. Важнее стоимость диалога, адекватность лида и шанс закрыть его в заказ.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="proof">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">Кейс</span>
+      <div><h2>Не теория. Клининг уже веду.</h2><p>Ниже — пример результатов по Toronto & GTA из реальной рекламной кампании.</p></div>
+    </div>
+
+    <div class="proof">
+      <article class="case">
+        <div class="caseHero"><span>TORONTO & GTA · CLEANING</span><h3>1 097 начатых диалогов</h3></div>
+        <div class="caseBody">
+          <div class="metrics">
+            <div class="metric"><strong>1 097</strong><small>диалогов</small></div>
+            <div class="metric"><strong>$2.39 CAD</strong><small>средняя цена</small></div>
+            <div class="metric"><strong>$2 629 CAD</strong><small>расход</small></div>
+          </div>
+        </div>
+      </article>
+
+      <div class="rulebox">
+        <h3>Что вы получаете</h3>
+        <p>Не «запуск рекламы и удачи». Я собираю связку целиком и продолжаю работать после старта.</p>
+        <div class="rule"><strong>01</strong><span>Анализ города, конкурентов, цен и услуг</span></div>
+        <div class="rule"><strong>02</strong><span>Оффер и рекламные креативы под ваш клининг</span></div>
+        <div class="rule"><strong>03</strong><span>Настройка Meta Ads и запуск кампаний</span></div>
+        <div class="rule"><strong>04</strong><span>14 дней личной оптимизации после запуска</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">Процесс</span>
+      <div><h2>Сначала считаем. Потом запускаем.</h2><p>Реклама не лечит слабый оффер магией. Поэтому перед бюджетом разбираем, что именно продаём и кому.</p></div>
+    </div>
+    <div class="steps">
+      <div class="step"><b>01</b><h3>Проверяем город</h3><p>Убеждаюсь, что у меня нет активного клиента по клинингу в вашем городе.</p></div>
+      <div class="step"><b>02</b><h3>Разбираю ваш бизнес</h3><p>Услуги, средний чек, зона выезда, сильные стороны, текущие заявки и прошлую рекламу.</p></div>
+      <div class="step"><b>03</b><h3>Готовлю запуск</h3><p>Креативы, оффер, аудитории, структура кампании и путь клиента до сообщения или лида.</p></div>
+      <div class="step"><b>04</b><h3>Оптимизирую</h3><p>После старта отслеживаю, откуда приходят нормальные обращения, и режу то, что съедает бюджет без смысла.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">FAQ</span>
+      <div><h2>До запуска — без сказок.</h2><p>Чем яснее экономика бизнеса до рекламы, тем меньше сюрпризов после.</p></div>
+    </div>
+    <div class="faq">
+      <details><summary>Вы гарантируете определённое количество заказов?</summary><p>Нет. Я отвечаю за рекламную систему, аналитику, креативы и оптимизацию. Количество закрытых заказов зависит также от цены, оффера, скорости ответа и работы с лидами.</p></details>
+      <details><summary>Почему Toronto и Calgary недоступны?</summary><p>Там уже есть активные клиенты по клинингу. Я не беру вторую компанию в том же городе, пока веду первую.</p></details>
+      <details><summary>Можно стартовать с небольшим бюджетом?</summary><p>Да, если бюджет позволяет собрать достаточно данных. Точную сумму предлагаю после оценки города, услуги и конкуренции.</p></details>
+      <details><summary>Креативы входят?</summary><p>Да. Для запуска готовлю рекламные концепции, тексты и простые креативы под вашу услугу и город.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="check">
+  <div class="container ctaBox">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Проверка города бесплатная</span>
+      <h2>Проверьте, свободен ли ваш город.</h2>
+      <p>Заполните короткую форму. После отправки сайт скопирует готовое сообщение и откроет Instagram.</p>
+      <div class="heroActions"><a class="btn secondary" href="https://instagram.com/target_vadym" target="_blank" rel="noopener">@target_vadym ↗</a></div>
+    </div>
+
+    <form id="leadForm">
+      <label>Ваше имя<input name="name" required placeholder="Александр"></label>
+      <label>Город в Канаде<input name="city" required placeholder="Edmonton"></label>
+      <label>Название компании<input name="company" required placeholder="ABC Cleaning"></label>
+      <label>Рекламный бюджет в месяц
+        <select name="budget" required>
+          <option value="">Выберите</option>
+          <option>до $500 CAD</option>
+          <option>$500–1 500 CAD</option>
+          <option>$1 500–3 000 CAD</option>
+          <option>$3 000+ CAD</option>
+        </select>
+      </label>
+      <label>Что хотите улучшить?<textarea name="problem" placeholder="Больше регулярных уборок / deep cleaning / коммерческий клининг..."></textarea></label>
+      <button class="btn primary" type="submit">Проверить город ↗</button>
+      <div class="formStatus" id="formStatus"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer">
+    <span>© <span id="year"></span> Вадим Лебеденко · Meta Ads</span>
+    <span>Toronto и Calgary: новые клиенты по клинингу не принимаются</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+const f=document.getElementById('leadForm');
+const s=document.getElementById('formStatus');
+f.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const d=new FormData(f);
+  const t=
+`Привет, Вадим! Хочу проверить город для рекламы клининга.
+
+Имя: ${d.get('name')}
+Город: ${d.get('city')}
+Компания: ${d.get('company')}
+Бюджет: ${d.get('budget')}
+Задача: ${d.get('problem')||'не указано'}`;
+  try{
+    await navigator.clipboard.writeText(t);
+    s.textContent='Данные скопированы. Открываю Instagram…';
+  }catch(err){
+    s.textContent='Открываю Instagram. Скопируйте данные вручную.';
+  }
+  window.open('https://instagram.com/target_vadym','_blank');
+});
+</script>
+</body>
+</html>
