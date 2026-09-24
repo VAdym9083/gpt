@@ -376,7 +376,6 @@ body{
 .creativeCard img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.02);transition:.45s}
 .creativeCard:hover img{transform:scale(1.035)}
 .creativeShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,11,13,.03),rgba(10,11,13,.72) 88%)}
-.creativeNo{position:absolute;top:15px;right:15px;color:#fff;font:italic 18px/1 Georgia,serif;background:rgba(13,14,16,.38);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(12px);padding:8px 10px;border-radius:999px}
 .creativeCopy{position:absolute;left:19px;right:19px;bottom:18px;color:#fff}.creativeCopy b{display:block;font-size:23px;letter-spacing:-.035em}.creativeCopy span{font-size:9px;color:rgba(255,255,255,.7);letter-spacing:.08em;text-transform:uppercase}
 .reviewSection{padding-top:40px}
 .reviewsTrack{animation-duration:46s;animation-direction:reverse}
@@ -402,15 +401,16 @@ body{
 
 /* Real portrait trust layer */
 .heroPortraitCard{
-  position:absolute;right:6%;top:24%;
-  width:min(29vw,330px);aspect-ratio:4/5;
-  border-radius:28px;overflow:hidden;
-  border:1px solid rgba(255,255,255,.48);
+  position:absolute;right:4.2%;top:16%;
+  width:min(34vw,420px);aspect-ratio:4/5;
+  border-radius:30px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.54);
   background:rgba(255,255,255,.10);
-  box-shadow:0 28px 80px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.20);
+  box-shadow:0 34px 100px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.24);
   backdrop-filter:blur(18px) saturate(125%);
   -webkit-backdrop-filter:blur(18px) saturate(125%);
-  transform:rotate(.6deg);
+  transform:rotate(.4deg);
+  z-index:4;
 }
 .heroPortraitCard:after{
   content:"";position:absolute;inset:0;
@@ -418,8 +418,8 @@ body{
   pointer-events:none
 }
 .heroPortraitCard img{
-  width:100%;height:100%;object-fit:cover;object-position:50% 38%;
-  filter:saturate(.83) contrast(1.03) brightness(.93)
+  width:100%;height:100%;object-fit:cover;object-position:50% 32%;
+  filter:saturate(.90) contrast(1.04) brightness(.97)
 }
 .heroPortraitMeta{
   position:absolute;z-index:3;left:16px;right:16px;bottom:15px;
@@ -430,8 +430,8 @@ body{
 }
 .heroPortraitMeta span{display:block;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.65)}
 .heroPortraitMeta b{display:block;margin-top:3px;font-size:13px;letter-spacing:-.01em}
-.heroRight .signature{right:0;top:16%;z-index:5;text-shadow:0 8px 30px rgba(0,0,0,.38)}
-.heroRight .verticalWords{right:0;top:72%;z-index:5}
+.heroRight .signature{right:1.5%;top:9%;z-index:6;text-shadow:0 8px 30px rgba(0,0,0,.42)}
+.heroRight .verticalWords{right:1.5%;top:76%;z-index:6}
 .heroRight .est{display:none}
 @media(max-width:1020px){
   .heroRight{display:block;min-height:390px}
@@ -536,7 +536,7 @@ body{
         <div class="heroPortraitCard">
           <img src="assets/vadym-real.jpg" alt="Vadym — performance marketer">
           <div class="heroPortraitMeta">
-            <span>VADYM</span>
+            <span>REAL PHOTO · VADYM</span>
             <b>3+ роки · Meta Ads</b>
           </div>
         </div>
@@ -736,86 +736,86 @@ body{
         <article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=82" alt="Cleaning offer">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Cleaning offer</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Cleaning offer</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=82" alt="Before / After">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Before / After</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Before / After</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=82" alt="Price card">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Price card</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Price card</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82" alt="Story 9:16">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Story 9:16</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Story 9:16</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=82" alt="Local service">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Local service</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Local service</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=82" alt="Detailing">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Detailing</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Detailing</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=82" alt="Beauty">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Beauty</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Beauty</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=82" alt="Lead gen">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Lead gen</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Lead gen</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=82" alt="Carousel">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Carousel</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Carousel</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82" alt="Retargeting">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Retargeting</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Retargeting</b><span>приклад рекламного формату</span></div>
         </article>
       </div>
       <div class="loopGroup" aria-hidden="true">
         <article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Cleaning offer</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Cleaning offer</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Before / After</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Before / After</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Price card</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Price card</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Story 9:16</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Story 9:16</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Local service</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Local service</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Detailing</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Detailing</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Beauty</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Beauty</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Lead gen</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Lead gen</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Carousel</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Carousel</b><span>приклад рекламного формату</span></div>
         </article><article class="creativeCard">
           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82" alt="">
           <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Retargeting</b><span>місце під ваш реальний креатив</span></div>
+          <div class="creativeCopy"><b>Retargeting</b><span>приклад рекламного формату</span></div>
         </article>
       </div>
     </div>
