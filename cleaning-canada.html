@@ -248,33 +248,8 @@ img{display:block;max-width:100%}
 footer{padding:26px 0 44px}
 .footer{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:24px;color:#77716b;font-size:10px}
 
-@media(max-width:1020px){
-  .navlinks{display:none}
-  .heroContent{grid-template-columns:1fr;padding:120px 30px 28px}
-  .heroRight{display:none}.cityBoard{grid-column:1}
-  .sectionHead{grid-template-columns:1fr;gap:16px}
-  .valueGrid,.caseFeature,.ctaBox{grid-template-columns:1fr}
-  .photoGrid{grid-template-columns:1fr 1fr}.photoGrid .photoCard:first-child{grid-column:1 / -1}
-  .process{grid-template-columns:1fr 1fr}.cityList{grid-template-columns:1fr 1fr}
-}
-@media(max-width:680px){
-  .wrap{width:min(calc(100% - 18px),var(--max))}
-  .nav{top:9px}.navin{border-radius:17px;min-height:56px}
-  .brandCopy span,.pill.hideMobile{display:none}.pill{min-height:40px;padding:0 13px;font-size:10px}
-  .hero{padding:9px 0}.heroShell{min-height:auto;border-radius:24px}
-  .heroContent{min-height:auto;padding:100px 17px 17px}
-  .hero h1{font-size:57px}.heroLead{font-size:15px}
-  .microProof{grid-template-columns:1fr 1fr;gap:14px}
-  .cityBoard{padding:12px;border-radius:18px}.boardHead{align-items:flex-start;flex-direction:column}
-  .boardGrid{grid-template-columns:1fr}.cityCard{min-height:155px}
-  .section{padding:76px 0}.sectionHead h2{font-size:48px}
-  .valueGrid{grid-template-columns:1fr}.manifesto{padding:24px;min-height:390px}.manifesto .big{font-size:67px}
-  .visualStory{padding-bottom:76px}.photoGrid{grid-template-columns:1fr}.photoGrid .photoCard:first-child{grid-column:auto}.photoCard{min-height:280px}
-  .metrics,.deltaGrid{grid-template-columns:1fr}
-  .caseMain,.caseSide{padding:24px}.caseSide{margin:10px}
-  .process{grid-template-columns:1fr}.cityList{grid-template-columns:1fr}
-  .ctaBox{padding:27px 20px}.footer{flex-direction:column}
-}
+
+
 
 /* 2026 premium editorial refinements */
 body{
@@ -358,11 +333,8 @@ body{
 .stepContent{padding:20px 22px 24px;min-height:142px;display:flex;flex-direction:column;justify-content:space-between}
 .step .n{margin-bottom:24px;color:#6f7f92}
 
-@media(max-width:1020px){.caseGrid{grid-template-columns:1fr}.caseCard{min-height:430px}}
-@media(max-width:680px){
-  .caseCard{min-height:420px}.caseStats{grid-template-columns:1fr 1fr}.casesFoot{align-items:flex-start;flex-direction:column}
-  .ctaBox:before{width:70%;opacity:.08}
-}
+
+
 
 
 /* Infinite creatives / reviews */
@@ -396,7 +368,7 @@ body{
 .cityTicker{overflow:hidden;margin-top:20px;border-top:1px solid rgba(15,16,18,.07);border-bottom:1px solid rgba(15,16,18,.07);padding:12px 0}.cityTickerTrack{display:flex;width:max-content;gap:8px;animation:cityLoop 38s linear infinite}.cityTicker:hover .cityTickerTrack{animation-play-state:paused}@keyframes cityLoop{to{transform:translateX(-50%)}}
 .tickerCity{display:flex;align-items:center;gap:10px;flex:none;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(20,20,20,.07);font-size:10px}.tickerCity i{font-style:normal;font-size:8px;text-transform:uppercase;letter-spacing:.1em}.tickerBusy i{color:#8e5d54}.tickerFree i{color:#4f7758}
 
-@media(max-width:900px){.cityFinder{grid-template-columns:1fr}.creativeCard{width:240px;height:330px}.reviewCard{width:300px}}
+
 
 
 /* Real portrait trust layer */
@@ -433,18 +405,8 @@ body{
 .heroRight .signature{right:1.5%;top:9%;z-index:6;text-shadow:0 8px 30px rgba(0,0,0,.42)}
 .heroRight .verticalWords{right:1.5%;top:76%;z-index:6}
 .heroRight .est{display:none}
-@media(max-width:1020px){
-  .heroRight{display:block;min-height:390px}
-  .heroPortraitCard{left:0;right:auto;top:20px;width:260px}
-  .heroRight .signature{left:230px;right:auto;top:45px}
-  .heroRight .verticalWords{left:285px;right:auto;top:165px}
-}
-@media(max-width:680px){
-  .heroRight{min-height:340px}
-  .heroPortraitCard{width:230px;left:50%;transform:translateX(-50%) rotate(.4deg);top:10px}
-  .heroRight .signature{left:calc(50% + 40px);top:32px;font-size:50px}
-  .heroRight .verticalWords{display:none}
-}
+
+
 
 
 /* Exclusivity clarification */
@@ -477,7 +439,7 @@ body{
 .cityTicker:hover .cityTickerTrack{animation-play-state:paused}
 @keyframes cityLoop{to{transform:translateX(-50%)}}
 
-@media(max-width:900px){.highlightProof{grid-template-columns:1fr}}
+
 
 
 /* FINAL UX FIXES */
@@ -521,10 +483,7 @@ body{
 .hb3 span{color:#202020;text-shadow:none}
 .hb4:before{background:linear-gradient(145deg,#d6edf0,#9ad4df 52%,#c8e5d1)}
 .hb5:before{background:linear-gradient(145deg,#b9ddff,#8ec5f5 55%,#e6f3ff)}
-@media(max-width:700px){
-  .exclusiveBanner{align-items:flex-start;flex-direction:column;font-size:12px}
-  .highlightMockRow{overflow-x:auto;justify-content:flex-start}
-}
+
 
 
 .highlightBubble{position:relative!important}
@@ -588,9 +547,266 @@ body{
 .highlightShot{display:block!important;overflow:hidden!important}
 .highlightShot img{display:block!important;width:100%!important;height:auto!important;border-radius:14px!important}
 
-@media(max-width:700px){
-  .exclusiveBanner{grid-template-columns:1fr!important;font-size:17px!important;padding:18px!important}
-  .exclusiveBanner:before{width:max-content!important}
+
+/* =========================================================
+   RESPONSIVE SYSTEM V3
+   One tablet breakpoint + one mobile breakpoint.
+   Desktop visual language stays untouched.
+   ========================================================= */
+
+/* TABLET · 768–1024 */
+@media (min-width:768px) and (max-width:1024px){
+  .wrap{width:min(calc(100% - 32px),var(--max))}
+  .nav{top:12px}
+  .navin{min-height:58px;border-radius:19px}
+  .navlinks{display:none}
+
+  .hero{min-height:auto;padding:12px 0 0}
+  .heroShell{min-height:auto;border-radius:28px}
+  .heroContent{
+    min-height:auto;grid-template-columns:1fr;gap:20px;
+    padding:108px 30px 24px
+  }
+  .heroCopy{max-width:680px}
+  .hero h1{font-size:clamp(64px,8.4vw,78px);line-height:.88;margin:20px 0}
+  .heroLead{font-size:16px}
+  .heroButtons{margin-top:22px}
+  .microProof{margin-top:26px}
+
+  .heroRight{display:block;min-height:330px}
+  .heroPortraitCard{left:0;right:auto;top:18px;width:250px}
+  .heroRight .signature{left:220px;right:auto;top:45px;font-size:64px}
+  .heroRight .verticalWords{left:275px;right:auto;top:160px}
+  .heroRight .est{display:none}
+
+  .cityBoard{grid-column:1;padding:15px;border-radius:21px}
+  .boardHead{align-items:flex-start}
+  .cityCard{min-height:175px}
+
+  .section{padding:82px 0}
+  .sectionHead{grid-template-columns:1fr;gap:14px;margin-bottom:30px}
+  .sectionHead h2{font-size:56px}
+  .sectionHead p{margin-top:14px;font-size:15px}
+
+  .valueGrid,.ctaBox{grid-template-columns:1fr}
+  .manifesto{min-height:390px}
+  .photoGrid{grid-template-columns:1fr 1fr}
+  .photoGrid .photoCard:first-child{grid-column:1 / -1}
+  .caseGrid{grid-template-columns:1fr}
+  .caseCard{min-height:420px}
+  .process{grid-template-columns:1fr 1fr}
+  .cityList{grid-template-columns:1fr 1fr}
+  .cityFinder{grid-template-columns:1fr}
+  .highlightProof{grid-template-columns:1fr}
+
+  .creativeCard{width:260px;height:345px}
+  .reviewCard{width:310px}
+}
+
+/* MOBILE · ≤767 */
+@media (max-width:767px){
+  html,body{overflow-x:hidden}
+  .wrap{width:min(calc(100% - 20px),var(--max))}
+
+  /* NAV: brand + one action only */
+  .nav{top:8px}
+  .navin{
+    min-height:54px;padding:7px 8px 7px 10px;
+    border-radius:17px;gap:10px
+  }
+  .navlinks,.navActions .hideMobile{display:none!important}
+  .brand{gap:9px}
+  .brandMark{width:36px;height:36px;border-radius:11px;font-size:19px}
+  .brandCopy strong{font-size:11px;letter-spacing:.14em}
+  .brandCopy span{display:none}
+  .navActions{gap:0}
+  .navActions .pill.dark{min-height:40px;padding:0 13px;font-size:10px}
+
+  /* HERO: designed for a phone, not a squeezed desktop */
+  .hero{min-height:auto;padding:8px 0 0}
+  .heroShell{min-height:auto;border-radius:22px}
+  .heroImage{object-position:56% center}
+  .heroVeil{
+    background:
+      linear-gradient(180deg,rgba(5,7,10,.30) 0%,rgba(5,7,10,.60) 34%,rgba(5,7,10,.78) 100%),
+      linear-gradient(90deg,rgba(5,7,10,.68),rgba(5,7,10,.18))
+  }
+  .heroContent{
+    min-height:auto;display:grid;grid-template-columns:1fr;
+    gap:14px;padding:82px 14px 14px
+  }
+  .heroCopy{max-width:none}
+  .eyebrow{font-size:8px;letter-spacing:.14em}
+  .eyebrow:before{width:24px}
+  .hero h1{
+    font-size:clamp(42px,12.2vw,48px);
+    line-height:.90;letter-spacing:-.065em;
+    margin:16px 0 15px
+  }
+  .heroLead{font-size:14px;line-height:1.48}
+  .heroButtons{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:8px;margin-top:19px
+  }
+  .heroButtons .heroBtn[href*="instagram"]{display:none}
+  .heroBtn{
+    min-height:46px;padding:0 10px;border-radius:13px;
+    font-size:10px;text-align:center
+  }
+  .microProof{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;margin-top:19px;padding-top:15px
+  }
+  .microProof strong{font-size:19px}
+  .microProof span{font-size:7.5px;line-height:1.25}
+
+  .heroRight{display:block;min-height:245px}
+  .heroPortraitCard{
+    width:182px;left:10px;right:auto;top:10px;
+    border-radius:22px;transform:rotate(.4deg)
+  }
+  .heroPortraitMeta{left:9px;right:9px;bottom:9px;padding:8px 9px;border-radius:11px}
+  .heroPortraitMeta span{font-size:7px}
+  .heroPortraitMeta b{font-size:10px}
+  .heroRight .signature{
+    left:auto;right:8px;top:30px;
+    font-size:42px;transform:rotate(-7deg)
+  }
+  .heroRight .verticalWords,.heroRight .est{display:none}
+
+  /* compact hero city proof */
+  .cityBoard{grid-column:1;padding:11px;border-radius:18px}
+  .boardHead{
+    flex-direction:column;align-items:flex-start;
+    gap:4px;margin-bottom:9px
+  }
+  .boardHead strong{font-size:12px;letter-spacing:.055em}
+  .boardHead span{font-size:9px;line-height:1.35}
+  .boardGrid{grid-template-columns:1fr 1fr;gap:7px}
+  .cityCard{min-height:134px;padding:11px;border-radius:14px}
+  .cityCard h3{font-size:20px;margin-bottom:4px}
+  .cityCard p{font-size:9px;line-height:1.25}
+  .cityCard .busy{top:9px;right:9px;font-size:7px;padding:5px 7px}
+
+  /* tighter page rhythm */
+  .section{padding:56px 0}
+  .sectionHead{grid-template-columns:1fr;gap:10px;margin-bottom:24px}
+  .sectionHead .label{font-size:8px}
+  .sectionHead h2{
+    font-size:clamp(34px,10vw,39px);
+    line-height:.95;letter-spacing:-.055em
+  }
+  .sectionHead p{margin-top:11px;font-size:14px;line-height:1.5}
+
+  .valueGrid{grid-template-columns:1fr;gap:10px}
+  .manifesto{padding:21px;min-height:300px}
+  .manifesto .big{font-size:54px;line-height:.86}
+  .manifesto p{font-size:14px}
+  .valueStack{gap:9px}
+  .valueCard{
+    min-height:auto;padding:17px;
+    grid-template-columns:42px 1fr;gap:12px
+  }
+  .valueNum{width:42px;height:42px;border-radius:13px;font-size:16px}
+  .valueCard h3{font-size:20px;margin-top:2px}
+  .valueCard p{font-size:12px;line-height:1.45}
+
+  .visualStory{padding-bottom:56px}
+  .photoGrid{grid-template-columns:1fr;gap:10px}
+  .photoGrid .photoCard:first-child{grid-column:auto}
+  .photoCard{min-height:260px;border-radius:22px}
+
+  /* cases: ~30% shorter, metrics kept in one line */
+  .caseGrid{grid-template-columns:1fr;gap:12px}
+  .caseCard{min-height:332px;border-radius:22px}
+  .casePhoto{inset:0 0 48%}
+  .caseTag{left:12px;top:12px;padding:6px 8px;font-size:7px}
+  .caseBody{min-height:53%;padding:16px}
+  .caseBody h3{font-size:24px;margin-bottom:6px}
+  .caseBody p{font-size:11.5px;line-height:1.4}
+  .caseStats{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:13px}
+  .caseStat{padding:9px 6px;border-radius:11px}
+  .caseStat strong{font-size:16px}
+  .caseStat span{font-size:6.5px;line-height:1.15}
+  .casesToggleLabel{min-height:48px!important;margin-top:14px!important;padding:0 17px!important}
+  .extraCaseGrid{margin-top:14px!important}
+
+  /* carousels: visible next card = obvious swipe/flow cue */
+  .showcaseSection{padding-bottom:50px}
+  .loopViewport{
+    padding:4px 0 18px;
+    mask-image:linear-gradient(90deg,transparent 0,#000 3%,#000 97%,transparent 100%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 3%,#000 97%,transparent 100%)
+  }
+  .loopGroup{gap:10px;padding-right:10px}
+  .creativeCard{
+    width:min(82vw,300px);height:min(101vw,365px);
+    border-radius:22px
+  }
+  .creativeCopy{left:15px;right:15px;bottom:14px}
+  .creativeCopy b{font-size:20px}
+  .reviewSection{padding-top:24px}
+  .reviewCard{
+    width:min(84vw,320px);min-height:215px;
+    padding:18px;border-radius:21px
+  }
+
+  /* process */
+  .process{grid-template-columns:1fr;gap:9px}
+  .step{min-height:180px;padding:18px}
+  .stepVisual{height:88px}
+  .step .n{font-size:24px}
+  .step h3{font-size:19px}
+  .step p{font-size:11.5px}
+
+  /* city finder */
+  .exclusiveBanner{
+    grid-template-columns:1fr!important;gap:10px!important;
+    margin:0 0 14px!important;padding:17px!important;
+    border-radius:18px!important;font-size:16px!important
+  }
+  .exclusiveBanner:before{
+    width:max-content!important;min-height:32px!important;
+    padding:0 10px!important;font-size:8px!important
+  }
+  .cityFinder{grid-template-columns:1fr;gap:8px;padding:10px;border-radius:20px}
+  .cityFinderLeft{padding:11px}
+  .citySelectWrap select{min-height:56px;padding-left:14px;font-size:16px;border-radius:14px}
+  .cityHint{font-size:10px}
+  .cityResult{min-height:190px;padding:20px;border-radius:18px}
+  .cityResult strong{font-size:32px}
+  .cityList{grid-template-columns:1fr;gap:9px}
+  .cityItem{min-height:170px;padding:19px}
+
+  /* one-line city ticker, slower and calmer on phone */
+  .cityTicker{
+    position:relative;margin-top:14px;padding:10px 0;
+    mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)
+  }
+  .cityTickerTrack{animation-duration:70s!important}
+  .tickerCity{gap:7px;padding:8px 10px;font-size:9px}
+  .tickerCity i{font-size:7px}
+
+  /* extra proof */
+  .highlightProof{grid-template-columns:1fr;gap:15px;padding:16px;border-radius:20px}
+  .highlightProof h3{font-size:27px;margin:8px 0}
+  .highlightProof p{font-size:12px}
+  .highlightActions{margin-top:14px}
+  .highlightShot{padding:7px;border-radius:17px}
+
+  /* CTA/footer */
+  .ctaBox{grid-template-columns:1fr;gap:18px;padding:22px 17px;border-radius:24px}
+  .ctaBox h2{font-size:38px;line-height:.94;margin-bottom:13px}
+  .ctaBox p{font-size:13px}
+  .contactStack{gap:8px}
+  .contact{min-height:58px;padding:0 14px;border-radius:14px}
+  .contact b{font-size:12px}
+  .contact span{font-size:9px}
+  .footer{flex-direction:column;gap:10px}
+
+  /* glass and shadow restraint: premium, not foggy */
+  .glassLight{backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%)}
 }
 
 </style>
