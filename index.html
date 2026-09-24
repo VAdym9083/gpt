@@ -3,215 +3,208 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f7f7f4">
-<title>Вадим Лебеденко — Meta Ads для локального бізнесу</title>
-<meta name="description" content="Facebook та Instagram Ads для локального і сервісного бізнесу. Стратегія, креативи, запуск та оптимізація. Для локальних ніш — без прямої конкуренції між моїми клієнтами в одному місті.">
-<meta property="og:title" content="Вадим Лебеденко — Meta Ads">
-<meta property="og:description" content="Реклама, яка має приводити заявки, а не просто витрачати бюджет.">
+<meta name="theme-color" content="#ffffff">
+<title>Meta Ads для клінінгових компаній — Вадим Лебеденко</title>
+<meta name="description" content="Facebook та Instagram Ads для cleaning companies у Канаді та США. Стратегія, креативи, запуск та оптимізація. 1 місто = 1 клієнт.">
+<meta property="og:title" content="Meta Ads для клінінгових компаній">
+<meta property="og:description" content="Заявки на клінінг, а не просто реклама. Toronto та Calgary уже зайняті.">
 <style>
 :root{
-  --bg:#f7f7f4;
-  --paper:#ffffff;
-  --ink:#111217;
-  --muted:#6c7079;
-  --line:#e6e7e9;
-  --soft:#f0f1f2;
-  --blue:#1769ff;
-  --blue2:#0b4fd6;
-  --warm:#f1ece4;
-  --ok:#0e8f5b;
-  --max:1240px;
-  --r:26px;
-  --shadow:0 24px 70px rgba(19,28,45,.08);
+  --bg:#fff;
+  --ink:#090a0d;
+  --muted:#62666f;
+  --line:#e8eaed;
+  --soft:#f6f7f8;
+  --blue:#5aa7ef;
+  --blue-strong:#1769ff;
+  --dark:#101114;
+  --max:1220px;
+  --r:22px;
+  --shadow:0 22px 60px rgba(15,22,35,.10);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
+  margin:0;background:#fff;color:var(--ink);
   font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  line-height:1.45;
-  text-rendering:optimizeLegibility;
+  line-height:1.42;
 }
 a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit}
-.wrap{width:min(calc(100% - 34px),var(--max));margin:auto}
-.serif{font-family:Georgia,"Times New Roman",serif}
-.kicker{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  color:#565b64;
-}
-.kicker:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.wrap{width:min(calc(100% - 32px),var(--max));margin:auto}
 .nav{
-  position:sticky;top:0;z-index:30;
-  background:rgba(247,247,244,.86);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(17,18,23,.06);
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.90);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(0,0,0,.05)
 }
-.navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-.brand{display:flex;align-items:center;gap:12px}
-.brandMark{
-  width:40px;height:40px;border:1px solid #d7d9de;border-radius:50%;
-  display:grid;place-items:center;background:#fff;font-weight:950;letter-spacing:-.05em
+.navin{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:13px}
+.brand strong{font-size:18px;letter-spacing:.18em;font-weight:850}
+.brand small{display:block;color:#8a8e96;font-size:9px;letter-spacing:.18em;margin-top:2px}
+.navlinks{display:flex;gap:27px;font-size:12px;color:#4f545d}
+.navlinks a:hover{color:#000}
+.socials{display:flex;gap:17px;align-items:center;font-size:12px}
+.topCta{
+  min-height:42px;padding:0 17px;border-radius:8px;background:#0f1012;color:#fff;
+  display:inline-flex;align-items:center;font-weight:800
 }
-.brandText strong{display:block;font-size:14px;letter-spacing:.02em}
-.brandText small{display:block;color:#8a8e96;font-size:11px;margin-top:2px}
-.links{display:flex;align-items:center;gap:27px;font-size:13px;color:#555a63}
-.links a:hover{color:#111}
-.navCta{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-height:44px;padding:0 17px;border-radius:999px;background:#111;color:#fff;
-  font-size:13px;font-weight:800
-}
-.hero{padding:68px 0 42px;overflow:hidden}
-.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:58px;align-items:center}
-.hero h1{
-  font-size:clamp(56px,7vw,96px);line-height:.94;letter-spacing:-.065em;
-  margin:22px 0 24px;max-width:780px
-}
-.hero h1 em{font-style:normal;color:var(--blue)}
-.lead{font-size:clamp(18px,2vw,22px);color:#616670;max-width:690px;margin:0}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-.btn{
-  min-height:54px;padding:0 22px;border-radius:999px;
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  font-weight:850;border:1px solid #d8dbe0;background:#fff;
-  transition:.2s ease;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(18,27,42,.08)}
-.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn.dark{background:#111;color:#fff;border-color:#111}
-.btn.ghost{background:transparent}
-.heroMeta{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:28px;color:#585d66;font-size:13px}
-.heroMeta b{color:#111}
-.portrait{
-  position:relative;min-height:610px;border-radius:38px;overflow:hidden;
-  background:linear-gradient(160deg,#f4efe8 0%,#e9eef6 58%,#e9edf2 100%);
-  box-shadow:var(--shadow);border:1px solid #e2e4e8;
-}
-.portrait:before{
-  content:"";position:absolute;inset:0;
+
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero:before{
+  content:"";position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(circle at 80% 12%,rgba(23,105,255,.13),transparent 33%),
-    linear-gradient(120deg,transparent 0 61%,rgba(255,255,255,.66) 61% 62%,transparent 62%);
+  linear-gradient(118deg,transparent 0 64%,rgba(90,167,239,.10) 64.2% 64.6%,transparent 64.8%),
+  linear-gradient(63deg,transparent 0 18%,rgba(0,0,0,.035) 18.1% 18.25%,transparent 18.4%);
 }
-.person{
-  position:absolute;inset:65px 46px 0 46px;
-  border-radius:32px 32px 0 0;overflow:hidden;
-  background:#dfe3e8;border:1px solid rgba(17,18,23,.08)
+.heroGrid{min-height:650px;display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:34px;position:relative}
+.heroCopy{padding:54px 0 55px;position:relative;z-index:2}
+.eyebrow{font-size:10px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:#5d626b}
+.hero h1{
+  font-size:clamp(58px,7.3vw,98px);line-height:.92;letter-spacing:-.065em;
+  margin:20px 0 20px;max-width:740px
 }
-.person img{width:100%;height:100%;object-fit:cover;object-position:center}
-.float{
-  position:absolute;background:rgba(255,255,255,.9);backdrop-filter:blur(15px);
-  border:1px solid rgba(17,18,23,.08);border-radius:19px;padding:15px 17px;
-  box-shadow:0 18px 45px rgba(17,18,23,.09)
+.hero h1 .blue{color:var(--blue)}
+.lead{font-size:17px;color:#4e535b;max-width:640px;margin:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  min-height:50px;padding:0 20px;border-radius:8px;border:1px solid #dce0e4;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:850;
+  background:#fff;transition:.18s ease
 }
-.float b{display:block;font-size:18px;letter-spacing:-.03em}
-.float small{color:#737880}
-.f1{left:22px;top:20px}.f2{right:20px;bottom:24px}
-.cityLock{
-  position:absolute;right:22px;top:26px;width:180px;padding:15px 16px;
-  background:#111;color:#fff;border-radius:18px
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(18,27,42,.08)}
+.btn.dark{background:#111;color:#fff;border-color:#111}
+.btn.blue{background:var(--blue-strong);color:#fff;border-color:var(--blue-strong)}
+.heroStats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:36px;max-width:720px}
+.heroStat strong{display:block;font-size:26px;letter-spacing:-.04em}
+.heroStat span{font-size:10px;color:#7b8088}
+
+.heroVisual{position:relative;align-self:stretch;min-height:650px}
+.heroVisual:before{
+  content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 60% 35%,rgba(90,167,239,.18),transparent 35%),
+  linear-gradient(110deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.2) 32%,rgba(255,255,255,0) 48%);
+  z-index:1
 }
-.cityLock span{display:block;color:#b7bcc4;font-size:11px}
-.cityLock b{display:block;font-size:17px;margin-top:5px}
-.trust{
-  margin-top:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:18px 0;background:rgba(255,255,255,.45)
+.heroPhoto{
+  position:absolute;right:-45px;top:42px;width:92%;height:608px;
+  object-fit:cover;object-position:center 18%;filter:grayscale(1) contrast(1.08);
+  border-radius:14px
 }
-.trustRow{display:flex;gap:26px;justify-content:space-between;flex-wrap:wrap;color:#7d828b;font-size:12px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
-.section{padding:112px 0}
-.sectionHead{display:grid;grid-template-columns:.75fr 1.25fr;gap:64px;align-items:end;margin-bottom:46px}
-.sectionHead h2,.final h2{font-size:clamp(42px,5.5vw,72px);line-height:.98;letter-spacing:-.055em;margin:0}
-.sectionHead p,.final p{font-size:18px;color:var(--muted);margin:0;max-width:680px}
-.editorial{
-  display:grid;grid-template-columns:1.15fr .85fr;gap:16px
+.signature{
+  position:absolute;left:25px;top:182px;z-index:3;font-family:Georgia,serif;
+  font-size:42px;font-style:italic;transform:rotate(-8deg)
 }
-.statement{
-  min-height:470px;padding:38px;border-radius:var(--r);border:1px solid var(--line);
-  background:var(--paper);position:relative;overflow:hidden
+.vertical{
+  position:absolute;right:-2px;top:128px;z-index:3;font-size:9px;letter-spacing:.22em;
+  color:#727780;line-height:2.1;text-transform:uppercase
 }
-.statement h3{font-size:clamp(38px,5vw,62px);line-height:.97;letter-spacing:-.055em;margin:115px 0 20px;max-width:720px}
-.statement p{color:var(--muted);font-size:17px;max-width:620px}
-.statement .stamp{position:absolute;top:30px;right:32px;font-size:12px;color:#848992}
-.statement.blue{background:var(--blue);color:#fff;border-color:var(--blue)}
-.statement.blue p{color:rgba(255,255,255,.78)}
-.services{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
-.service{padding:27px 24px 30px;border-right:1px solid var(--line);min-height:290px}
+.cityOverlay{
+  position:absolute;left:15px;right:0;bottom:32px;z-index:4;
+  background:rgba(12,13,15,.94);color:#fff;border:1px solid rgba(255,255,255,.16);
+  border-radius:14px;padding:14px;box-shadow:0 16px 50px rgba(0,0,0,.22)
+}
+.cityTop{display:flex;justify-content:space-between;gap:20px;margin-bottom:10px;font-size:10px;letter-spacing:.08em}
+.cityCards{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.cityCard{border:1px solid #3a3d43;border-radius:10px;padding:18px;background:linear-gradient(160deg,#2a2d33,#111)}
+.cityCard small{display:block;color:#a9adb4;margin-bottom:14px}
+.cityCard strong{display:block;font-size:24px;letter-spacing:-.04em}
+.lock{float:right;font-size:9px;background:#26282c;border-radius:999px;padding:5px 8px;color:#c6cad0}
+
+.section{padding:88px 0}
+.sectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:28px}
+.sectionHead h2{font-size:clamp(44px,5.6vw,68px);letter-spacing:-.055em;line-height:.95;margin:0}
+.sectionHead p{max-width:540px;color:var(--muted);font-size:14px;margin:0}
+.rule{height:1px;background:var(--line);margin-top:11px}
+
+.services{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.service{min-height:250px;padding:25px 22px;border-right:1px solid var(--line);background:#fff}
 .service:last-child{border-right:0}
-.service .n{color:var(--blue);font-size:12px;font-weight:900}
-.service h3{font-size:25px;line-height:1.04;letter-spacing:-.035em;margin:55px 0 13px}
-.service p{color:var(--muted);margin:0;font-size:14px}
-.citySection{background:#111;color:#fff}
-.citySection .sectionHead p{color:#a9adb4}
-.cityGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-.cityPanel{border:1px solid #2b2d31;border-radius:var(--r);padding:32px;background:#17181b}
-.cityPanel h3{font-size:34px;letter-spacing:-.04em;margin:0 0 10px}
-.cityPanel p{color:#aeb2b8;margin:0 0 24px}
-.cityRow{display:flex;align-items:center;justify-content:space-between;padding:17px 0;border-top:1px solid #2a2c30;gap:14px}
-.badge{font-size:11px;font-weight:900;padding:7px 9px;border-radius:999px}
-.busy{background:#2a2b2f;color:#b7bbc2}
-.open{background:#0b3b2b;color:#75e6b2}
-.cityBig{
-  border-radius:var(--r);padding:34px;background:
-  radial-gradient(circle at 90% 10%,rgba(23,105,255,.28),transparent 35%),
-  #15171b;border:1px solid #2b2d31;
+.icon{
+  width:48px;height:48px;border-radius:12px;background:#f1f6fd;
+  display:grid;place-items:center;color:var(--blue-strong);font-size:24px
+}
+.service b{display:block;color:#5e9de0;font-size:11px;margin-top:18px}
+.service h3{font-size:24px;line-height:1.02;letter-spacing:-.04em;margin:8px 0 10px}
+.service p{font-size:13px;color:var(--muted);margin:0}
+
+.cleaningFocus{background:#f7f8fa;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.focusGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.focusMain{
+  min-height:420px;background:#111;color:#fff;border-radius:18px;padding:34px;
   display:flex;flex-direction:column;justify-content:space-between
 }
-.cityBig .huge{font-size:clamp(64px,8vw,112px);line-height:.82;letter-spacing:-.075em}
-.cityBig p{color:#afb4bc;max-width:480px}
-.proofGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.proofCard{border:1px solid var(--line);background:#fff;border-radius:24px;overflow:hidden}
-.proofTop{aspect-ratio:16/10;background:linear-gradient(145deg,#efeee8,#dfe7f6);position:relative;overflow:hidden}
-.proofTop:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 0 62%,rgba(23,105,255,.12) 62% 100%)}
-.proofBody{padding:24px}
-.proofBody small{color:#858a92;text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:900}
-.proofBody h3{font-size:26px;letter-spacing:-.04em;line-height:1.05;margin:13px 0 10px}
-.proofBody p{color:var(--muted);font-size:14px;margin:0}
-.proofLink{display:inline-flex;margin-top:18px;color:var(--blue);font-weight:850;font-size:13px}
-.process{border-top:1px solid var(--line)}
-.step{display:grid;grid-template-columns:70px .8fr 1.2fr;gap:28px;padding:30px 0;border-bottom:1px solid var(--line)}
-.step b{color:var(--blue);font-size:12px}
-.step h3{font-size:28px;letter-spacing:-.035em;margin:0}
-.step p{color:var(--muted);margin:0}
-.faq{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 20px}
-summary{min-height:68px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:850}
-summary::after{content:"+";font-size:24px;color:var(--blue)}
-details[open] summary::after{content:"−"}
-details p{margin:-4px 0 20px;color:var(--muted)}
-.final{
-  padding:50px;border-radius:34px;background:#fff;border:1px solid var(--line);
-  display:grid;grid-template-columns:1fr 1fr;gap:54px;box-shadow:var(--shadow)
+.focusMain .big{font-size:clamp(64px,8vw,106px);line-height:.82;letter-spacing:-.075em}
+.focusMain p{color:#b5bac2;max-width:520px}
+.focusSide{display:grid;gap:15px}
+.focusBox{border:1px solid var(--line);border-radius:18px;padding:28px;background:#fff}
+.focusBox strong{font-size:31px;letter-spacing:-.045em;display:block}
+.focusBox p{color:var(--muted);font-size:14px}
+
+.caseGrid{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:14px}
+.case{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}
+.caseVisual{
+  aspect-ratio:16/9;position:relative;background:
+  linear-gradient(135deg,#dfe5ec 0 45%,#c8d6e4 45% 58%,#eef1f4 58%);
 }
-.final h2{margin:17px 0}
-.contactLinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-form{display:grid;gap:10px}
-label{display:grid;gap:6px;font-size:12px;font-weight:800;color:#5c6169}
-input,select,textarea{width:100%;padding:13px 14px;border:1px solid #dfe1e5;border-radius:12px;background:#fbfbfa;color:#111}
-textarea{min-height:88px;resize:vertical}
-.formStatus{min-height:18px;color:var(--ok);font-size:12px}
-footer{padding:34px 0 42px;color:#8b9098}
-.foot{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:26px;font-size:12px}
-.reveal{opacity:0;transform:translateY(18px);transition:.55s ease}
+.caseVisual.city{background:linear-gradient(180deg,#d9e4ef 0 58%,#9ca8b2 58% 62%,#c6cbd0 62%)}
+.caseVisual.dark{background:linear-gradient(145deg,#15171a,#343942)}
+.caseBadge{
+  position:absolute;left:14px;top:14px;font-size:10px;font-weight:900;letter-spacing:.06em;
+  padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.90)
+}
+.caseBody{padding:23px}
+.caseBody h3{font-size:24px;letter-spacing:-.04em;line-height:1.05;margin:0 0 15px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:18px 0}
+.metric{border-top:1px solid var(--line);padding-top:12px}
+.metric strong{display:block;font-size:23px;letter-spacing:-.04em}
+.metric span{font-size:10px;color:#7d828a}
+.caseBody p{color:var(--muted);font-size:13px;margin:0}
+.caseLink{display:inline-flex;margin-top:18px;color:var(--blue-strong);font-size:12px;font-weight:850}
+
+.process{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.process:before{content:"";position:absolute;left:4%;right:4%;top:20px;height:1px;background:#d7dce2}
+.step{position:relative;padding-right:24px}
+.stepN{
+  width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #d5dae0;
+  display:grid;place-items:center;color:#222;font-size:11px;position:relative;z-index:2
+}
+.step h3{font-size:18px;letter-spacing:-.03em;margin:20px 0 8px}
+.step p{font-size:12px;color:var(--muted);margin:0}
+
+.cta{padding-top:20px}
+.ctaBox{
+  border-radius:24px;background:#111;color:#fff;padding:34px 38px;
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center
+}
+.ctaBox h2{font-size:clamp(42px,5vw,62px);line-height:.96;letter-spacing:-.055em;margin:8px 0 16px}
+.ctaBox p{color:#b8bdc4;max-width:560px}
+.contactLinks{display:flex;gap:10px;flex-wrap:wrap}
+.ctaBox .btn{border-color:#34373c;background:#181a1e;color:#fff}
+.ctaBox .btn.blue{background:var(--blue-strong);border-color:var(--blue-strong)}
+
+footer{padding:30px 0 38px;color:#858a92;font-size:11px}
+.foot{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:22px}
+.reveal{opacity:0;transform:translateY(15px);transition:.45s ease}
 .reveal.show{opacity:1;transform:none}
+
 @media(max-width:980px){
-  .links{display:none}.heroGrid,.sectionHead,.editorial,.cityGrid,.final{grid-template-columns:1fr}
-  .services{grid-template-columns:1fr 1fr}.service:nth-child(2){border-right:0}.proofGrid{grid-template-columns:1fr}
-  .portrait{min-height:560px}
+  .navlinks{display:none}.heroGrid{grid-template-columns:1fr}.heroVisual{min-height:570px}
+  .heroPhoto{right:0;width:100%;height:540px}.heroStats{grid-template-columns:repeat(2,1fr)}
+  .services{grid-template-columns:1fr 1fr}.service:nth-child(2){border-right:0}.service{border-bottom:1px solid var(--line)}
+  .focusGrid,.ctaBox{grid-template-columns:1fr}.caseGrid{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr 1fr;gap:30px}.process:before{display:none}
 }
-@media(max-width:650px){
-  .wrap{width:min(calc(100% - 22px),var(--max))}
-  .navin{height:68px}.brandText small{display:none}
-  .navCta{display:none}.hero{padding-top:44px}.hero h1{font-size:54px}
-  .portrait{min-height:470px;border-radius:26px}.person{inset:64px 14px 0 14px}
-  .cityLock{width:155px;right:12px}.f2{right:12px;bottom:12px}.f1{left:12px}
-  .section{padding:78px 0}.services{grid-template-columns:1fr}.service{border-right:0;border-bottom:1px solid var(--line)}
-  .statement{min-height:390px;padding:26px}.statement h3{margin-top:95px}
-  .step{grid-template-columns:48px 1fr}.step p{grid-column:2}
-  .faq{grid-template-columns:1fr}.final{padding:26px 18px}.foot{flex-direction:column}
+@media(max-width:640px){
+  .wrap{width:min(calc(100% - 20px),var(--max))}
+  .navin{height:66px}.socials{display:none}.topCta{font-size:11px}
+  .heroGrid{min-height:auto}.hero h1{font-size:55px}.heroCopy{padding-top:40px}
+  .heroVisual{min-height:500px}.heroPhoto{height:480px;top:12px}
+  .signature{font-size:30px;top:115px}.vertical{display:none}
+  .cityOverlay{left:8px;right:8px;bottom:10px}.cityCards{grid-template-columns:1fr}
+  .heroStats{grid-template-columns:1fr 1fr}
+  .section{padding:68px 0}.sectionHead{display:block}.sectionHead p{margin-top:17px}
+  .services{grid-template-columns:1fr}.service{border-right:0}
+  .process{grid-template-columns:1fr}.ctaBox{padding:26px 20px}.foot{flex-direction:column}
 }
 </style>
 </head>
@@ -219,72 +212,66 @@ footer{padding:34px 0 42px;color:#8b9098}
 <header class="nav">
   <div class="wrap navin">
     <a class="brand" href="#top">
-      <span class="brandMark">VL</span>
-      <span class="brandText"><strong>Вадим Лебеденко</strong><small>Performance marketer · Meta Ads</small></span>
+      <span><strong>VADYM</strong><small>PERFORMANCE MARKETER</small></span>
     </a>
-    <nav class="links">
-      <a href="#services">Послуги</a>
-      <a href="#exclusivity">Ексклюзивність</a>
+    <nav class="navlinks">
+      <a href="#services">Що отримаєте</a>
       <a href="#cases">Кейси</a>
-      <a href="#process">Процес</a>
-      <a href="#faq">FAQ</a>
+      <a href="#process">Як працюю</a>
+      <a href="#contact">Зв’язок</a>
     </nav>
-    <a class="navCta" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати в Telegram ↗</a>
+    <div class="socials">
+      <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">◎ @lebedenkkko</a>
+      <a href="https://t.me/target_vadym" target="_blank" rel="noopener">➤ @target_vadym</a>
+      <a class="topCta" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
+    </div>
   </div>
 </header>
 
 <main id="top">
 <section class="hero">
   <div class="wrap heroGrid">
-    <div>
-      <span class="kicker">Facebook & Instagram Ads</span>
-      <h1>Заявки для бізнесу без <em>маркетингового шуму.</em></h1>
-      <p class="lead">Будую Meta Ads як систему: стратегія, креативи, запуск, аналітика та оптимізація. Фокус не на кліках, а на адекватних зверненнях і бізнес-результаті.</p>
+    <div class="heroCopy">
+      <div class="eyebrow">META ADS ДЛЯ CLEANING COMPANIES • CANADA / USA</div>
+      <h1>Вам потрібні <span class="blue">заявки</span>, а не просто реклама</h1>
+      <p class="lead">Стратегія, креативи, запуск та оптимізація Meta Ads для клінінгових компаній. Моя задача — стабільний потік адекватних звернень у вашому місті, а не красиві цифри в рекламному кабінеті.</p>
       <div class="actions">
-        <a class="btn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати в Telegram ↗</a>
-        <a class="btn ghost" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko</a>
+        <a class="btn dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
+        <a class="btn" href="#cases">Переглянути кейси</a>
       </div>
-      <div class="heroMeta">
-        <span><b>2+ роки</b> досвіду</span>
-        <span><b>1 місто = 1 клієнт</b> для локальних ніш</span>
-        <span><b>Toronto + Calgary</b> уже зайняті</span>
+      <div class="heroStats">
+        <div class="heroStat"><strong>2+</strong><span>роки роботи з Meta Ads</span></div>
+        <div class="heroStat"><strong>93</strong><span>діалоги в одному Toronto cleaning кейсі</span></div>
+        <div class="heroStat"><strong>$4.40</strong><span>CAD середня ціна діалогу в кейсі</span></div>
+        <div class="heroStat"><strong>1:1</strong><span>одне місто = один cleaning-клієнт</span></div>
       </div>
     </div>
 
-    <div class="portrait">
-      <div class="person">
-        <img src="https://avatars.githubusercontent.com/u/211505407?v=4" alt="Вадим Лебеденко">
+    <div class="heroVisual">
+      <img class="heroPhoto" src="https://avatars.githubusercontent.com/u/211505407?v=4" alt="Вадим Лебеденко">
+      <div class="signature">Vadym</div>
+      <div class="vertical">СТРАТЕГІЯ<br>КРЕАТИВИ<br>ТРАФІК<br>ОПТИМІЗАЦІЯ<br>РЕЗУЛЬТАТ</div>
+
+      <div class="cityOverlay">
+        <div class="cityTop">
+          <span>TORONTO І CALGARY — ВЖЕ ЗАЙНЯТІ</span>
+          <span>1 МІСТО — 1 КЛІЄНТ</span>
+        </div>
+        <div class="cityCards">
+          <div class="cityCard">
+            <span class="lock">Зайнято</span>
+            <small>CANADA</small>
+            <strong>TORONTO</strong>
+            <span style="font-size:11px;color:#b4b9c1">Активний cleaning-проєкт уже працює зі мною</span>
+          </div>
+          <div class="cityCard">
+            <span class="lock">Зайнято</span>
+            <small>CANADA</small>
+            <strong>CALGARY</strong>
+            <span style="font-size:11px;color:#b4b9c1">Нових cleaning-клієнтів у місті не беру</span>
+          </div>
+        </div>
       </div>
-      <div class="float f1"><b>Meta Ads</b><small>Стратегія · Креативи · Оптимізація</small></div>
-      <div class="cityLock"><span>ЕКСКЛЮЗИВНІСТЬ</span><b>1 місто — 1 клієнт</b></div>
-      <div class="float f2"><b>Toronto & Calgary</b><small>нових клієнтів у цих містах не беру</small></div>
-    </div>
-  </div>
-
-  <div class="trust">
-    <div class="wrap trustRow">
-      <span>Local Services</span><span>Cleaning</span><span>Beauty</span><span>Home Services</span><span>E-commerce</span><span>Lead Generation</span>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="sectionHead reveal">
-      <span class="kicker">Підхід</span>
-      <div><h2>Красивий сайт не рятує слабку рекламу. І навпаки.</h2><p>Тому я не продаю «натиснути Launch». Спочатку розбираю бізнес, потім будую зв’язку, яку можна перевірити цифрами.</p></div>
-    </div>
-    <div class="editorial">
-      <article class="statement reveal">
-        <span class="stamp">01 / Стратегія</span>
-        <h3>Спочатку зрозуміти, <span style="color:var(--blue)">кому і чому</span> люди мають написати.</h3>
-        <p>Офер, географія, ціна, конкуренти, поведінка клієнта та шлях до заявки. Реклама починається не в Ads Manager.</p>
-      </article>
-      <article class="statement blue reveal">
-        <span class="stamp" style="color:rgba(255,255,255,.65)">02 / Виконання</span>
-        <h3>Потім зробити так, щоб реклама <span style="color:#fff">витримала реальні гроші.</span></h3>
-        <p>Креативи, структура кампаній, тест, оптимізація та масштабування того, що реально працює.</p>
-      </article>
     </div>
   </div>
 </section>
@@ -292,38 +279,52 @@ footer{padding:34px 0 42px;color:#8b9098}
 <section class="section" id="services">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <span class="kicker">Послуги</span>
-      <div><h2>Повний цикл Meta Ads.</h2><p>Без десяти підрядників і перекладання відповідальності. Один процес від аналізу до оптимізації.</p></div>
+      <div><div class="eyebrow">ЩО ВИ ОТРИМУЄТЕ</div><h2>Повний запуск під клінінг</h2></div>
+      <p>Не «включити рекламу і чекати». Від позиціонування до оптимізації заявок під конкретне місто, послугу і бюджет.</p>
     </div>
     <div class="services">
-      <article class="service reveal"><span class="n">01</span><h3>Стратегія</h3><p>Аналіз ніші, конкурентів, міста, офера, бюджету й того, що вже пробували.</p></article>
-      <article class="service reveal"><span class="n">02</span><h3>Креативи</h3><p>Статика, відео, офери та тексти, які виглядають природно й продають без дешевого крику.</p></article>
-      <article class="service reveal"><span class="n">03</span><h3>Запуск</h3><p>Структура кампаній, аудиторії, плейсменти, повідомлення або lead generation під задачу.</p></article>
-      <article class="service reveal"><span class="n">04</span><h3>Оптимізація</h3><p>Розподіл бюджету, відсікання слабких зв’язок, нові гіпотези та масштабування переможців.</p></article>
+      <article class="service reveal">
+        <div class="icon">◎</div><b>01</b><h3>Стратегія</h3>
+        <p>Розбираю ваші послуги, ціни, конкурентів, гео, офер і попередню рекламу.</p>
+      </article>
+      <article class="service reveal">
+        <div class="icon">▧</div><b>02</b><h3>Креативи</h3>
+        <p>До/після, офери, статичні креативи, відео та тексти саме під cleaning-аудиторію.</p>
+      </article>
+      <article class="service reveal">
+        <div class="icon">▥</div><b>03</b><h3>Запуск і оптимізація</h3>
+        <p>Структура кампаній, аудиторії, плейсменти, Direct / Messages і контроль ціни звернення.</p>
+      </article>
+      <article class="service reveal">
+        <div class="icon">ϟ</div><b>04</b><h3>Якість заявок</h3>
+        <p>Дивлюсь не тільки CPL. Важливо, хто пише, що запитує і чи реально цей лід можна закрити.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="section citySection" id="exclusivity">
+<section class="section cleaningFocus">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <span class="kicker" style="color:#b6bac1">Ексклюзивність</span>
-      <div><h2>Ваш рекламщик не має працювати на вашого конкурента.</h2><p>Для локальних ніш я не беру прямого конкурента того самого типу в тому самому місті. Це обмежує мій масштаб. Зате не створює абсурд, де я оптимізую дві компанії одна проти одної.</p></div>
+      <div><div class="eyebrow">CLEANING-СПЕЦІАЛІЗАЦІЯ</div><h2>Ваш рекламщик не має працювати на вашого конкурента</h2></div>
+      <p>Для клінінгу я не беру дві конкуруючі компанії одного типу в одному місті. Саме тому Toronto і Calgary зараз закриті.</p>
     </div>
-    <div class="cityGrid">
-      <div class="cityPanel reveal">
-        <h3>Статус міст</h3>
-        <p>Для активних локальних проєктів.</p>
-        <div class="cityRow"><span>Toronto / GTA</span><span class="badge busy">ЗАЙНЯТО</span></div>
-        <div class="cityRow"><span>Calgary</span><span class="badge busy">ЗАЙНЯТО</span></div>
-        <div class="cityRow"><span>Edmonton</span><span class="badge open">ПЕРЕВІРИТИ</span></div>
-        <div class="cityRow"><span>Vancouver</span><span class="badge open">ПЕРЕВІРИТИ</span></div>
-        <div class="cityRow"><span>Інше місто</span><span class="badge open">ПЕРЕВІРИТИ</span></div>
+    <div class="focusGrid">
+      <div class="focusMain reveal">
+        <div>
+          <div class="eyebrow" style="color:#aeb4bc">LOCAL CLEANING ADS</div>
+          <div class="big">1:1</div>
+        </div>
+        <div>
+          <h3 style="font-size:34px;margin:0 0 10px">Одне місто — один клієнт</h3>
+          <p>Не використовую ті самі напрацювання, креативні кути й рекламну логіку проти власного клієнта в тому самому місті.</p>
+          <a class="btn blue" href="#contact">Перевірити ваше місто →</a>
+        </div>
       </div>
-      <div class="cityBig reveal">
-        <div><span class="kicker" style="color:#b6bac1">Local business</span><div class="huge">1:1</div></div>
-        <p>Одна ніша. Одне місто. Один активний клієнт. Якщо місто вільне — можемо говорити про запуск.</p>
-        <a class="btn primary" href="#contact">Перевірити місто ↗</a>
+      <div class="focusSide">
+        <div class="focusBox reveal"><strong>Toronto / GTA</strong><p>Residential cleaning. Активний проєкт. Нового прямого cleaning-конкурента тут не беру.</p></div>
+        <div class="focusBox reveal"><strong>Calgary</strong><p>Cleaning-напрям уже зайнятий. Місто закрите на час активної співпраці.</p></div>
+        <div class="focusBox reveal"><strong>Інші міста</strong><p>Edmonton, Vancouver, Ottawa, Winnipeg, Montreal, міста США — перевіряю перед стартом.</p></div>
       </div>
     </div>
   </div>
@@ -332,21 +333,45 @@ footer{padding:34px 0 42px;color:#8b9098}
 <section class="section" id="cases">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <span class="kicker">Кейси</span>
-      <div><h2>Докази замість декоративних цифр.</h2><p>Я навмисно не малюю на сайті «ROI 800%» без контексту. Актуальні результати й приклади запусків показую у кейсах та хайлайтс Instagram.</p></div>
+      <div><div class="eyebrow">РЕАЛЬНІ КАМПАНІЇ</div><h2>Кейси по клінінгу</h2></div>
+      <p>Без намальованих ROAS і «1000 клієнтів за ніч». Тут тільки цифри, які мають контекст.</p>
     </div>
-    <div class="proofGrid">
-      <article class="proofCard reveal">
-        <div class="proofTop"></div>
-        <div class="proofBody"><small>Канада · Local services</small><h3>Toronto / GTA</h3><p>Активна кампанія. Нових клієнтів у цій ніші та місті не беру, поки проєкт активний.</p><a class="proofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Дивитися кейси ↗</a></div>
+
+    <div class="caseGrid">
+      <article class="case reveal">
+        <div class="caseVisual city"><span class="caseBadge">Residential cleaning · Toronto / GTA</span></div>
+        <div class="caseBody">
+          <h3>Преміум-клінінг у Toronto & GTA</h3>
+          <div class="metrics">
+            <div class="metric"><strong>93</strong><span>started conversations</span></div>
+            <div class="metric"><strong>$4.40</strong><span>CAD за діалог</span></div>
+            <div class="metric"><strong>$409.35</strong><span>CAD spend</span></div>
+          </div>
+          <p>Одна з робочих кампаній: жінки 30–60, локальне GEO, чистий офер і системна оптимізація.</p>
+          <a class="caseLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Дивитися кейси в Instagram →</a>
+        </div>
       </article>
-      <article class="proofCard reveal">
-        <div class="proofTop" style="background:linear-gradient(145deg,#ecebe6,#e5e8ed)"></div>
-        <div class="proofBody"><small>Канада · Local services</small><h3>Calgary</h3><p>Активна кампанія. Гео закрите для прямого конкурента в межах цієї ніші.</p><a class="proofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Дивитися кейси ↗</a></div>
+
+      <article class="case reveal">
+        <div class="caseVisual dark"><span class="caseBadge">Оптимізація · Toronto</span></div>
+        <div class="caseBody">
+          <h3>Winner проти попередньої кампанії</h3>
+          <div class="metrics">
+            <div class="metric"><strong>-12%</strong><span>вартість діалогу</span></div>
+            <div class="metric"><strong>+41%</strong><span>link CTR</span></div>
+            <div class="metric"><strong>-10%</strong><span>link CPC</span></div>
+          </div>
+          <p>Результат отримано не зміною «магічного інтересу», а сильнішою зв’язкою офер + креатив + подача.</p>
+        </div>
       </article>
-      <article class="proofCard reveal">
-        <div class="proofTop" style="background:linear-gradient(145deg,#e7eefb,#f4f1eb)"></div>
-        <div class="proofBody"><small>Різні ніші</small><h3>Кейси та запуски</h3><p>Приклади креативів, логіки кампаній і результатів зібрані в Instagram-профілі.</p><a class="proofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko ↗</a></div>
+
+      <article class="case reveal">
+        <div class="caseVisual"><span class="caseBadge">Cleaning · Calgary</span></div>
+        <div class="caseBody">
+          <h3>Активний проєкт у Calgary</h3>
+          <p>Місто вже зайняте чинним cleaning-клієнтом. Нову конкуруючу компанію тут зараз не беру.</p>
+          <a class="caseLink" href="#contact">Перевірити інше місто →</a>
+        </div>
       </article>
     </div>
   </div>
@@ -355,101 +380,47 @@ footer{padding:34px 0 42px;color:#8b9098}
 <section class="section" id="process">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <span class="kicker">Процес</span>
-      <div><h2>Чотири кроки. Без цирку.</h2><p>Робота має бути зрозумілою до запуску, а не після того, як бюджет уже навчив нас життю.</p></div>
+      <div><div class="eyebrow">ВІД ПЕРШОЇ РОЗМОВИ ДО ЗАЯВОК</div><h2>Як проходить запуск</h2></div>
+      <p>Зрозумілий процес без хаосу, випадкових правок і постійного «ще трохи почекаємо».</p>
     </div>
     <div class="process">
-      <div class="step reveal"><b>01</b><h3>Аудит</h3><p>Розбираю нішу, гео, офер, попередню рекламу та економіку послуги.</p></div>
-      <div class="step reveal"><b>02</b><h3>Стратегія</h3><p>Формую аудиторії, структуру кампаній, креативні кути й критерії оцінки результату.</p></div>
-      <div class="step reveal"><b>03</b><h3>Запуск</h3><p>Готую рекламу, запускаю кампанії та збираю перші дані без паніки після трьох кліків.</p></div>
-      <div class="step reveal"><b>04</b><h3>Оптимізація</h3><p>Залишаю сильні зв’язки, прибираю слабкі та масштабую те, що підтверджене цифрами.</p></div>
+      <div class="step reveal"><div class="stepN">01</div><h3>Знайомство</h3><p>Послуги, місто, ціни, цілі та поточна ситуація.</p></div>
+      <div class="step reveal"><div class="stepN">02</div><h3>Аналіз</h3><p>Конкуренти, офер, аудиторії, попередні результати.</p></div>
+      <div class="step reveal"><div class="stepN">03</div><h3>Креативи</h3><p>Готую концепції й оголошення під ваш cleaning-сегмент.</p></div>
+      <div class="step reveal"><div class="stepN">04</div><h3>Запуск</h3><p>Налаштовую кампанії й контролюю перші сигнали.</p></div>
+      <div class="step reveal"><div class="stepN">05</div><h3>Оптимізація</h3><p>Залишаю сильні зв’язки та прибираю витрати без сенсу.</p></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="faq">
-  <div class="wrap">
-    <div class="sectionHead reveal">
-      <span class="kicker">FAQ</span>
-      <div><h2>Без казок до оплати.</h2><p>Реклама може сильно прискорити нормальний бізнес. Вона не може магічно виправити слабкий продукт, погані продажі або неадекватну ціну.</p></div>
-    </div>
-    <div class="faq">
-      <details><summary>Ви гарантуєте кількість продажів?</summary><p>Ні. Я відповідаю за рекламну систему, креативи, трафік, аналітику й оптимізацію. Продаж залежить також від офера, ціни, швидкості відповіді та роботи з лідами.</p></details>
-      <details><summary>Креативи входять у роботу?</summary><p>Так. Готую концепції, тексти, технічні завдання та рекламні креативи під конкретну задачу.</p></details>
-      <details><summary>З яким бюджетом можна стартувати?</summary><p>Залежить від міста, ніші та вартості послуги. Бюджет має бути достатнім, щоб кампанія зібрала дані, а не просто красиво існувала дві доби.</p></details>
-      <details><summary>Чому не берете двох конкурентів в одному місті?</summary><p>Бо тоді я фактично використовую свої ж напрацювання проти одного з клієнтів. Для локальних ніш це слабка модель співпраці.</p></details>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="contact">
-  <div class="wrap final reveal">
+<section class="section cta" id="contact">
+  <div class="wrap ctaBox reveal">
     <div>
-      <span class="kicker">Контакт</span>
-      <h2>Є бізнес і потрібні заявки?</h2>
-      <p>Напишіть у Telegram або Instagram. Якщо це локальна ніша, спочатку перевіримо, чи вільне ваше місто.</p>
-      <div class="contactLinks">
-        <a class="btn dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Telegram @target_vadym ↗</a>
-        <a class="btn" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko ↗</a>
-      </div>
+      <div class="eyebrow" style="color:#b5bac1">ЗВ’ЯЗОК</div>
+      <h2>Готові обговорити ваш cleaning-проєкт?</h2>
+      <p>Напишіть напряму. Якщо ваше місто вільне, розберемо нішу, офер, бюджет і найсильніший варіант запуску.</p>
     </div>
-
-    <form id="leadForm">
-      <label>Ім’я<input name="name" required placeholder="Олександр"></label>
-      <label>Ніша<input name="niche" required placeholder="Клінінг, beauty, home services…"></label>
-      <label>Місто / GEO<input name="geo" required placeholder="Edmonton, Canada"></label>
-      <label>Рекламний бюджет на місяць
-        <select name="budget" required>
-          <option value="">Оберіть</option>
-          <option>до $500</option>
-          <option>$500–1 500</option>
-          <option>$1 500–3 000</option>
-          <option>$3 000+</option>
-        </select>
-      </label>
-      <label>Що потрібно покращити?<textarea name="problem" placeholder="Стабільні заявки, нижча ціна ліда, новий запуск…"></textarea></label>
-      <button class="btn primary" type="submit">Сформувати заявку ↗</button>
-      <div class="formStatus" id="formStatus"></div>
-    </form>
+    <div class="contactLinks">
+      <a class="btn blue" href="https://t.me/target_vadym" target="_blank" rel="noopener">Telegram @target_vadym →</a>
+      <a class="btn" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko →</a>
+    </div>
   </div>
 </section>
 </main>
 
 <footer>
   <div class="wrap foot">
-    <span>© <span id="year"></span> Вадим Лебеденко · Meta Ads</span>
-    <span><a href="https://t.me/target_vadym" target="_blank" rel="noopener">@target_vadym</a> · <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">@lebedenkkko</a></span>
+    <span>© <span id="year"></span> Vadym · Meta Ads for Cleaning Companies</span>
+    <span>Toronto & Calgary: cleaning-напрям зайнятий</span>
   </div>
 </footer>
 
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
-
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
 },{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-const form=document.getElementById('leadForm');
-const status=document.getElementById('formStatus');
-form.addEventListener('submit',async e=>{
-  e.preventDefault();
-  const d=new FormData(form);
-  const text=`Привіт, Вадиме! Хочу обговорити Meta Ads.
-
-Ім’я: ${d.get('name')}
-Ніша: ${d.get('niche')}
-Місто / GEO: ${d.get('geo')}
-Бюджет: ${d.get('budget')}
-Задача: ${d.get('problem')||'не вказано'}`;
-  try{
-    await navigator.clipboard.writeText(text);
-    status.textContent='Текст заявки скопійовано. Відкриваю Telegram…';
-  }catch(err){
-    status.textContent='Відкриваю Telegram. Скопіюйте дані вручну.';
-  }
-  window.open('https://t.me/target_vadym','_blank');
-});
 </script>
 </body>
 </html>
