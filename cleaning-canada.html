@@ -3,269 +3,390 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<title>Vadym — Meta Ads для клінінгових компаній у Канаді</title>
-<meta name="description" content="Meta Ads для cleaning companies у Канаді та США. Стратегія, креативи, запуск і оптимізація. 1 місто = 1 клієнт. Toronto і Calgary уже зайняті.">
-<meta property="og:title" content="Vadym — Meta Ads for Cleaning Companies">
+<meta name="theme-color" content="#f4f0ea">
+<title>Vadym — Performance Marketer | Meta Ads</title>
+<meta name="description" content="Meta Ads для локального бізнесу та cleaning companies у Канаді й США. Стратегія, креативи, запуск, оптимізація. 1 місто = 1 клієнт.">
+<meta property="og:title" content="Vadym — Meta Ads that bring clients">
 <meta property="og:description" content="1 місто = 1 клієнт. Toronto і Calgary уже зайняті.">
 <style>
 :root{
-  --bg:#ffffff;
-  --ink:#0b0d10;
-  --muted:#686e78;
-  --line:#e7e9ed;
-  --soft:#f6f7f8;
-  --soft2:#eef4fb;
-  --blue:#1769ff;
-  --blue2:#75aef8;
-  --dark:#111318;
-  --max:1240px;
-  --r:24px;
-  --shadow:0 22px 70px rgba(14,22,35,.09);
+  --paper:#f4f0ea;
+  --paper-2:#fbfaf7;
+  --ink:#0b0c0e;
+  --muted:#66635f;
+  --line:rgba(16,17,20,.12);
+  --glass:rgba(255,255,255,.34);
+  --glass-dark:rgba(10,11,13,.72);
+  --accent:#85b7ff;
+  --max:1320px;
+  --radius:30px;
+  --shadow:0 24px 90px rgba(23,20,16,.12);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:var(--bg);color:var(--ink);
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 7%,rgba(126,177,255,.18),transparent 24%),
+    radial-gradient(circle at 82% 8%,rgba(224,195,166,.28),transparent 26%),
+    var(--paper);
   font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   line-height:1.45;
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none}
-button{font:inherit}
+img{display:block;max-width:100%}
 .wrap{width:min(calc(100% - 34px),var(--max));margin:auto}
 .serif{font-family:Georgia,"Times New Roman",serif}
-.muted{color:var(--muted)}
-.reveal{opacity:0;transform:translateY(18px);transition:.55s cubic-bezier(.2,.7,.2,1)}
+.mono{font-family:"SFMono-Regular",Consolas,monospace}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
 .reveal.show{opacity:1;transform:none}
 
 /* NAV */
 .nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(10,14,20,.06)
+  position:fixed;z-index:50;top:18px;left:0;right:0;
 }
-.navin{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:flex-end;gap:10px}
-.brand strong{font-size:18px;letter-spacing:.16em}
-.brand small{font-size:9px;color:#8b9098;letter-spacing:.18em;padding-bottom:2px}
-.navlinks{display:flex;gap:28px;font-size:12px;color:#4c5158}
+.navin{
+  min-height:62px;
+  padding:8px 10px 8px 16px;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:22px;
+  background:rgba(255,255,255,.47);
+  box-shadow:0 10px 42px rgba(0,0,0,.08);
+  backdrop-filter:blur(24px) saturate(145%);
+  -webkit-backdrop-filter:blur(24px) saturate(145%);
+  display:flex;align-items:center;justify-content:space-between;gap:22px;
+}
+.brand{display:flex;align-items:center;gap:13px}
+.brandMark{
+  width:39px;height:39px;border-radius:13px;
+  display:grid;place-items:center;
+  border:1px solid rgba(14,15,18,.12);
+  background:rgba(255,255,255,.38);
+  font-family:Georgia,serif;font-style:italic;font-size:21px
+}
+.brandCopy strong{display:block;font-size:13px;letter-spacing:.18em}
+.brandCopy span{display:block;font-size:8px;letter-spacing:.19em;color:#6d6b67;margin-top:2px}
+.navlinks{display:flex;align-items:center;gap:28px;font-size:11px;color:#4f4d49}
 .navlinks a{position:relative}
-.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:#111;transition:.2s}
+.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:#111;transition:.2s}
 .navlinks a:hover:after{right:0}
-.navright{display:flex;align-items:center;gap:9px}
-.chip{
-  min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:999px;
-  display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;background:#fff
+.navActions{display:flex;align-items:center;gap:8px}
+.pill{
+  min-height:43px;padding:0 16px;border-radius:999px;
+  border:1px solid rgba(15,16,18,.13);
+  background:rgba(255,255,255,.4);
+  backdrop-filter:blur(12px);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:11px;font-weight:800;transition:.22s
 }
-.chip.dark{background:#111;color:#fff;border-color:#111}
+.pill:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(0,0,0,.08)}
+.pill.dark{background:#0b0c0e;color:#fff;border-color:#0b0c0e}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero:before{
-  content:"";position:absolute;inset:0;pointer-events:none;
+.hero{min-height:100svh;padding:24px 0 24px;position:relative;overflow:hidden}
+.heroShell{
+  min-height:calc(100svh - 48px);
+  border-radius:34px;overflow:hidden;position:relative;
   background:
-    radial-gradient(circle at 78% 21%,rgba(23,105,255,.075),transparent 26%),
-    linear-gradient(114deg,transparent 0 68%,rgba(23,105,255,.055) 68.1% 68.35%,transparent 68.5%)
+    linear-gradient(90deg,rgba(7,10,14,.55),rgba(7,10,14,.08) 42%,rgba(240,228,215,.05) 62%),
+    linear-gradient(135deg,#222a31 0%,#7e8c98 36%,#d9cbbb 100%);
+  box-shadow:0 36px 120px rgba(22,18,14,.22)
 }
-.heroGrid{
-  min-height:720px;display:grid;grid-template-columns:1.06fr .94fr;gap:52px;align-items:center;
-  position:relative
-}
-.heroCopy{padding:72px 0 64px;position:relative;z-index:3}
-.kicker{
-  display:flex;align-items:center;gap:10px;font-size:10px;font-weight:900;
-  letter-spacing:.19em;text-transform:uppercase;color:#626873
-}
-.kicker:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--blue)}
-.hero h1{
-  font-size:clamp(64px,7.2vw,106px);line-height:.89;letter-spacing:-.07em;
-  margin:24px 0 24px;max-width:790px;font-weight:850
-}
-.hero h1 .blue{color:var(--blue)}
-.heroLead{
-  font-size:19px;line-height:1.5;color:#555b65;max-width:680px;margin:0
-}
-.heroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-.btn{
-  min-height:52px;padding:0 21px;border-radius:10px;border:1px solid var(--line);
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  font-size:13px;font-weight:850;background:#fff;transition:.2s ease
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(12,20,32,.08)}
-.btn.dark{background:#111;color:#fff;border-color:#111}
-.btn.blue{background:var(--blue);color:#fff;border-color:var(--blue)}
-.proofline{
-  display:flex;gap:24px;flex-wrap:wrap;margin-top:39px;padding-top:24px;border-top:1px solid var(--line);
-  max-width:720px
-}
-.proofItem strong{display:block;font-size:26px;letter-spacing:-.05em}
-.proofItem span{font-size:10px;color:#858a92}
-.proofItem.wide{max-width:170px}
-
-/* HERO VISUAL */
-.heroVisual{position:relative;align-self:stretch;min-height:720px}
-.photoFrame{
-  position:absolute;right:-42px;top:54px;width:92%;height:612px;
-  border-radius:18px;overflow:hidden;background:#e9edf2;box-shadow:var(--shadow)
-}
-.heroPhoto{
-  width:100%;height:100%;object-fit:cover;object-position:center 24%;
-  filter:grayscale(1) contrast(1.05)
-}
-.photoFrame:after{
-  content:"";position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(255,255,255,.34),transparent 28%),
-  linear-gradient(180deg,transparent 65%,rgba(9,12,16,.12));
+.heroShell:before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 58% 34%,rgba(255,214,181,.28),transparent 22%),
+    linear-gradient(112deg,transparent 0 55%,rgba(255,255,255,.12) 55.3% 55.6%,transparent 56%);
   pointer-events:none
 }
-.editorialMark{
-  position:absolute;left:-10px;top:180px;z-index:4;
-  font:italic 46px/1 Georgia,serif;transform:rotate(-7deg)
+.heroImage{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:center 38%;
+  opacity:.96;filter:contrast(1.02) saturate(.93)
 }
-.sideWords{
-  position:absolute;right:2px;top:96px;z-index:4;
-  font-size:9px;line-height:2.1;letter-spacing:.22em;color:#7c818a;text-transform:uppercase
+.heroVeil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(5,7,10,.82) 0%,rgba(5,7,10,.62) 28%,rgba(5,7,10,.18) 55%,rgba(245,235,225,.06) 100%),
+    linear-gradient(180deg,transparent 58%,rgba(8,9,11,.58) 100%)
 }
-.availability{
-  position:absolute;left:-22px;right:-2px;bottom:30px;z-index:5;
-  background:rgba(14,16,19,.95);color:#fff;border:1px solid rgba(255,255,255,.13);
-  border-radius:16px;padding:16px;box-shadow:0 20px 60px rgba(0,0,0,.18)
+.heroContent{
+  position:relative;z-index:4;min-height:calc(100svh - 48px);
+  padding:130px 58px 36px;
+  display:grid;grid-template-columns:1.04fr .96fr;gap:26px;
 }
-.avHead{display:flex;justify-content:space-between;gap:18px;font-size:10px;letter-spacing:.08em;margin-bottom:10px}
-.avGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.avCard{border:1px solid #383b42;border-radius:11px;padding:18px;background:linear-gradient(145deg,#22252a,#111318)}
-.avCard small{display:block;color:#9da2aa;margin-bottom:15px}
-.avCard strong{display:block;font-size:25px;letter-spacing:-.04em}
-.avCard span{font-size:10px;color:#b9bec5}
-.badgeBusy{float:right;background:#272a2f;border-radius:999px;padding:5px 8px;color:#d1d4d8;font-size:9px}
+.heroCopy{align-self:center;max-width:720px;color:#fff}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:10px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.72)
+}
+.eyebrow:before{content:"";width:34px;height:1px;background:rgba(255,255,255,.58)}
+.hero h1{
+  font-size:clamp(62px,7.4vw,118px);line-height:.86;letter-spacing:-.075em;
+  margin:24px 0 24px;font-weight:900
+}
+.hero h1 span{
+  display:block;
+  background:linear-gradient(92deg,#fff 0%,#bdd8ff 48%,#e8eef8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.heroLead{
+  max-width:650px;font-size:18px;line-height:1.55;color:rgba(255,255,255,.79);margin:0
+}
+.heroButtons{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.heroBtn{
+  min-height:54px;padding:0 20px;border-radius:15px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.12);
+  color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:850;font-size:12px;
+  backdrop-filter:blur(18px) saturate(145%);
+  transition:.22s ease
+}
+.heroBtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.18)}
+.heroBtn.primary{background:#fff;color:#0b0c0e;border-color:#fff}
+.microProof{
+  display:grid;grid-template-columns:repeat(3,max-content);gap:24px;
+  margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18)
+}
+.microProof strong{display:block;font-size:23px;letter-spacing:-.05em}
+.microProof span{display:block;font-size:9px;color:rgba(255,255,255,.58);margin-top:2px}
+.heroRight{position:relative}
+.signature{
+  position:absolute;right:2%;top:18%;
+  color:#fff;font:italic clamp(48px,5.6vw,92px)/1 Georgia,serif;
+  transform:rotate(-7deg);text-shadow:0 8px 40px rgba(0,0,0,.25)
+}
+.verticalWords{
+  position:absolute;right:1%;top:31%;
+  color:rgba(255,255,255,.8);font-size:11px;line-height:2.15;letter-spacing:.23em;text-transform:uppercase
+}
+.est{
+  position:absolute;right:0;top:13%;bottom:46%;
+  width:28px;border-left:1px solid rgba(255,255,255,.36);border-right:1px solid rgba(255,255,255,.36)
+}
+.est span{
+  position:absolute;left:-20px;top:50%;transform:rotate(-90deg) translateY(-50%);
+  transform-origin:center;white-space:nowrap;font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.72)
+}
 
-/* SECTIONS */
-.section{padding:104px 0}
+/* HERO GLASS CITY BOARD */
+.cityBoard{
+  grid-column:1 / -1;align-self:end;
+  border:1px solid rgba(255,255,255,.45);
+  background:linear-gradient(135deg,rgba(10,11,13,.72),rgba(10,11,13,.46));
+  box-shadow:0 28px 80px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter:blur(26px) saturate(135%);
+  -webkit-backdrop-filter:blur(26px) saturate(135%);
+  border-radius:24px;padding:18px;color:#fff
+}
+.boardHead{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  margin-bottom:13px;font-size:13px;letter-spacing:.05em
+}
+.boardHead strong{font-size:16px;letter-spacing:.08em}
+.boardGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cityCard{
+  position:relative;overflow:hidden;min-height:185px;border-radius:17px;
+  border:1px solid rgba(255,255,255,.32);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.36)),
+    radial-gradient(circle at 20% 10%,rgba(121,174,255,.45),transparent 40%),
+    #26313e;
+  padding:18px;display:flex;flex-direction:column;justify-content:flex-end
+}
+.cityCard.calgary{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(0,0,0,.4)),
+    radial-gradient(circle at 75% 18%,rgba(241,173,111,.42),transparent 38%),
+    #3b352e
+}
+.cityCard:before{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:56%;
+  background:
+    linear-gradient(90deg,transparent 0 5%,rgba(255,255,255,.18) 5.3% 6.2%,transparent 6.5% 10%,rgba(255,255,255,.13) 10.3% 13%,transparent 13.3% 19%,rgba(255,255,255,.11) 19.3% 23%,transparent 23.3% 30%,rgba(255,255,255,.16) 30.3% 33%,transparent 33.3% 41%,rgba(255,255,255,.12) 41.3% 46%,transparent 46.3% 55%,rgba(255,255,255,.16) 55.3% 60%,transparent 60.3% 70%,rgba(255,255,255,.12) 70.3% 74%,transparent 74.3% 83%,rgba(255,255,255,.13) 83.3% 88%,transparent 88.3% 100%);
+  opacity:.35
+}
+.busy{
+  position:absolute;top:13px;right:13px;z-index:2;
+  padding:7px 11px;border-radius:999px;background:rgba(7,8,10,.74);
+  border:1px solid rgba(255,255,255,.14);font-size:10px;font-weight:850
+}
+.cityCard h3{position:relative;z-index:2;font-size:32px;line-height:1;margin:0 0 5px;letter-spacing:-.045em}
+.cityCard p{position:relative;z-index:2;margin:0;font-size:11px;color:rgba(255,255,255,.76)}
+
+/* SECTION COMMON */
+.section{padding:110px 0}
 .sectionHead{
-  display:grid;grid-template-columns:.72fr 1.28fr;gap:70px;align-items:end;margin-bottom:38px
+  display:grid;grid-template-columns:.64fr 1.36fr;gap:74px;align-items:end;margin-bottom:42px
 }
-.sectionHead .label{
-  font-size:10px;font-weight:900;letter-spacing:.19em;text-transform:uppercase;color:#777c85
-}
+.sectionHead .label{font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:#77716a}
 .sectionHead h2{
-  font-size:clamp(48px,5.7vw,78px);line-height:.93;letter-spacing:-.06em;margin:0
+  margin:0;font-size:clamp(48px,5.9vw,82px);line-height:.92;letter-spacing:-.065em
 }
-.sectionHead p{max-width:600px;color:var(--muted);font-size:16px;margin:18px 0 0}
+.sectionHead p{margin:18px 0 0;max-width:650px;color:var(--muted);font-size:16px}
 
-/* MANIFESTO */
-.manifesto{
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  display:grid;grid-template-columns:1.3fr .7fr
+/* GLASS VALUE */
+.valueGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+.glassLight{
+  border:1px solid rgba(255,255,255,.78);
+  background:rgba(255,255,255,.48);
+  backdrop-filter:blur(24px) saturate(135%);
+  -webkit-backdrop-filter:blur(24px) saturate(135%);
+  box-shadow:var(--shadow);border-radius:var(--radius)
 }
-.manifestoMain{padding:48px 48px 48px 0;border-right:1px solid var(--line)}
-.manifestoMain .giant{
-  font-size:clamp(66px,8vw,118px);line-height:.82;letter-spacing:-.075em;font-weight:900
+.manifesto{padding:38px;min-height:480px;display:flex;flex-direction:column;justify-content:space-between}
+.manifesto .big{
+  font-size:clamp(68px,8vw,126px);line-height:.82;letter-spacing:-.078em;font-weight:900
 }
-.manifestoMain .giant span{color:var(--blue)}
-.manifestoMain p{max-width:720px;color:#595f68;font-size:17px;margin:26px 0 0}
-.manifestoSide{display:grid}
-.manifestoRow{padding:28px 0 28px 34px;border-bottom:1px solid var(--line)}
-.manifestoRow:last-child{border-bottom:0}
-.manifestoRow b{font-size:12px;color:var(--blue)}
-.manifestoRow h3{font-size:22px;letter-spacing:-.035em;margin:8px 0 8px}
-.manifestoRow p{font-size:13px;color:var(--muted);margin:0}
+.manifesto .big span{font-family:Georgia,serif;font-style:italic;font-weight:400;color:#6d89b8}
+.manifesto p{max-width:650px;color:#5e5a55;font-size:17px}
+.valueStack{display:grid;gap:12px}
+.valueCard{
+  padding:24px 26px;min-height:148px;display:grid;grid-template-columns:52px 1fr;gap:18px;align-items:start
+}
+.valueNum{
+  width:52px;height:52px;border-radius:17px;
+  display:grid;place-items:center;background:rgba(115,162,227,.12);
+  border:1px solid rgba(115,162,227,.2);font:italic 19px/1 Georgia,serif;color:#4772ae
+}
+.valueCard h3{font-size:24px;letter-spacing:-.035em;margin:3px 0 7px}
+.valueCard p{margin:0;color:var(--muted);font-size:13px}
 
 /* CASE */
 .caseFeature{
-  display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);border-radius:22px;overflow:hidden
+  position:relative;overflow:hidden;border-radius:32px;
+  display:grid;grid-template-columns:1.12fr .88fr;
+  background:linear-gradient(135deg,#0d0e10,#1b1c1f);
+  color:#fff;box-shadow:0 35px 110px rgba(0,0,0,.16)
 }
-.caseBlack{background:#111318;color:#fff;padding:42px;min-height:480px;display:flex;flex-direction:column;justify-content:space-between}
-.caseBlack .ey{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#adb3bb}
-.caseBlack h3{font-size:clamp(48px,5.2vw,72px);line-height:.9;letter-spacing:-.06em;margin:18px 0}
-.caseBlack p{color:#afb5bd;max-width:530px}
-.caseMetrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
-.caseMetric{border-top:1px solid #3b3e44;padding-top:15px}
-.caseMetric strong{display:block;font-size:30px;letter-spacing:-.05em}
-.caseMetric span{font-size:10px;color:#9ca2aa}
-.caseLight{padding:42px;background:#fafafa;display:flex;flex-direction:column;justify-content:space-between}
-.caseLight .number{font:italic 72px/1 Georgia,serif;color:#c8ccd1}
-.caseLight h3{font-size:34px;line-height:1.03;letter-spacing:-.045em;margin:0 0 14px}
-.caseLight p{color:var(--muted);font-size:14px}
-.deltaGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:25px}
-.delta{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff}
-.delta strong{display:block;font-size:24px;color:var(--blue)}
-.delta span{font-size:10px;color:#7b818a}
+.caseFeature:after{
+  content:"";position:absolute;width:460px;height:460px;border-radius:50%;
+  right:-140px;top:-180px;background:rgba(119,167,235,.18);filter:blur(12px)
+}
+.caseMain{padding:44px;position:relative;z-index:2}
+.caseKicker{font-size:10px;letter-spacing:.18em;color:#9fa5ad;text-transform:uppercase}
+.caseMain h3{font-size:clamp(52px,6vw,90px);line-height:.88;letter-spacing:-.07em;margin:26px 0 22px}
+.caseMain p{max-width:600px;color:#b8bdc4}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+.metric{
+  padding:17px;border:1px solid rgba(255,255,255,.13);border-radius:16px;
+  background:rgba(255,255,255,.055);backdrop-filter:blur(16px)
+}
+.metric strong{display:block;font-size:31px;letter-spacing:-.055em}
+.metric span{font-size:9px;color:#a7adb5}
+.caseSide{
+  margin:18px;position:relative;z-index:2;
+  border:1px solid rgba(255,255,255,.16);border-radius:22px;
+  background:rgba(255,255,255,.07);backdrop-filter:blur(22px);
+  padding:30px;display:flex;flex-direction:column;justify-content:space-between
+}
+.caseSide .script{font:italic 52px/1 Georgia,serif;color:#c6dcff}
+.caseSide h4{font-size:30px;line-height:1.02;letter-spacing:-.04em;margin:28px 0 10px}
+.caseSide p{color:#aeb4bc;font-size:13px}
+.deltaGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:25px}
+.delta{
+  padding:13px;border-radius:13px;border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.06)
+}
+.delta strong{display:block;font-size:22px;color:#bad6ff}
+.delta span{font-size:8px;color:#aeb4bc}
 
 /* PROCESS */
-.process{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.step{padding:24px 22px 30px;border-right:1px solid var(--line);min-height:210px}
-.step:last-child{border-right:0}
-.step .n{font:italic 30px/1 Georgia,serif;color:#b8bdc4}
-.step h3{font-size:20px;letter-spacing:-.035em;margin:42px 0 9px}
+.process{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px
+}
+.step{
+  min-height:245px;padding:22px;display:flex;flex-direction:column;justify-content:space-between
+}
+.step .n{font:italic 28px/1 Georgia,serif;color:#7b8798}
+.step h3{font-size:21px;letter-spacing:-.035em;margin:0 0 8px}
 .step p{font-size:12px;color:var(--muted);margin:0}
 
-/* AVAILABILITY */
-.citySection{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.cityList{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.cityItem{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
-.cityItem .cityName{font-size:28px;letter-spacing:-.045em;font-weight:850}
-.cityItem .status{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#8b9098}
-.cityItem.busy .status{color:#111}
-.cityItem p{font-size:13px;color:var(--muted);margin:14px 0 0}
+/* CITY AVAILABILITY */
+.availabilitySection{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(126,177,255,.16),transparent 28%),
+    linear-gradient(180deg,#f0ece6,#f7f4ef);
+  border-top:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06)
+}
+.cityList{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.cityItem{padding:26px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
+.cityItem .status{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#756f68}
+.cityItem .cityName{font-size:38px;font-weight:850;letter-spacing:-.05em}
+.cityItem p{font-size:13px;color:var(--muted);margin:12px 0 0}
+.cityItem.busyCity{background:rgba(10,11,13,.87);color:#fff;border-color:rgba(255,255,255,.12)}
+.cityItem.busyCity p{color:#aeb4bc}
+.cityItem.busyCity .status{color:#c1c6ce}
 
 /* CTA */
-.ctaSection{padding:100px 0}
+.cta{padding:110px 0}
 .ctaBox{
-  border-radius:24px;background:#111318;color:#fff;padding:48px;
-  display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;
-  position:relative;overflow:hidden
+  position:relative;overflow:hidden;
+  border-radius:32px;padding:46px;
+  display:grid;grid-template-columns:1.2fr .8fr;gap:36px;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(128,176,242,.23),transparent 30%),
+    rgba(255,255,255,.48);
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(26px)
 }
-.ctaBox:after{
-  content:"";position:absolute;width:380px;height:380px;border-radius:50%;
-  right:-180px;top:-170px;background:rgba(23,105,255,.22);filter:blur(8px)
-}
-.ctaBox h2{font-size:clamp(46px,5.5vw,76px);line-height:.92;letter-spacing:-.06em;margin:10px 0 18px;position:relative;z-index:2}
-.ctaBox p{color:#b9bec5;max-width:600px;position:relative;z-index:2}
-.contactStack{display:grid;gap:10px;position:relative;z-index:2}
+.ctaBox h2{font-size:clamp(48px,5.6vw,80px);line-height:.9;letter-spacing:-.065em;margin:0 0 18px}
+.ctaBox p{max-width:680px;color:var(--muted)}
+.contactStack{display:grid;gap:10px;align-self:center}
 .contact{
-  min-height:64px;padding:0 18px;border:1px solid #343840;border-radius:12px;
-  display:flex;align-items:center;justify-content:space-between;gap:15px;background:#171a1f
+  min-height:68px;border-radius:17px;border:1px solid rgba(0,0,0,.1);
+  padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  background:rgba(255,255,255,.52);transition:.22s
 }
-.contact b{font-size:14px}
-.contact span{font-size:11px;color:#aeb4bc}
-.contact:hover{border-color:#6c737e}
-.contact.blue{background:var(--blue);border-color:var(--blue)}
-.contact.blue span{color:#dbe8ff}
+.contact:hover{transform:translateY(-2px);background:#fff}
+.contact.dark{background:#0b0c0e;color:#fff}
+.contact b{font-size:14px}.contact span{font-size:10px;color:#777}
+.contact.dark span{color:#aaa}
 
-footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
-.footer{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:22px}
+/* FOOTER */
+footer{padding:26px 0 44px}
+.footer{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:24px;color:#77716b;font-size:10px}
 
-/* MOBILE */
-@media(max-width:980px){
+/* RESPONSIVE */
+@media(max-width:1020px){
   .navlinks{display:none}
-  .heroGrid{grid-template-columns:1fr}
-  .heroVisual{min-height:600px}
-  .photoFrame{right:0;width:100%;height:560px}
-  .sectionHead{grid-template-columns:1fr;gap:18px}
-  .manifesto{grid-template-columns:1fr}.manifestoMain{border-right:0;border-bottom:1px solid var(--line);padding-right:0}
-  .manifestoRow{padding-left:0}
-  .caseFeature,.ctaBox{grid-template-columns:1fr}
-  .process{grid-template-columns:1fr 1fr}.step:nth-child(2n){border-right:0}
+  .heroContent{grid-template-columns:1fr;padding:120px 30px 28px}
+  .heroRight{display:none}
+  .cityBoard{grid-column:1}
+  .sectionHead{grid-template-columns:1fr;gap:16px}
+  .valueGrid,.caseFeature,.ctaBox{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr 1fr}
   .cityList{grid-template-columns:1fr 1fr}
 }
-@media(max-width:640px){
-  .wrap{width:min(calc(100% - 20px),var(--max))}
-  .navin{height:66px}.brand small,.chip.hideMobile{display:none}
-  .chip{font-size:10px;padding:0 11px}
-  .heroGrid{min-height:auto}.heroCopy{padding:48px 0 34px}
-  .hero h1{font-size:54px}.heroLead{font-size:16px}
-  .proofline{display:grid;grid-template-columns:1fr 1fr}
-  .heroVisual{min-height:510px}.photoFrame{top:0;height:480px}.editorialMark{top:105px;font-size:34px}.sideWords{display:none}
-  .availability{left:8px;right:8px;bottom:12px}.avGrid{grid-template-columns:1fr}
-  .section{padding:74px 0}.sectionHead h2{font-size:48px}
-  .manifestoMain .giant{font-size:68px}
-  .caseMetrics,.deltaGrid{grid-template-columns:1fr}
-  .caseBlack,.caseLight{padding:26px 22px}
-  .process{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}
-  .step:last-child{border-bottom:0}
+@media(max-width:680px){
+  .wrap{width:min(calc(100% - 18px),var(--max))}
+  .nav{top:9px}.navin{border-radius:17px;min-height:56px}
+  .brandCopy span,.pill.hideMobile{display:none}
+  .pill{min-height:40px;padding:0 13px;font-size:10px}
+  .hero{padding:9px 0}
+  .heroShell{min-height:auto;border-radius:24px}
+  .heroContent{min-height:auto;padding:100px 17px 17px}
+  .hero h1{font-size:57px}
+  .heroLead{font-size:15px}
+  .microProof{grid-template-columns:1fr 1fr;gap:14px}
+  .cityBoard{padding:12px;border-radius:18px}
+  .boardHead{align-items:flex-start;flex-direction:column}
+  .boardGrid{grid-template-columns:1fr}
+  .cityCard{min-height:145px}
+  .section{padding:76px 0}.sectionHead h2{font-size:48px}
+  .valueGrid{grid-template-columns:1fr}.manifesto{padding:24px;min-height:390px}
+  .manifesto .big{font-size:67px}
+  .metrics,.deltaGrid{grid-template-columns:1fr}
+  .caseMain,.caseSide{padding:24px}.caseSide{margin:10px}
+  .process{grid-template-columns:1fr}
   .cityList{grid-template-columns:1fr}
-  .ctaBox{padding:30px 22px}
+  .ctaBox{padding:27px 20px}
   .footer{flex-direction:column}
 }
 </style>
@@ -275,7 +396,8 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
 <header class="nav">
   <div class="wrap navin">
     <a class="brand" href="#top">
-      <strong>VADYM</strong><small>PERFORMANCE MARKETER</small>
+      <div class="brandMark">V</div>
+      <div class="brandCopy"><strong>VADYM</strong><span>PERFORMANCE MARKETER</span></div>
     </a>
     <nav class="navlinks">
       <a href="#approach">Підхід</a>
@@ -283,56 +405,59 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
       <a href="#process">Процес</a>
       <a href="#cities">Міста</a>
     </nav>
-    <div class="navright">
-      <a class="chip hideMobile" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram</a>
-      <a class="chip dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати →</a>
+    <div class="navActions">
+      <a class="pill hideMobile" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати →</a>
     </div>
   </div>
 </header>
 
 <main id="top">
 <section class="hero">
-  <div class="wrap heroGrid">
-    <div class="heroCopy">
-      <div class="kicker">Meta Ads для cleaning companies · Canada / USA</div>
-      <h1>Вам потрібні <span class="blue">заявки</span>, а не ще одна реклама</h1>
-      <p class="heroLead">Я будую рекламну систему для клінінгових компаній: офер, креативи, запуск, Direct / Messages і оптимізація. Ціль проста — більше адекватних звернень у вашому місті.</p>
-      <div class="heroActions">
-        <a class="btn dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
-        <a class="btn" href="#case">Подивитися кейс</a>
-      </div>
-      <div class="proofline">
-        <div class="proofItem"><strong>2+</strong><span>роки з Meta Ads</span></div>
-        <div class="proofItem"><strong>93</strong><span>діалоги в Toronto-кейсі</span></div>
-        <div class="proofItem"><strong>$4.40</strong><span>CAD за діалог у кейсі</span></div>
-        <div class="proofItem wide"><strong>1:1</strong><span>одне місто = один cleaning-клієнт</span></div>
-      </div>
-    </div>
+  <div class="wrap heroShell">
+    <img class="heroImage" src="https://avatars.githubusercontent.com/u/211505407?v=4" alt="Vadym — Performance Marketer">
+    <div class="heroVeil"></div>
 
-    <div class="heroVisual">
-      <div class="photoFrame">
-        <img class="heroPhoto" src="https://avatars.githubusercontent.com/u/211505407?v=4" alt="Вадим — Meta Ads">
-      </div>
-      <div class="editorialMark">Vadym</div>
-      <div class="sideWords">СТРАТЕГІЯ<br>КРЕАТИВИ<br>ТРАФІК<br>ОПТИМІЗАЦІЯ<br>РЕЗУЛЬТАТ</div>
+    <div class="heroContent">
+      <div class="heroCopy">
+        <div class="eyebrow">Meta Ads · Canada / USA</div>
+        <h1>Вам потрібні <span>заявки.</span> Не просто реклама.</h1>
+        <p class="heroLead">Стратегія, креативи, запуск і оптимізація Meta Ads для локального бізнесу та cleaning companies. Моя задача — не «відкрутити бюджет», а знайти зв’язку, яка приводить нормальні звернення.</p>
 
-      <div class="availability">
-        <div class="avHead">
-          <span>TORONTO І CALGARY — ЗАЙНЯТІ</span>
-          <span>1 МІСТО — 1 КЛІЄНТ</span>
+        <div class="heroButtons">
+          <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
+          <a class="heroBtn" href="#case">Подивитися кейс</a>
+          <a class="heroBtn" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko</a>
         </div>
-        <div class="avGrid">
-          <div class="avCard">
-            <span class="badgeBusy">Зайнято</span>
-            <small>CANADA</small>
-            <strong>TORONTO</strong>
-            <span>Активний cleaning-проєкт уже працює зі мною</span>
+
+        <div class="microProof">
+          <div><strong>2+</strong><span>роки з Meta Ads</span></div>
+          <div><strong>93</strong><span>діалоги в Toronto-кейсі</span></div>
+          <div><strong>1:1</strong><span>одне місто = один cleaning-клієнт</span></div>
+        </div>
+      </div>
+
+      <div class="heroRight">
+        <div class="signature">Vadym</div>
+        <div class="verticalWords">СТРАТЕГІЯ<br>КРЕАТИВИ<br>ТРАФІК<br>ОПТИМІЗАЦІЯ<br>РЕЗУЛЬТАТИ</div>
+        <div class="est"><span>EST. 2024</span></div>
+      </div>
+
+      <div class="cityBoard">
+        <div class="boardHead">
+          <strong>TORONTO І CALGARY — ВЖЕ ЗАЙНЯТІ</strong>
+          <span>Кожне місто — лише один cleaning-клієнт</span>
+        </div>
+        <div class="boardGrid">
+          <div class="cityCard">
+            <span class="busy">Зайнято</span>
+            <h3>TORONTO</h3>
+            <p>Активний cleaning-проєкт у цьому регіоні вже працює зі мною</p>
           </div>
-          <div class="avCard">
-            <span class="badgeBusy">Зайнято</span>
-            <small>CANADA</small>
-            <strong>CALGARY</strong>
-            <span>Нових cleaning-клієнтів у місті не беру</span>
+          <div class="cityCard calgary">
+            <span class="busy">Зайнято</span>
+            <h3>CALGARY</h3>
+            <p>Нових cleaning-клієнтів у місті зараз не беру</p>
           </div>
         </div>
       </div>
@@ -345,26 +470,30 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
     <div class="sectionHead reveal">
       <div class="label">Мій підхід</div>
       <div>
-        <h2>Ваш рекламщик не має працювати проти вас.</h2>
-        <p>Якщо один спеціаліст одночасно веде дві однакові клінінгові компанії в одному місті, він фактично допомагає конкурентам боротися за ту саму аудиторію. Я так не працюю.</p>
+        <h2>Ексклюзивність замість конфлікту інтересів.</h2>
+        <p>Якщо один спеціаліст веде дві однакові cleaning-компанії в одному місті, він фактично змушує власних клієнтів конкурувати між собою. Я так не працюю.</p>
       </div>
     </div>
 
-    <div class="manifesto reveal">
-      <div class="manifestoMain">
-        <div class="giant">1 місто.<br><span>1 клієнт.</span></div>
-        <p>Поки ми працюємо разом, я не беру прямого cleaning-конкурента у вашому місті. Це не маркетинговий трюк, а нормальна логіка, коли відповідаєш за результат клієнта.</p>
+    <div class="valueGrid">
+      <div class="manifesto glassLight reveal">
+        <div class="big">1 місто.<br><span>1 клієнт.</span></div>
+        <p>Поки ми працюємо разом, я не беру прямого cleaning-конкурента у вашому місті. Стратегія, офер, креативи й результати залишаються на вашому боці.</p>
       </div>
-      <div class="manifestoSide">
-        <div class="manifestoRow">
-          <b>01</b><h3>Локальна стратегія</h3><p>Гео, ціни, сезонність, послуги та конкуренція відрізняються. Реклама теж має відрізнятися.</p>
-        </div>
-        <div class="manifestoRow">
-          <b>02</b><h3>Креативи під ваш ринок</h3><p>Не один шаблон на всіх. Подача та офер збираються під конкретну cleaning-компанію.</p>
-        </div>
-        <div class="manifestoRow">
-          <b>03</b><h3>Оптимізація за якістю</h3><p>Дивлюся не лише на дешевий CPL, а на те, хто реально пише і чи можна закрити цього ліда в замовлення.</p>
-        </div>
+
+      <div class="valueStack">
+        <article class="valueCard glassLight reveal">
+          <div class="valueNum">01</div>
+          <div><h3>Локальна стратегія</h3><p>Гео, ціни, сезонність і конкуренція різні. Тому не запускаю один шаблон на всі міста.</p></div>
+        </article>
+        <article class="valueCard glassLight reveal">
+          <div class="valueNum">02</div>
+          <div><h3>Креативи під ваш ринок</h3><p>Офер і подача створюються під конкретну послугу, місто й тип клієнта.</p></div>
+        </article>
+        <article class="valueCard glassLight reveal">
+          <div class="valueNum">03</div>
+          <div><h3>Оптимізація за якістю</h3><p>Дивлюся не лише на дешевий CPL, а на те, хто реально пише і чи закривається в замовлення.</p></div>
+        </article>
       </div>
     </div>
   </div>
@@ -376,35 +505,33 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
       <div class="label">Реальний кейс</div>
       <div>
         <h2>Не намальований ROAS. Реальна кампанія.</h2>
-        <p>Toronto & GTA, residential cleaning. Нижче — цифри конкретної робочої кампанії, а не «1000 клієнтів за ніч».</p>
+        <p>Toronto & GTA, residential cleaning. Нижче — фактичні цифри робочої кампанії, а не декоративна статистика для красивого сайту.</p>
       </div>
     </div>
 
     <div class="caseFeature reveal">
-      <div class="caseBlack">
-        <div>
-          <div class="ey">Toronto / GTA · Residential cleaning</div>
-          <h3>93 початі діалоги</h3>
-          <p>Локальний офер, жінки 30–60, статичний креатив і контроль вартості звернення.</p>
-        </div>
-        <div class="caseMetrics">
-          <div class="caseMetric"><strong>93</strong><span>started conversations</span></div>
-          <div class="caseMetric"><strong>$4.40</strong><span>CAD / conversation</span></div>
-          <div class="caseMetric"><strong>$409.35</strong><span>CAD spend</span></div>
+      <div class="caseMain">
+        <div class="caseKicker">Toronto / GTA · Residential cleaning</div>
+        <h3>93 початі діалоги</h3>
+        <p>Локальний офер, статичний креатив і системна оптимізація кампанії під повідомлення.</p>
+
+        <div class="metrics">
+          <div class="metric"><strong>93</strong><span>STARTED CONVERSATIONS</span></div>
+          <div class="metric"><strong>$4.40</strong><span>CAD / CONVERSATION</span></div>
+          <div class="metric"><strong>$409.35</strong><span>CAD SPEND</span></div>
         </div>
       </div>
 
-      <div class="caseLight">
-        <div class="number serif">+41%</div>
+      <div class="caseSide">
+        <div class="script">+41%</div>
         <div>
-          <h3>Сильніша зв’язка, а не «магічний інтерес»</h3>
+          <h4>Сильніша зв’язка, а не «магічний інтерес»</h4>
           <p>Порівняно з попередньою сильною кампанією ця зв’язка дала кращий CTR і нижчу вартість кліку та діалогу.</p>
           <div class="deltaGrid">
-            <div class="delta"><strong>-12%</strong><span>вартість діалогу</span></div>
+            <div class="delta"><strong>-12%</strong><span>ціна діалогу</span></div>
             <div class="delta"><strong>+41%</strong><span>link CTR</span></div>
             <div class="delta"><strong>-10%</strong><span>link CPC</span></div>
           </div>
-          <a class="btn" style="margin-top:24px" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Кейси в Instagram →</a>
         </div>
       </div>
     </div>
@@ -417,21 +544,21 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
       <div class="label">Як проходить запуск</div>
       <div>
         <h2>Спочатку думаємо. Потім витрачаємо бюджет.</h2>
-        <p>Без хаотичних тестів і постійного «ще трохи почекаємо». Є конкретний процес від першого розбору до оптимізації.</p>
+        <p>Без хаотичних тестів і постійного «ще трохи почекаємо». Є зрозумілий процес від першого розбору до оптимізації.</p>
       </div>
     </div>
 
-    <div class="process reveal">
-      <div class="step"><div class="n">01</div><h3>Розбір</h3><p>Послуги, ціни, гео, поточні заявки та попередня реклама.</p></div>
-      <div class="step"><div class="n">02</div><h3>Стратегія</h3><p>Офер, аудиторія, позиціонування та структура кампанії.</p></div>
-      <div class="step"><div class="n">03</div><h3>Креативи</h3><p>Статика, відео, тексти й рекламні кути під ваш cleaning-сегмент.</p></div>
-      <div class="step"><div class="n">04</div><h3>Запуск</h3><p>Meta Ads, Direct / Messages, плейсменти та перші сигнали.</p></div>
-      <div class="step"><div class="n">05</div><h3>Оптимізація</h3><p>Залишаю сильні зв’язки й прибираю витрати, які не дають нормальних звернень.</p></div>
+    <div class="process">
+      <article class="step glassLight reveal"><div class="n">01</div><div><h3>Розбір</h3><p>Послуги, ціни, гео, поточні заявки та попередня реклама.</p></div></article>
+      <article class="step glassLight reveal"><div class="n">02</div><div><h3>Стратегія</h3><p>Офер, аудиторія, позиціонування та структура кампанії.</p></div></article>
+      <article class="step glassLight reveal"><div class="n">03</div><div><h3>Креативи</h3><p>Статика, відео, тексти й рекламні кути під конкретний сегмент.</p></div></article>
+      <article class="step glassLight reveal"><div class="n">04</div><div><h3>Запуск</h3><p>Meta Ads, Direct / Messages, плейсменти та перші сигнали.</p></div></article>
+      <article class="step glassLight reveal"><div class="n">05</div><div><h3>Оптимізація</h3><p>Залишаю сильні зв’язки й прибираю витрати, які не дають нормальних звернень.</p></div></article>
     </div>
   </div>
 </section>
 
-<section class="section citySection" id="cities">
+<section class="section availabilitySection" id="cities">
   <div class="wrap">
     <div class="sectionHead reveal">
       <div class="label">Доступність</div>
@@ -442,23 +569,33 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
     </div>
 
     <div class="cityList">
-      <div class="cityItem busy reveal"><div class="status">Зайнято</div><div class="cityName">Toronto / GTA</div><p>Активний residential cleaning-проєкт.</p></div>
-      <div class="cityItem busy reveal"><div class="status">Зайнято</div><div class="cityName">Calgary</div><p>Cleaning-напрям уже закріплений за чинним клієнтом.</p></div>
-      <div class="cityItem reveal"><div class="status">Перевірити</div><div class="cityName">Інше місто</div><p>Edmonton, Vancouver, Ottawa, Winnipeg, Montreal або місто в США.</p></div>
+      <article class="cityItem glassLight busyCity reveal">
+        <div class="status">Зайнято</div>
+        <div><div class="cityName">Toronto / GTA</div><p>Активний residential cleaning-проєкт.</p></div>
+      </article>
+      <article class="cityItem glassLight busyCity reveal">
+        <div class="status">Зайнято</div>
+        <div><div class="cityName">Calgary</div><p>Cleaning-напрям уже закріплений за чинним клієнтом.</p></div>
+      </article>
+      <article class="cityItem glassLight reveal">
+        <div class="status">Перевірити</div>
+        <div><div class="cityName">Ваше місто</div><p>Edmonton, Vancouver, Ottawa, Winnipeg, Montreal або місто в США.</p></div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="ctaSection" id="contact">
+<section class="cta" id="contact">
   <div class="wrap">
     <div class="ctaBox reveal">
       <div>
-        <div class="kicker" style="color:#b8bec6">Контакт напряму</div>
+        <div class="label">Контакт напряму</div>
         <h2>Ваше місто ще вільне?</h2>
-        <p>Напишіть мені. Якщо немає конфлікту з чинним клієнтом, розберемо вашу cleaning-компанію, бюджет і найсильніший варіант запуску.</p>
+        <p>Напишіть мені. Якщо немає конфлікту з чинним клієнтом, розберемо ваш бізнес, рекламний бюджет і найсильніший варіант запуску.</p>
       </div>
+
       <div class="contactStack">
-        <a class="contact blue" href="https://t.me/target_vadym" target="_blank" rel="noopener">
+        <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">
           <div><b>Telegram</b><br><span>@target_vadym</span></div><strong>→</strong>
         </a>
         <a class="contact" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">
@@ -472,13 +609,12 @@ footer{padding:32px 0 44px;color:#8b9098;font-size:11px}
 
 <footer>
   <div class="wrap footer">
-    <span>© <span id="year"></span> Vadym · Meta Ads for Cleaning Companies</span>
-    <span>Toronto & Calgary: cleaning-напрям зайнятий</span>
+    <span>© 2026 Vadym · Performance Marketer</span>
+    <span>Instagram @lebedenkkko · Telegram @target_vadym</span>
   </div>
 </footer>
 
 <script>
-document.getElementById('year').textContent=new Date().getFullYear();
 const io=new IntersectionObserver((entries)=>{
   entries.forEach((e)=>{if(e.isIntersecting)e.target.classList.add('show')})
 },{threshold:.08});
