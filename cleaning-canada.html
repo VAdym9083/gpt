@@ -528,6 +528,27 @@ body{
 
 
 .highlightBubble{position:relative!important}
+
+/* Pure-CSS expandable cases: reliable without JS */
+.caseDetails{margin-top:18px}
+.caseDetails>summary{
+  list-style:none;display:flex;justify-content:center;cursor:pointer
+}
+.caseDetails>summary::-webkit-details-marker{display:none}
+.caseDetails>summary span{
+  min-height:50px;padding:0 20px;border-radius:999px;background:#111214;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  font:800 11px/1 system-ui;border:1px solid rgba(15,16,18,.12);
+  box-shadow:0 14px 36px rgba(20,18,16,.10);transition:.22s
+}
+.caseDetails>summary span:hover{transform:translateY(-2px)}
+.caseOpened{display:none!important}
+.caseDetails[open] .caseClosed{display:none!important}
+.caseDetails[open] .caseOpened{display:inline-flex!important}
+.extraCaseGrid{margin-top:18px}
+.caseDetails .caseExtra{display:block!important;opacity:1!important;transform:none!important}
+.moreProof{margin-top:22px}
+
 </style>
 <script type="application/ld+json">
 {
@@ -749,65 +770,76 @@ if(caseToggle&&caseGrid){
       </div>
     </div>
 
-    <div class="caseGrid" id="caseGrid">
-      <article class="caseCard reveal">
-    <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Residential Cleaning"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
-    <div class="caseBody"><h3>Residential Cleaning</h3><p>Локальний офер, статичний креатив і кампанія під повідомлення.</p>
-      <div class="caseStats"><div class="caseStat"><strong>93</strong><span>діалоги</span></div><div class="caseStat"><strong>$4.40</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$409.35</strong><span>CAD spend</span></div></div>
-    </div>
-  </article><article class="caseCard reveal">
-    <div class="casePhoto"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=84" alt="Cleaning у США"><span class="caseTag">Cleaning · USA</span></div>
-    <div class="caseBody"><h3>Cleaning у США</h3><p>Стабільний потік звернень через Meta Ads для локального сервісного бізнесу.</p>
-      <div class="caseStats"><div class="caseStat"><strong>244</strong><span>розмови</span></div><div class="caseStat"><strong>$5</strong><span>за звернення</span></div><div class="caseStat"><strong>$1,220</strong><span>budget</span></div></div>
-    </div>
-  </article>
-      <article class="caseCard reveal caseExtra">
-    <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Автодетейлінг"><span class="caseTag">Detailing · Netherlands</span></div>
-    <div class="caseBody"><h3>Автодетейлінг</h3><p>Лідогенерація для detailing-бізнесу в Нідерландах.</p>
-      <div class="caseStats"><div class="caseStat"><strong>34</strong><span>заявки</span></div><div class="caseStat"><strong>€12.35</strong><span>ціна заявки</span></div><div class="caseStat"><strong>€420</strong><span>budget</span></div></div>
-    </div>
-  </article><article class="caseCard reveal caseExtra">
-    <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг у Лондоні"><span class="caseTag">Cleaning · London</span></div>
-    <div class="caseBody"><h3>Клінінг у Лондоні</h3><p>Трафік на сайт + заявки з форми; додаткові звернення в Direct не включені в CPL.</p>
-      <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>315</strong><span>link clicks</span></div></div>
-    </div>
-  </article><article class="caseCard reveal caseExtra">
-    <div class="casePhoto"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=84" alt="Чистка меблів у NYC"><span class="caseTag">Upholstery · New York</span></div>
-    <div class="caseBody"><h3>Чистка меблів у NYC</h3><p>Локальна кампанія на sofa / rug / mattress cleaning з переходом у повідомлення.</p>
-      <div class="caseStats"><div class="caseStat"><strong>8</strong><span>переписок</span></div><div class="caseStat"><strong>1</strong><span>бронювання</span></div><div class="caseStat"><strong>$20/day</strong><span>стартовий бюджет</span></div></div>
-    </div>
-  </article><article class="caseCard reveal caseExtra">
-    <div class="casePhoto"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=84" alt="Beauty у Midtown Toronto"><span class="caseTag">Beauty · Toronto</span></div>
-    <div class="caseBody"><h3>Beauty у Midtown Toronto</h3><p>Keratin, Botox і Reconstruction: локальне гео, before/after-креативи та Direct.</p>
-      <div class="caseStats"><div class="caseStat"><strong>3</strong><span>ключові послуги</span></div><div class="caseStat"><strong>5 км</strong><span>локальне GEO</span></div><div class="caseStat"><strong>Direct</strong><span>ціль кампанії</span></div></div>
-    </div>
-  </article>
-    </div>
-
-    <div class="caseToggleWrap reveal">
-      <button class="caseToggle" id="caseToggle" type="button">Переглянути більше кейсів ↓</button>
-    </div>
-
-    <div class="highlightProof glassLight reveal" id="moreCasesProof" hidden>
-      <div class="highlightProofCopy">
-        <span class="label">Ще більше доказів</span>
-        <h3>Хочете побачити більше кейсів?</h3>
-        <p>Перейдіть в Instagram і відкрийте Highlights <b>«КЕЙСИ»</b>. Там зібрані додаткові скріни запусків, результати та приклади роботи.</p>
-        <div class="highlightActions">
-          <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити Instagram →</a>
-          <a class="pill" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Де це?</a>
-        </div>
-      </div>
-      <a class="highlightShot highlightMock" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Instagram Highlights Кейси">
-  <div class="highlightMockRow">
-    <div class="highlightBubble hb1"><span>КРЕА<br>ТИВИ</span><small>КРЕАТИВИ</small></div>
-    <div class="highlightBubble hb2"><span>КЕЙСИ</span><small>КЕЙСИ</small></div>
-    <div class="highlightBubble hb3"><span>САЙТИ</span><small>САЙТИ</small></div>
-    <div class="highlightBubble hb4"><span>ПОСЛУГИ<br>ТА ЦІНИ</span><small>ПОСЛУГИ</small></div>
-    <div class="highlightBubble hb5"><span>РЕАЛЬНІ<br>ВІДГУКИ</span><small>ВІДГУКИ</small></div>
+    <div class="caseGrid">
+      
+<article class="caseCard reveal">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Residential Cleaning"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
+  <div class="caseBody"><h3>Residential Cleaning</h3><p>Локальний офер, статичний креатив і кампанія під повідомлення.</p>
+    <div class="caseStats"><div class="caseStat"><strong>93</strong><span>діалоги</span></div><div class="caseStat"><strong>$4.40</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$409.35</strong><span>CAD spend</span></div></div>
   </div>
-</a>
+</article>
+<article class="caseCard reveal">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=84" alt="Cleaning у США"><span class="caseTag">Cleaning · USA</span></div>
+  <div class="caseBody"><h3>Cleaning у США</h3><p>Стабільний потік звернень через Meta Ads для локального сервісного бізнесу.</p>
+    <div class="caseStats"><div class="caseStat"><strong>244</strong><span>розмови</span></div><div class="caseStat"><strong>$5</strong><span>за звернення</span></div><div class="caseStat"><strong>$1,220</strong><span>budget</span></div></div>
+  </div>
+</article>
     </div>
+
+    <details class="caseDetails">
+      <summary>
+        <span class="caseClosed">Переглянути більше кейсів ↓</span>
+        <span class="caseOpened">Сховати додаткові кейси ↑</span>
+      </summary>
+      <div class="caseGrid extraCaseGrid">
+        
+<article class="caseCard caseExtra">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Автодетейлінг"><span class="caseTag">Detailing · Netherlands</span></div>
+  <div class="caseBody"><h3>Автодетейлінг</h3><p>Лідогенерація для detailing-бізнесу в Нідерландах.</p>
+    <div class="caseStats"><div class="caseStat"><strong>34</strong><span>заявки</span></div><div class="caseStat"><strong>€12.35</strong><span>ціна заявки</span></div><div class="caseStat"><strong>€420</strong><span>budget</span></div></div>
+  </div>
+</article>
+<article class="caseCard caseExtra">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг у Лондоні"><span class="caseTag">Cleaning · London</span></div>
+  <div class="caseBody"><h3>Клінінг у Лондоні</h3><p>Трафік на сайт + заявки з форми; додаткові звернення в Direct не включені в CPL.</p>
+    <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>315</strong><span>link clicks</span></div></div>
+  </div>
+</article>
+<article class="caseCard caseExtra">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=84" alt="Чистка меблів у NYC"><span class="caseTag">Upholstery · New York</span></div>
+  <div class="caseBody"><h3>Чистка меблів у NYC</h3><p>Локальна кампанія на sofa / rug / mattress cleaning з переходом у повідомлення.</p>
+    <div class="caseStats"><div class="caseStat"><strong>8</strong><span>переписок</span></div><div class="caseStat"><strong>1</strong><span>бронювання</span></div><div class="caseStat"><strong>$20/day</strong><span>стартовий бюджет</span></div></div>
+  </div>
+</article>
+<article class="caseCard caseExtra">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=84" alt="Beauty у Midtown Toronto"><span class="caseTag">Beauty · Toronto</span></div>
+  <div class="caseBody"><h3>Beauty у Midtown Toronto</h3><p>Keratin, Botox і Reconstruction: локальне гео, before/after-креативи та Direct.</p>
+    <div class="caseStats"><div class="caseStat"><strong>3</strong><span>ключові послуги</span></div><div class="caseStat"><strong>5 км</strong><span>локальне GEO</span></div><div class="caseStat"><strong>Direct</strong><span>ціль кампанії</span></div></div>
+  </div>
+</article>
+      </div>
+      
+<div class="highlightProof glassLight moreProof">
+  <div class="highlightProofCopy">
+    <span class="label">Ще більше доказів</span>
+    <h3>Хочете побачити більше кейсів?</h3>
+    <p>Перейдіть в Instagram і відкрийте Highlights <b>«КЕЙСИ»</b>. Там зібрані додаткові скріни запусків, результати та приклади роботи.</p>
+    <div class="highlightActions">
+      <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити Instagram →</a>
+      <a class="pill" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Де це?</a>
+    </div>
+  </div>
+  <a class="highlightShot highlightMock" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Instagram Highlights Кейси">
+    <div class="highlightMockRow">
+      <div class="highlightBubble hb1"><span>КРЕА<br>ТИВИ</span><small>КРЕАТИВИ</small></div>
+      <div class="highlightBubble hb2"><span>КЕЙСИ</span><small>КЕЙСИ</small></div>
+      <div class="highlightBubble hb3"><span>САЙТИ</span><small>САЙТИ</small></div>
+      <div class="highlightBubble hb4"><span>ПОСЛУГИ<br>ТА ЦІНИ</span><small>ПОСЛУГИ</small></div>
+      <div class="highlightBubble hb5"><span>РЕАЛЬНІ<br>ВІДГУКИ</span><small>ВІДГУКИ</small></div>
+    </div>
+  </a>
+</div>
+    </details>
   </div>
 </section>
 
