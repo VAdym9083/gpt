@@ -322,6 +322,18 @@ body{
 .caseStat{padding:12px 10px;border-radius:14px;background:rgba(255,255,255,.72);border:1px solid rgba(20,20,20,.07)}
 .caseStat strong{display:block;font-size:22px;letter-spacing:-.045em;color:#27313d}
 .caseStat span{font-size:8px;color:#7c766f;text-transform:uppercase;letter-spacing:.07em}
+.caseProofLink{
+  width:max-content;min-height:40px;margin-top:14px;padding:0 14px;border-radius:999px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:#111214;color:#fff;border:1px solid rgba(17,18,20,.92);
+  box-shadow:0 10px 26px rgba(20,18,16,.10);
+  font-size:10px;font-weight:850;letter-spacing:.01em;transition:.22s ease
+}
+.caseProofLink:before{
+  content:"";width:6px;height:6px;border-radius:50%;background:#b8d0e8;
+  box-shadow:0 0 0 4px rgba(120,148,181,.12)
+}
+.caseProofLink:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,18,16,.14)}
 .casesFoot{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
 .casesFoot p{margin:0;color:var(--muted);font-size:13px}
 
@@ -728,6 +740,7 @@ body{
   .caseStat{padding:9px 6px;border-radius:11px}
   .caseStat strong{font-size:16px}
   .caseStat span{font-size:6.5px;line-height:1.15}
+  .caseProofLink{min-height:36px;margin-top:10px;padding:0 11px;font-size:8.5px}
   .casesToggleLabel{min-height:48px!important;margin-top:14px!important;padding:0 17px!important}
   .extraCaseGrid{margin-top:14px!important}
 
@@ -937,26 +950,6 @@ if(caseToggle&&caseGrid){
         <div class="est"><span>3+ YEARS</span></div>
       </div>
 
-      <div class="cityBoard">
-        <div class="boardHead">
-          <strong>TORONTO І CALGARY — ВЖЕ ЗАЙНЯТІ</strong>
-          <span>Кожне місто — лише один cleaning-клієнт</span>
-        </div>
-        <div class="boardGrid">
-          <div class="cityCard">
-            <img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=82" alt="Toronto skyline">
-            <span class="busy">Зайнято</span>
-            <h3>TORONTO</h3>
-            <p>Активний cleaning-проєкт у цьому регіоні вже працює зі мною</p>
-          </div>
-          <div class="cityCard">
-            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=82" alt="Calgary city">
-            <span class="busy">Зайнято</span>
-            <h3>CALGARY</h3>
-            <p>Нових cleaning-клієнтів у місті зараз не беру</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1042,12 +1035,14 @@ if(caseToggle&&caseGrid){
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Residential Cleaning"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Residential Cleaning</h3><p>Локальний офер, статичний креатив і кампанія під повідомлення.</p>
     <div class="caseStats"><div class="caseStat"><strong>93</strong><span>діалоги</span></div><div class="caseStat"><strong>$4.40</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$409.35</strong><span>CAD spend</span></div></div>
+    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Residential Cleaning">Переглянути підтвердження →</a>
   </div>
 </article>
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=84" alt="Cleaning у США"><span class="caseTag">Cleaning · USA</span></div>
   <div class="caseBody"><h3>Cleaning у США</h3><p>Стабільний потік звернень через Meta Ads для локального сервісного бізнесу.</p>
     <div class="caseStats"><div class="caseStat"><strong>244</strong><span>розмови</span></div><div class="caseStat"><strong>$5</strong><span>за звернення</span></div><div class="caseStat"><strong>$1,220</strong><span>budget</span></div></div>
+    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Cleaning у США">Переглянути підтвердження →</a>
   </div>
 </article></div>
 
@@ -1063,24 +1058,28 @@ if(caseToggle&&caseGrid){
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Автодетейлінг"><span class="caseTag">Detailing · Netherlands</span></div>
   <div class="caseBody"><h3>Автодетейлінг</h3><p>Лідогенерація для detailing-бізнесу в Нідерландах.</p>
     <div class="caseStats"><div class="caseStat"><strong>34</strong><span>заявки</span></div><div class="caseStat"><strong>€12.35</strong><span>ціна заявки</span></div><div class="caseStat"><strong>€420</strong><span>budget</span></div></div>
+    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Автодетейлінг">Переглянути підтвердження →</a>
   </div>
 </article>
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг у Лондоні"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг у Лондоні</h3><p>Трафік на сайт + заявки з форми; додаткові звернення в Direct не включені в CPL.</p>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>315</strong><span>link clicks</span></div></div>
+    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Клінінг у Лондоні">Переглянути підтвердження →</a>
   </div>
 </article>
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=84" alt="Чистка меблів у NYC"><span class="caseTag">Upholstery · New York</span></div>
   <div class="caseBody"><h3>Чистка меблів у NYC</h3><p>Локальна кампанія на sofa / rug / mattress cleaning з переходом у повідомлення.</p>
     <div class="caseStats"><div class="caseStat"><strong>8</strong><span>переписок</span></div><div class="caseStat"><strong>1</strong><span>бронювання</span></div><div class="caseStat"><strong>$20/day</strong><span>стартовий бюджет</span></div></div>
+    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Чистка меблів у NYC">Переглянути підтвердження →</a>
   </div>
 </article>
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=84" alt="Beauty у Midtown Toronto"><span class="caseTag">Beauty · Toronto</span></div>
   <div class="caseBody"><h3>Beauty у Midtown Toronto</h3><p>Keratin, Botox і Reconstruction: локальне гео, before/after-креативи та Direct.</p>
     <div class="caseStats"><div class="caseStat"><strong>3</strong><span>ключові послуги</span></div><div class="caseStat"><strong>5 км</strong><span>локальне GEO</span></div><div class="caseStat"><strong>Direct</strong><span>ціль кампанії</span></div></div>
+    <a class="caseProofLink" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Переглянути підтвердження кейсу Beauty у Midtown Toronto">Переглянути підтвердження →</a>
   </div>
 </article></div>
 
