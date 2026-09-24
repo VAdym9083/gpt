@@ -549,6 +549,50 @@ body{
 .caseDetails .caseExtra{display:block!important;opacity:1!important;transform:none!important}
 .moreProof{margin-top:22px}
 
+
+/* FINAL FIX: prominent cleaning exclusivity */
+.exclusiveBanner{
+  margin:0 0 24px!important;padding:22px 26px!important;border-radius:22px!important;
+  background:linear-gradient(135deg,#0b0c0e 0%,#17191d 58%,#25292e 100%)!important;
+  color:#fff!important;border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 24px 60px rgba(10,10,12,.18)!important;
+  display:grid!important;grid-template-columns:auto 1fr!important;align-items:center!important;gap:18px!important;
+  font-size:20px!important;font-weight:950!important;line-height:1.15!important;letter-spacing:-.02em!important
+}
+.exclusiveBanner:before{
+  content:"ТІЛЬКИ ДЛЯ КЛІНІНГУ"!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:38px!important;padding:0 13px!important;border-radius:999px!important;
+  background:#dff56a!important;color:#111214!important;font-size:10px!important;font-weight:950!important;
+  letter-spacing:.10em!important;white-space:nowrap!important
+}
+
+/* FINAL FIX: checkbox-driven expandable cases, no JS */
+.casesToggleInput{position:absolute!important;opacity:0!important;width:1px!important;height:1px!important;pointer-events:none!important}
+.casesToggleLabel{
+  width:max-content;max-width:100%;margin:18px auto 0!important;min-height:52px;padding:0 22px!important;
+  border-radius:999px!important;background:#111214!important;color:#fff!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  cursor:pointer!important;position:relative!important;z-index:20!important;
+  font:850 11px/1 system-ui!important;border:1px solid rgba(15,16,18,.12)!important;
+  box-shadow:0 14px 36px rgba(20,18,16,.12)!important;user-select:none!important
+}
+.casesHide{display:none!important}
+.extraCasesWrap{display:none!important}
+#casesToggle:checked + .casesToggleLabel .casesShow{display:none!important}
+#casesToggle:checked + .casesToggleLabel .casesHide{display:inline!important}
+#casesToggle:checked ~ .extraCasesWrap{display:block!important}
+#extraCasesWrap .caseExtra{display:block!important;opacity:1!important;transform:none!important}
+.extraCaseGrid{margin-top:20px!important}
+.moreProof{margin-top:22px!important}
+.highlightShot{display:block!important;overflow:hidden!important}
+.highlightShot img{display:block!important;width:100%!important;height:auto!important;border-radius:14px!important}
+
+@media(max-width:700px){
+  .exclusiveBanner{grid-template-columns:1fr!important;font-size:17px!important;padding:18px!important}
+  .exclusiveBanner:before{width:max-content!important}
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -659,7 +703,7 @@ if(caseToggle&&caseGrid){
       </div>
 
       <div class="heroRight">
-        <div class="heroPortraitCard"><img src="https://avatars.githubusercontent.com/u/211505407?v=4&s=1200" alt="Vadym — performance marketer">
+        <div class="heroPortraitCard"><img src="assets/vadym-portrait.svg" alt="Vadym — performance marketer">
           <div class="heroPortraitMeta">
             <span>REAL PHOTO · VADYM</span>
             <b>3+ роки · Meta Ads</b>
@@ -771,7 +815,6 @@ if(caseToggle&&caseGrid){
     </div>
 
     <div class="caseGrid">
-      
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Residential Cleaning"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Residential Cleaning</h3><p>Локальний офер, статичний креатив і кампанія під повідомлення.</p>
@@ -783,16 +826,16 @@ if(caseToggle&&caseGrid){
   <div class="caseBody"><h3>Cleaning у США</h3><p>Стабільний потік звернень через Meta Ads для локального сервісного бізнесу.</p>
     <div class="caseStats"><div class="caseStat"><strong>244</strong><span>розмови</span></div><div class="caseStat"><strong>$5</strong><span>за звернення</span></div><div class="caseStat"><strong>$1,220</strong><span>budget</span></div></div>
   </div>
-</article>
-    </div>
+</article></div>
 
-    <details class="caseDetails">
-      <summary>
-        <span class="caseClosed">Переглянути більше кейсів ↓</span>
-        <span class="caseOpened">Сховати додаткові кейси ↑</span>
-      </summary>
+    <input class="casesToggleInput" type="checkbox" id="casesToggle">
+    <label class="casesToggleLabel" for="casesToggle">
+      <span class="casesShow">Переглянути більше кейсів ↓</span>
+      <span class="casesHide">Сховати додаткові кейси ↑</span>
+    </label>
+
+    <div class="extraCasesWrap" id="extraCasesWrap">
       <div class="caseGrid extraCaseGrid">
-        
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Автодетейлінг"><span class="caseTag">Detailing · Netherlands</span></div>
   <div class="caseBody"><h3>Автодетейлінг</h3><p>Лідогенерація для detailing-бізнесу в Нідерландах.</p>
@@ -816,33 +859,25 @@ if(caseToggle&&caseGrid){
   <div class="caseBody"><h3>Beauty у Midtown Toronto</h3><p>Keratin, Botox і Reconstruction: локальне гео, before/after-креативи та Direct.</p>
     <div class="caseStats"><div class="caseStat"><strong>3</strong><span>ключові послуги</span></div><div class="caseStat"><strong>5 км</strong><span>локальне GEO</span></div><div class="caseStat"><strong>Direct</strong><span>ціль кампанії</span></div></div>
   </div>
-</article>
+</article></div>
+
+      <div class="highlightProof glassLight moreProof">
+        <div class="highlightProofCopy">
+          <span class="label">Ще більше доказів</span>
+          <h3>Хочете побачити більше кейсів?</h3>
+          <p>Перейдіть в Instagram і відкрийте Highlights <b>«КЕЙСИ»</b>. Там зібрані додаткові скріни запусків, результати та приклади роботи.</p>
+          <div class="highlightActions">
+            <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити Instagram →</a>
+            <a class="pill" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Де це?</a>
+          </div>
+        </div>
+        <a class="highlightShot" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Instagram Highlights Кейси">
+          <img src="assets/highlights.svg" alt="Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки">
+        </a>
       </div>
-      
-<div class="highlightProof glassLight moreProof">
-  <div class="highlightProofCopy">
-    <span class="label">Ще більше доказів</span>
-    <h3>Хочете побачити більше кейсів?</h3>
-    <p>Перейдіть в Instagram і відкрийте Highlights <b>«КЕЙСИ»</b>. Там зібрані додаткові скріни запусків, результати та приклади роботи.</p>
-    <div class="highlightActions">
-      <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити Instagram →</a>
-      <a class="pill" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Де це?</a>
     </div>
-  </div>
-  <a class="highlightShot highlightMock" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Instagram Highlights Кейси">
-    <div class="highlightMockRow">
-      <div class="highlightBubble hb1"><span>КРЕА<br>ТИВИ</span><small>КРЕАТИВИ</small></div>
-      <div class="highlightBubble hb2"><span>КЕЙСИ</span><small>КЕЙСИ</small></div>
-      <div class="highlightBubble hb3"><span>САЙТИ</span><small>САЙТИ</small></div>
-      <div class="highlightBubble hb4"><span>ПОСЛУГИ<br>ТА ЦІНИ</span><small>ПОСЛУГИ</small></div>
-      <div class="highlightBubble hb5"><span>РЕАЛЬНІ<br>ВІДГУКИ</span><small>ВІДГУКИ</small></div>
-    </div>
-  </a>
-</div>
-    </details>
   </div>
 </section>
-
 
 <section class="section showcaseSection" id="creatives">
   <div class="wrap">
