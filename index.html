@@ -665,6 +665,7 @@ body.proofModalOpen{overflow:hidden}
   .navlinks,.navActions .hideMobile{display:none!important}
   .brand{gap:9px}
   .brandMark{width:36px;height:36px;border-radius:11px;font-size:19px}
+  .brandMark img{width:25px!important;height:29px!important}
   .brandCopy strong{font-size:11px;letter-spacing:.14em}
   .brandCopy span{display:none}
   .navActions{gap:0}
@@ -900,7 +901,13 @@ body.proofModalOpen{overflow:hidden}
   font-style:normal!important;
   font-size:11px!important;
   font-weight:900!important;
-  letter-spacing:-.045em!important
+  letter-spacing:-.045em!important;
+  overflow:hidden!important
+}
+.brandMark img{
+  width:27px!important;height:31px!important;
+  object-fit:contain!important;object-position:center!important;
+  opacity:.92!important
 }
 
 .heroContent{
@@ -1045,7 +1052,7 @@ body.proofModalOpen{overflow:hidden}
 <header class="nav">
   <div class="wrap navin">
     <a class="brand" href="#top">
-      <div class="brandMark">LB</div>
+      <div class="brandMark"><img src="assets/target-lb-logo.png" alt="Таргет LB"></div>
       <div class="brandCopy"><strong>ТАРГЕТ LB</strong><span>PERFORMANCE MARKETER</span></div>
     </a>
     <nav class="navlinks">
