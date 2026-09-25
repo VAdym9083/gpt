@@ -897,80 +897,16 @@ body.proofModalOpen{overflow:hidden}
 .reviewsViewport,.reviewsTrack,.reviewCard{visibility:visible!important;opacity:1!important}
 .navlinks a[href="#reviews"]{display:inline-flex!important}
 
-/* 2026-09-25 · trust-focused personal hero portrait */
-.heroContent{
-  grid-template-columns:minmax(0,1.12fr) minmax(330px,.72fr)!important;
-  gap:44px!important;align-items:center!important
-}
-.heroCopy{max-width:730px!important}
-.hero h1{font-size:clamp(60px,6.25vw,94px)!important}
-.heroTrust{position:relative;z-index:5}
-.heroTrustMobile{display:none}
-.heroTrustDesktop{display:block;justify-self:end;width:min(30vw,410px)}
-.heroTrust:before{
-  content:"";position:absolute;inset:9% -9% -7% 12%;z-index:-1;border-radius:50%;
-  background:radial-gradient(circle,rgba(189,143,98,.22),rgba(120,148,181,.10) 42%,transparent 72%);
-  filter:blur(22px);pointer-events:none
-}
-.heroTrustFrame{
-  position:relative;overflow:hidden;aspect-ratio:535/625;border-radius:31px;
-  border:1px solid rgba(255,255,255,.42);
-  background:rgba(255,255,255,.08);
-  box-shadow:0 34px 90px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.24);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)
-}
-.heroTrustFrame:before{
-  content:"";position:absolute;inset:10px;z-index:2;border-radius:23px;
-  border:1px solid rgba(255,255,255,.20);pointer-events:none
-}
-.heroTrustFrame:after{
-  content:"";position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg,rgba(8,9,11,.00) 48%,rgba(8,9,11,.12) 67%,rgba(8,9,11,.58) 100%);
-  pointer-events:none
-}
-.heroTrustFrame img{
-  width:100%;height:100%;object-fit:cover;object-position:center 34%;
-  filter:saturate(.88) contrast(1.035) brightness(.98)
-}
-.heroTrustCaption{
-  position:absolute;z-index:3;left:20px;right:20px;bottom:18px;
-  padding:12px 14px;border-radius:14px;
-  background:rgba(13,14,16,.48);border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff
-}
-.heroTrustCaption span{
-  display:block;font-size:7px;font-weight:800;letter-spacing:.16em;
-  color:rgba(255,255,255,.62)
-}
-.heroTrustCaption b{
-  display:block;margin-top:4px;font-size:12px;letter-spacing:-.01em
-}
-
+/* 2026-09-25 · hero without portrait */
+.heroContent{grid-template-columns:1fr!important}
+.heroCopy{max-width:760px!important}
 @media (min-width:768px) and (max-width:1024px){
-  .heroContent{
-    grid-template-columns:minmax(0,1fr) 270px!important;
-    gap:24px!important;padding-left:34px!important;padding-right:34px!important
-  }
-  .hero h1{font-size:clamp(54px,7vw,72px)!important}
-  .heroTrustDesktop{width:270px}
-  .heroTrustCaption{left:14px;right:14px;bottom:13px;padding:10px 11px}
-  .heroTrustCaption b{font-size:10px}
+  .heroContent{grid-template-columns:1fr!important}
+  .heroCopy{max-width:680px!important}
 }
 @media (max-width:767px){
-  .heroContent{grid-template-columns:1fr!important;gap:0!important}
-  .heroTrustDesktop{display:none!important}
-  .heroTrustMobile{display:block!important;width:100%;margin:18px 0 20px}
-  .heroTrustMobile .heroTrustFrame{
-    width:100%;height:220px;aspect-ratio:auto;border-radius:22px
-  }
-  .heroTrustMobile .heroTrustFrame:before{inset:7px;border-radius:16px}
-  .heroTrustMobile .heroTrustFrame img{object-position:center 30%}
-  .heroTrustMobile .heroTrustCaption{
-    left:12px;right:12px;bottom:10px;padding:8px 10px;border-radius:11px
-  }
-  .heroTrustMobile .heroTrustCaption span{font-size:5.8px}
-  .heroTrustMobile .heroTrustCaption b{font-size:9px;margin-top:2px}
-  .heroTrust:before{display:none}
+  .heroContent{grid-template-columns:1fr!important}
+  .heroCopy{max-width:none!important}
 }
 </style>
 <script type="application/ld+json">
@@ -1052,13 +988,6 @@ body.proofModalOpen{overflow:hidden}
         <h1>Вам потрібні <span>заявки.</span> Не просто реклама</h1>
         <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Також працюю з іншими нішами локального бізнесу. Від стратегії та креативів до запуску й оптимізації — з фокусом на якість звернень, а не просто дешевий CPL.</p>
 
-        <div class="heroTrust heroTrustMobile" aria-label="Vadym — performance marketer">
-          <div class="heroTrustFrame">
-            <img src="assets/hero-vadym-editorial.webp" alt="Vadym — performance marketer">
-            <div class="heroTrustCaption"><span>VADYM · PERFORMANCE MARKETER</span><b>Meta Ads · Local Business</b></div>
-          </div>
-        </div>
-
         <div class="heroButtons">
           <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
           <a class="heroBtn" href="#case">Подивитися кейси</a>
@@ -1067,13 +996,6 @@ body.proofModalOpen{overflow:hidden}
 
         <div class="microProof">
           <div><strong>3+</strong><span>роки з Meta Ads</span></div>
-        </div>
-      </div>
-
-      <div class="heroTrust heroTrustDesktop" aria-label="Vadym — performance marketer">
-        <div class="heroTrustFrame">
-          <img src="assets/hero-vadym-editorial.webp" alt="Vadym — performance marketer">
-          <div class="heroTrustCaption"><span>VADYM · PERFORMANCE MARKETER</span><b>Meta Ads · Local Business</b></div>
         </div>
       </div>
 
