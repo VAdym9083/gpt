@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f4f0ea">
-<title>Vadym — Performance Marketer | Meta Ads</title>
+<title>Таргет LB · Vadym — Performance Marketer</title>
 <meta name="description" content="Meta Ads для локального бізнесу в Канаді та США. Спеціалізація — cleaning companies. Стратегія, креативи, запуск, оптимізація та реальні кейси. 3+ роки досвіду.">
-<meta property="og:title" content="Vadym — Meta Ads that bring clients">
+<meta property="og:title" content="Таргет LB · Vadym — Performance Marketer">
 <meta property="og:description" content="Performance marketing для локального бізнесу. Спеціалізація — клінінг. Реальні кейси, креативи та результати з Meta Ads.">
 <style>
 :root{
@@ -876,8 +876,6 @@ body.proofModalOpen{overflow:hidden}
 }
 .heroContent{grid-template-columns:1fr!important}
 .heroCopy{max-width:760px}
-.microProof{grid-template-columns:max-content!important}
-.microProof>div:not(:first-child){display:none!important}
 .caseProofLink{display:inline-flex!important}
 
 @media (min-width:768px) and (max-width:1024px){
@@ -887,7 +885,6 @@ body.proofModalOpen{overflow:hidden}
 @media (max-width:767px){
   .heroContent{grid-template-columns:1fr!important}
   .heroCopy{max-width:none}
-  .microProof{grid-template-columns:max-content!important}
 }
 
 
@@ -897,23 +894,113 @@ body.proofModalOpen{overflow:hidden}
 .reviewsViewport,.reviewsTrack,.reviewCard{visibility:visible!important;opacity:1!important}
 .navlinks a[href="#reviews"]{display:inline-flex!important}
 
-/* 2026-09-25 · hero without portrait */
-.heroContent{grid-template-columns:1fr!important}
-.heroCopy{max-width:760px!important}
-@media (min-width:768px) and (max-width:1024px){
-  .heroContent{grid-template-columns:1fr!important}
-  .heroCopy{max-width:680px!important}
+/* 2026-09-25 · editorial hero + unified Target LB branding */
+.brandMark{
+  font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;
+  font-style:normal!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  letter-spacing:-.045em!important
 }
+
+.heroContent{
+  grid-template-columns:minmax(0,1.15fr) minmax(260px,.55fr)!important;
+  gap:clamp(34px,5vw,82px)!important;
+  align-items:center!important
+}
+.heroCopy{max-width:700px!important}
+.hero h1{
+  font-size:clamp(58px,6.55vw,104px)!important;
+  line-height:.88!important
+}
+.heroEditorialProof{
+  align-self:center;justify-self:end;
+  width:min(100%,330px);
+  color:#fff;
+  padding:10px 0 10px 28px;
+  border-left:1px solid rgba(255,255,255,.34)
+}
+.heroProofLabel{
+  margin-bottom:28px;
+  font-size:8px;font-weight:800;letter-spacing:.22em;
+  color:rgba(255,255,255,.48)
+}
+.heroProofYears{
+  display:flex;align-items:flex-end;gap:12px;
+  padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.16)
+}
+.heroProofYears strong{
+  font-size:clamp(58px,5.3vw,82px);
+  line-height:.72;letter-spacing:-.08em
+}
+.heroProofYears span{
+  max-width:74px;padding-bottom:2px;
+  font-size:9px;line-height:1.35;letter-spacing:.06em;
+  color:rgba(255,255,255,.58)
+}
+.heroProofList{margin-top:6px}
+.heroProofList>div{
+  min-height:49px;display:grid;
+  grid-template-columns:30px 1fr;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.12)
+}
+.heroProofList span{
+  font-size:8px;letter-spacing:.12em;color:rgba(255,255,255,.35)
+}
+.heroProofList b{
+  font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.82)
+}
+
+@media (min-width:768px) and (max-width:1024px){
+  .heroContent{
+    grid-template-columns:minmax(0,1fr) 230px!important;
+    gap:26px!important
+  }
+  .heroCopy{max-width:620px!important}
+  .hero h1{font-size:clamp(56px,7.1vw,70px)!important}
+  .heroEditorialProof{width:220px;padding-left:20px}
+  .heroProofYears strong{font-size:58px}
+  .heroProofList>div{min-height:44px}
+}
+
 @media (max-width:767px){
-  .heroContent{grid-template-columns:1fr!important}
+  .heroContent{grid-template-columns:1fr!important;gap:0!important}
   .heroCopy{max-width:none!important}
+  .hero h1{
+    font-size:clamp(42px,12.2vw,48px)!important;
+    line-height:.90!important
+  }
+  .heroEditorialProof{
+    width:100%;margin-top:22px;padding:17px 0 0;
+    border-left:0;border-top:1px solid rgba(255,255,255,.18)
+  }
+  .heroProofLabel{display:none}
+  .heroProofYears{
+    justify-content:flex-start;gap:10px;
+    padding-bottom:14px
+  }
+  .heroProofYears strong{font-size:38px;line-height:.78}
+  .heroProofYears span{max-width:none;font-size:8px}
+  .heroProofList{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:0;margin-top:0
+  }
+  .heroProofList>div{
+    min-height:42px;display:block;
+    padding:11px 8px 0 0;border-bottom:0
+  }
+  .heroProofList span{display:none}
+  .heroProofList b{
+    font-size:8px;line-height:1.25;letter-spacing:.06em
+  }
 }
 </style>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"ProfessionalService",
-  "name":"Vadym — Performance Marketer",
+  "name":"Таргет LB · Vadym — Performance Marketer",
   "url":"https://vadym9083.github.io/gpt/",
   "description":"Performance marketing and Meta Ads for local businesses in Canada and the United States. Specialization: cleaning companies. 3+ years of experience. Real case results and project examples are published on the website.",
   "areaServed":[
@@ -958,7 +1045,7 @@ body.proofModalOpen{overflow:hidden}
 <header class="nav">
   <div class="wrap navin">
     <a class="brand" href="#top">
-      <div class="brandMark">V</div>
+      <div class="brandMark">LB</div>
       <div class="brandCopy"><strong>ТАРГЕТ LB</strong><span>PERFORMANCE MARKETER</span></div>
     </a>
     <nav class="navlinks">
@@ -991,13 +1078,22 @@ body.proofModalOpen{overflow:hidden}
         <div class="heroButtons">
           <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
           <a class="heroBtn" href="#case">Подивитися кейси</a>
-          <a class="heroBtn" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram @lebedenkkko</a>
         </div>
 
-        <div class="microProof">
-          <div><strong>3+</strong><span>роки з Meta Ads</span></div>
-        </div>
       </div>
+
+      <aside class="heroEditorialProof" aria-label="Профіль performance-маркетолога">
+        <div class="heroProofLabel">PERFORMANCE MARKETING</div>
+        <div class="heroProofYears">
+          <strong>3+</strong>
+          <span>роки з Meta Ads</span>
+        </div>
+        <div class="heroProofList" aria-label="Спеціалізація">
+          <div><span>01</span><b>Meta Ads</b></div>
+          <div><span>02</span><b>Local Business</b></div>
+          <div><span>03</span><b>Canada + USA</b></div>
+        </div>
+      </aside>
 
     </div>
   </div>
@@ -1518,7 +1614,7 @@ body.proofModalOpen{overflow:hidden}
 
 <footer>
   <div class="wrap footer">
-    <span>© 2026 Vadym · Performance Marketer</span>
+    <span>© 2026 Таргет LB · Vadym — Performance Marketer</span>
     <span>Instagram @lebedenkkko · Telegram @target_vadym</span>
   </div>
 </footer>
