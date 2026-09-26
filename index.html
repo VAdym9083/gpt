@@ -1002,6 +1002,46 @@ body.proofModalOpen{overflow:hidden}
     font-size:8px;line-height:1.25;letter-spacing:.06em
   }
 }
+
+/* 2026-09-26 · real site materials */
+.spriteCreative{
+  background-image:url("assets/site/creatives-sprite.webp")!important;
+  background-size:500% 200%!important;
+  background-position:var(--sx) var(--sy)!important;
+  background-repeat:no-repeat!important;
+  aspect-ratio:4/5!important;height:auto!important;min-height:0!important;position:relative
+}
+.spriteCreative:after{
+  content:"";position:absolute;inset:52% 0 0;
+  background:linear-gradient(180deg,transparent,rgba(9,10,12,.36));pointer-events:none
+}
+.creativeBadge{
+  position:absolute;z-index:3;left:14px;bottom:14px;max-width:calc(100% - 28px);
+  padding:7px 10px;border-radius:999px;color:#fff;background:rgba(10,11,13,.58);
+  border:1px solid rgba(255,255,255,.26);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  font-size:8px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.reviewShot{
+  width:300px!important;min-width:300px!important;min-height:0!important;height:auto!important;
+  aspect-ratio:280/364!important;padding:0!important;background-color:#fff!important;
+  background-image:url("assets/site/reviews-sprite.webp")!important;background-size:400% 200%!important;
+  background-position:var(--sx) var(--sy)!important;background-repeat:no-repeat!important;
+  border:1px solid rgba(255,255,255,.88)!important;box-shadow:0 22px 70px rgba(31,26,22,.13)!important
+}
+.caseProofFrame{
+  min-height:0!important;aspect-ratio:6/5!important;background:#f2eee7!important;overflow:hidden!important
+}
+.caseProofSprite{
+  width:100%;height:100%;background-image:url("assets/site/cases-proof-sprite.webp");
+  background-size:400% 300%;background-position:0% 0%;background-repeat:no-repeat
+}
+@media (max-width:767px){
+  .spriteCreative{width:82vw!important;min-width:82vw!important}
+  .reviewShot{width:84vw!important;min-width:84vw!important}
+  .creativeBadge{left:11px;bottom:11px;padding:6px 9px;font-size:7px}
+  .caseProofFrame{aspect-ratio:6/5!important}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1187,7 +1227,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3><p>Meta Ads для локальної cleaning-компанії: 1 660 кліків, 1 097 розпочатих діалогів і 11% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-creative="assets/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-creative-pos="0% 0%" data-proof-ads-pos="33.333% 0%">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1195,7 +1235,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
   <div class="caseBody"><h3>Косметологічний центр</h3><p>Meta Ads у США: 23 300 кліків, 1 984 заявки та 16% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-creative="assets/proofs/cosmetology-creative.webp" data-proof-ads="assets/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-creative-pos="66.667% 0%" data-proof-ads-pos="100% 0%">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
     </div>
@@ -1212,7 +1252,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=84" alt="Нерухомість в Іспанії"><span class="caseTag">Real Estate · Spain</span></div>
   <div class="caseBody"><h3>Нерухомість в Іспанії</h3><p>Об’єкти від €200 000. Аудиторія — Україна: 500+ кліків, 12 заявок із форми, 2 підписані угоди та ще 8 потенційних клієнтів у процесі вибору.</p>
     <div class="caseStats"><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div><div class="caseStat"><strong>2</strong><span>підписані угоди</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-creative="assets/proofs/real-estate-spain-cover.webp" data-proof-ads="assets/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-creative-pos="0% 50%" data-proof-ads-pos="33.333% 50%">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1220,7 +1260,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=84" alt="Медичний центр New York"><span class="caseTag">Medical · New York</span></div>
   <div class="caseBody"><h3>Медичний центр · New York</h3><p>720 кліків, 191 заявка та 19% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-creative="assets/proofs/medical-center-cover.webp" data-proof-ads="assets/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-creative-pos="66.667% 50%" data-proof-ads-pos="100% 50%">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1228,7 +1268,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
   <div class="caseBody"><h3>Детейлінг · Amsterdam</h3><p>313 кліків, 147 розпочатих розмов і 10% конверсії в клієнта. Частина Direct-звернень у Європі не відстежувалась.</p>
     <div class="caseStats"><div class="caseStat"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-creative="assets/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-creative-pos="0% 100%" data-proof-ads-pos="33.333% 100%">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1236,7 +1276,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг · London</h3><p>315 кліків і 13 лідів із сайту. Додаткові Direct-звернення були частково не відстежені.</p>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-creative="assets/proofs/london-cleaning-cover.webp" data-proof-ads="assets/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-creative-pos="66.667% 100%" data-proof-ads-pos="100% 100%">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
       </div>
@@ -1264,99 +1304,14 @@ body.proofModalOpen{overflow:hidden}
       <div class="label">Креативи</div>
       <div>
         <h2>Реклама має зупиняти погляд ще до першого кліку</h2>
-        
+        <p>Реальні рекламні креативи з локальних проєктів у різних нішах</p>
       </div>
     </div>
   </div>
-
   <div class="loopViewport creativeViewport">
-    <div class="loopTrack">
-      <div class="loopGroup">
-        <article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=82" alt="Cleaning offer">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Cleaning offer</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=82" alt="Before / After">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Before / After</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=82" alt="Price card">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Price card</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82" alt="Story 9:16">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Story 9:16</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=82" alt="Local service">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Local service</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=82" alt="Detailing">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Detailing</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=82" alt="Beauty">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Beauty</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=82" alt="Lead gen">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Lead gen</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=82" alt="Carousel">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Carousel</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82" alt="Retargeting">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Retargeting</b></div>
-        </article>
-      </div>
-      <div class="loopGroup" aria-hidden="true">
-        <article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Cleaning offer</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Before / After</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Price card</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Story 9:16</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Local service</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Detailing</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Beauty</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Lead gen</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Carousel</b></div>
-        </article><article class="creativeCard">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=82" alt="">
-          <div class="creativeShade"></div>
-          <div class="creativeCopy"><b>Retargeting</b></div>
-        </article>
-      </div>
+    <div class="loopTrack creativeTrack">
+      <div class="loopGroup"><article class="creativeCard spriteCreative" style="--sx:0%;--sy:0%"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:0%"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:0%"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:0%"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:0%"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:0%;--sy:100%"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:100%"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:100%"><span class="creativeBadge">Music School</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:100%"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:100%"><span class="creativeBadge">Moving Berlin</span></article></div>
+      <div class="loopGroup" aria-hidden="true"><article class="creativeCard spriteCreative" style="--sx:0%;--sy:0%"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:0%"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:0%"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:0%"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:0%"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:0%;--sy:100%"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:100%"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:100%"><span class="creativeBadge">Music School</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:100%"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:100%"><span class="creativeBadge">Moving Berlin</span></article></div>
     </div>
   </div>
 </section>
@@ -1367,115 +1322,14 @@ body.proofModalOpen{overflow:hidden}
       <div class="label">Відгуки</div>
       <div>
         <h2>Що кажуть клієнти про роботу</h2>
-        
+        <p>Реальні повідомлення клієнтів після запусків і ведення реклами</p>
       </div>
     </div>
   </div>
-
   <div class="loopViewport reviewsViewport">
     <div class="loopTrack reviewsTrack">
-      <div class="loopGroup">
-        <article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">A</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">B</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">C</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">D</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">E</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">F</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">G</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">H</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article>
-      </div>
-      <div class="loopGroup" aria-hidden="true">
-        <article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">A</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">B</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">C</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">D</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">E</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">F</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">G</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article><article class="reviewCard">
-          <div class="reviewTop"><span class="reviewAvatar">H</span><div></div></div>
-          <div class="reviewMock">
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="reviewFooter"><strong>↗</strong></div>
-        </article>
-      </div>
+      <div class="loopGroup"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
+      <div class="loopGroup" aria-hidden="true"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
     </div>
   </div>
 </section>
@@ -1610,15 +1464,13 @@ body.proofModalOpen{overflow:hidden}
       <div class="caseProofMedia">
         <b>Креатив</b>
         <div class="caseProofFrame" id="caseCreativeFrame">
-          <img id="caseProofCreative" alt="Креатив кейсу">
-          <div class="caseProofMissing"></div>
+          <div class="caseProofSprite" id="caseProofCreative" role="img" aria-label="Креатив кейсу"></div>
         </div>
       </div>
       <div class="caseProofMedia">
         <b>Ads Manager</b>
         <div class="caseProofFrame" id="caseAdsFrame">
-          <img id="caseProofAds" alt="Скріншот результатів з Ads Manager">
-          <div class="caseProofMissing"></div>
+          <div class="caseProofSprite" id="caseProofAds" role="img" aria-label="Скріншот результатів з Ads Manager"></div>
         </div>
       </div>
     </div>
@@ -1668,19 +1520,13 @@ const proofAds=document.getElementById('caseProofAds');
 const creativeFrame=document.getElementById('caseCreativeFrame');
 const adsFrame=document.getElementById('caseAdsFrame');
 
-function setProofImage(img,frame,src){
-  frame.classList.remove('isMissing');
-  img.style.display='block';
-  img.onerror=()=>{
-    img.style.display='none';
-    frame.classList.add('isMissing');
-  };
-  img.src=src;
+function setProofCell(el,pos){
+  el.style.backgroundPosition=pos||'0% 0%';
 }
 function openProofModal(button){
   proofTitle.textContent=button.dataset.proofTitle||'Кейс';
-  setProofImage(proofCreative,creativeFrame,button.dataset.proofCreative||'');
-  setProofImage(proofAds,adsFrame,button.dataset.proofAds||'');
+  setProofCell(proofCreative,button.dataset.proofCreativePos);
+  setProofCell(proofAds,button.dataset.proofAdsPos);
   proofModal.classList.add('isOpen');
   proofModal.setAttribute('aria-hidden','false');
   document.body.classList.add('proofModalOpen');
