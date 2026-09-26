@@ -1361,7 +1361,7 @@ body.proofModalOpen{overflow:hidden}
   box-shadow:0 18px 50px rgba(20,20,20,.12)
 }
 .galleryLightboxStage video{
-  display:block;max-width:100%;max-height:calc(100svh - 120px);
+  max-width:100%;max-height:calc(100svh - 120px);
   border-radius:18px;background:#000
 }
 .galleryLightbox.mediaOnly .galleryLightboxNav{display:none}
@@ -1388,6 +1388,57 @@ body.proofModalOpen{overflow:hidden}
   .caseZoomContent .caseStat{padding:12px 9px!important}
   .caseZoomContent .caseStat strong{font-size:22px!important}
   .caseZoomContent .caseStat span{font-size:7px!important}
+}
+/* 2026-09-26 · HQ reviews + correct lightbox hidden states */
+.reviewShot{
+  width:300px!important;min-width:300px!important;height:auto!important;
+  aspect-ratio:280/364!important;padding:10px!important;
+  display:grid!important;place-items:center!important;
+  overflow:hidden!important;background:#fff!important;
+  background-image:none!important;
+  border:1px solid rgba(255,255,255,.9)!important;
+  box-shadow:0 22px 70px rgba(31,26,22,.13)!important
+}
+.reviewShot img{
+  display:block;width:auto!important;height:auto!important;
+  max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  border-radius:14px;image-rendering:auto;
+  transform:none!important;filter:none!important
+}
+.galleryLightboxStage img[hidden],
+.galleryLightboxStage video[hidden],
+.galleryLightboxReview[hidden]{
+  display:none!important
+}
+.galleryLightboxStage video:not([hidden]){
+  display:block!important;
+  max-width:100%;max-height:calc(100svh - 120px);
+  border-radius:18px;background:#000
+}
+.galleryLightbox.reviewMode .galleryLightboxDialog{
+  width:min(760px,calc(100vw - 28px))
+}
+.galleryLightbox.reviewMode .galleryLightboxStage img{
+  max-width:min(540px,100%)!important;
+  max-height:calc(100svh - 120px)!important;
+  width:auto!important;height:auto!important;
+  object-fit:contain!important;
+  image-rendering:auto
+}
+@media (max-width:767px){
+  .reviewShot{
+    width:84vw!important;min-width:84vw!important;
+    padding:8px!important
+  }
+  .reviewShot img{border-radius:11px}
+  .galleryLightbox.reviewMode .galleryLightboxDialog{
+    width:calc(100vw - 14px)
+  }
+  .galleryLightbox.reviewMode .galleryLightboxStage img{
+    max-width:100%!important;
+    max-height:calc(100svh - 105px)!important
+  }
 }
 </style>
 <script type="application/ld+json">
@@ -1681,8 +1732,8 @@ body.proofModalOpen{overflow:hidden}
   </div>
   <div class="loopViewport reviewsViewport" data-gallery-viewport="review">
     <div class="loopTrack reviewsTrack">
-      <div class="loopGroup"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
-      <div class="loopGroup" aria-hidden="true"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
+      <div class="loopGroup"><article class="reviewCard reviewShot" aria-label="Відгук клієнта 1"><img src="assets/site/reviews/review-01.png" alt="Відгук клієнта 1" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 2"><img src="assets/site/reviews/review-02.png" alt="Відгук клієнта 2" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 3"><img src="assets/site/reviews/review-03.png" alt="Відгук клієнта 3" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 4"><img src="assets/site/reviews/review-04.png" alt="Відгук клієнта 4" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 5"><img src="assets/site/reviews/review-05.png" alt="Відгук клієнта 5" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 6"><img src="assets/site/reviews/review-06.png" alt="Відгук клієнта 6" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 7"><img src="assets/site/reviews/review-07.png" alt="Відгук клієнта 7" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 8"><img src="assets/site/reviews/review-08.png" alt="Відгук клієнта 8" loading="lazy" decoding="async" draggable="false"></article></div>
+      <div class="loopGroup" aria-hidden="true"><article class="reviewCard reviewShot" aria-label="Відгук клієнта 1"><img src="assets/site/reviews/review-01.png" alt="Відгук клієнта 1" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 2"><img src="assets/site/reviews/review-02.png" alt="Відгук клієнта 2" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 3"><img src="assets/site/reviews/review-03.png" alt="Відгук клієнта 3" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 4"><img src="assets/site/reviews/review-04.png" alt="Відгук клієнта 4" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 5"><img src="assets/site/reviews/review-05.png" alt="Відгук клієнта 5" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 6"><img src="assets/site/reviews/review-06.png" alt="Відгук клієнта 6" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 7"><img src="assets/site/reviews/review-07.png" alt="Відгук клієнта 7" loading="lazy" decoding="async" draggable="false"></article><article class="reviewCard reviewShot" aria-label="Відгук клієнта 8"><img src="assets/site/reviews/review-08.png" alt="Відгук клієнта 8" loading="lazy" decoding="async" draggable="false"></article></div>
     </div>
   </div>
 </section>
@@ -2110,12 +2161,14 @@ function renderGalleryLightbox(){
     galleryLightboxImage.alt=img?.alt||'Креатив';
     galleryLightboxCaption.textContent=item.querySelector('.creativeBadge')?.textContent||'Креатив';
   }else{
-    galleryLightboxImage.hidden=true;
-    galleryLightboxImage.removeAttribute('src');
-    galleryLightboxReview.hidden=false;
-    const sx=item.style.getPropertyValue('--sx')||'0%';
-    const sy=item.style.getPropertyValue('--sy')||'0%';
-    galleryLightboxReview.style.backgroundPosition=sx+' '+sy;
+    const img=item.querySelector('img');
+    galleryLightboxVideo.pause();
+    galleryLightboxVideo.hidden=true;
+    galleryLightboxVideo.removeAttribute('src');
+    galleryLightboxReview.hidden=true;
+    galleryLightboxImage.hidden=false;
+    galleryLightboxImage.src=img?.currentSrc||img?.src||'';
+    galleryLightboxImage.alt=img?.alt||'Відгук клієнта';
     galleryLightboxCaption.textContent=item.getAttribute('aria-label')||'Відгук клієнта';
   }
 }
@@ -2131,13 +2184,14 @@ function openStandaloneMedia(type,src,caption){
 function openGalleryLightbox(type,index){
   activeGalleryType=type;
   activeGalleryIndex=index;
+  galleryLightbox.classList.toggle('reviewMode',type==='review');
   renderGalleryLightbox();
   galleryLightbox.classList.add('isOpen');
   galleryLightbox.setAttribute('aria-hidden','false');
   document.body.classList.add('proofModalOpen');
 }
 function closeGalleryLightbox(){
-  galleryLightbox.classList.remove('isOpen','mediaOnly');
+  galleryLightbox.classList.remove('isOpen','mediaOnly','reviewMode');
   galleryLightbox.setAttribute('aria-hidden','true');
   galleryLightboxImage.removeAttribute('src');
   galleryLightboxVideo.pause();
