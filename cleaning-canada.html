@@ -1560,6 +1560,32 @@ body.proofModalOpen{overflow:hidden}
   object-position:center!important;
   transform:none!important
 }
+/* 2026-09-26 · case proof creatives always fully visible */
+.caseProofCreativeFrame{
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important
+}
+.caseProofCreativeFrame img:not([hidden]){
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important
+}
+.caseProofCreativeFrame video:not([hidden]){
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important
+}
 </style>
 <script type="application/ld+json">
 {
