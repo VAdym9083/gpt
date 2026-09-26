@@ -303,8 +303,14 @@ body{
   backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)
 }
 .casePhoto{position:absolute;inset:0 0 42%;overflow:hidden}
-.casePhoto img{width:100%;height:100%;object-fit:cover;transition:.55s ease}
-.caseCard:hover .casePhoto img{transform:scale(1.03)}
+.casePhoto{
+  background:#ece8e2
+}
+.casePhoto img{
+  width:100%;height:100%;object-fit:contain;object-position:center;
+  transition:none
+}
+.caseCard:hover .casePhoto img{transform:none}
 .casePhoto:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,13,15,.02),rgba(12,13,15,.32))}
 .caseTag{
   position:absolute;left:18px;top:18px;z-index:3;padding:7px 10px;border-radius:999px;
@@ -1536,6 +1542,24 @@ body.proofModalOpen{overflow:hidden}
     margin:auto!important
   }
 }
+/* 2026-09-26 · case cards are static; only proof button is interactive */
+.caseCard{
+  cursor:default!important
+}
+.caseCard .casePhoto,
+.caseCard .caseBody,
+.caseCard .caseStats,
+.caseCard .caseStat{
+  cursor:default!important
+}
+.caseCard .caseProofLink{
+  cursor:pointer!important
+}
+.caseCard .casePhoto img{
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2139,18 +2163,8 @@ function closeCaseZoom(){
   }
 }
 document.querySelectorAll('.caseCard').forEach((card)=>{
-  card.tabIndex=0;
-  card.setAttribute('aria-label',(card.querySelector('h3')?.textContent||'Кейс')+' — натисніть, щоб збільшити');
-  card.addEventListener('click',(event)=>{
-    if(event.target.closest('button,a,.casePhoto'))return;
-    openCaseZoom(card);
-  });
-  card.addEventListener('keydown',(event)=>{
-    if((event.key==='Enter'||event.key===' ')&&!event.target.closest('button,a')){
-      event.preventDefault();
-      openCaseZoom(card);
-    }
-  });
+  card.removeAttribute('tabindex');
+  card.removeAttribute('aria-label');
 });
 if(caseZoomClose)caseZoomClose.addEventListener('click',closeCaseZoom);
 if(caseZoomModal)caseZoomModal.addEventListener('click',(event)=>{
