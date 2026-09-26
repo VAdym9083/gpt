@@ -1586,6 +1586,61 @@ body.proofModalOpen{overflow:hidden}
   object-fit:contain!important;
   object-position:center!important
 }
+/* 2026-09-26 · case proof zoom: full media without crop */
+.galleryLightbox.mediaOnly .galleryLightboxDialog{
+  width:min(1100px,calc(100vw - 28px))!important;
+  height:min(920px,calc(100svh - 28px))!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:minmax(0,1fr) auto!important
+}
+.galleryLightbox.mediaOnly .galleryLightboxStage{
+  grid-column:1!important;
+  grid-row:1!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:100%!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  padding:6px!important
+}
+.galleryLightbox.mediaOnly .galleryLightboxStage img:not([hidden]){
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:min(820px,calc(100svh - 110px))!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important
+}
+.galleryLightbox.mediaOnly .galleryLightboxStage video:not([hidden]){
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:min(820px,calc(100svh - 110px))!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center!important
+}
+@media (max-width:767px){
+  .galleryLightbox.mediaOnly .galleryLightboxDialog{
+    width:calc(100vw - 14px)!important;
+    height:calc(100svh - 14px)!important
+  }
+  .galleryLightbox.mediaOnly .galleryLightboxStage{
+    padding:4px!important
+  }
+  .galleryLightbox.mediaOnly .galleryLightboxStage img:not([hidden]),
+  .galleryLightbox.mediaOnly .galleryLightboxStage video:not([hidden]){
+    max-width:100%!important;
+    max-height:calc(100svh - 90px)!important;
+    width:auto!important;
+    height:auto!important
+  }
+}
 </style>
 <script type="application/ld+json">
 {
