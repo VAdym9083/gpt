@@ -1042,6 +1042,64 @@ body.proofModalOpen{overflow:hidden}
   .creativeBadge{left:11px;bottom:11px;padding:6px 9px;font-size:7px}
   .caseProofFrame{aspect-ratio:6/5!important}
 }
+
+/* 2026-09-26 · HQ media + browser-safe case video previews */
+.realCreative{
+  width:300px!important;height:auto!important;aspect-ratio:4/5!important;
+  background:#ece7df!important;isolation:isolate
+}
+.realCreative img{
+  width:100%!important;height:100%!important;object-fit:cover!important;
+  filter:none!important;transform:none;image-rendering:auto
+}
+.realCreative:hover img{transform:scale(1.018)!important}
+.realCreative:after{
+  content:"";position:absolute;z-index:1;inset:68% 0 0;
+  background:linear-gradient(180deg,transparent,rgba(7,8,10,.36));pointer-events:none
+}
+.creativeBadge{z-index:3}
+.realEstateCasePhoto img{
+  object-position:center 56%!important;
+  filter:saturate(.88) contrast(1.05) brightness(.96)
+}
+.realEstateCasePhoto:after{
+  background:linear-gradient(180deg,rgba(10,11,13,.03),rgba(10,11,13,.36))!important
+}
+.caseProofDialog{width:min(1180px,calc(100vw - 32px))!important}
+.caseProofGrid{
+  grid-template-columns:minmax(320px,.84fr) minmax(460px,1.16fr)!important;
+  gap:14px!important;align-items:start
+}
+.caseProofFrame{
+  display:grid!important;place-items:center!important;
+  min-height:0!important;aspect-ratio:auto!important;
+  border-radius:20px!important;overflow:hidden!important;
+  border:1px solid rgba(20,20,20,.09)!important
+}
+.caseProofCreativeFrame{
+  height:min(68vh,620px)!important;min-height:460px!important;
+  background:#0b0c0e!important
+}
+.caseProofAdsFrame{
+  aspect-ratio:2.146/1!important;background:#eeeae4!important
+}
+.caseProofFrame img,.caseProofFrame video{
+  display:block;width:100%!important;height:100%!important;
+  min-height:0!important;object-fit:contain!important
+}
+.caseProofCreativeFrame img,.caseProofCreativeFrame video{background:#0b0c0e!important}
+.caseProofAdsFrame img{background:#eeeae4!important}
+.caseProofFrame [hidden]{display:none!important}
+@media (max-width:1024px){
+  .caseProofGrid{grid-template-columns:minmax(280px,.9fr) minmax(360px,1.1fr)!important}
+  .caseProofCreativeFrame{height:min(62vh,560px)!important;min-height:400px!important}
+}
+@media (max-width:767px){
+  .realCreative{width:82vw!important;min-width:82vw!important;height:auto!important;aspect-ratio:4/5!important}
+  .caseProofGrid{grid-template-columns:1fr!important}
+  .caseProofCreativeFrame{height:min(64svh,560px)!important;min-height:340px!important}
+  .caseProofAdsFrame{aspect-ratio:2.146/1!important}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1227,7 +1285,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3><p>Meta Ads для локальної cleaning-компанії: 1 660 кліків, 1 097 розпочатих діалогів і 11% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-creative-pos="0% 0%" data-proof-ads-pos="33.333% 0%">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1235,7 +1293,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
   <div class="caseBody"><h3>Косметологічний центр</h3><p>Meta Ads у США: 23 300 кліків, 1 984 заявки та 16% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-creative-pos="66.667% 0%" data-proof-ads-pos="100% 0%">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
     </div>
@@ -1249,10 +1307,10 @@ body.proofModalOpen{overflow:hidden}
     <div class="extraCasesWrap" id="extraCasesWrap">
       <div class="caseGrid extraCaseGrid">
 <article class="caseCard caseExtra">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=84" alt="Нерухомість в Іспанії"><span class="caseTag">Real Estate · Spain</span></div>
+  <div class="casePhoto realEstateCasePhoto"><img src="assets/site/covers/real-estate-spain-premium.webp" alt="Преміальна нерухомість в Іспанії" loading="lazy" decoding="async"><span class="caseTag">Real Estate · Spain</span></div>
   <div class="caseBody"><h3>Нерухомість в Іспанії</h3><p>Об’єкти від €200 000. Аудиторія — Україна: 500+ кліків, 12 заявок із форми, 2 підписані угоди та ще 8 потенційних клієнтів у процесі вибору.</p>
     <div class="caseStats"><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div><div class="caseStat"><strong>2</strong><span>підписані угоди</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-creative-pos="0% 50%" data-proof-ads-pos="33.333% 50%">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-type="video" data-proof-creative="assets/site/videos/real-estate-spain.mp4" data-proof-ads="assets/site/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1260,7 +1318,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=84" alt="Медичний центр New York"><span class="caseTag">Medical · New York</span></div>
   <div class="caseBody"><h3>Медичний центр · New York</h3><p>720 кліків, 191 заявка та 19% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-creative-pos="66.667% 50%" data-proof-ads-pos="100% 50%">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-type="video" data-proof-creative="assets/site/videos/medical-center.mp4" data-proof-ads="assets/site/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1268,7 +1326,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
   <div class="caseBody"><h3>Детейлінг · Amsterdam</h3><p>313 кліків, 147 розпочатих розмов і 10% конверсії в клієнта. Частина Direct-звернень у Європі не відстежувалась.</p>
     <div class="caseStats"><div class="caseStat"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-creative-pos="0% 100%" data-proof-ads-pos="33.333% 100%">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
 
@@ -1276,7 +1334,7 @@ body.proofModalOpen{overflow:hidden}
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг · London</h3><p>315 кліків і 13 лідів із сайту. Додаткові Direct-звернення були частково не відстежені.</p>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-creative-pos="66.667% 100%" data-proof-ads-pos="100% 100%">Переглянути креатив + Ads Manager →</button>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
 </article>
       </div>
@@ -1310,8 +1368,8 @@ body.proofModalOpen{overflow:hidden}
   </div>
   <div class="loopViewport creativeViewport">
     <div class="loopTrack creativeTrack">
-      <div class="loopGroup"><article class="creativeCard spriteCreative" style="--sx:0%;--sy:0%"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:0%"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:0%"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:0%"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:0%"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:0%;--sy:100%"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:100%"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:100%"><span class="creativeBadge">Music School</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:100%"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:100%"><span class="creativeBadge">Moving Berlin</span></article></div>
-      <div class="loopGroup" aria-hidden="true"><article class="creativeCard spriteCreative" style="--sx:0%;--sy:0%"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:0%"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:0%"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:0%"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:0%"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:0%;--sy:100%"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard spriteCreative" style="--sx:25%;--sy:100%"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard spriteCreative" style="--sx:50%;--sy:100%"><span class="creativeBadge">Music School</span></article><article class="creativeCard spriteCreative" style="--sx:75%;--sy:100%"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard spriteCreative" style="--sx:100%;--sy:100%"><span class="creativeBadge">Moving Berlin</span></article></div>
+      <div class="loopGroup"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/upholstery-nyc.webp" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
+      <div class="loopGroup" aria-hidden="true"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/upholstery-nyc.webp" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
     </div>
   </div>
 </section>
@@ -1462,15 +1520,16 @@ body.proofModalOpen{overflow:hidden}
     </div>
     <div class="caseProofGrid">
       <div class="caseProofMedia">
-        <b>Креатив</b>
-        <div class="caseProofFrame" id="caseCreativeFrame">
-          <div class="caseProofSprite" id="caseProofCreative" role="img" aria-label="Креатив кейсу"></div>
+        <b id="caseCreativeLabel">Креатив</b>
+        <div class="caseProofFrame caseProofCreativeFrame" id="caseCreativeFrame">
+          <img id="caseProofCreativeImage" alt="Креатив кейсу" hidden>
+          <video id="caseProofCreativeVideo" muted loop playsinline preload="metadata" aria-label="Відеокреатив кейсу" hidden></video>
         </div>
       </div>
       <div class="caseProofMedia">
         <b>Ads Manager</b>
-        <div class="caseProofFrame" id="caseAdsFrame">
-          <div class="caseProofSprite" id="caseProofAds" role="img" aria-label="Скріншот результатів з Ads Manager"></div>
+        <div class="caseProofFrame caseProofAdsFrame" id="caseAdsFrame">
+          <img id="caseProofAds" alt="Скріншот результатів з Ads Manager">
         </div>
       </div>
     </div>
@@ -1515,23 +1574,42 @@ if(citySelect){citySelect.addEventListener('change',renderCityStatus);renderCity
 const proofModal=document.getElementById('caseProofModal');
 const proofClose=document.getElementById('caseProofClose');
 const proofTitle=document.getElementById('caseProofTitle');
-const proofCreative=document.getElementById('caseProofCreative');
+const proofCreativeImage=document.getElementById('caseProofCreativeImage');
+const proofCreativeVideo=document.getElementById('caseProofCreativeVideo');
+const proofCreativeLabel=document.getElementById('caseCreativeLabel');
 const proofAds=document.getElementById('caseProofAds');
-const creativeFrame=document.getElementById('caseCreativeFrame');
-const adsFrame=document.getElementById('caseAdsFrame');
 
-function setProofCell(el,pos){
-  el.style.backgroundPosition=pos||'0% 0%';
-}
 function openProofModal(button){
+  const type=button.dataset.proofType||'image';
   proofTitle.textContent=button.dataset.proofTitle||'Кейс';
-  setProofCell(proofCreative,button.dataset.proofCreativePos);
-  setProofCell(proofAds,button.dataset.proofAdsPos);
+  proofCreativeLabel.textContent=type==='video'?'Відеокреатив':'Креатив';
+  proofAds.src=button.dataset.proofAds||'';
+
+  if(type==='video'){
+    proofCreativeImage.hidden=true;
+    proofCreativeImage.removeAttribute('src');
+    proofCreativeVideo.hidden=false;
+    proofCreativeVideo.src=button.dataset.proofCreative||'';
+    proofCreativeVideo.load();
+    const playPromise=proofCreativeVideo.play();
+    if(playPromise?.catch) playPromise.catch(()=>{});
+  }else{
+    proofCreativeVideo.pause();
+    proofCreativeVideo.hidden=true;
+    proofCreativeVideo.removeAttribute('src');
+    proofCreativeVideo.load();
+    proofCreativeImage.hidden=false;
+    proofCreativeImage.src=button.dataset.proofCreative||'';
+  }
+
   proofModal.classList.add('isOpen');
   proofModal.setAttribute('aria-hidden','false');
   document.body.classList.add('proofModalOpen');
 }
 function closeProofModal(){
+  proofCreativeVideo.pause();
+  proofCreativeVideo.removeAttribute('src');
+  proofCreativeVideo.load();
   proofModal.classList.remove('isOpen');
   proofModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('proofModalOpen');
