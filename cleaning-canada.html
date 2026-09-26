@@ -1204,6 +1204,105 @@ body.proofModalOpen{overflow:hidden}
   .instagramWhereShot{padding:6px;border-radius:15px}
   .instagramWhereShot img{border-radius:10px}
 }
+
+/* 2026-09-26 · manual galleries + fullscreen zoom */
+.galleryControls{
+  display:flex;align-items:center;gap:9px;margin-top:15px
+}
+.galleryControls span{
+  font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:#7a746e
+}
+.galleryArrow{
+  width:38px;height:38px;border-radius:999px;border:1px solid rgba(18,19,21,.11);
+  background:rgba(255,255,255,.72);color:#111214;font:800 16px/1 system-ui;
+  display:grid;place-items:center;cursor:pointer;transition:.2s ease
+}
+.galleryArrow:hover{transform:translateY(-2px);background:#111214;color:#fff}
+.manualGallery{
+  overflow-x:auto!important;overflow-y:hidden!important;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  mask-image:linear-gradient(90deg,transparent 0,#000 2%,#000 98%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 2%,#000 98%,transparent 100%)!important;
+  cursor:grab
+}
+.manualGallery::-webkit-scrollbar{display:none}
+.manualGallery:active{cursor:grabbing}
+.manualGallery .loopTrack{
+  animation:none!important;transform:none!important;will-change:auto!important
+}
+.manualGallery .loopGroup[aria-hidden="true"]{display:none!important}
+.manualGallery .creativeCard,
+.manualGallery .reviewCard{
+  scroll-snap-align:center;cursor:zoom-in;user-select:none
+}
+.manualGallery .creativeCard:focus-visible,
+.manualGallery .reviewCard:focus-visible{
+  outline:3px solid rgba(91,125,164,.55);outline-offset:4px
+}
+.galleryLightbox{
+  position:fixed;inset:0;z-index:145;display:none;place-items:center;
+  padding:20px;background:rgba(5,6,8,.82);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)
+}
+.galleryLightbox.isOpen{display:grid}
+.galleryLightboxDialog{
+  position:relative;width:min(1000px,calc(100vw - 28px));
+  height:min(920px,calc(100svh - 28px));
+  display:grid;grid-template-columns:58px minmax(0,1fr) 58px;
+  grid-template-rows:minmax(0,1fr) auto;align-items:center;
+  border-radius:28px;padding:16px;
+  background:rgba(18,19,21,.94);border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 34px 120px rgba(0,0,0,.48)
+}
+.galleryLightboxStage{
+  grid-column:2;grid-row:1;min-width:0;min-height:0;height:100%;
+  display:grid;place-items:center;overflow:hidden
+}
+.galleryLightboxStage img{
+  display:block;max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;border-radius:20px;box-shadow:0 20px 70px rgba(0,0,0,.3)
+}
+.galleryLightboxReview{
+  width:min(620px,78vw);aspect-ratio:280/364;
+  background-image:url("assets/site/reviews-sprite.webp");
+  background-size:400% 200%;background-repeat:no-repeat;
+  border-radius:20px;box-shadow:0 20px 70px rgba(0,0,0,.3)
+}
+.galleryLightboxClose{
+  position:absolute;right:14px;top:14px;z-index:4;width:42px;height:42px;
+  border:1px solid rgba(255,255,255,.14);border-radius:999px;
+  background:rgba(0,0,0,.48);color:#fff;font:500 23px/1 system-ui;cursor:pointer
+}
+.galleryLightboxNav{
+  width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.08);color:#fff;font:700 20px/1 system-ui;
+  display:grid;place-items:center;cursor:pointer;transition:.2s
+}
+.galleryLightboxNav:hover{background:#fff;color:#111214}
+.galleryLightboxNav.prev{grid-column:1;grid-row:1;justify-self:start}
+.galleryLightboxNav.next{grid-column:3;grid-row:1;justify-self:end}
+.galleryLightboxCaption{
+  grid-column:1/-1;grid-row:2;text-align:center;padding:9px 40px 2px;
+  color:rgba(255,255,255,.75);font-size:10px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase
+}
+@media (max-width:767px){
+  .galleryControls{justify-content:space-between;gap:7px;margin-top:13px}
+  .galleryControls span{font-size:7px;text-align:center;line-height:1.35}
+  .galleryArrow{width:36px;height:36px;flex:none}
+  .galleryLightbox{padding:7px}
+  .galleryLightboxDialog{
+    width:calc(100vw - 14px);height:calc(100svh - 14px);
+    grid-template-columns:42px minmax(0,1fr) 42px;
+    padding:8px;border-radius:20px
+  }
+  .galleryLightboxStage img{border-radius:14px}
+  .galleryLightboxReview{width:min(78vw,430px);border-radius:14px}
+  .galleryLightboxNav{width:36px;height:36px;font-size:17px}
+  .galleryLightboxClose{right:10px;top:10px;width:38px;height:38px}
+  .galleryLightboxCaption{font-size:8px;padding:8px 30px 2px}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1473,13 +1572,18 @@ body.proofModalOpen{overflow:hidden}
       <div>
         <h2>Реклама має зупиняти погляд ще до першого кліку</h2>
         <p>Реальні рекламні креативи з локальних проєктів у різних нішах</p>
+        <div class="galleryControls" aria-label="Навігація креативами">
+          <button class="galleryArrow" type="button" data-gallery-scroll="creative" data-dir="-1" aria-label="Попередній креатив">←</button>
+          <span>Гортайте або натисніть для збільшення</span>
+          <button class="galleryArrow" type="button" data-gallery-scroll="creative" data-dir="1" aria-label="Наступний креатив">→</button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="loopViewport creativeViewport">
+  <div class="loopViewport creativeViewport manualGallery" data-gallery-viewport="creative">
     <div class="loopTrack creativeTrack">
-      <div class="loopGroup"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/upholstery-nyc.webp" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
-      <div class="loopGroup" aria-hidden="true"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/upholstery-nyc.webp" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
+      <div class="loopGroup"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="https://cdn.openart.ai/openart-uploads/production/attachment-transfers/747fdd84dfbf1731e6a5cbb16cdd6e9aee8d5f793e122a1d1c8ec78463aa2c9d.png" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
+      <div class="loopGroup" aria-hidden="true"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="https://cdn.openart.ai/openart-uploads/production/attachment-transfers/747fdd84dfbf1731e6a5cbb16cdd6e9aee8d5f793e122a1d1c8ec78463aa2c9d.png" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
     </div>
   </div>
 </section>
@@ -1491,10 +1595,15 @@ body.proofModalOpen{overflow:hidden}
       <div>
         <h2>Що кажуть клієнти про роботу</h2>
         <p>Реальні повідомлення клієнтів після запусків і ведення реклами</p>
+        <div class="galleryControls" aria-label="Навігація відгуками">
+          <button class="galleryArrow" type="button" data-gallery-scroll="review" data-dir="-1" aria-label="Попередній відгук">←</button>
+          <span>Гортайте або натисніть для збільшення</span>
+          <button class="galleryArrow" type="button" data-gallery-scroll="review" data-dir="1" aria-label="Наступний відгук">→</button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="loopViewport reviewsViewport">
+  <div class="loopViewport reviewsViewport manualGallery" data-gallery-viewport="review">
     <div class="loopTrack reviewsTrack">
       <div class="loopGroup"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
       <div class="loopGroup" aria-hidden="true"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
@@ -1646,6 +1755,19 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </div>
 
+<div class="galleryLightbox" id="galleryLightbox" aria-hidden="true">
+  <div class="galleryLightboxDialog" role="dialog" aria-modal="true" aria-label="Перегляд матеріалу">
+    <button class="galleryLightboxClose" id="galleryLightboxClose" type="button" aria-label="Закрити">×</button>
+    <button class="galleryLightboxNav prev" id="galleryLightboxPrev" type="button" aria-label="Попередній">←</button>
+    <div class="galleryLightboxStage">
+      <img id="galleryLightboxImage" alt="" hidden>
+      <div class="galleryLightboxReview" id="galleryLightboxReview" hidden></div>
+    </div>
+    <button class="galleryLightboxNav next" id="galleryLightboxNext" type="button" aria-label="Наступний">→</button>
+    <div class="galleryLightboxCaption" id="galleryLightboxCaption"></div>
+  </div>
+</div>
+
 <div class="instagramWhereModal" id="instagramWhereModal" aria-hidden="true">
   <div class="instagramWhereDialog" role="dialog" aria-modal="true" aria-labelledby="instagramWhereTitle">
     <div class="instagramWhereTop">
@@ -1772,6 +1894,96 @@ if(instagramWhereModal)instagramWhereModal.addEventListener('click',(event)=>{
 });
 document.addEventListener('keydown',(event)=>{
   if(event.key==='Escape'&&instagramWhereModal?.classList.contains('isOpen'))closeInstagramWhere();
+});
+
+const galleryLightbox=document.getElementById('galleryLightbox');
+const galleryLightboxClose=document.getElementById('galleryLightboxClose');
+const galleryLightboxPrev=document.getElementById('galleryLightboxPrev');
+const galleryLightboxNext=document.getElementById('galleryLightboxNext');
+const galleryLightboxImage=document.getElementById('galleryLightboxImage');
+const galleryLightboxReview=document.getElementById('galleryLightboxReview');
+const galleryLightboxCaption=document.getElementById('galleryLightboxCaption');
+let activeGalleryType=null;
+let activeGalleryIndex=0;
+
+function getGalleryItems(type){
+  const viewport=document.querySelector('[data-gallery-viewport="'+type+'"]');
+  if(!viewport)return[];
+  return [...viewport.querySelectorAll('.loopGroup:not([aria-hidden="true"]) .'+(type==='creative'?'creativeCard':'reviewCard'))];
+}
+function renderGalleryLightbox(){
+  const items=getGalleryItems(activeGalleryType);
+  if(!items.length)return;
+  activeGalleryIndex=(activeGalleryIndex+items.length)%items.length;
+  const item=items[activeGalleryIndex];
+
+  if(activeGalleryType==='creative'){
+    const img=item.querySelector('img');
+    galleryLightboxReview.hidden=true;
+    galleryLightboxImage.hidden=false;
+    galleryLightboxImage.src=img?.currentSrc||img?.src||'';
+    galleryLightboxImage.alt=img?.alt||'Креатив';
+    galleryLightboxCaption.textContent=item.querySelector('.creativeBadge')?.textContent||'Креатив';
+  }else{
+    galleryLightboxImage.hidden=true;
+    galleryLightboxImage.removeAttribute('src');
+    galleryLightboxReview.hidden=false;
+    const sx=item.style.getPropertyValue('--sx')||'0%';
+    const sy=item.style.getPropertyValue('--sy')||'0%';
+    galleryLightboxReview.style.backgroundPosition=sx+' '+sy;
+    galleryLightboxCaption.textContent=item.getAttribute('aria-label')||'Відгук клієнта';
+  }
+}
+function openGalleryLightbox(type,index){
+  activeGalleryType=type;
+  activeGalleryIndex=index;
+  renderGalleryLightbox();
+  galleryLightbox.classList.add('isOpen');
+  galleryLightbox.setAttribute('aria-hidden','false');
+  document.body.classList.add('proofModalOpen');
+}
+function closeGalleryLightbox(){
+  galleryLightbox.classList.remove('isOpen');
+  galleryLightbox.setAttribute('aria-hidden','true');
+  galleryLightboxImage.removeAttribute('src');
+  document.body.classList.remove('proofModalOpen');
+}
+function stepGallery(delta){
+  activeGalleryIndex+=delta;
+  renderGalleryLightbox();
+}
+document.querySelectorAll('[data-gallery-scroll]').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    const type=button.dataset.galleryScroll;
+    const viewport=document.querySelector('[data-gallery-viewport="'+type+'"]');
+    const card=viewport?.querySelector('.loopGroup:not([aria-hidden="true"]) > *');
+    const step=(card?.getBoundingClientRect().width||300)+14;
+    viewport?.scrollBy({left:step*Number(button.dataset.dir||1),behavior:'smooth'});
+  });
+});
+['creative','review'].forEach((type)=>{
+  getGalleryItems(type).forEach((item,index)=>{
+    item.tabIndex=0;
+    item.addEventListener('click',()=>openGalleryLightbox(type,index));
+    item.addEventListener('keydown',(event)=>{
+      if(event.key==='Enter'||event.key===' '){
+        event.preventDefault();
+        openGalleryLightbox(type,index);
+      }
+    });
+  });
+});
+if(galleryLightboxClose)galleryLightboxClose.addEventListener('click',closeGalleryLightbox);
+if(galleryLightboxPrev)galleryLightboxPrev.addEventListener('click',()=>stepGallery(-1));
+if(galleryLightboxNext)galleryLightboxNext.addEventListener('click',()=>stepGallery(1));
+if(galleryLightbox)galleryLightbox.addEventListener('click',(event)=>{
+  if(event.target===galleryLightbox)closeGalleryLightbox();
+});
+document.addEventListener('keydown',(event)=>{
+  if(!galleryLightbox?.classList.contains('isOpen'))return;
+  if(event.key==='Escape')closeGalleryLightbox();
+  if(event.key==='ArrowLeft')stepGallery(-1);
+  if(event.key==='ArrowRight')stepGallery(1);
 });
 
 </script>
