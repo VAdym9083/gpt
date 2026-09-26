@@ -8,9 +8,6 @@
 <meta name="description" content="Meta Ads для локального бізнесу в Канаді та США. Спеціалізація — cleaning companies. Стратегія, креативи, запуск, оптимізація та реальні кейси. 3+ роки досвіду.">
 <meta property="og:title" content="Таргет LB · Vadym — Performance Marketer">
 <meta property="og:description" content="Performance marketing для локального бізнесу. Спеціалізація — клінінг. Реальні кейси, креативи та результати з Meta Ads.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#f2eee7;
@@ -1589,249 +1586,6 @@ body.proofModalOpen{overflow:hidden}
   object-fit:contain!important;
   object-position:center!important
 }
-/* 2026-09-26 · premium visual audit pass */
-:root{
-  --accent:#7693aa;
-  --accent-warm:#7693aa;
-  --accent-mint:#8fae9c;
-  --paper:#f2eee8;
-  --paper-2:#fbfaf7;
-}
-body{
-  font-family:"Manrope",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 8% 7%,rgba(118,147,170,.15),transparent 25%),
-    radial-gradient(circle at 86% 9%,rgba(143,174,156,.13),transparent 24%),
-    var(--paper)
-}
-.serif,
-.manifesto .big span,
-.valueNum{
-  font-family:"Instrument Serif",Georgia,"Times New Roman",serif!important
-}
-
-/* Hero: owned editorial brand visual instead of stock photography */
-.heroShell{
-  background:
-    linear-gradient(135deg,#0b0d10 0%,#151a20 48%,#2b343b 100%)!important
-}
-.heroBrandBackdrop{
-  position:absolute;inset:0;overflow:hidden;pointer-events:none
-}
-.heroBrandGrid{
-  position:absolute;inset:-1px;
-  background-image:
-    linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
-  background-size:72px 72px;
-  mask-image:linear-gradient(90deg,transparent 0,#000 43%,#000 100%);
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 43%,#000 100%);
-  opacity:.48
-}
-.heroBrandGlow{
-  position:absolute;border-radius:50%;filter:blur(70px);opacity:.65
-}
-.heroBrandGlowA{
-  width:420px;height:420px;right:8%;top:8%;background:rgba(118,147,170,.33)
-}
-.heroBrandGlowB{
-  width:320px;height:320px;right:31%;bottom:-8%;background:rgba(143,174,156,.16)
-}
-.heroBrandMonogram{
-  position:absolute;right:7%;top:15%;
-  font:400 clamp(170px,25vw,390px)/.75 "Instrument Serif",Georgia,serif;
-  letter-spacing:-.11em;color:rgba(255,255,255,.10);
-  transform:rotate(-4deg)
-}
-.heroBrandRail{
-  position:absolute;right:4%;bottom:7%;
-  display:grid;gap:8px;justify-items:end;
-  color:rgba(255,255,255,.36);
-  font-size:8px;font-weight:800;letter-spacing:.16em
-}
-.heroBrandRail span{
-  min-width:185px;padding:7px 9px;border-top:1px solid rgba(255,255,255,.13);
-  text-align:right
-}
-.heroVeil{
-  background:
-    linear-gradient(90deg,rgba(5,7,10,.93) 0%,rgba(5,7,10,.76) 33%,rgba(5,7,10,.28) 65%,rgba(5,7,10,.10) 100%),
-    linear-gradient(180deg,transparent 56%,rgba(8,9,11,.55) 100%)!important
-}
-
-/* Real work replaces decorative stock photography */
-.visualStory{padding:0 0 72px!important}
-.artifactGrid{grid-template-columns:1.2fr .9fr .9fr!important}
-.artifactCard{
-  min-height:300px!important;
-  background:linear-gradient(145deg,#11151a,#242c32)!important;
-  padding:14px!important
-}
-.artifactCard img{
-  position:absolute!important;
-  inset:14px 14px 90px!important;
-  width:calc(100% - 28px)!important;
-  height:calc(100% - 104px)!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  border-radius:17px!important;
-  background:#f4f1ec!important;
-  filter:none!important;
-  transform:none!important;
-  box-shadow:0 20px 48px rgba(0,0,0,.18)
-}
-.artifactCard:hover img{transform:none!important}
-.artifactCard:after{
-  background:linear-gradient(180deg,rgba(9,11,14,.01) 28%,rgba(9,11,14,.88) 82%)!important
-}
-.artifactCard .photoCaption{
-  left:22px!important;right:22px!important;bottom:18px!important
-}
-.artifactCard .photoCaption p{max-width:90%;font-size:10px!important}
-
-/* One premium editorial cover language for every case */
-.caseEditorialCover{
-  display:block!important;
-  overflow:hidden!important;
-  isolation:isolate;
-  background:
-    radial-gradient(circle at 78% 22%,color-mix(in srgb,var(--caseAccent) 25%,transparent),transparent 34%),
-    linear-gradient(135deg,var(--caseA),var(--caseB))!important;
-  border-bottom:1px solid rgba(255,255,255,.12)
-}
-.caseEditorialCover:before{
-  content:"";position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
-  background-size:38px 38px;
-  opacity:.62
-}
-.caseEditorialCover:after{
-  content:"LB"!important;display:block!important;
-  position:absolute;right:-2%;bottom:-22%;z-index:0;
-  font:400 clamp(110px,13vw,210px)/.75 "Instrument Serif",Georgia,serif;
-  letter-spacing:-.12em;color:rgba(255,255,255,.08);
-  background:none!important
-}
-.coverBlue{--caseA:#0d1218;--caseB:#2a3b48;--caseAccent:#8fb8d0}
-.coverGreen{--caseA:#0f1514;--caseB:#2d403b;--caseAccent:#9bc1ad}
-.coverSlate{--caseA:#101216;--caseB:#343d46;--caseAccent:#9fb2c0}
-.caseEditorialTop{
-  position:absolute;top:22px;right:22px;z-index:2;
-  display:flex;gap:14px;color:rgba(255,255,255,.48);
-  font-size:7px;font-weight:800;letter-spacing:.16em
-}
-.caseEditorialTitle{
-  position:absolute;z-index:2;left:24px;right:24px;top:50%;
-  transform:translateY(-45%);
-  color:#fff;font-size:clamp(31px,4vw,56px);font-weight:800;
-  line-height:.82;letter-spacing:-.065em
-}
-.caseEditorialTitle em{
-  display:block;margin-top:9px;
-  font:italic 400 1.02em/1 "Instrument Serif",Georgia,serif;
-  letter-spacing:-.035em;color:color-mix(in srgb,var(--caseAccent) 88%,#fff)
-}
-.caseEditorialMeta{
-  position:absolute;z-index:2;left:24px;bottom:23px;
-  color:rgba(255,255,255,.46);font-size:7px;font-weight:800;letter-spacing:.16em
-}
-.caseEditorialCover .caseTag{
-  background:rgba(8,10,13,.48)!important;
-  border-color:rgba(255,255,255,.16)!important;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
-}
-
-/* Process is editorial/data-led rather than another stock-photo strip */
-.brandStepVisual{
-  display:flex!important;align-items:flex-end!important;justify-content:space-between!important;
-  padding:16px 18px!important;
-  background:
-    linear-gradient(rgba(17,18,20,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(17,18,20,.055) 1px,transparent 1px),
-    linear-gradient(145deg,#f8f6f2,#e9edf0)!important;
-  background-size:22px 22px,22px 22px,auto!important
-}
-.brandStepVisual span{
-  align-self:flex-start;font-size:8px;font-weight:900;letter-spacing:.14em;color:#718392
-}
-.brandStepVisual b{
-  font-size:17px;letter-spacing:-.035em;color:#17191d
-}
-.brandStepVisual i{
-  width:28px;height:28px;border-radius:50%;
-  background:linear-gradient(145deg,#7894aa,#91ad9e);
-  box-shadow:0 8px 22px rgba(64,85,101,.22)
-}
-
-/* Calmer premium motion: keep the two proof carousels, remove decorative motion */
-.reveal{transform:translateY(10px);transition-duration:.5s}
-.photoCard.reveal,
-.valueCard.reveal,
-.exclusiveBanner.reveal,
-.cityFinder.reveal{
-  opacity:1!important;transform:none!important;transition:none!important
-}
-.cityTicker{display:none!important}
-
-/* Proof modal hierarchy: creative first, Ads Manager secondary */
-.caseProofDialog{
-  width:min(1160px,calc(100vw - 32px))!important;
-  background:linear-gradient(145deg,rgba(249,248,245,.985),rgba(235,237,237,.975))!important
-}
-.caseProofGrid{
-  grid-template-columns:minmax(360px,1.18fr) minmax(320px,.82fr)!important;
-  gap:18px!important;align-items:start!important
-}
-.caseProofCreativeFrame{
-  height:min(70vh,650px)!important;min-height:470px!important;
-  border-color:rgba(255,255,255,.10)!important;
-  box-shadow:0 22px 60px rgba(16,18,22,.16)
-}
-.caseProofAdsFrame{
-  align-self:start!important;
-  max-height:470px!important;
-  background:#f4f1ec!important;
-  box-shadow:0 14px 38px rgba(30,27,23,.08)
-}
-.caseProofMedia:first-child>b{
-  color:#273038!important;font-size:9px!important
-}
-.caseProofMedia:last-child>b{
-  color:#87817a!important;font-size:8px!important
-}
-
-/* Low-resolution review sources look better when not blown up beyond their useful size */
-.galleryLightbox.reviewMode .galleryLightboxStage img:not([hidden]){
-  max-width:min(480px,78vw)!important
-}
-
-/* Remove remaining warm/brown visual noise */
-.colorDot.warm{background:#7894aa!important}
-.colorDot.mint{background:#91ad9e!important}
-
-@media (max-width:1024px){
-  .caseProofGrid{
-    grid-template-columns:minmax(300px,1.05fr) minmax(300px,.95fr)!important
-  }
-  .caseProofCreativeFrame{height:min(62vh,560px)!important;min-height:400px!important}
-}
-@media (max-width:767px){
-  .heroBrandMonogram{right:-10%;top:25%;font-size:190px}
-  .heroBrandRail{display:none}
-  .artifactGrid{grid-template-columns:1fr!important}
-  .artifactCard{min-height:290px!important}
-  .caseEditorialTop{top:17px;right:17px;font-size:6px}
-  .caseEditorialTitle{left:18px;right:18px;font-size:34px}
-  .caseEditorialMeta{left:18px;bottom:17px;font-size:6px}
-  .caseProofGrid{grid-template-columns:1fr!important}
-  .caseProofCreativeFrame{height:min(60svh,530px)!important;min-height:340px!important}
-  .caseProofAdsFrame{max-height:none!important}
-  .galleryLightbox.reviewMode .galleryLightboxStage img:not([hidden]){
-    max-width:min(92vw,460px)!important
-  }
-}
 </style>
 <script type="application/ld+json">
 {
@@ -1903,17 +1657,7 @@ body{
 <main id="top">
 <section class="hero">
   <div class="wrap heroShell">
-    <div class="heroBrandBackdrop" aria-hidden="true">
-      <div class="heroBrandGrid"></div>
-      <div class="heroBrandGlow heroBrandGlowA"></div>
-      <div class="heroBrandGlow heroBrandGlowB"></div>
-      <div class="heroBrandMonogram">LB</div>
-      <div class="heroBrandRail">
-        <span>01 · TARGETING</span>
-        <span>02 · CREATIVE</span>
-        <span>03 · OPTIMIZATION</span>
-      </div>
-    </div>
+    <img class="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88" alt="Premium marketing workspace">
     <div class="heroVeil"></div>
 
     <div class="heroContent">
@@ -1982,29 +1726,30 @@ body{
 
 <section class="visualStory">
   <div class="wrap">
-    <div class="photoGrid artifactGrid">
-      <article class="photoCard artifactCard blue">
-        <img src="assets/site/proofs/toronto-cleaning-ads.webp" alt="Реальний Ads Manager — cleaning Toronto" loading="lazy" decoding="async">
+    <div class="photoGrid">
+      <article class="photoCard blue reveal">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=84" alt="Стратегія та планування">
         <div class="photoCaption">
           <span>Стратегія</span>
           <h3>Спочатку логіка. Потім бюджет</h3>
-          <p>Рішення приймаю по реальних даних кампаній, а не по універсальному шаблону.</p>
+          <p>Офер, аудиторія, гео та структура кампанії визначаються до того, як реклама починає витрачати бюджет.</p>
+          <div class="colorBar"><i class="colorDot blue"></i><i class="colorDot warm"></i><i class="colorDot mint"></i></div>
         </div>
       </article>
-      <article class="photoCard artifactCard mint">
-        <img src="assets/site/creatives/cleaning-toronto.webp" alt="Реальний рекламний креатив cleaning Toronto" loading="lazy" decoding="async">
+      <article class="photoCard warm reveal">
+        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1100&q=84" alt="Cleaning business">
         <div class="photoCaption">
-          <span>Creative system</span>
-          <h3>Креатив під конкретний ринок</h3>
-          <p>Офер, гео і мотивація клієнта зібрані в одному рекламному повідомленні.</p>
+          <span>Cleaning niche</span>
+          <h3>Реклама під реальний сервіс</h3>
+          <p>Конкретна послуга, конкретний ринок і зрозуміла причина звернутися саме до вас.</p>
         </div>
       </article>
-      <article class="photoCard artifactCard blue">
-        <img src="assets/site/proofs/cosmetology-ads.webp" alt="Реальні результати рекламної кампанії" loading="lazy" decoding="async">
+      <article class="photoCard mint reveal">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=84" alt="Аналітика та оптимізація">
         <div class="photoCaption">
           <span>Оптимізація</span>
-          <h3>Цифри вирішують, що лишається</h3>
-          <p>Слабкі зв’язки відключаю, бюджет переводжу туди, де є підтверджений результат.</p>
+          <h3>Працюю з цифрами, не з надією</h3>
+          <p>Залишаю те, що дає якісні звернення, і відключаю те, що не підтверджує результат цифрами.</p>
         </div>
       </article>
     </div>
@@ -2023,12 +1768,7 @@ body{
 
     <div class="caseGrid">
 <article class="caseCard reveal">
-  <div class="casePhoto caseEditorialCover coverBlue">
-      <span class="caseTag">Cleaning · Toronto / GTA</span>
-      <div class="caseEditorialTop"><span>01 / CLEANING</span><span>CANADA</span></div>
-      <div class="caseEditorialTitle">TORONTO <em>/ GTA</em></div>
-      <div class="caseEditorialMeta">META ADS · CASE STUDY</div>
-    </div>
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3><p>Meta Ads для локальної cleaning-компанії: 1 660 кліків, 1 097 розпочатих діалогів і 11% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -2036,12 +1776,7 @@ body{
 </article>
 
 <article class="caseCard reveal">
-  <div class="casePhoto caseEditorialCover coverGreen">
-      <span class="caseTag">Cosmetology · USA</span>
-      <div class="caseEditorialTop"><span>02 / BEAUTY</span><span>USA</span></div>
-      <div class="caseEditorialTitle">COSMETOLOGY <em>/ CENTER</em></div>
-      <div class="caseEditorialMeta">LEAD GEN · CASE STUDY</div>
-    </div>
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
   <div class="caseBody"><h3>Косметологічний центр</h3><p>Meta Ads у США: 23 300 кліків, 1 984 заявки та 16% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -2058,12 +1793,7 @@ body{
     <div class="extraCasesWrap" id="extraCasesWrap">
       <div class="caseGrid extraCaseGrid">
 <article class="caseCard caseExtra">
-  <div class="casePhoto caseEditorialCover coverSlate">
-      <span class="caseTag">Real Estate · Spain</span>
-      <div class="caseEditorialTop"><span>03 / REAL ESTATE</span><span>SPAIN</span></div>
-      <div class="caseEditorialTitle">SPAIN <em>/ PROPERTY</em></div>
-      <div class="caseEditorialMeta">€200K+ · CASE STUDY</div>
-    </div>
+  <div class="casePhoto realEstateCasePhoto"><img src="assets/site/covers/real-estate-spain-premium-v2.webp" alt="Преміальна нерухомість в Іспанії" loading="lazy" decoding="async"><span class="caseTag">Real Estate · Spain</span></div>
   <div class="caseBody"><h3>Нерухомість в Іспанії</h3><p>Об’єкти від €200 000. Аудиторія — Україна: 500+ кліків, 12 заявок із форми, 2 підписані угоди та ще 8 потенційних клієнтів у процесі вибору.</p>
     <div class="caseStats"><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div><div class="caseStat"><strong>2</strong><span>підписані угоди</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-type="video" data-proof-creative="assets/site/videos/real-estate-spain.mp4" data-proof-ads="assets/site/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -2071,12 +1801,7 @@ body{
 </article>
 
 <article class="caseCard caseExtra">
-  <div class="casePhoto caseEditorialCover coverBlue">
-      <span class="caseTag">Cleaning · London</span>
-      <div class="caseEditorialTop"><span>04 / CLEANING</span><span>UK</span></div>
-      <div class="caseEditorialTitle">LONDON <em>/ CLEANING</em></div>
-      <div class="caseEditorialMeta">WEBSITE LEADS · CASE STUDY</div>
-    </div>
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг · London</h3><p>315 кліків і 13 лідів із сайту. Додаткові Direct-звернення були частково не відстежені.</p>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -2084,12 +1809,7 @@ body{
 </article>
 
 <article class="caseCard caseExtra">
-  <div class="casePhoto caseEditorialCover coverGreen">
-      <span class="caseTag">Detailing · Amsterdam</span>
-      <div class="caseEditorialTop"><span>05 / DETAILING</span><span>NL</span></div>
-      <div class="caseEditorialTitle">AMSTERDAM <em>/ DETAILING</em></div>
-      <div class="caseEditorialMeta">CONVERSATIONS · CASE STUDY</div>
-    </div>
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
   <div class="caseBody"><h3>Детейлінг · Amsterdam</h3><p>313 кліків, 147 розпочатих розмов і 10% конверсії в клієнта. Частина Direct-звернень у Європі не відстежувалась.</p>
     <div class="caseStats"><div class="caseStat"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -2097,12 +1817,7 @@ body{
 </article>
 
 <article class="caseCard caseExtra">
-  <div class="casePhoto caseEditorialCover coverSlate">
-      <span class="caseTag">Medical · New York</span>
-      <div class="caseEditorialTop"><span>06 / MEDICAL</span><span>USA</span></div>
-      <div class="caseEditorialTitle">NEW YORK <em>/ MEDICAL</em></div>
-      <div class="caseEditorialMeta">LEADS · CASE STUDY</div>
-    </div>
+  <div class="casePhoto medicalCasePhoto"><img src="assets/site/covers/medical-center-premium.webp" alt="Преміальний медичний центр New York" loading="lazy" decoding="async"><span class="caseTag">Medical · New York</span></div>
   <div class="caseBody"><h3>Медичний центр · New York</h3><p>720 кліків, 191 заявка та 19% конверсії в клієнта.</p>
     <div class="caseStats"><div class="caseStat"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-type="video" data-proof-creative="assets/site/videos/medical-center.mp4" data-proof-ads="assets/site/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -2181,23 +1896,23 @@ body{
 
     <div class="process">
       <article class="step glassLight reveal">
-        <div class="stepVisual brandStepVisual" aria-hidden="true"><span>01</span><b>DIAGNOSE</b><i></i></div>
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80" alt="Аналіз бізнесу"></div>
         <div class="stepContent"><div class="n">01</div><div><h3>Розбір</h3><p>Послуги, ціни, гео, попит, поточна воронка та попередні рекламні дані.</p></div></div>
       </article>
       <article class="step glassLight reveal">
-        <div class="stepVisual brandStepVisual" aria-hidden="true"><span>02</span><b>STRATEGY</b><i></i></div>
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=80" alt="Стратегія"></div>
         <div class="stepContent"><div class="n">02</div><div><h3>Стратегія</h3><p>Офер, аудиторія, шлях до заявки та структура кампанії.</p></div></div>
       </article>
       <article class="step glassLight reveal">
-        <div class="stepVisual brandStepVisual" aria-hidden="true"><span>03</span><b>CREATIVE</b><i></i></div>
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=700&q=80" alt="Рекламні креативи"></div>
         <div class="stepContent"><div class="n">03</div><div><h3>Креативи</h3><p>Візуали й тексти під конкретну послугу, ринок і мотивацію клієнта.</p></div></div>
       </article>
       <article class="step glassLight reveal">
-        <div class="stepVisual brandStepVisual" aria-hidden="true"><span>04</span><b>LAUNCH</b><i></i></div>
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80" alt="Запуск реклами"></div>
         <div class="stepContent"><div class="n">04</div><div><h3>Запуск</h3><p>Налаштування Meta Ads, цілі кампанії, плейсментів і способу отримання заявок.</p></div></div>
       </article>
       <article class="step glassLight reveal">
-        <div class="stepVisual brandStepVisual" aria-hidden="true"><span>05</span><b>OPTIMIZE</b><i></i></div>
+        <div class="stepVisual"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="Оптимізація реклами"></div>
         <div class="stepContent"><div class="n">05</div><div><h3>Оптимізація</h3><p>Перерозподіляю бюджет у сильні зв’язки та відключаю те, що не дає якісних звернень.</p></div></div>
       </article>
     </div>
