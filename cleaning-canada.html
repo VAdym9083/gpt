@@ -1307,6 +1307,17 @@ body.proofModalOpen{overflow:hidden}
   .galleryLightboxClose{right:10px;top:10px;width:38px;height:38px}
   .galleryLightboxCaption{font-size:8px;padding:8px 30px 2px}
 }
+/* 2026-09-26 · restored automatic infinite carousels */
+.creativeViewport .creativeCard,
+.reviewsViewport .reviewCard{
+  cursor:zoom-in;
+  user-select:none
+}
+.creativeViewport .creativeCard:focus-visible,
+.reviewsViewport .reviewCard:focus-visible{
+  outline:3px solid rgba(91,125,164,.55);
+  outline-offset:4px
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1576,15 +1587,10 @@ body.proofModalOpen{overflow:hidden}
       <div>
         <h2>Реклама має зупиняти погляд ще до першого кліку</h2>
         <p>Реальні рекламні креативи з локальних проєктів у різних нішах</p>
-        <div class="galleryControls" aria-label="Навігація креативами">
-          <button class="galleryArrow" type="button" data-gallery-scroll="creative" data-dir="-1" aria-label="Попередній креатив">←</button>
-          <span>Гортайте або натисніть для збільшення</span>
-          <button class="galleryArrow" type="button" data-gallery-scroll="creative" data-dir="1" aria-label="Наступний креатив">→</button>
-        </div>
       </div>
     </div>
   </div>
-  <div class="loopViewport creativeViewport manualGallery" data-gallery-viewport="creative">
+  <div class="loopViewport creativeViewport" data-gallery-viewport="creative">
     <div class="loopTrack creativeTrack">
       <div class="loopGroup"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/upholstery-nyc.webp" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
       <div class="loopGroup" aria-hidden="true"><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-toronto.webp" alt="Cleaning ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-calgary.webp" alt="Cleaning ad creative for Calgary" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Calgary</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/upholstery-nyc.webp" alt="Upholstery cleaning ad creative for New York" loading="lazy" decoding="async"><span class="creativeBadge">Upholstery NYC</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/cleaning-recruitment.webp" alt="Cleaning recruitment ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Cleaning Recruitment</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/plumbing-toronto.webp" alt="Plumbing ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Plumbing Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Hair care ad creative for Toronto" loading="lazy" decoding="async"><span class="creativeBadge">Hair Care Toronto</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/hair-extensions.webp" alt="Hair extensions ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Hair Extensions</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/music-school.webp" alt="Online music school ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Music School</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/aesthetic-clinic.webp" alt="Aesthetic clinic ad creative" loading="lazy" decoding="async"><span class="creativeBadge">Aesthetic Clinic</span></article><article class="creativeCard realCreative"><img src="assets/site/creatives/moving-berlin.webp" alt="Moving company ad creative for Berlin" loading="lazy" decoding="async"><span class="creativeBadge">Moving Berlin</span></article></div>
@@ -1599,15 +1605,10 @@ body.proofModalOpen{overflow:hidden}
       <div>
         <h2>Що кажуть клієнти про роботу</h2>
         <p>Реальні повідомлення клієнтів після запусків і ведення реклами</p>
-        <div class="galleryControls" aria-label="Навігація відгуками">
-          <button class="galleryArrow" type="button" data-gallery-scroll="review" data-dir="-1" aria-label="Попередній відгук">←</button>
-          <span>Гортайте або натисніть для збільшення</span>
-          <button class="galleryArrow" type="button" data-gallery-scroll="review" data-dir="1" aria-label="Наступний відгук">→</button>
-        </div>
       </div>
     </div>
   </div>
-  <div class="loopViewport reviewsViewport manualGallery" data-gallery-viewport="review">
+  <div class="loopViewport reviewsViewport" data-gallery-viewport="review">
     <div class="loopTrack reviewsTrack">
       <div class="loopGroup"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
       <div class="loopGroup" aria-hidden="true"><article class="reviewCard reviewShot" style="--sx:0%;--sy:0%" aria-label="Відгук клієнта 1"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:0%" aria-label="Відгук клієнта 2"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:0%" aria-label="Відгук клієнта 3"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:0%" aria-label="Відгук клієнта 4"></article><article class="reviewCard reviewShot" style="--sx:0%;--sy:100%" aria-label="Відгук клієнта 5"></article><article class="reviewCard reviewShot" style="--sx:33.333%;--sy:100%" aria-label="Відгук клієнта 6"></article><article class="reviewCard reviewShot" style="--sx:66.667%;--sy:100%" aria-label="Відгук клієнта 7"></article><article class="reviewCard reviewShot" style="--sx:100%;--sy:100%" aria-label="Відгук клієнта 8"></article></div>
@@ -1956,39 +1957,6 @@ function stepGallery(delta){
   activeGalleryIndex+=delta;
   renderGalleryLightbox();
 }
-document.querySelectorAll('.manualGallery').forEach((viewport)=>{
-  let dragging=false;
-  let moved=false;
-  let startX=0;
-  let startScroll=0;
-
-  viewport.addEventListener('pointerdown',(event)=>{
-    if(event.pointerType!=='mouse'||event.button!==0)return;
-    dragging=true;
-    moved=false;
-    startX=event.clientX;
-    startScroll=viewport.scrollLeft;
-    viewport.setPointerCapture?.(event.pointerId);
-  });
-
-  viewport.addEventListener('pointermove',(event)=>{
-    if(!dragging)return;
-    const dx=event.clientX-startX;
-    if(Math.abs(dx)>5)moved=true;
-    viewport.scrollLeft=startScroll-dx;
-  });
-
-  const stopDrag=()=>{dragging=false};
-  viewport.addEventListener('pointerup',stopDrag);
-  viewport.addEventListener('pointercancel',stopDrag);
-  viewport.addEventListener('click',(event)=>{
-    if(!moved)return;
-    event.preventDefault();
-    event.stopPropagation();
-    moved=false;
-  },true);
-});
-
 let galleryTouchStartX=0;
 let galleryTouchStartY=0;
 const galleryStage=document.querySelector('.galleryLightboxStage');
@@ -2011,15 +1979,6 @@ if(galleryStage){
   },{passive:true});
 }
 
-document.querySelectorAll('[data-gallery-scroll]').forEach((button)=>{
-  button.addEventListener('click',()=>{
-    const type=button.dataset.galleryScroll;
-    const viewport=document.querySelector('[data-gallery-viewport="'+type+'"]');
-    const card=viewport?.querySelector('.loopGroup:not([aria-hidden="true"]) > *');
-    const step=(card?.getBoundingClientRect().width||300)+14;
-    viewport?.scrollBy({left:step*Number(button.dataset.dir||1),behavior:'smooth'});
-  });
-});
 ['creative','review'].forEach((type)=>{
   getGalleryItems(type).forEach((item,index)=>{
     item.tabIndex=0;
