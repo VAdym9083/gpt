@@ -1114,6 +1114,59 @@ body.proofModalOpen{overflow:hidden}
   object-fit:contain!important;
   image-rendering:auto!important;
 }
+/* 2026-09-26 · Instagram "Де це?" modal */
+.highlightProofSimple{
+  grid-template-columns:1fr!important;
+  min-height:220px;
+  align-items:center
+}
+.highlightProofSimple .highlightProofCopy{max-width:760px}
+.instagramWhereButton{cursor:pointer}
+.instagramWhereModal{
+  position:fixed;inset:0;z-index:130;display:none;place-items:center;
+  padding:24px;background:rgba(7,8,10,.68);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+.instagramWhereModal.isOpen{display:grid}
+.instagramWhereDialog{
+  width:min(820px,calc(100vw - 32px));max-height:calc(100svh - 32px);overflow:auto;
+  border-radius:28px;padding:18px;
+  background:linear-gradient(145deg,rgba(248,246,242,.98),rgba(236,232,226,.97));
+  border:1px solid rgba(255,255,255,.84);
+  box-shadow:0 34px 120px rgba(0,0,0,.34)
+}
+.instagramWhereTop{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:4px 4px 16px
+}
+.instagramWhereTop span{
+  display:block;font-size:8px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:#7a746e
+}
+.instagramWhereTop h3{
+  margin:5px 0 0;font-size:28px;line-height:1;letter-spacing:-.045em
+}
+.instagramWhereShot{
+  padding:10px;border-radius:20px;background:#fff;
+  border:1px solid rgba(20,20,20,.07);box-shadow:0 16px 50px rgba(30,24,20,.08)
+}
+.instagramWhereShot img{
+  display:block;width:100%;height:auto;border-radius:13px
+}
+.instagramWhereCta{
+  margin-top:14px;width:100%;min-height:52px;justify-content:center
+}
+@media (max-width:767px){
+  .highlightProofSimple{min-height:0}
+  .instagramWhereModal{padding:10px}
+  .instagramWhereDialog{
+    width:calc(100vw - 20px);max-height:calc(100svh - 20px);
+    padding:12px;border-radius:21px
+  }
+  .instagramWhereTop h3{font-size:23px}
+  .instagramWhereShot{padding:6px;border-radius:15px}
+  .instagramWhereShot img{border-radius:10px}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1353,18 +1406,15 @@ body.proofModalOpen{overflow:hidden}
 </article>
       </div>
 
-      <div class="highlightProof glassLight moreProof">
+      <div class="highlightProof glassLight moreProof highlightProofSimple">
         <div class="highlightProofCopy">
           <span class="label">Ще більше доказів</span>
           <h3>Більше кейсів — в Instagram</h3>
           <p>У Highlights <b>«КЕЙСИ»</b> зібрані додаткові результати, скріни рекламного кабінету та приклади запусків.</p>
           <div class="highlightActions">
-            <a class="pill dark" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Відкрити Highlights →</a>
+            <button class="pill dark instagramWhereButton" id="instagramWhereButton" type="button">Де це? →</button>
           </div>
         </div>
-        <a class="highlightShot" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener" aria-label="Instagram Highlights Кейси">
-          <img src="assets/site/instagram-highlights-cases.png" alt="Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки" loading="lazy" decoding="async">
-        </a>
       </div>
     </div>
   </div>
@@ -1550,6 +1600,22 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </div>
 
+<div class="instagramWhereModal" id="instagramWhereModal" aria-hidden="true">
+  <div class="instagramWhereDialog" role="dialog" aria-modal="true" aria-labelledby="instagramWhereTitle">
+    <div class="instagramWhereTop">
+      <div>
+        <span>Де знайти кейси</span>
+        <h3 id="instagramWhereTitle">Instagram Highlights · «КЕЙСИ»</h3>
+      </div>
+      <button class="caseProofClose" id="instagramWhereClose" type="button" aria-label="Закрити">×</button>
+    </div>
+    <div class="instagramWhereShot">
+      <img src="assets/site/instagram-highlights-cases.png" alt="Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки">
+    </div>
+    <a class="pill dark instagramWhereCta" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Перейти в Instagram →</a>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footer">
     <span>© 2026 Таргет LB · Vadym — Performance Marketer</span>
@@ -1637,6 +1703,29 @@ if(proofModal)proofModal.addEventListener('click',(event)=>{
 });
 document.addEventListener('keydown',(event)=>{
   if(event.key==='Escape'&&proofModal?.classList.contains('isOpen'))closeProofModal();
+});
+
+const instagramWhereButton=document.getElementById('instagramWhereButton');
+const instagramWhereModal=document.getElementById('instagramWhereModal');
+const instagramWhereClose=document.getElementById('instagramWhereClose');
+
+function openInstagramWhere(){
+  instagramWhereModal.classList.add('isOpen');
+  instagramWhereModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('proofModalOpen');
+}
+function closeInstagramWhere(){
+  instagramWhereModal.classList.remove('isOpen');
+  instagramWhereModal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('proofModalOpen');
+}
+if(instagramWhereButton)instagramWhereButton.addEventListener('click',openInstagramWhere);
+if(instagramWhereClose)instagramWhereClose.addEventListener('click',closeInstagramWhere);
+if(instagramWhereModal)instagramWhereModal.addEventListener('click',(event)=>{
+  if(event.target===instagramWhereModal)closeInstagramWhere();
+});
+document.addEventListener('keydown',(event)=>{
+  if(event.key==='Escape'&&instagramWhereModal?.classList.contains('isOpen'))closeInstagramWhere();
 });
 
 </script>
