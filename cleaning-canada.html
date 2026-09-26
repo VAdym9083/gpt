@@ -1641,6 +1641,92 @@ body.proofModalOpen{overflow:hidden}
     height:auto!important
   }
 }
+/* 2026-09-27 · three premium accent colors */
+:root{
+  --accent-blue:#8FB6D2;
+  --accent-sage:#9DBDA8;
+  --accent-champagne:#D5B98A
+}
+
+/* Hero: color appears in hierarchy, not as decoration everywhere */
+.eyebrow{
+  color:#C9DFEC!important
+}
+.eyebrow:before{
+  background:var(--accent-blue)!important;
+  box-shadow:0 0 18px rgba(143,182,210,.30)
+}
+.hero h1 span{
+  background:linear-gradient(92deg,#ffffff 0%,#BBD6E8 44%,var(--accent-blue) 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important
+}
+.heroProofYears strong{
+  color:var(--accent-champagne)!important;
+  text-shadow:0 8px 30px rgba(213,185,138,.12)
+}
+.heroProofList>div b{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important
+}
+.heroProofList>div b:before{
+  content:"";
+  width:6px;height:6px;flex:none;border-radius:999px;
+  box-shadow:0 0 0 4px rgba(255,255,255,.035)
+}
+.heroProofList>div:nth-child(1) b:before{background:var(--accent-blue)}
+.heroProofList>div:nth-child(2) b:before{background:var(--accent-sage)}
+.heroProofList>div:nth-child(3) b:before{background:var(--accent-champagne)}
+.heroProofList>div:nth-child(1) span{color:var(--accent-blue)!important}
+.heroProofList>div:nth-child(2) span{color:var(--accent-sage)!important}
+.heroProofList>div:nth-child(3) span{color:var(--accent-champagne)!important}
+.heroBtn.primary{
+  box-shadow:inset 0 0 0 1px rgba(143,182,210,.34),0 14px 34px rgba(0,0,0,.12)!important
+}
+
+/* Same three-color language continues below the fold */
+.valueStack .valueCard:nth-child(1) .valueNum{
+  color:#5F87A2!important;
+  background:rgba(143,182,210,.15)!important;
+  border-color:rgba(143,182,210,.30)!important
+}
+.valueStack .valueCard:nth-child(2) .valueNum{
+  color:#638572!important;
+  background:rgba(157,189,168,.16)!important;
+  border-color:rgba(157,189,168,.32)!important
+}
+.valueStack .valueCard:nth-child(3) .valueNum{
+  color:#9A774D!important;
+  background:rgba(213,185,138,.17)!important;
+  border-color:rgba(213,185,138,.34)!important
+}
+.colorDot.blue{background:var(--accent-blue)!important}
+.colorDot.mint{background:var(--accent-sage)!important}
+.colorDot.warm{background:var(--accent-champagne)!important}
+.caseProofLink:before{
+  background:var(--accent-blue)!important;
+  box-shadow:0 0 0 4px rgba(143,182,210,.13)!important
+}
+.sectionHead .label,
+.cta .label{
+  color:#6F91A7!important
+}
+.freeResult .resultBadge,
+.tickerFree i{
+  color:#547762!important
+}
+.instagramDirectIcon{
+  border-color:rgba(143,182,210,.30)!important;
+  box-shadow:inset 0 0 0 1px rgba(157,189,168,.08)
+}
+
+@media (max-width:767px){
+  .heroProofList>div b:before{
+    width:5px;height:5px
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1718,8 +1804,8 @@ body.proofModalOpen{overflow:hidden}
     <div class="heroContent">
       <div class="heroCopy">
         <div class="eyebrow">Meta Ads · Canada / USA</div>
-        <h1>Вам потрібні <span>заявки.</span> Не просто реклама</h1>
-        <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Також працюю з іншими нішами локального бізнесу. Від стратегії та креативів до запуску й оптимізації — з фокусом на якість звернень, а не просто дешевий CPL.</p>
+        <h1>Вам потрібні <span>заявки</span> Не просто реклама</h1>
+        <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Також працюю з іншими нішами локального бізнесу. Від стратегії та креативів до запуску й оптимізації — з фокусом на якість звернень, а не просто дешевий CPL</p>
 
         <div class="heroButtons">
           <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити проєкт →</a>
@@ -1751,28 +1837,28 @@ body.proofModalOpen{overflow:hidden}
       <div class="label">Мій підхід</div>
       <div>
         <h2>Не запускаю рекламу за одним шаблоном</h2>
-        <p>Перед запуском дивлюся на послугу, гео, ціни, попит і попередні рекламні дані. Структура кампанії має відповідати конкретному бізнесу, а не минулому клієнту.</p>
+        <p>Перед запуском дивлюся на послугу, гео, ціни, попит і попередні рекламні дані. Структура кампанії має відповідати конкретному бізнесу, а не минулому клієнту</p>
       </div>
     </div>
 
     <div class="valueGrid">
       <div class="manifesto glassLight reveal">
         <div class="big"><small>Для клінінгу</small>1 місто<br><span>1 клієнт</span></div>
-        <p>Поки ми працюємо разом, я не беру прямого cleaning-конкурента у вашому місті. Це правило діє виключно для клінінгу.</p>
+        <p>Поки ми працюємо разом, я не беру прямого cleaning-конкурента у вашому місті. Це правило діє виключно для клінінгу</p>
       </div>
 
       <div class="valueStack">
         <article class="valueCard glassLight reveal">
           <div class="valueNum">01</div>
-          <div><h3>Локальна стратегія</h3><p>Гео, ціни, сезонність і попит відрізняються. Кампанію будую під конкретний ринок, а не копіюю готову структуру.</p></div>
+          <div><h3>Локальна стратегія</h3><p>Гео, ціни, сезонність і попит відрізняються. Кампанію будую під конкретний ринок, а не копіюю готову структуру</p></div>
         </article>
         <article class="valueCard glassLight reveal">
           <div class="valueNum">02</div>
-          <div><h3>Креативи під ваш ринок</h3><p>Офер, візуал і текст створюю під конкретну послугу, гео та мотивацію клієнта.</p></div>
+          <div><h3>Креативи під ваш ринок</h3><p>Офер, візуал і текст створюю під конкретну послугу, гео та мотивацію клієнта</p></div>
         </article>
         <article class="valueCard glassLight reveal">
           <div class="valueNum">03</div>
-          <div><h3>Оптимізація за якістю</h3><p>Оцінюю не лише вартість звернення, а й його якість. Дешевий CPL не має цінності, якщо ці звернення не стають клієнтами.</p></div>
+          <div><h3>Оптимізація за якістю</h3><p>Оцінюю не лише вартість звернення, а й його якість. Дешевий CPL не має цінності, якщо ці звернення не стають клієнтами</p></div>
         </article>
       </div>
     </div>
@@ -1787,7 +1873,7 @@ body.proofModalOpen{overflow:hidden}
         <div class="photoCaption">
           <span>Стратегія</span>
           <h3>Спочатку логіка. Потім бюджет</h3>
-          <p>Офер, аудиторія, гео та структура кампанії визначаються до того, як реклама починає витрачати бюджет.</p>
+          <p>Офер, аудиторія, гео та структура кампанії визначаються до того, як реклама починає витрачати бюджет</p>
           <div class="colorBar"><i class="colorDot blue"></i><i class="colorDot warm"></i><i class="colorDot mint"></i></div>
         </div>
       </article>
@@ -1796,7 +1882,7 @@ body.proofModalOpen{overflow:hidden}
         <div class="photoCaption">
           <span>Cleaning niche</span>
           <h3>Реклама під реальний сервіс</h3>
-          <p>Конкретна послуга, конкретний ринок і зрозуміла причина звернутися саме до вас.</p>
+          <p>Конкретна послуга, конкретний ринок і зрозуміла причина звернутися саме до вас</p>
         </div>
       </article>
       <article class="photoCard mint reveal">
@@ -1804,7 +1890,7 @@ body.proofModalOpen{overflow:hidden}
         <div class="photoCaption">
           <span>Оптимізація</span>
           <h3>Працюю з цифрами, не з надією</h3>
-          <p>Залишаю те, що дає якісні звернення, і відключаю те, що не підтверджує результат цифрами.</p>
+          <p>Залишаю те, що дає якісні звернення, і відключаю те, що не підтверджує результат цифрами</p>
         </div>
       </article>
     </div>
@@ -1817,14 +1903,14 @@ body.proofModalOpen{overflow:hidden}
       <div class="label">Кейси / Results</div>
       <div>
         <h2>Результати з реальних запусків</h2>
-        <p>Показую тільки підтверджені цифри з реальних рекламних запусків. Без намальованих результатів і декоративної статистики.</p>
+        <p>Показую тільки підтверджені цифри з реальних рекламних запусків. Без намальованих результатів і декоративної статистики</p>
       </div>
     </div>
 
     <div class="caseGrid">
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
-  <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3><p>Meta Ads для локальної cleaning-компанії: 1 660 кліків, 1 097 розпочатих діалогів і 11% конверсії в клієнта.</p>
+  <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3><p>Meta Ads для локальної cleaning-компанії: 1 660 кліків, 1 097 розпочатих діалогів і 11% конверсії в клієнта</p>
     <div class="caseStats"><div class="caseStat"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -1832,7 +1918,7 @@ body.proofModalOpen{overflow:hidden}
 
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
-  <div class="caseBody"><h3>Косметологічний центр</h3><p>Meta Ads у США: 23 300 кліків, 1 984 заявки та 16% конверсії в клієнта.</p>
+  <div class="caseBody"><h3>Косметологічний центр</h3><p>Meta Ads у США: 23 300 кліків, 1 984 заявки та 16% конверсії в клієнта</p>
     <div class="caseStats"><div class="caseStat"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -1849,7 +1935,7 @@ body.proofModalOpen{overflow:hidden}
       <div class="caseGrid extraCaseGrid">
 <article class="caseCard caseExtra">
   <div class="casePhoto realEstateCasePhoto"><img src="assets/site/covers/real-estate-spain-premium-v2.webp" alt="Преміальна нерухомість в Іспанії" loading="lazy" decoding="async"><span class="caseTag">Real Estate · Spain</span></div>
-  <div class="caseBody"><h3>Нерухомість в Іспанії</h3><p>Об’єкти від €200 000. Аудиторія — Україна: 500+ кліків, 12 заявок із форми, 2 підписані угоди та ще 8 потенційних клієнтів у процесі вибору.</p>
+  <div class="caseBody"><h3>Нерухомість в Іспанії</h3><p>Об’єкти від €200 000. Аудиторія — Україна: 500+ кліків, 12 заявок із форми, 2 підписані угоди та ще 8 потенційних клієнтів у процесі вибору</p>
     <div class="caseStats"><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div><div class="caseStat"><strong>2</strong><span>підписані угоди</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-type="video" data-proof-creative="assets/site/videos/real-estate-spain.mp4" data-proof-ads="assets/site/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -1857,7 +1943,7 @@ body.proofModalOpen{overflow:hidden}
 
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
-  <div class="caseBody"><h3>Клінінг · London</h3><p>315 кліків і 13 лідів із сайту. Додаткові Direct-звернення були частково не відстежені.</p>
+  <div class="caseBody"><h3>Клінінг · London</h3><p>315 кліків і 13 лідів із сайту. Додаткові Direct-звернення були частково не відстежені</p>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -1865,7 +1951,7 @@ body.proofModalOpen{overflow:hidden}
 
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
-  <div class="caseBody"><h3>Детейлінг · Amsterdam</h3><p>313 кліків, 147 розпочатих розмов і 10% конверсії в клієнта. Частина Direct-звернень у Європі не відстежувалась.</p>
+  <div class="caseBody"><h3>Детейлінг · Amsterdam</h3><p>313 кліків, 147 розпочатих розмов і 10% конверсії в клієнта. Частина Direct-звернень у Європі не відстежувалась</p>
     <div class="caseStats"><div class="caseStat"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -1873,7 +1959,7 @@ body.proofModalOpen{overflow:hidden}
 
 <article class="caseCard caseExtra">
   <div class="casePhoto medicalCasePhoto"><img src="assets/site/covers/medical-center-premium.webp" alt="Преміальний медичний центр New York" loading="lazy" decoding="async"><span class="caseTag">Medical · New York</span></div>
-  <div class="caseBody"><h3>Медичний центр · New York</h3><p>720 кліків, 191 заявка та 19% конверсії в клієнта.</p>
+  <div class="caseBody"><h3>Медичний центр · New York</h3><p>720 кліків, 191 заявка та 19% конверсії в клієнта</p>
     <div class="caseStats"><div class="caseStat"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-type="video" data-proof-creative="assets/site/videos/medical-center.mp4" data-proof-ads="assets/site/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -1884,7 +1970,7 @@ body.proofModalOpen{overflow:hidden}
         <div class="highlightProofCopy">
           <span class="label">Ще більше доказів</span>
           <h3>Більше кейсів — в Instagram</h3>
-          <p>У Highlights <b>«КЕЙСИ»</b> зібрані додаткові результати, скріни рекламного кабінету та приклади запусків.</p>
+          <p>У Highlights <b>«КЕЙСИ»</b> зібрані додаткові результати, скріни рекламного кабінету та приклади запусків</p>
           <div class="highlightActions">
             <button class="pill dark instagramWhereButton" id="instagramWhereButton" type="button">Де це? →</button>
           </div>
@@ -1945,30 +2031,30 @@ body.proofModalOpen{overflow:hidden}
       <div class="label">Як проходить запуск</div>
       <div>
         <h2>Спочатку стратегія. Потім бюджет</h2>
-        <p>Від першого розбору до оптимізації кожен етап має конкретну задачу. Реклама запускається лише після того, як зрозуміло, що саме ми тестуємо і навіщо.</p>
+        <p>Від першого розбору до оптимізації кожен етап має конкретну задачу. Реклама запускається лише після того, як зрозуміло, що саме ми тестуємо і навіщо</p>
       </div>
     </div>
 
     <div class="process">
       <article class="step glassLight reveal">
         <div class="stepVisual"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80" alt="Аналіз бізнесу"></div>
-        <div class="stepContent"><div class="n">01</div><div><h3>Розбір</h3><p>Послуги, ціни, гео, попит, поточна воронка та попередні рекламні дані.</p></div></div>
+        <div class="stepContent"><div class="n">01</div><div><h3>Розбір</h3><p>Послуги, ціни, гео, попит, поточна воронка та попередні рекламні дані</p></div></div>
       </article>
       <article class="step glassLight reveal">
         <div class="stepVisual"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=80" alt="Стратегія"></div>
-        <div class="stepContent"><div class="n">02</div><div><h3>Стратегія</h3><p>Офер, аудиторія, шлях до заявки та структура кампанії.</p></div></div>
+        <div class="stepContent"><div class="n">02</div><div><h3>Стратегія</h3><p>Офер, аудиторія, шлях до заявки та структура кампанії</p></div></div>
       </article>
       <article class="step glassLight reveal">
         <div class="stepVisual"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=700&q=80" alt="Рекламні креативи"></div>
-        <div class="stepContent"><div class="n">03</div><div><h3>Креативи</h3><p>Візуали й тексти під конкретну послугу, ринок і мотивацію клієнта.</p></div></div>
+        <div class="stepContent"><div class="n">03</div><div><h3>Креативи</h3><p>Візуали й тексти під конкретну послугу, ринок і мотивацію клієнта</p></div></div>
       </article>
       <article class="step glassLight reveal">
         <div class="stepVisual"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80" alt="Запуск реклами"></div>
-        <div class="stepContent"><div class="n">04</div><div><h3>Запуск</h3><p>Налаштування Meta Ads, цілі кампанії, плейсментів і способу отримання заявок.</p></div></div>
+        <div class="stepContent"><div class="n">04</div><div><h3>Запуск</h3><p>Налаштування Meta Ads, цілі кампанії, плейсментів і способу отримання заявок</p></div></div>
       </article>
       <article class="step glassLight reveal">
         <div class="stepVisual"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80" alt="Оптимізація реклами"></div>
-        <div class="stepContent"><div class="n">05</div><div><h3>Оптимізація</h3><p>Перерозподіляю бюджет у сильні зв’язки та відключаю те, що не дає якісних звернень.</p></div></div>
+        <div class="stepContent"><div class="n">05</div><div><h3>Оптимізація</h3><p>Перерозподіляю бюджет у сильні зв’язки та відключаю те, що не дає якісних звернень</p></div></div>
       </article>
     </div>
   </div>
@@ -1981,7 +2067,7 @@ body.proofModalOpen{overflow:hidden}
       <div class="label">ЕКСКЛЮЗИВНІСТЬ ДЛЯ КЛІНІНГУ</div>
       <div>
         <h2>Перевірте, чи вільне ваше місто</h2>
-        <p>Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті.</p>
+        <p>Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті</p>
       </div>
     </div>
 
@@ -2016,14 +2102,14 @@ body.proofModalOpen{overflow:hidden}
           </select>
           <span class="selectArrow">⌄</span>
         </div>
-        <p class="cityHint">Не бачите місто? Напишіть у Telegram — перевірю вручну.</p>
+        <p class="cityHint">Не бачите місто? Напишіть у Telegram — перевірю вручну</p>
       </div>
 
       <div class="cityResult busyResult" id="cityResult">
         <span class="resultEyebrow">Статус</span>
         <strong id="cityResultName">Toronto / GTA</strong>
         <div class="resultBadge" id="cityResultBadge">ЗАЙНЯТО</div>
-        <p id="cityResultText">У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру.</p>
+        <p id="cityResultText">У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру</p>
         <a id="cityResultCta" class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати щодо іншого міста →</a>
       </div>
     </div>
@@ -2045,7 +2131,7 @@ body.proofModalOpen{overflow:hidden}
       <div>
         <div class="label">Контакт напряму</div>
         <h2>Обговоримо ваш проєкт</h2>
-        <p>Напишіть нішу, місто, послугу й коротко опишіть поточну рекламу. Я перегляну вводні й скажу, чи бачу сенс у співпраці.</p>
+        <p>Напишіть нішу, місто, послугу й коротко опишіть поточну рекламу. Я перегляну вводні й скажу, чи бачу сенс у співпраці</p>
       </div>
       <div class="contactStack">
         <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener"><div><b>Telegram</b><br><span>@target_vadym</span></div><strong>→</strong></a>
@@ -2147,8 +2233,8 @@ function renderCityStatus(){
   cityResultName.textContent=city;
   cityResultBadge.textContent=busy?'ЗАЙНЯТО':'ВІЛЬНО';
   cityResultText.textContent=busy
-    ? 'У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру.'
-    : 'Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці.';
+    ? 'У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру'
+    : 'Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці';
   cityResult.classList.toggle('busyResult',busy);
   cityResult.classList.toggle('freeResult',!busy);
   cityResultCta.textContent=busy?'Написати щодо іншого міста →':'Обговорити запуск →';
