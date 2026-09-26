@@ -1440,16 +1440,21 @@ body.proofModalOpen{overflow:hidden}
     max-height:calc(100svh - 105px)!important
   }
 }
-/* 2026-09-26 · final fullscreen contain + reliable infinite-loop clicks */
+/* 2026-09-26 · centered fullscreen media without crop or overflow */
 .galleryLightboxStage{
-  overflow:visible!important
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+  min-width:0!important;
+  min-height:0!important
 }
 .galleryLightboxStage img:not([hidden]){
   display:block!important;
-  width:100%!important;
-  height:100%!important;
+  width:auto!important;
+  height:auto!important;
   max-width:100%!important;
   max-height:100%!important;
+  margin:auto!important;
   object-fit:contain!important;
   object-position:center!important;
   transform:none!important
@@ -1458,10 +1463,11 @@ body.proofModalOpen{overflow:hidden}
   width:min(980px,calc(100vw - 28px))!important
 }
 .galleryLightbox.reviewMode .galleryLightboxStage img:not([hidden]){
-  width:100%!important;
-  height:100%!important;
+  width:auto!important;
+  height:auto!important;
   max-width:100%!important;
   max-height:100%!important;
+  margin:auto!important;
   object-fit:contain!important;
   object-position:center!important
 }
@@ -1480,17 +1486,19 @@ body.proofModalOpen{overflow:hidden}
 }
 @media (max-width:767px){
   .galleryLightboxStage{
-    overflow:visible!important
+    overflow:hidden!important;
+    padding:4px!important
   }
   .galleryLightbox.reviewMode .galleryLightboxDialog{
     width:calc(100vw - 14px)!important
   }
   .galleryLightboxStage img:not([hidden]),
   .galleryLightbox.reviewMode .galleryLightboxStage img:not([hidden]){
-    width:100%!important;
-    height:100%!important;
+    width:auto!important;
+    height:auto!important;
     max-width:100%!important;
     max-height:100%!important;
+    margin:auto!important;
     object-fit:contain!important;
     object-position:center!important
   }
