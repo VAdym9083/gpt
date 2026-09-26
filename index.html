@@ -1440,6 +1440,61 @@ body.proofModalOpen{overflow:hidden}
     max-height:calc(100svh - 105px)!important
   }
 }
+/* 2026-09-26 · final fullscreen contain + reliable infinite-loop clicks */
+.galleryLightboxStage{
+  overflow:visible!important
+}
+.galleryLightboxStage img:not([hidden]){
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important
+}
+.galleryLightbox.reviewMode .galleryLightboxDialog{
+  width:min(980px,calc(100vw - 28px))!important
+}
+.galleryLightbox.reviewMode .galleryLightboxStage img:not([hidden]){
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important
+}
+.caseZoomContent .casePhoto{
+  background:#eeeae4!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important
+}
+.caseZoomContent .casePhoto img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important
+}
+@media (max-width:767px){
+  .galleryLightboxStage{
+    overflow:visible!important
+  }
+  .galleryLightbox.reviewMode .galleryLightboxDialog{
+    width:calc(100vw - 14px)!important
+  }
+  .galleryLightboxStage img:not([hidden]),
+  .galleryLightbox.reviewMode .galleryLightboxStage img:not([hidden]){
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    object-position:center!important
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2176,6 +2231,7 @@ function openStandaloneMedia(type,src,caption){
   if(!src)return;
   activeGalleryType='media';
   activeStandaloneMedia={type,src,caption};
+  galleryLightbox.classList.remove('reviewMode');
   renderGalleryLightbox();
   galleryLightbox.classList.add('isOpen','mediaOnly');
   galleryLightbox.setAttribute('aria-hidden','false');
@@ -2230,15 +2286,26 @@ if(galleryStage){
 }
 
 ['creative','review'].forEach((type)=>{
-  getGalleryItems(type).forEach((item,index)=>{
-    item.tabIndex=0;
-    item.addEventListener('click',()=>openGalleryLightbox(type,index));
-    item.addEventListener('keydown',(event)=>{
-      if(event.key==='Enter'||event.key===' '){
-        event.preventDefault();
-        openGalleryLightbox(type,index);
-      }
-    });
+  const viewport=document.querySelector('[data-gallery-viewport="'+type+'"]');
+  if(!viewport)return;
+  const originals=getGalleryItems(type);
+  if(!originals.length)return;
+  const cardClass=type==='creative'?'creativeCard':'reviewCard';
+  const allItems=[...viewport.querySelectorAll('.loopGroup .'+cardClass)];
+
+  allItems.forEach((item,index)=>{
+    const galleryIndex=index%originals.length;
+    const duplicate=item.closest('.loopGroup')?.getAttribute('aria-hidden')==='true';
+    item.tabIndex=duplicate?-1:0;
+    item.addEventListener('click',()=>openGalleryLightbox(type,galleryIndex));
+    if(!duplicate){
+      item.addEventListener('keydown',(event)=>{
+        if(event.key==='Enter'||event.key===' '){
+          event.preventDefault();
+          openGalleryLightbox(type,galleryIndex);
+        }
+      });
+    }
   });
 });
 if(galleryLightboxClose)galleryLightboxClose.addEventListener('click',closeGalleryLightbox);
