@@ -1503,6 +1503,39 @@ body.proofModalOpen{overflow:hidden}
     object-position:center!important
   }
 }
+/* 2026-09-26 · desktop creatives show full artwork + static case covers */
+.casePhoto{
+  cursor:default!important
+}
+@media (min-width:768px){
+  .creativeViewport .realCreative{
+    background:#111214!important
+  }
+  .creativeViewport .realCreative img{
+    object-fit:contain!important;
+    object-position:center!important;
+    transform:none!important
+  }
+  .creativeViewport .realCreative:hover img{
+    transform:none!important
+  }
+  .galleryLightbox.creativeMode .galleryLightboxStage{
+    overflow:hidden!important;
+    display:grid!important;
+    place-items:center!important;
+    padding:6px!important
+  }
+  .galleryLightbox.creativeMode .galleryLightboxStage img:not([hidden]){
+    display:block!important;
+    width:auto!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    margin:auto!important
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2109,7 +2142,7 @@ document.querySelectorAll('.caseCard').forEach((card)=>{
   card.tabIndex=0;
   card.setAttribute('aria-label',(card.querySelector('h3')?.textContent||'Кейс')+' — натисніть, щоб збільшити');
   card.addEventListener('click',(event)=>{
-    if(event.target.closest('button,a'))return;
+    if(event.target.closest('button,a,.casePhoto'))return;
     openCaseZoom(card);
   });
   card.addEventListener('keydown',(event)=>{
@@ -2239,7 +2272,7 @@ function openStandaloneMedia(type,src,caption){
   if(!src)return;
   activeGalleryType='media';
   activeStandaloneMedia={type,src,caption};
-  galleryLightbox.classList.remove('reviewMode');
+  galleryLightbox.classList.remove('reviewMode','creativeMode');
   renderGalleryLightbox();
   galleryLightbox.classList.add('isOpen','mediaOnly');
   galleryLightbox.setAttribute('aria-hidden','false');
@@ -2249,13 +2282,14 @@ function openGalleryLightbox(type,index){
   activeGalleryType=type;
   activeGalleryIndex=index;
   galleryLightbox.classList.toggle('reviewMode',type==='review');
+  galleryLightbox.classList.toggle('creativeMode',type==='creative');
   renderGalleryLightbox();
   galleryLightbox.classList.add('isOpen');
   galleryLightbox.setAttribute('aria-hidden','false');
   document.body.classList.add('proofModalOpen');
 }
 function closeGalleryLightbox(){
-  galleryLightbox.classList.remove('isOpen','mediaOnly','reviewMode');
+  galleryLightbox.classList.remove('isOpen','mediaOnly','reviewMode','creativeMode');
   galleryLightbox.setAttribute('aria-hidden','true');
   galleryLightboxImage.removeAttribute('src');
   galleryLightboxVideo.pause();
