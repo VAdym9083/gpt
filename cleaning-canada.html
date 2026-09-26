@@ -1318,6 +1318,77 @@ body.proofModalOpen{overflow:hidden}
   outline:3px solid rgba(91,125,164,.55);
   outline-offset:4px
 }
+/* 2026-09-26 · zoom for cases and case proof media */
+.caseCard{cursor:zoom-in}
+.caseCard .caseProofLink{cursor:pointer}
+.caseStat{transition:transform .18s ease,box-shadow .18s ease}
+.caseCard:hover .caseStat{box-shadow:0 8px 26px rgba(20,20,20,.05)}
+.caseZoomModal{
+  position:fixed;inset:0;z-index:145;display:none;place-items:center;
+  padding:22px;background:rgba(7,8,10,.72);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)
+}
+.caseZoomModal.isOpen{display:grid}
+.caseZoomDialog{
+  position:relative;width:min(980px,calc(100vw - 36px));
+  max-height:calc(100svh - 36px);overflow:auto;
+  border-radius:30px;padding:16px;
+  background:linear-gradient(145deg,rgba(248,246,242,.99),rgba(237,233,227,.98));
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:0 38px 130px rgba(0,0,0,.38)
+}
+.caseZoomContent .caseCard{
+  width:100%;min-height:0!important;cursor:default;
+  grid-template-rows:minmax(260px,42vh) auto!important;
+  border-radius:24px!important;box-shadow:none!important
+}
+.caseZoomContent .casePhoto{min-height:260px}
+.caseZoomContent .casePhoto img{transform:none!important}
+.caseZoomContent .caseBody{padding:28px 30px 30px!important}
+.caseZoomContent .caseBody h3{font-size:clamp(32px,4vw,52px)!important;line-height:.96!important}
+.caseZoomContent .caseBody p{font-size:14px!important;line-height:1.5!important;max-width:850px}
+.caseZoomContent .caseStats{gap:12px!important;margin-top:24px!important}
+.caseZoomContent .caseStat{padding:18px 16px!important;border-radius:17px!important}
+.caseZoomContent .caseStat strong{font-size:clamp(28px,3vw,40px)!important}
+.caseZoomContent .caseStat span{font-size:9px!important}
+.caseZoomContent .caseProofLink{margin-top:18px}
+.caseProofFrame{
+  cursor:zoom-in;
+  transition:transform .18s ease,box-shadow .18s ease
+}
+.caseProofFrame:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 50px rgba(20,20,20,.12)
+}
+.galleryLightboxStage video{
+  display:block;max-width:100%;max-height:calc(100svh - 120px);
+  border-radius:18px;background:#000
+}
+.galleryLightbox.mediaOnly .galleryLightboxNav{display:none}
+.galleryLightbox.mediaOnly .galleryLightboxDialog{
+  grid-template-columns:1fr;
+}
+.galleryLightbox.mediaOnly .galleryLightboxStage{
+  grid-column:1;
+}
+@media (max-width:767px){
+  .caseZoomModal{padding:8px}
+  .caseZoomDialog{
+    width:calc(100vw - 16px);max-height:calc(100svh - 16px);
+    padding:9px;border-radius:21px
+  }
+  .caseZoomContent .caseCard{
+    grid-template-rows:minmax(190px,30vh) auto!important;
+    border-radius:17px!important
+  }
+  .caseZoomContent .casePhoto{min-height:190px}
+  .caseZoomContent .caseBody{padding:18px 16px 20px!important}
+  .caseZoomContent .caseBody h3{font-size:29px!important}
+  .caseZoomContent .caseBody p{font-size:11px!important}
+  .caseZoomContent .caseStat{padding:12px 9px!important}
+  .caseZoomContent .caseStat strong{font-size:22px!important}
+  .caseZoomContent .caseStat span{font-size:7px!important}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1760,12 +1831,20 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </div>
 
+<div class="caseZoomModal" id="caseZoomModal" aria-hidden="true">
+  <div class="caseZoomDialog" role="dialog" aria-modal="true" aria-label="Збільшений кейс">
+    <button class="galleryLightboxClose" id="caseZoomClose" type="button" aria-label="Закрити">×</button>
+    <div class="caseZoomContent" id="caseZoomContent"></div>
+  </div>
+</div>
+
 <div class="galleryLightbox" id="galleryLightbox" aria-hidden="true">
   <div class="galleryLightboxDialog" role="dialog" aria-modal="true" aria-label="Перегляд матеріалу">
     <button class="galleryLightboxClose" id="galleryLightboxClose" type="button" aria-label="Закрити">×</button>
     <button class="galleryLightboxNav prev" id="galleryLightboxPrev" type="button" aria-label="Попередній">←</button>
     <div class="galleryLightboxStage">
       <img id="galleryLightboxImage" alt="" hidden>
+      <video id="galleryLightboxVideo" controls playsinline preload="metadata" hidden></video>
       <div class="galleryLightboxReview" id="galleryLightboxReview" hidden></div>
     </div>
     <button class="galleryLightboxNav next" id="galleryLightboxNext" type="button" aria-label="Наступний">→</button>
@@ -1830,6 +1909,8 @@ const proofTitle=document.getElementById('caseProofTitle');
 const proofCreativeImage=document.getElementById('caseProofCreativeImage');
 const proofCreativeVideo=document.getElementById('caseProofCreativeVideo');
 const proofCreativeLabel=document.getElementById('caseCreativeLabel');
+const caseCreativeFrame=document.getElementById('caseCreativeFrame');
+const caseAdsFrame=document.getElementById('caseAdsFrame');
 const proofAds=document.getElementById('caseProofAds');
 
 function openProofModal(button){
@@ -1878,6 +1959,73 @@ document.addEventListener('keydown',(event)=>{
   if(event.key==='Escape'&&proofModal?.classList.contains('isOpen'))closeProofModal();
 });
 
+const caseZoomModal=document.getElementById('caseZoomModal');
+const caseZoomClose=document.getElementById('caseZoomClose');
+const caseZoomContent=document.getElementById('caseZoomContent');
+
+function openCaseZoom(card){
+  const clone=card.cloneNode(true);
+  clone.classList.remove('reveal','caseExtra');
+  clone.removeAttribute('style');
+  clone.querySelectorAll('[id]').forEach((el)=>el.removeAttribute('id'));
+  caseZoomContent.replaceChildren(clone);
+
+  const proofButton=clone.querySelector('.caseProofLink');
+  if(proofButton){
+    proofButton.addEventListener('click',(event)=>{
+      event.stopPropagation();
+      closeCaseZoom();
+      openProofModal(proofButton);
+    });
+  }
+
+  caseZoomModal.classList.add('isOpen');
+  caseZoomModal.setAttribute('aria-hidden','false');
+  document.body.classList.add('proofModalOpen');
+}
+function closeCaseZoom(){
+  caseZoomModal.classList.remove('isOpen');
+  caseZoomModal.setAttribute('aria-hidden','true');
+  caseZoomContent.replaceChildren();
+  if(!proofModal?.classList.contains('isOpen')&&!galleryLightbox?.classList.contains('isOpen')&&!instagramWhereModal?.classList.contains('isOpen')){
+    document.body.classList.remove('proofModalOpen');
+  }
+}
+document.querySelectorAll('.caseCard').forEach((card)=>{
+  card.tabIndex=0;
+  card.setAttribute('aria-label',(card.querySelector('h3')?.textContent||'Кейс')+' — натисніть, щоб збільшити');
+  card.addEventListener('click',(event)=>{
+    if(event.target.closest('button,a'))return;
+    openCaseZoom(card);
+  });
+  card.addEventListener('keydown',(event)=>{
+    if((event.key==='Enter'||event.key===' ')&&!event.target.closest('button,a')){
+      event.preventDefault();
+      openCaseZoom(card);
+    }
+  });
+});
+if(caseZoomClose)caseZoomClose.addEventListener('click',closeCaseZoom);
+if(caseZoomModal)caseZoomModal.addEventListener('click',(event)=>{
+  if(event.target===caseZoomModal)closeCaseZoom();
+});
+
+function openCurrentProofCreativeLarge(){
+  if(!proofCreativeVideo.hidden&&proofCreativeVideo.src){
+    openStandaloneMedia('video',proofCreativeVideo.currentSrc||proofCreativeVideo.src,proofTitle.textContent+' · Відеокреатив');
+  }else if(!proofCreativeImage.hidden&&proofCreativeImage.src){
+    openStandaloneMedia('image',proofCreativeImage.currentSrc||proofCreativeImage.src,proofTitle.textContent+' · Креатив');
+  }
+}
+if(caseCreativeFrame)caseCreativeFrame.addEventListener('click',openCurrentProofCreativeLarge);
+if(caseAdsFrame)caseAdsFrame.addEventListener('click',()=>{
+  if(proofAds.src)openStandaloneMedia('image',proofAds.currentSrc||proofAds.src,proofTitle.textContent+' · Ads Manager');
+});
+
+document.addEventListener('keydown',(event)=>{
+  if(event.key==='Escape'&&caseZoomModal?.classList.contains('isOpen'))closeCaseZoom();
+});
+
 const instagramWhereButton=document.getElementById('instagramWhereButton');
 const instagramWhereModal=document.getElementById('instagramWhereModal');
 const instagramWhereClose=document.getElementById('instagramWhereClose');
@@ -1906,6 +2054,7 @@ const galleryLightboxClose=document.getElementById('galleryLightboxClose');
 const galleryLightboxPrev=document.getElementById('galleryLightboxPrev');
 const galleryLightboxNext=document.getElementById('galleryLightboxNext');
 const galleryLightboxImage=document.getElementById('galleryLightboxImage');
+const galleryLightboxVideo=document.getElementById('galleryLightboxVideo');
 const galleryLightboxReview=document.getElementById('galleryLightboxReview');
 const galleryLightboxCaption=document.getElementById('galleryLightboxCaption');
 let activeGalleryType=null;
@@ -1916,7 +2065,38 @@ function getGalleryItems(type){
   if(!viewport)return[];
   return [...viewport.querySelectorAll('.loopGroup:not([aria-hidden="true"]) .'+(type==='creative'?'creativeCard':'reviewCard'))];
 }
+let activeStandaloneMedia=null;
+
 function renderGalleryLightbox(){
+  if(activeGalleryType==='media'){
+    galleryLightboxReview.hidden=true;
+    galleryLightboxImage.hidden=true;
+    galleryLightboxVideo.hidden=true;
+    galleryLightboxImage.removeAttribute('src');
+    galleryLightboxVideo.pause();
+    galleryLightboxVideo.removeAttribute('src');
+
+    if(activeStandaloneMedia?.type==='video'){
+      galleryLightboxVideo.hidden=false;
+      galleryLightboxVideo.src=activeStandaloneMedia.src||'';
+      galleryLightboxVideo.load();
+      const p=galleryLightboxVideo.play();
+      if(p?.catch)p.catch(()=>{});
+    }else{
+      galleryLightboxImage.hidden=false;
+      galleryLightboxImage.src=activeStandaloneMedia?.src||'';
+      galleryLightboxImage.alt=activeStandaloneMedia?.caption||'Матеріал кейсу';
+    }
+    galleryLightboxCaption.textContent=activeStandaloneMedia?.caption||'Матеріал кейсу';
+    galleryLightbox.classList.add('mediaOnly');
+    return;
+  }
+
+  galleryLightbox.classList.remove('mediaOnly');
+  galleryLightboxVideo.pause();
+  galleryLightboxVideo.hidden=true;
+  galleryLightboxVideo.removeAttribute('src');
+
   const items=getGalleryItems(activeGalleryType);
   if(!items.length)return;
   activeGalleryIndex=(activeGalleryIndex+items.length)%items.length;
@@ -1939,6 +2119,15 @@ function renderGalleryLightbox(){
     galleryLightboxCaption.textContent=item.getAttribute('aria-label')||'Відгук клієнта';
   }
 }
+function openStandaloneMedia(type,src,caption){
+  if(!src)return;
+  activeGalleryType='media';
+  activeStandaloneMedia={type,src,caption};
+  renderGalleryLightbox();
+  galleryLightbox.classList.add('isOpen','mediaOnly');
+  galleryLightbox.setAttribute('aria-hidden','false');
+  document.body.classList.add('proofModalOpen');
+}
 function openGalleryLightbox(type,index){
   activeGalleryType=type;
   activeGalleryIndex=index;
@@ -1948,12 +2137,19 @@ function openGalleryLightbox(type,index){
   document.body.classList.add('proofModalOpen');
 }
 function closeGalleryLightbox(){
-  galleryLightbox.classList.remove('isOpen');
+  galleryLightbox.classList.remove('isOpen','mediaOnly');
   galleryLightbox.setAttribute('aria-hidden','true');
   galleryLightboxImage.removeAttribute('src');
-  document.body.classList.remove('proofModalOpen');
+  galleryLightboxVideo.pause();
+  galleryLightboxVideo.removeAttribute('src');
+  galleryLightboxVideo.load();
+  activeStandaloneMedia=null;
+  if(!proofModal?.classList.contains('isOpen')&&!caseZoomModal?.classList.contains('isOpen')&&!instagramWhereModal?.classList.contains('isOpen')){
+    document.body.classList.remove('proofModalOpen');
+  }
 }
 function stepGallery(delta){
+  if(activeGalleryType==='media')return;
   activeGalleryIndex+=delta;
   renderGalleryLightbox();
 }
