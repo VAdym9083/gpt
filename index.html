@@ -1116,12 +1116,47 @@ body.proofModalOpen{overflow:hidden}
 }
 /* 2026-09-26 · Instagram "Де це?" modal */
 .highlightProofSimple{
-  grid-template-columns:1fr!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr)!important;
   min-height:220px;
-  align-items:center
+  align-items:stretch
 }
-.highlightProofSimple .highlightProofCopy{max-width:760px}
+.highlightProofSimple .highlightProofCopy{
+  max-width:760px;
+  align-self:center
+}
 .instagramWhereButton{cursor:pointer}
+.instagramDirectCard{
+  min-height:176px;padding:22px;border-radius:24px;
+  background:linear-gradient(145deg,#111214,#24272b);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 18px 54px rgba(17,18,20,.18);
+  color:#fff;display:flex;flex-direction:column;justify-content:center
+}
+.instagramDirectTop{
+  display:flex;align-items:center;gap:9px;
+  font-size:8px;font-weight:900;letter-spacing:.18em;
+  color:rgba(255,255,255,.58)
+}
+.instagramDirectIcon{
+  width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);
+  color:#fff;font-size:9px;letter-spacing:.04em
+}
+.instagramDirectCard strong{
+  display:block;margin-top:17px;font-size:24px;line-height:1;
+  letter-spacing:-.035em
+}
+.instagramDirectCard p{
+  margin:8px 0 18px;color:rgba(255,255,255,.62);font-size:10px
+}
+.instagramDirectCta{
+  min-height:43px;padding:0 14px;border-radius:999px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:#fff;color:#111214;text-decoration:none;
+  font-size:10px;font-weight:900;transition:.22s ease
+}
+.instagramDirectCta:hover{transform:translateY(-2px);background:#f3f0eb}
+.instagramDirectCta b{font-size:15px}
 .instagramWhereModal{
   position:fixed;inset:0;z-index:130;display:none;place-items:center;
   padding:24px;background:rgba(7,8,10,.68);
@@ -1157,7 +1192,9 @@ body.proofModalOpen{overflow:hidden}
   margin-top:14px;width:100%;min-height:52px;justify-content:center
 }
 @media (max-width:767px){
-  .highlightProofSimple{min-height:0}
+  .highlightProofSimple{grid-template-columns:1fr!important;min-height:0}
+  .instagramDirectCard{min-height:156px;padding:18px;border-radius:20px}
+  .instagramDirectCard strong{font-size:22px}
   .instagramWhereModal{padding:10px}
   .instagramWhereDialog{
     width:calc(100vw - 20px);max-height:calc(100svh - 20px);
@@ -1415,6 +1452,15 @@ body.proofModalOpen{overflow:hidden}
             <button class="pill dark instagramWhereButton" id="instagramWhereButton" type="button">Де це? →</button>
           </div>
         </div>
+        <aside class="instagramDirectCard" aria-label="Instagram @lebedenkkko">
+          <div class="instagramDirectTop">
+            <span class="instagramDirectIcon">IG</span>
+            <span>INSTAGRAM</span>
+          </div>
+          <strong>@lebedenkkko</strong>
+          <p>Кейси · Креативи · Відгуки</p>
+          <a class="instagramDirectCta" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Перейти в Instagram <b>→</b></a>
+        </aside>
       </div>
     </div>
   </div>
