@@ -2272,6 +2272,348 @@ body.proofModalOpen{overflow:hidden}
     font-size:13px
   }
 }
+/* 2026-09-27 · four-card client journey */
+.journeyCardsSection{
+  padding:72px 0 82px
+}
+.journeyCardsHead{
+  display:grid;
+  grid-template-columns:.34fr 1fr;
+  gap:42px;
+  align-items:end;
+  margin-bottom:32px
+}
+.journeyCardsHead>span{
+  align-self:end;
+  padding-bottom:8px;
+  color:#668DA6;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.18em
+}
+.journeyCardsHead>div{
+  max-width:800px
+}
+.journeyCardsHead h2{
+  margin:0;
+  max-width:760px;
+  font-size:clamp(42px,5vw,70px);
+  line-height:.92;
+  letter-spacing:-.06em
+}
+.journeyCardsHead p{
+  max-width:720px;
+  margin:16px 0 0;
+  color:#6e6861;
+  font-size:14px;
+  line-height:1.55
+}
+.journeyCardsGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px
+}
+.journeyCard{
+  min-width:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(246,243,238,.72));
+  border:1px solid rgba(255,255,255,.90);
+  box-shadow:0 18px 54px rgba(34,28,23,.085);
+  transition:transform .28s ease,box-shadow .28s ease
+}
+.journeyCard:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 62px rgba(34,28,23,.12)
+}
+.journeyCardVisual{
+  height:190px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid rgba(17,18,20,.07);
+  background:#e9e5df
+}
+.journeyAdVisual{
+  background:#111214
+}
+.journeyAdVisual img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center 19%
+}
+.journeyAdVisual>span{
+  position:absolute;
+  left:12px;top:12px;
+  padding:7px 9px;
+  border-radius:999px;
+  color:#fff;
+  background:rgba(11,12,14,.66);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  font-size:6.5px;
+  font-weight:850;
+  letter-spacing:.11em;
+  text-transform:uppercase
+}
+.journeyMessageVisual{
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 15% 18%,rgba(143,182,210,.30),transparent 33%),
+    linear-gradient(145deg,#e8edf1,#f6f4f0)
+}
+.journeyPhone{
+  width:100%;
+  max-width:250px;
+  padding:13px;
+  border-radius:18px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(19,20,22,.08);
+  box-shadow:0 14px 34px rgba(35,42,50,.12)
+}
+.journeyPhoneTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0 2px 10px;
+  border-bottom:1px solid rgba(20,20,20,.07)
+}
+.journeyPhoneTop b{font-size:9px}
+.journeyPhoneTop span{font-size:7px;color:#77818b}
+.journeyBubble{
+  max-width:88%;
+  margin-top:9px;
+  padding:9px 11px;
+  border-radius:13px;
+  font-size:8px;
+  line-height:1.35
+}
+.journeyBubble.customer{
+  background:#edf0f2;
+  color:#24272a
+}
+.journeyBubble.business{
+  margin-left:auto;
+  background:#dceaf3;
+  color:#304957
+}
+.journeyBookingVisual{
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 78% 18%,rgba(213,185,138,.28),transparent 34%),
+    linear-gradient(145deg,#f2eee7,#e8e4dc)
+}
+.journeyBooking{
+  width:100%;
+  max-width:248px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(17,18,20,.08);
+  box-shadow:0 14px 34px rgba(34,28,23,.10)
+}
+.journeyBooking>span{
+  display:block;
+  color:#8f714e;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.14em
+}
+.journeyBooking>strong{
+  display:block;
+  margin-top:7px;
+  font-size:19px;
+  letter-spacing:-.035em
+}
+.journeyBooking>div{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:15px;
+  padding-top:12px;
+  border-top:1px solid rgba(20,20,20,.08)
+}
+.journeyBooking>div b{font-size:9px}
+.journeyBooking>div i{
+  width:24px;height:24px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:#9DBDA8;
+  color:#fff;
+  font-style:normal;
+  font-size:11px
+}
+.journeyBooking>small{
+  display:block;
+  margin-top:9px;
+  color:#847d76;
+  font-size:7.5px
+}
+.journeyResultVisual{
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 72% 25%,rgba(157,189,168,.27),transparent 36%),
+    linear-gradient(145deg,#eaf1ec,#f5f1e9)
+}
+.journeyResultMock{
+  width:100%;
+  max-width:245px;
+  min-height:150px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  border-radius:18px;
+  background:#243129;
+  color:#fff;
+  box-shadow:0 16px 38px rgba(37,58,46,.18)
+}
+.journeyResultMock>span{
+  color:#aec8b7;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.15em
+}
+.journeyResultMock>strong{
+  width:36px;height:36px;
+  margin:11px 0 10px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:#9DBDA8;
+  font-size:17px
+}
+.journeyResultMock>b{
+  font-size:13px;
+  letter-spacing:-.02em
+}
+.journeyResultMock>small{
+  margin-top:6px;
+  color:rgba(255,255,255,.65);
+  font-size:7.5px;
+  line-height:1.4
+}
+.journeyCardBody{
+  min-height:190px;
+  padding:20px 20px 22px
+}
+.journeyCardBody>i{
+  display:block;
+  color:#6d96b2;
+  font:italic 30px/1 Georgia,serif
+}
+.journeyCard:nth-child(2) .journeyCardBody>i{color:#62856f}
+.journeyCard:nth-child(3) .journeyCardBody>i{color:#a07b4e}
+.journeyCard:nth-child(4) .journeyCardBody>i{color:#557864}
+.journeyCardBody h3{
+  margin:17px 0 0;
+  font-size:20px;
+  line-height:1.05;
+  letter-spacing:-.035em
+}
+.journeyCardBody p{
+  margin:9px 0 0;
+  color:#756f68;
+  font-size:10.5px;
+  line-height:1.48
+}
+.journeyResultCard{
+  border-color:rgba(121,157,136,.22)
+}
+.journeyCardsOutcome{
+  margin-top:20px;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(143,182,210,.10),rgba(157,189,168,.13));
+  border:1px solid rgba(103,137,119,.12)
+}
+.journeyCardsOutcome span{
+  color:#668DA6;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.16em;
+  white-space:nowrap
+}
+.journeyCardsOutcome strong{
+  max-width:680px;
+  text-align:right;
+  font-size:14px;
+  line-height:1.35;
+  letter-spacing:-.02em
+}
+
+@media (max-width:1100px){
+  .journeyCardsGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
+@media (max-width:767px){
+  .journeyCardsSection{
+    padding:52px 10px 62px
+  }
+  .journeyCardsHead{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-bottom:22px
+  }
+  .journeyCardsHead>span{
+    padding-bottom:0;
+    font-size:7px
+  }
+  .journeyCardsHead h2{
+    font-size:39px
+  }
+  .journeyCardsHead p{
+    margin-top:12px;
+    font-size:12px
+  }
+  .journeyCardsGrid{
+    grid-template-columns:1fr;
+    gap:12px
+  }
+  .journeyCardVisual{
+    height:210px
+  }
+  .journeyCardBody{
+    min-height:0;
+    padding:18px 18px 20px
+  }
+  .journeyCardBody>i{
+    font-size:26px
+  }
+  .journeyCardBody h3{
+    margin-top:13px;
+    font-size:19px
+  }
+  .journeyCardBody p{
+    font-size:10px
+  }
+  .journeyCardsOutcome{
+    display:block;
+    margin-top:14px;
+    padding:16px 17px
+  }
+  .journeyCardsOutcome strong{
+    display:block;
+    margin-top:7px;
+    text-align:left;
+    font-size:12px
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2376,60 +2718,80 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </section>
 
-<section class="clientJourneySection" aria-label="Як реклама приводить клієнта">
+<section class="journeyCardsSection" aria-label="Як реклама перетворюється на клієнта">
   <div class="wrap">
-    <div class="clientJourneyPanel">
-      <div class="clientJourneyVisual">
-        <div class="clientJourneyMedia">
+    <div class="journeyCardsHead">
+      <span>ЯК ЦЕ ПРАЦЮЄ ДЛЯ ВАШОГО БІЗНЕСУ</span>
+      <div>
+        <h2>Як реклама перетворюється на клієнта</h2>
+        <p>Не кліки заради кліків. Людина бачить вашу рекламу, пише вам, бронює послугу — і бізнес отримує нового клієнта</p>
+      </div>
+    </div>
+
+    <div class="journeyCardsGrid">
+      <article class="journeyCard">
+        <div class="journeyCardVisual journeyAdVisual">
           <img src="assets/site/creatives/cleaning-toronto.webp" alt="Приклад реального рекламного креативу для cleaning-бізнесу" loading="lazy" decoding="async">
-          <span class="clientJourneyMediaTag">Реальний рекламний креатив</span>
+          <span>Реальний креатив</span>
         </div>
-      </div>
+        <div class="journeyCardBody">
+          <i>01</i>
+          <h3>Побачив вашу рекламу</h3>
+          <p>Гарний креатив зачепив увагу і одразу пояснив, яку послугу ви пропонуєте</p>
+        </div>
+      </article>
 
-      <div class="clientJourneyContent">
-        <div class="clientJourneyLabel">ЯК ЦЕ ВИГЛЯДАЄ В ЖИТТІ</div>
-        <h2>Уявіть: ваша реклама вже працює</h2>
-        <p class="clientJourneyIntro">Людина відкрила Facebook або Instagram, побачила вашу рекламу і зрозуміла, що їй потрібна саме ваша послуга</p>
-
-        <div class="clientJourneySteps">
-          <div class="clientJourneyStep stepBlue">
-            <span>01</span>
-            <div>
-              <strong>Вона побачила вашу рекламу</strong>
-              <p>Гарний креатив привернув увагу і показав, що саме ви пропонуєте</p>
-            </div>
-          </div>
-
-          <div class="clientJourneyStep stepSage">
-            <span>02</span>
-            <div>
-              <strong>Натиснула «Написати»</strong>
-              <p>Запитала про ціну, вільний час або деталі послуги</p>
-            </div>
-          </div>
-
-          <div class="clientJourneyStep stepChampagne">
-            <span>03</span>
-            <div>
-              <strong>Ви поспілкувалися і домовилися</strong>
-              <p>Відповіли на питання, підібрали час і підтвердили замовлення</p>
-            </div>
-          </div>
-
-          <div class="clientJourneyStep stepResult">
-            <span>04</span>
-            <div>
-              <strong>У вас уже є новий клієнт з реклами</strong>
-              <p>А якщо сервіс йому сподобається, він може повернутися ще раз і стати постійним</p>
-            </div>
+      <article class="journeyCard">
+        <div class="journeyCardVisual journeyMessageVisual" aria-hidden="true">
+          <div class="journeyPhone">
+            <div class="journeyPhoneTop"><b>Нове повідомлення</b><span>Instagram</span></div>
+            <div class="journeyBubble customer">Привіт! Скільки коштує ця послуга?</div>
+            <div class="journeyBubble business">Вітаю 👋 Зараз підкажу ціну і вільний час</div>
           </div>
         </div>
-
-        <div class="clientJourneyOutcome">
-          <span>ГОЛОВНА ДУМКА</span>
-          <strong>Реклама потрібна не заради кліків. Вона потрібна, щоб у ваш бізнес приходили нові клієнти</strong>
+        <div class="journeyCardBody">
+          <i>02</i>
+          <h3>Написав вам</h3>
+          <p>Запитав про ціну, деталі або вільний час — у вас уже є живий потенційний клієнт</p>
         </div>
-      </div>
+      </article>
+
+      <article class="journeyCard">
+        <div class="journeyCardVisual journeyBookingVisual" aria-hidden="true">
+          <div class="journeyBooking">
+            <span>БРОНЮВАННЯ</span>
+            <strong>Tomorrow · 14:00</strong>
+            <div><b>Послуга підтверджена</b><i>✓</i></div>
+            <small>Клієнт отримав час і адресу</small>
+          </div>
+        </div>
+        <div class="journeyCardBody">
+          <i>03</i>
+          <h3>Ви домовилися</h3>
+          <p>Коротко переписалися, відповіли на питання і підтвердили замовлення або бронювання</p>
+        </div>
+      </article>
+
+      <article class="journeyCard journeyResultCard">
+        <div class="journeyCardVisual journeyResultVisual" aria-hidden="true">
+          <div class="journeyResultMock">
+            <span>НОВИЙ КЛІЄНТ</span>
+            <strong>✓</strong>
+            <b>Замовлення виконано</b>
+            <small>Задоволений клієнт може повернутися ще раз</small>
+          </div>
+        </div>
+        <div class="journeyCardBody">
+          <i>04</i>
+          <h3>Став вашим клієнтом</h3>
+          <p>Ви отримали реальне замовлення з реклами, а хороший сервіс може перетворити його на постійного клієнта</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="journeyCardsOutcome">
+      <span>САМЕ ЦЕ Є РЕЗУЛЬТАТОМ</span>
+      <strong>Не покази і не кліки. Нові люди, які реально звертаються у ваш бізнес</strong>
     </div>
   </div>
 </section>
