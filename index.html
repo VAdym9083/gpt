@@ -1906,6 +1906,144 @@ body.proofModalOpen{overflow:hidden}
   }
   .photoCard{min-height:285px!important}
 }
+/* 2026-09-27 · plain-language first screen */
+.resultProofStrip{
+  position:relative!important;
+  z-index:8!important;
+  margin-top:-42px!important;
+  padding:0 0 8px!important
+}
+.simpleValuePanel{
+  padding:18px 20px 20px;
+  border-radius:24px;
+  background:rgba(250,249,246,.88);
+  border:1px solid rgba(255,255,255,.88);
+  box-shadow:0 22px 62px rgba(31,27,23,.13);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px)
+}
+.simpleValueHead{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  padding:2px 5px 15px;
+  border-bottom:1px solid rgba(18,19,21,.08)
+}
+.simpleValueHead span{
+  color:#668DA6;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.17em
+}
+.simpleValueHead strong{
+  max-width:430px;
+  text-align:right;
+  font-size:16px;
+  line-height:1.15;
+  letter-spacing:-.025em
+}
+.simpleValueGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr)
+}
+.simpleValueItem{
+  min-width:0;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:12px;
+  padding:18px 22px 4px 5px;
+  border-right:1px solid rgba(18,19,21,.08)
+}
+.simpleValueItem:last-child{
+  border-right:0;
+  padding-right:5px
+}
+.simpleValueItem i{
+  width:30px;height:30px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  font-style:normal;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.05em
+}
+.simpleValueItem strong{
+  display:block;
+  margin-top:1px;
+  font-size:14px;
+  line-height:1.2;
+  letter-spacing:-.025em
+}
+.simpleValueItem p{
+  margin:6px 0 0;
+  color:#77716a;
+  font-size:10px;
+  line-height:1.45
+}
+.simpleBlue i{
+  color:#557C98;
+  background:rgba(143,182,210,.20)
+}
+.simpleSage i{
+  color:#557762;
+  background:rgba(157,189,168,.22)
+}
+.simpleChampagne i{
+  color:#8E6B42;
+  background:rgba(213,185,138,.24)
+}
+.heroLead{
+  max-width:690px!important
+}
+.heroProofLabel{
+  line-height:1.35!important
+}
+
+@media (max-width:767px){
+  .resultProofStrip{
+    margin-top:-22px!important;
+    padding:0 10px 4px!important
+  }
+  .simpleValuePanel{
+    padding:15px 14px 16px;
+    border-radius:20px
+  }
+  .simpleValueHead{
+    display:block;
+    padding:2px 2px 13px
+  }
+  .simpleValueHead strong{
+    display:block;
+    max-width:none;
+    margin-top:6px;
+    text-align:left;
+    font-size:15px
+  }
+  .simpleValueGrid{
+    grid-template-columns:1fr
+  }
+  .simpleValueItem{
+    grid-template-columns:30px minmax(0,1fr);
+    padding:14px 2px;
+    border-right:0;
+    border-bottom:1px solid rgba(18,19,21,.08)
+  }
+  .simpleValueItem:last-child{
+    border-bottom:0;
+    padding-right:2px;
+    padding-bottom:2px
+  }
+  .simpleValueItem i{
+    width:27px;height:27px
+  }
+  .simpleValueItem strong{
+    font-size:13px
+  }
+  .simpleValueItem p{
+    font-size:9px
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1982,9 +2120,9 @@ body.proofModalOpen{overflow:hidden}
 
     <div class="heroContent">
       <div class="heroCopy">
-        <div class="eyebrow">Meta Ads · Canada / USA</div>
+        <div class="eyebrow">Реклама у Facebook та Instagram · Canada / USA</div>
         <h1>Вам потрібні <span>заявки</span> Не просто реклама</h1>
-        <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Також працюю з іншими локальними нішами. Стратегія, креативи, запуск і оптимізація — з фокусом на якість звернень</p>
+        <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Допомагаю локальному бізнесу отримувати звернення з Facebook та Instagram. Люди бачать рекламу, пишуть вам або залишають заявку, а ви бачите ціну кожного звернення</p>
 
         <div class="heroButtons">
           <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити рекламу →</a>
@@ -1994,13 +2132,13 @@ body.proofModalOpen{overflow:hidden}
       </div>
 
       <aside class="heroEditorialProof" aria-label="Профіль performance-маркетолога">
-        <div class="heroProofLabel">PERFORMANCE MARKETING</div>
+        <div class="heroProofLabel">РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БІЗНЕСУ</div>
         <div class="heroProofYears">
           <strong>3+</strong>
           <span>роки з Meta Ads</span>
         </div>
         <div class="heroProofList" aria-label="Спеціалізація">
-          <div><span>01</span><b>Meta Ads</b></div>
+          <div><span>01</span><b>Facebook + Instagram</b></div>
           <div><span>02</span><b>Local Business</b></div>
           <div><span>03</span><b>Canada + USA</b></div>
         </div>
@@ -2010,23 +2148,37 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </section>
 
-<section class="resultProofStrip" aria-label="Ключові результати">
-  <div class="wrap resultProofInner">
-    <div class="resultProofStat resultGreen">
-      <strong>1 097</strong>
-      <span>діалогів · Cleaning GTA</span>
+<section class="resultProofStrip" aria-label="Що реклама дає бізнесу">
+  <div class="wrap simpleValuePanel">
+    <div class="simpleValueHead">
+      <span>ЩО ЦЕ ДАЄ ВАШОМУ БІЗНЕСУ</span>
+      <strong>Від показу реклами — до реального звернення</strong>
     </div>
-    <div class="resultProofStat resultBlue">
-      <strong>$2.39</strong>
-      <span>CAD / діалог · Cleaning GTA</span>
-    </div>
-    <div class="resultProofStat resultGreen">
-      <strong>1 984</strong>
-      <span>заявки · Cosmetology USA</span>
-    </div>
-    <div class="resultProofStat resultGreen">
-      <strong>191</strong>
-      <span>заявка · Medical New York</span>
+
+    <div class="simpleValueGrid">
+      <div class="simpleValueItem simpleBlue">
+        <i>01</i>
+        <div>
+          <strong>Потенційні клієнти бачать вас</strong>
+          <p>Реклама у Facebook та Instagram показується людям у потрібному місті</p>
+        </div>
+      </div>
+
+      <div class="simpleValueItem simpleSage">
+        <i>02</i>
+        <div>
+          <strong>Вони пишуть або залишають заявку</strong>
+          <p>Веду людину до повідомлення, форми або іншої цільової дії</p>
+        </div>
+      </div>
+
+      <div class="simpleValueItem simpleChampagne">
+        <i>03</i>
+        <div>
+          <strong>Ви бачите, скільки це коштує</strong>
+          <p>Зрозуміло, скільки витрачено і яка ціна одного звернення</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
