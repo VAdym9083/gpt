@@ -3255,6 +3255,170 @@ body.proofModalOpen{overflow:hidden}
     font-size:7.5px
   }
 }
+/* 2026-09-27 · clarity, color and consultation pass */
+:root{
+  --accent-blue:#72ACD1;
+  --accent-sage:#82B895;
+  --accent-champagne:#D1A45F
+}
+
+/* Hero consultation message: prominent, but not a coupon */
+.heroFreeLead{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 15px;
+  padding:9px 13px 9px 10px;
+  border-radius:999px;
+  color:#15251c;
+  background:linear-gradient(90deg,rgba(130,184,149,.94),rgba(170,209,181,.88));
+  border:1px solid rgba(255,255,255,.32);
+  box-shadow:0 10px 28px rgba(76,124,92,.16);
+  font-size:13px;
+  line-height:1;
+  letter-spacing:-.01em
+}
+.heroFreeLead>span{
+  width:8px;height:8px;
+  flex:none;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 0 5px rgba(255,255,255,.16)
+}
+.heroFreeLead strong{font-weight:900}
+.heroProofResult{display:none!important}
+.freeConsultationNote{display:none!important}
+
+/* More color, still premium */
+.journeyAirBlue{
+  background:linear-gradient(155deg,rgba(114,172,209,.15),rgba(255,255,255,.82) 36%)!important;
+  border-color:rgba(114,172,209,.22)!important
+}
+.journeyAirSage{
+  background:linear-gradient(155deg,rgba(130,184,149,.15),rgba(255,255,255,.82) 36%)!important;
+  border-color:rgba(130,184,149,.22)!important
+}
+.journeyAirChampagne{
+  background:linear-gradient(155deg,rgba(209,164,95,.15),rgba(255,255,255,.82) 36%)!important;
+  border-color:rgba(209,164,95,.22)!important
+}
+.journeyAirResult{
+  background:linear-gradient(155deg,rgba(95,151,113,.16),rgba(255,255,255,.82) 36%)!important;
+  border-color:rgba(95,151,113,.24)!important
+}
+.valueStack .valueCard:nth-child(1){
+  background:linear-gradient(135deg,rgba(114,172,209,.16),rgba(255,255,255,.72))!important
+}
+.valueStack .valueCard:nth-child(2){
+  background:linear-gradient(135deg,rgba(130,184,149,.16),rgba(255,255,255,.72))!important
+}
+.valueStack .valueCard:nth-child(3){
+  background:linear-gradient(135deg,rgba(209,164,95,.15),rgba(255,255,255,.72))!important
+}
+.caseStoryResult{
+  margin-left:-8px;
+  margin-right:-8px;
+  padding-left:8px!important;
+  padding-right:8px!important;
+  border-radius:10px;
+  background:linear-gradient(90deg,rgba(130,184,149,.12),rgba(114,172,209,.06))
+}
+.trustFacts span:nth-child(1){background:rgba(114,172,209,.12)!important}
+.trustFacts span:nth-child(2){background:rgba(130,184,149,.12)!important}
+.trustFacts span:nth-child(3){background:rgba(209,164,95,.12)!important}
+
+/* Process: image-led and understandable without marketing jargon */
+.processCompact{
+  gap:12px!important
+}
+.processCompactCard{
+  min-height:330px!important;
+  padding:12px 12px 18px!important;
+  overflow:hidden;
+  border-radius:24px!important;
+  background:rgba(255,255,255,.74)!important
+}
+.processCompactVisual{
+  height:150px;
+  overflow:hidden;
+  border-radius:16px;
+  background:#eceae6;
+  border:1px solid rgba(255,255,255,.92)
+}
+.processCompactVisual img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  transition:transform .35s ease
+}
+.processCompactCard:hover .processCompactVisual img{
+  transform:scale(1.025)
+}
+.processCompactCard>span{
+  margin:17px 5px 0;
+  font-size:26px!important
+}
+.processCompactCard>div:last-child{
+  padding:0 5px
+}
+.processCompactCard h3{
+  margin:15px 0 0!important;
+  font-size:18px!important
+}
+.processCompactCard p{
+  font-size:9.5px!important
+}
+.processBlue{
+  border-color:rgba(114,172,209,.25)!important;
+  box-shadow:0 15px 42px rgba(74,126,159,.09)!important
+}
+.processSage{
+  border-color:rgba(130,184,149,.25)!important;
+  box-shadow:0 15px 42px rgba(82,132,98,.09)!important
+}
+.processChampagne{
+  border-color:rgba(209,164,95,.25)!important;
+  box-shadow:0 15px 42px rgba(149,111,54,.08)!important
+}
+.processGreen{
+  border-color:rgba(95,151,113,.25)!important;
+  box-shadow:0 15px 42px rgba(67,120,83,.09)!important
+}
+
+/* Consultation CTAs get one consistent visual cue */
+.heroBtn.primary,
+.trustActions a:first-child,
+.contact.dark,
+.mobileStickyCta{
+  background:linear-gradient(135deg,#15191c,#22332a)!important
+}
+.trustActions a:first-child,
+.contact.dark{
+  box-shadow:0 10px 28px rgba(65,105,78,.13)!important
+}
+
+@media (max-width:767px){
+  .heroFreeLead{
+    margin-bottom:12px;
+    padding:8px 11px 8px 9px;
+    font-size:11px
+  }
+  .processCompactCard{
+    min-height:300px!important;
+    padding:10px 10px 16px!important
+  }
+  .processCompactVisual{
+    height:145px
+  }
+  .processCompactCard h3{
+    font-size:16px!important
+  }
+  .mobileStickyCta{
+    font-size:10px!important
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -3318,7 +3482,7 @@ body.proofModalOpen{overflow:hidden}
     </nav>
     <div class="navActions">
       <a class="pill hideMobile" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram</a>
-      <a class="pill dark freeConsultationHeader" href="https://t.me/target_vadym" target="_blank" rel="noopener"><span class="freeCtaDesktop">Безкоштовна консультація →</span><span class="freeCtaMobile">Безкоштовно →</span></a>
+      <a class="pill dark freeConsultationHeader" href="https://t.me/target_vadym" target="_blank" rel="noopener"><span class="freeCtaDesktop">Отримати безкоштовну консультацію →</span><span class="freeCtaMobile">Отримати →</span></a>
     </div>
   </div>
 </header>
@@ -3331,15 +3495,15 @@ body.proofModalOpen{overflow:hidden}
 
     <div class="heroContent">
       <div class="heroCopy">
+        <div class="heroFreeLead"><span></span><strong>Перша консультація — безкоштовна</strong></div>
         <div class="eyebrow">Реклама у Facebook та Instagram · Canada / USA</div>
         <h1>Вам потрібні <span>заявки</span> Не просто реклама</h1>
         <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Допомагаю локальному бізнесу отримувати звернення з Facebook та Instagram. Люди бачать рекламу, пишуть вам або залишають заявку, а ви бачите ціну кожного звернення</p>
 
         <div class="heroButtons">
-          <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Безкоштовна консультація →</a>
+          <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Отримати безкоштовну консультацію →</a>
           <a class="heroBtn" href="#case">Подивитися кейси</a>
         </div>
-        <div class="freeConsultationNote"><span>0€</span> Перша консультація — безкоштовна</div>
 
       </div>
 
@@ -3348,10 +3512,6 @@ body.proofModalOpen{overflow:hidden}
         <div class="heroProofYears">
           <strong>3+</strong>
           <span>роки з Meta Ads</span>
-        </div>
-        <div class="heroProofResult" aria-label="Приклад реального результату">
-          <strong>1 097 діалогів</strong>
-          <span>Cleaning GTA · $2.39 CAD / діалог</span>
         </div>
         <div class="heroProofList" aria-label="Спеціалізація">
           <div><span>01</span><b>Facebook + Instagram</b></div>
@@ -3620,17 +3780,17 @@ body.proofModalOpen{overflow:hidden}
         <img src="https://github.com/VAdym9083.png?size=512" alt="Vadym — Performance Marketer" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('trustPortraitFallback')">
       </div>
       <div class="trustCopy">
-        <span class="trustLabel">ХТО ВІДПОВІДАЄ ЗА РЕЗУЛЬТАТ</span>
-        <h2>Працюєте напряму зі мною</h2>
-        <p>Я — Vadym, performance marketer. Сам аналізую бізнес, будую стратегію, контролюю креативи, запускаю рекламу й дивлюся на якість звернень</p>
+        <span class="trustLabel">ХТО БУДЕ ПРАЦЮВАТИ З ВАМИ</span>
+        <h2>Вашу рекламу веду я особисто</h2>
+        <p>Я — Vadym. Допомагаю локальному бізнесу отримувати нових клієнтів через Facebook та Instagram. Ви спілкуєтесь напряму зі мною — від першої консультації до запуску й покращення реклами</p>
         <div class="trustFacts">
-          <span><b>3+</b> роки з Meta Ads</span>
-          <span><b>Без</b> менеджерів і junior-команди</span>
-          <span><b>1 місто</b> = 1 cleaning-клієнт</span>
+          <span><b>3+</b> роки запускаю рекламу</span>
+          <span><b>Напряму</b> без менеджерів між нами</span>
+          <span><b>Cleaning</b> 1 місто = 1 клієнт</span>
         </div>
         <div class="trustActions">
-          <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Безкоштовна консультація · Telegram →</a>
-          <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Безкоштовна консультація · Instagram →</a>
+          <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Отримати безкоштовну консультацію · Telegram →</a>
+          <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Отримати безкоштовну консультацію · Instagram →</a>
         </div>
       </div>
     </div>
@@ -3676,25 +3836,36 @@ body.proofModalOpen{overflow:hidden}
 <section class="section processCompactSection" id="process">
   <div class="wrap">
     <div class="sectionHead reveal">
-      <div class="label">Як проходить запуск</div>
+      <div class="label">Як починаємо роботу</div>
       <div>
-        <h2>4 етапи. Без зайвої бюрократії</h2>
-        <p>Спочатку розуміємо бізнес і пропозицію, потім запускаємо тест і залишаємо тільки те, що дає якісні звернення</p>
+        <h2>Як запускаємо вашу рекламу</h2>
+        <p>4 прості кроки: розумію ваш бізнес, готую рекламу, запускаю її та покращую результат</p>
       </div>
     </div>
 
     <div class="processCompact">
-      <article class="processCompactCard reveal">
-        <span>01</span><div><h3>Розбір</h3><p>Послуги, ціни, гео, попит, попередня реклама</p></div>
+      <article class="processCompactCard processBlue reveal">
+        <div class="processCompactVisual"><img src="assets/site/proofs/toronto-cleaning-ads.webp" alt="Аналіз рекламних даних" loading="lazy" decoding="async"></div>
+        <span>01</span>
+        <div><h3>Розумію ваш бізнес</h3><p>Що ви продаєте, кому, за якою ціною і в якому місті</p></div>
       </article>
-      <article class="processCompactCard reveal">
-        <span>02</span><div><h3>Стратегія + креативи</h3><p>Офер, аудиторія, тексти й візуали під конкретний ринок</p></div>
+
+      <article class="processCompactCard processSage reveal">
+        <div class="processCompactVisual"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Підготовка рекламних креативів" loading="lazy" decoding="async"></div>
+        <span>02</span>
+        <div><h3>Готую рекламу</h3><p>Пропозиція, аудиторія, тексти й креативи під ваш бізнес</p></div>
       </article>
-      <article class="processCompactCard reveal">
-        <span>03</span><div><h3>Запуск</h3><p>Meta Ads, ціль кампанії, плейсменти й шлях до заявки</p></div>
+
+      <article class="processCompactCard processChampagne reveal">
+        <div class="processCompactVisual"><img src="assets/site/proofs/toronto-cleaning-creative.webp" alt="Запуск реклами Facebook та Instagram" loading="lazy" decoding="async"></div>
+        <span>03</span>
+        <div><h3>Запускаю кампанію</h3><p>Налаштовую рекламу у Facebook та Instagram і запускаю трафік</p></div>
       </article>
-      <article class="processCompactCard reveal">
-        <span>04</span><div><h3>Оптимізація</h3><p>Бюджет переходить у сильні зв’язки, слабке відключається</p></div>
+
+      <article class="processCompactCard processGreen reveal">
+        <div class="processCompactVisual"><img src="assets/site/proofs/cosmetology-ads.webp" alt="Оптимізація рекламної кампанії" loading="lazy" decoding="async"></div>
+        <span>04</span>
+        <div><h3>Покращую результат</h3><p>Залишаю те, що приводить якісні звернення, слабке вимикаю</p></div>
       </article>
     </div>
   </div>
@@ -3749,7 +3920,7 @@ body.proofModalOpen{overflow:hidden}
         <strong id="cityResultName">Toronto / GTA</strong>
         <div class="resultBadge" id="cityResultBadge">ЗАЙНЯТО</div>
         <p id="cityResultText">У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру</p>
-        <a id="cityResultCta" class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Безкоштовна консультація щодо іншого міста →</a>
+        <a id="cityResultCta" class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Отримати безкоштовну консультацію →</a>
       </div>
     </div>
   </div>
@@ -3768,13 +3939,13 @@ body.proofModalOpen{overflow:hidden}
   <div class="wrap">
     <div class="ctaBox reveal">
       <div>
-        <div class="label">Безкоштовна консультація</div>
-        <h2>Безкоштовно розберу ваш бізнес і рекламу</h2>
+        <div class="label">Перша консультація — безкоштовна</div>
+        <h2>Отримайте безкоштовну консультацію</h2>
         <p>Перша консультація — безкоштовна. Напишіть нішу, місто, послугу й коротко опишіть рекламу. Я подивлюся на бізнес і скажу, чи бачу потенціал для Meta Ads та сенс у співпраці</p>
       </div>
       <div class="contactStack">
-        <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener"><div><b>Безкоштовна консультація</b><br><span>Telegram · @target_vadym</span></div><strong>→</strong></a>
-        <a class="contact" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener"><div><b>Безкоштовна консультація</b><br><span>Instagram · @lebedenkkko</span></div><strong>→</strong></a>
+        <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener"><div><b>Отримати безкоштовну консультацію</b><br><span>Telegram · @target_vadym</span></div><strong>→</strong></a>
+        <a class="contact" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener"><div><b>Отримати безкоштовну консультацію</b><br><span>Instagram · @lebedenkkko</span></div><strong>→</strong></a>
       </div>
     </div>
   </div>
@@ -3782,7 +3953,7 @@ body.proofModalOpen{overflow:hidden}
 </main>
 
 <a class="mobileStickyCta" id="mobileStickyCta" href="https://t.me/target_vadym" target="_blank" rel="noopener">
-  <span>Безкоштовна консультація</span><b>→</b>
+  <span>Отримати безкоштовну консультацію</span><b>→</b>
 </a>
 
 <div class="caseProofModal" id="caseProofModal" aria-hidden="true">
@@ -3852,7 +4023,7 @@ body.proofModalOpen{overflow:hidden}
 <footer>
   <div class="wrap footer">
     <span>© 2026 Таргет LB · Vadym — Performance Marketer</span>
-    <span>Безкоштовна консультація · Instagram @lebedenkkko · Telegram @target_vadym</span>
+    <span>Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym</span>
   </div>
 </footer>
 
@@ -3901,7 +4072,7 @@ function renderCityStatus(){
     : 'Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці';
   cityResult.classList.toggle('busyResult',busy);
   cityResult.classList.toggle('freeResult',!busy);
-  cityResultCta.textContent=busy?'Безкоштовна консультація щодо іншого міста →':'Безкоштовна консультація →';
+  cityResultCta.textContent=busy?'Отримати безкоштовну консультацію →':'Отримати безкоштовну консультацію →';
 }
 if(citySelect){citySelect.addEventListener('change',renderCityStatus);renderCityStatus();}
 
