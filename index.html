@@ -659,6 +659,21 @@ body.proofModalOpen{overflow:hidden}
 
 /* MOBILE · ≤767 */
 @media (max-width:767px){
+  .journeyAirStudioPoster{
+    width:132px;
+    height:172px
+  }
+  .journeyAirStudioGhost{
+    width:132px;
+    height:166px
+  }
+  .journeyAirStudioBadge{
+    font-size:6.5px
+  }
+  .journeyAirStudioNote{
+    font-size:6px
+  }
+
   html,body{overflow-x:hidden}
   .wrap{width:min(calc(100% - 20px),var(--max))}
 
@@ -2422,94 +2437,96 @@ body.proofModalOpen{overflow:hidden}
   border:1px solid rgba(25,25,25,.055)
 }
 .journeyAirCreative{
+  position:relative;
   display:grid;
   place-items:center;
   padding:14px;
-  background:
-    radial-gradient(circle at 80% 14%,rgba(143,182,210,.22),transparent 38%),
-    linear-gradient(145deg,#edf3f6,#f8f7f4)
-}
-.journeyAirAdMock{
-  width:100%;
-  height:100%;
   overflow:hidden;
-  display:grid;
-  grid-template-rows:auto minmax(0,1fr) auto;
-  border-radius:15px;
+  background:
+    radial-gradient(circle at 24% 14%,rgba(143,182,210,.24),transparent 34%),
+    radial-gradient(circle at 82% 84%,rgba(213,185,138,.16),transparent 30%),
+    linear-gradient(145deg,#eef3f5,#faf8f4)
+}
+.journeyAirCreativeStudio:before{
+  content:"AD";
+  position:absolute;
+  left:16px;
+  bottom:-14px;
+  color:rgba(75,96,112,.055);
+  font:700 92px/.82 Arial,sans-serif;
+  letter-spacing:-.08em;
+  pointer-events:none
+}
+.journeyAirStudioGhost{
+  position:absolute;
+  width:118px;
+  height:148px;
+  border-radius:18px;
+  border:1px solid rgba(39,48,55,.07);
+  background:rgba(255,255,255,.36);
+  box-shadow:0 12px 28px rgba(55,61,65,.04)
+}
+.journeyAirStudioGhost.ghostOne{
+  transform:translate(-35px,8px) rotate(-8deg)
+}
+.journeyAirStudioGhost.ghostTwo{
+  transform:translate(40px,7px) rotate(7deg);
+  background:rgba(255,255,255,.48)
+}
+.journeyAirStudioPoster{
+  position:relative;
+  z-index:3;
+  width:118px;
+  height:154px;
+  overflow:hidden;
+  border-radius:17px;
   background:#fff;
-  border:1px solid rgba(25,28,31,.07);
-  box-shadow:0 15px 38px rgba(47,61,70,.12)
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:
+    0 20px 42px rgba(61,53,47,.18),
+    0 2px 8px rgba(61,53,47,.08);
+  transform:rotate(-1.7deg)
 }
-.journeyAirAdHead{
-  display:grid;
-  grid-template-columns:25px minmax(0,1fr) auto;
-  gap:8px;
-  align-items:center;
-  padding:9px 10px 8px
-}
-.journeyAirAdHead>i{
-  width:25px;height:25px;
-  border-radius:50%;
-  background:
-    linear-gradient(145deg,rgba(143,182,210,.95),rgba(79,101,117,.95));
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)
-}
-.journeyAirAdHead>div{
-  min-width:0
-}
-.journeyAirAdHead b{
-  display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  color:#202326;
-  font-size:8px
-}
-.journeyAirAdHead small{
-  display:block;
-  margin-top:1px;
-  color:#92979a;
-  font-size:5.7px
-}
-.journeyAirAdHead>span{
-  color:#8e9295;
-  font-size:8px;
-  letter-spacing:.08em
-}
-.journeyAirAdImage{
-  min-height:0;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  background:#f3f1ed
-}
-.journeyAirAdImage img{
+.journeyAirStudioPoster img{
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
-  object-position:center 24%
+  object-position:center 15%
 }
-.journeyAirAdFoot{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:8px 10px;
-  border-top:1px solid rgba(25,28,31,.06)
-}
-.journeyAirAdFoot span{
-  color:#777d80;
+.journeyAirStudioBadge{
+  position:absolute;
+  z-index:4;
+  padding:7px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 8px 22px rgba(52,56,58,.08);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:#55646d;
   font-size:5.8px;
-  font-weight:700
+  font-weight:850;
+  letter-spacing:.06em
 }
-.journeyAirAdFoot b{
-  flex:none;
-  padding:5px 7px;
-  border-radius:7px;
-  color:#31546b;
-  background:rgba(143,182,210,.18);
-  font-size:6px
+.journeyAirStudioBadge.badgeFb{
+  left:16px;
+  top:18px
+}
+.journeyAirStudioBadge.badgeIg{
+  right:16px;
+  top:18px;
+  color:#8d6b55
+}
+.journeyAirStudioNote{
+  position:absolute;
+  z-index:4;
+  right:16px;
+  bottom:13px;
+  color:#7e8588;
+  font-size:5.7px;
+  font-weight:900;
+  letter-spacing:.13em
 }
 
 .journeyAirMessage{
@@ -2929,21 +2946,15 @@ body.proofModalOpen{overflow:hidden}
           <strong>01</strong>
           <span>ПОБАЧИВ</span>
         </div>
-        <div class="journeyAirVisual journeyAirCreative">
-          <div class="journeyAirAdMock">
-            <div class="journeyAirAdHead">
-              <i></i>
-              <div><b>North Star Cleaning</b><small>Sponsored · Toronto & GTA</small></div>
-              <span>•••</span>
-            </div>
-            <div class="journeyAirAdImage">
-              <img src="assets/site/creatives/cleaning-toronto.webp" alt="Реальний рекламний креатив для cleaning-бізнесу" loading="lazy" decoding="async">
-            </div>
-            <div class="journeyAirAdFoot">
-              <span>Deep Cleaning · Special offer</span>
-              <b>Написати →</b>
-            </div>
+        <div class="journeyAirVisual journeyAirCreative journeyAirCreativeStudio">
+          <div class="journeyAirStudioGhost ghostOne"></div>
+          <div class="journeyAirStudioGhost ghostTwo"></div>
+          <div class="journeyAirStudioPoster">
+            <img src="assets/site/creatives/hair-care-toronto.webp" alt="Реальний рекламний креатив локального бізнесу" loading="lazy" decoding="async">
           </div>
+          <div class="journeyAirStudioBadge badgeFb">Facebook</div>
+          <div class="journeyAirStudioBadge badgeIg">Instagram</div>
+          <div class="journeyAirStudioNote">REAL CLIENT CREATIVE</div>
         </div>
         <h3>Побачив вашу рекламу</h3>
         <p>У стрічці Facebook або Instagram побачив зрозумілу пропозицію і зацікавився послугою</p>
