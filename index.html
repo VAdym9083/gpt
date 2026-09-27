@@ -3392,6 +3392,341 @@ body.proofModalOpen{overflow:hidden}
 .caseStats{
   margin-top:0!important
 }
+/* 2026-09-27 · artificial premium process visuals */
+.processScene{
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  isolation:isolate
+}
+.processScene:before{
+  content:"";
+  position:absolute;
+  inset:-35%;
+  z-index:-2;
+  filter:blur(25px)
+}
+.processScene:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  opacity:.42;
+  background-image:
+    linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent)
+}
+
+/* 01 — analysis */
+.processSceneAnalysis{
+  background:linear-gradient(145deg,#eaf3f8,#f7fafb)
+}
+.processSceneAnalysis:before{
+  background:radial-gradient(circle,#7bb4d8 0%,transparent 58%)
+}
+.sceneWindow{
+  width:82%;
+  padding:12px;
+  border-radius:16px;
+  background:rgba(255,255,255,.83);
+  border:1px solid rgba(255,255,255,.94);
+  box-shadow:0 18px 38px rgba(62,102,128,.13);
+  backdrop-filter:blur(12px)
+}
+.sceneWindowTop{
+  display:flex;
+  gap:5px;
+  margin-bottom:11px
+}
+.sceneWindowTop span{
+  width:6px;height:6px;border-radius:50%;background:#a9c7d9
+}
+.sceneDashboard{
+  display:grid;
+  grid-template-columns:.55fr 1fr;
+  gap:10px;
+  align-items:end
+}
+.sceneMetric{
+  padding:10px;
+  border-radius:12px;
+  background:#edf6fb
+}
+.sceneMetric b{
+  display:block;
+  color:#477a99;
+  font-size:18px
+}
+.sceneMetric small{
+  display:block;
+  margin-top:2px;
+  color:#8297a4;
+  font-size:7px
+}
+.sceneBars{
+  height:58px;
+  display:flex;
+  align-items:flex-end;
+  gap:5px
+}
+.sceneBars i{
+  flex:1;
+  border-radius:5px 5px 2px 2px;
+  background:linear-gradient(#79afd1,#b8d6e8)
+}
+.sceneBars i:nth-child(1){height:35%}
+.sceneBars i:nth-child(2){height:58%}
+.sceneBars i:nth-child(3){height:46%}
+.sceneBars i:nth-child(4){height:76%}
+.sceneBars i:nth-child(5){height:92%}
+.sceneMiniRows{
+  grid-column:1/-1;
+  display:grid;
+  gap:5px
+}
+.sceneMiniRows span{
+  height:5px;
+  border-radius:999px;
+  background:#e5edf1
+}
+.sceneMiniRows span:nth-child(2){width:74%}
+.sceneMiniRows span:nth-child(3){width:88%}
+.processSceneAnalysis>em{
+  position:absolute;
+  right:11px;
+  bottom:8px;
+  color:#6f96ad;
+  font-size:5.5px;
+  font-style:normal;
+  font-weight:900;
+  letter-spacing:.16em
+}
+
+/* 02 — creative */
+.processSceneCreative{
+  background:linear-gradient(145deg,#eef6ef,#faf8f3)
+}
+.processSceneCreative:before{
+  background:radial-gradient(circle,#7fbf94 0%,transparent 58%)
+}
+.scenePhone{
+  width:74px;
+  height:118px;
+  padding:7px;
+  border-radius:18px;
+  background:#1b211d;
+  box-shadow:0 19px 42px rgba(46,78,57,.18);
+  transform:rotate(-4deg)
+}
+.scenePhoneTop{
+  width:24px;height:4px;
+  margin:0 auto 6px;
+  border-radius:999px;
+  background:rgba(255,255,255,.22)
+}
+.sceneAdCard{
+  position:relative;
+  height:95px;
+  padding:10px 7px;
+  overflow:hidden;
+  border-radius:12px;
+  color:#173323;
+  background:linear-gradient(145deg,#dceee2,#f2e7d7)
+}
+.sceneAdGlow{
+  position:absolute;
+  width:54px;height:54px;
+  right:-16px;top:-18px;
+  border-radius:50%;
+  background:#d5a962;
+  filter:blur(8px);
+  opacity:.55
+}
+.sceneAdCard span,
+.sceneAdCard strong,
+.sceneAdCard small{
+  position:relative;z-index:2;display:block
+}
+.sceneAdCard span{font-size:6px;font-weight:800;letter-spacing:.12em}
+.sceneAdCard strong{margin-top:17px;font-size:14px;line-height:.9}
+.sceneAdCard small{margin-top:10px;font-size:5.5px;color:#6a7c70}
+.sceneCreativeChip{
+  position:absolute;
+  right:17px;
+  bottom:15px;
+  padding:6px 8px;
+  border-radius:999px;
+  color:#416b4f;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:0 7px 18px rgba(54,86,64,.08);
+  font-size:5.5px;
+  font-weight:900;
+  letter-spacing:.14em
+}
+
+/* 03 — launch */
+.processSceneLaunch{
+  background:linear-gradient(145deg,#f8f1e6,#fffaf4)
+}
+.processSceneLaunch:before{
+  background:radial-gradient(circle,#d0a460 0%,transparent 58%)
+}
+.sceneLaunchPanel{
+  position:absolute;
+  left:16px;
+  top:18px;
+  width:66%;
+  padding:14px;
+  border-radius:15px;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 15px 36px rgba(125,91,42,.11)
+}
+.sceneLaunchLabel{
+  color:#a77d43;
+  font-size:5.5px;
+  font-weight:900;
+  letter-spacing:.14em
+}
+.sceneLaunchPanel>strong{
+  display:block;
+  margin-top:8px;
+  color:#342a1f;
+  font-size:11px
+}
+.sceneLaunchLine{
+  display:flex;
+  gap:5px;
+  margin-top:13px
+}
+.sceneLaunchLine i{
+  height:5px;border-radius:999px;background:#eadfce
+}
+.sceneLaunchLine i:nth-child(1){width:46%}
+.sceneLaunchLine i:nth-child(2){width:26%}
+.sceneLaunchLine i:nth-child(3){width:18%}
+.sceneLaunchToggle{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:12px
+}
+.sceneLaunchToggle span{
+  width:25px;height:14px;padding:2px;
+  border-radius:999px;
+  background:#8fbd9d
+}
+.sceneLaunchToggle span:after{
+  content:"";
+  display:block;
+  width:10px;height:10px;
+  margin-left:auto;
+  border-radius:50%;
+  background:#fff
+}
+.sceneLaunchToggle b{
+  color:#5a765f;
+  font-size:5.5px;
+  letter-spacing:.12em
+}
+.sceneTarget{
+  position:absolute;
+  right:18px;
+  bottom:16px;
+  width:62px;height:62px
+}
+.sceneTarget i,
+.sceneTarget span{
+  position:absolute;
+  inset:0;
+  margin:auto;
+  border-radius:50%;
+  border:1px solid rgba(167,125,67,.28)
+}
+.sceneTarget i:nth-child(2){width:42px;height:42px}
+.sceneTarget i:nth-child(3){width:22px;height:22px}
+.sceneTarget span{
+  width:8px;height:8px;
+  border:0;
+  background:#c5924b
+}
+
+/* 04 — optimize */
+.processSceneOptimize{
+  color:#5f8a6d;
+  background:linear-gradient(145deg,#eaf3ed,#f8faf7)
+}
+.processSceneOptimize:before{
+  background:radial-gradient(circle,#7fb58e 0%,transparent 58%)
+}
+.sceneChart{
+  position:relative;
+  width:86%;
+  height:106px;
+  padding:12px;
+  border-radius:16px;
+  background:rgba(255,255,255,.84);
+  box-shadow:0 17px 38px rgba(64,102,76,.12)
+}
+.sceneChartGrid{
+  position:absolute;inset:12px;
+  background-image:
+    linear-gradient(rgba(95,138,109,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(95,138,109,.08) 1px,transparent 1px);
+  background-size:22px 22px
+}
+.sceneChartBars{
+  position:absolute;
+  left:14px;right:14px;bottom:12px;
+  height:50px;
+  display:flex;
+  gap:7px;
+  align-items:flex-end
+}
+.sceneChartBars i{
+  flex:1;
+  border-radius:4px 4px 2px 2px;
+  background:linear-gradient(#a8ceb3,#7da98a)
+}
+.sceneChartBars i:nth-child(1){height:28%}
+.sceneChartBars i:nth-child(2){height:38%}
+.sceneChartBars i:nth-child(3){height:48%}
+.sceneChartBars i:nth-child(4){height:62%}
+.sceneChartBars i:nth-child(5){height:73%}
+.sceneChartBars i:nth-child(6){height:88%}
+.sceneChart svg{
+  position:absolute;
+  left:12px;right:12px;bottom:18px;
+  width:calc(100% - 24px);
+  height:70px
+}
+.sceneOptimizeBadge{
+  position:absolute;
+  right:12px;
+  top:10px;
+  padding:7px 9px;
+  border-radius:11px;
+  color:#345640;
+  background:#dff0e4;
+  box-shadow:0 8px 20px rgba(56,95,68,.08)
+}
+.sceneOptimizeBadge b,
+.sceneOptimizeBadge span{display:block}
+.sceneOptimizeBadge b{font-size:9px}
+.sceneOptimizeBadge span{margin-top:1px;font-size:5.5px;color:#79917f}
+
+@media (max-width:767px){
+  .processSceneAnalysis>em,
+  .sceneCreativeChip,
+  .sceneLaunchLabel{
+    font-size:6px
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -3728,8 +4063,8 @@ body.proofModalOpen{overflow:hidden}
         <p>Привіт! Мене звати Вадим. Уже понад 3 роки запускаю рекламу у Facebook та Instagram для локального бізнесу. Сам налаштовую кампанії, стежу за результатами й покращую їх у процесі</p>
         <div class="trustFacts">
           <span><b>3+</b> роки досвіду</span>
-          <span><b>Особисто</b> сам веду рекламу</span>
-          <span><b>1 cleaning-клієнт</b> в одному місті</span>
+          <span><b>Локальний бізнес</b> cleaning, beauty, medical та інші ніші</span>
+          <span><b>Canada + USA</b> досвід із локальними ринками</span>
         </div>
         <div class="trustActions">
           <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Отримати безкоштовну консультацію · Telegram →</a>
@@ -3788,25 +4123,61 @@ body.proofModalOpen{overflow:hidden}
 
     <div class="processCompact">
       <article class="processCompactCard processBlue reveal">
-        <div class="processCompactVisual"><img src="assets/site/proofs/toronto-cleaning-ads.webp" alt="Аналіз рекламних даних" loading="lazy" decoding="async"></div>
+        <div class="processCompactVisual processScene processSceneAnalysis" aria-hidden="true">
+          <div class="sceneWindow">
+            <div class="sceneWindowTop"><span></span><span></span><span></span></div>
+            <div class="sceneDashboard">
+              <div class="sceneMetric"><b>+24%</b><small>попит</small></div>
+              <div class="sceneBars"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="sceneMiniRows"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <em>ANALYSIS</em>
+        </div>
         <span>01</span>
         <div><h3>Розумію ваш бізнес</h3><p>Що ви продаєте, кому, за якою ціною і в якому місті</p></div>
       </article>
 
       <article class="processCompactCard processSage reveal">
-        <div class="processCompactVisual"><img src="assets/site/creatives/hair-care-toronto.webp" alt="Підготовка рекламних креативів" loading="lazy" decoding="async"></div>
+        <div class="processCompactVisual processScene processSceneCreative" aria-hidden="true">
+          <div class="scenePhone">
+            <div class="scenePhoneTop"></div>
+            <div class="sceneAdCard">
+              <div class="sceneAdGlow"></div>
+              <span>YOUR OFFER</span>
+              <strong>NEW CLIENTS</strong>
+              <small>Facebook · Instagram</small>
+            </div>
+          </div>
+          <div class="sceneCreativeChip">CREATIVE</div>
+        </div>
         <span>02</span>
         <div><h3>Готую рекламу</h3><p>Пропозиція, аудиторія, тексти й креативи під ваш бізнес</p></div>
       </article>
 
       <article class="processCompactCard processChampagne reveal">
-        <div class="processCompactVisual"><img src="assets/site/proofs/toronto-cleaning-creative.webp" alt="Запуск реклами Facebook та Instagram" loading="lazy" decoding="async"></div>
+        <div class="processCompactVisual processScene processSceneLaunch" aria-hidden="true">
+          <div class="sceneLaunchPanel">
+            <span class="sceneLaunchLabel">CAMPAIGN</span>
+            <strong>READY TO LAUNCH</strong>
+            <div class="sceneLaunchLine"><i></i><i></i><i></i></div>
+            <div class="sceneLaunchToggle"><span></span><b>ACTIVE</b></div>
+          </div>
+          <div class="sceneTarget"><i></i><i></i><i></i><span></span></div>
+        </div>
         <span>03</span>
         <div><h3>Запускаю кампанію</h3><p>Налаштовую рекламу у Facebook та Instagram і запускаю трафік</p></div>
       </article>
 
       <article class="processCompactCard processGreen reveal">
-        <div class="processCompactVisual"><img src="assets/site/proofs/cosmetology-ads.webp" alt="Оптимізація рекламної кампанії" loading="lazy" decoding="async"></div>
+        <div class="processCompactVisual processScene processSceneOptimize" aria-hidden="true">
+          <div class="sceneChart">
+            <div class="sceneChartGrid"></div>
+            <div class="sceneChartBars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <svg viewBox="0 0 220 90" preserveAspectRatio="none" aria-hidden="true"><path d="M5,76 C35,66 42,55 68,58 C95,61 104,43 130,45 C154,47 168,24 214,18" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+          </div>
+          <div class="sceneOptimizeBadge"><b>↑ 31%</b><span>better result</span></div>
+        </div>
         <span>04</span>
         <div><h3>Покращую результат</h3><p>Залишаю те, що приводить якісні звернення, слабке вимикаю</p></div>
       </article>
