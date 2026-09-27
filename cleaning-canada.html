@@ -2044,6 +2044,234 @@ body.proofModalOpen{overflow:hidden}
     font-size:9px
   }
 }
+/* 2026-09-27 · client journey story block */
+.clientJourneySection{
+  padding:34px 0 76px;
+  position:relative;
+  z-index:4
+}
+.clientJourneyPanel{
+  display:grid;
+  grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);
+  gap:34px;
+  padding:28px;
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(246,243,238,.78));
+  border:1px solid rgba(255,255,255,.88);
+  box-shadow:0 24px 76px rgba(34,28,23,.10);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px)
+}
+.clientJourneyVisual{
+  display:flex;
+  align-items:stretch
+}
+.clientJourneyMedia{
+  position:relative;
+  width:100%;
+  min-height:560px;
+  border-radius:24px;
+  overflow:hidden;
+  background:#111214;
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 22px 58px rgba(25,22,19,.15)
+}
+.clientJourneyMedia img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  background:#111214
+}
+.clientJourneyMediaTag{
+  position:absolute;
+  left:16px;
+  top:16px;
+  padding:8px 11px;
+  border-radius:999px;
+  background:rgba(12,13,15,.68);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:.10em;
+  text-transform:uppercase
+}
+.clientJourneyContent{
+  padding:8px 8px 4px 0;
+  display:flex;
+  flex-direction:column
+}
+.clientJourneyLabel{
+  color:#668DA6;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.18em;
+  margin-bottom:14px
+}
+.clientJourneyContent h2{
+  margin:0;
+  max-width:630px;
+  font-size:clamp(34px,4vw,58px);
+  line-height:.98;
+  letter-spacing:-.055em
+}
+.clientJourneyIntro{
+  max-width:640px;
+  margin:18px 0 0;
+  color:#68625c;
+  font-size:14px;
+  line-height:1.6
+}
+.clientJourneySteps{
+  display:grid;
+  gap:0;
+  margin-top:24px;
+  border-top:1px solid rgba(17,18,20,.09)
+}
+.clientJourneyStep{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:14px;
+  padding:17px 0;
+  border-bottom:1px solid rgba(17,18,20,.09)
+}
+.clientJourneyStep>span{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.05em
+}
+.clientJourneyStep strong{
+  display:block;
+  font-size:16px;
+  line-height:1.2;
+  letter-spacing:-.025em
+}
+.clientJourneyStep p{
+  margin:5px 0 0;
+  color:#78716b;
+  font-size:11px;
+  line-height:1.45
+}
+.stepBlue>span{
+  color:#557C98;
+  background:rgba(143,182,210,.21)
+}
+.stepSage>span{
+  color:#54775F;
+  background:rgba(157,189,168,.23)
+}
+.stepChampagne>span{
+  color:#8D6940;
+  background:rgba(213,185,138,.25)
+}
+.stepResult>span{
+  color:#fff;
+  background:#557864;
+  box-shadow:0 7px 20px rgba(85,120,100,.18)
+}
+.stepResult strong{
+  color:#456957
+}
+.clientJourneyOutcome{
+  margin-top:22px;
+  padding:18px 20px;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(143,182,210,.12),rgba(157,189,168,.13));
+  border:1px solid rgba(103,137,119,.14)
+}
+.clientJourneyOutcome span{
+  display:block;
+  margin-bottom:7px;
+  color:#668DA6;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.16em
+}
+.clientJourneyOutcome strong{
+  display:block;
+  max-width:640px;
+  font-size:15px;
+  line-height:1.4;
+  letter-spacing:-.02em
+}
+
+@media (max-width:900px){
+  .clientJourneyPanel{
+    grid-template-columns:1fr;
+    gap:24px
+  }
+  .clientJourneyMedia{
+    min-height:0;
+    aspect-ratio:4/5;
+    max-height:680px
+  }
+  .clientJourneyContent{
+    padding:0 4px 4px
+  }
+}
+@media (max-width:767px){
+  .clientJourneySection{
+    padding:22px 10px 56px
+  }
+  .clientJourneyPanel{
+    padding:14px;
+    border-radius:22px;
+    gap:20px
+  }
+  .clientJourneyMedia{
+    border-radius:18px;
+    max-height:none
+  }
+  .clientJourneyMediaTag{
+    left:11px;top:11px;
+    font-size:6.5px;
+    padding:7px 9px
+  }
+  .clientJourneyLabel{
+    margin-bottom:10px;
+    font-size:7px
+  }
+  .clientJourneyContent h2{
+    font-size:36px
+  }
+  .clientJourneyIntro{
+    margin-top:13px;
+    font-size:12px
+  }
+  .clientJourneySteps{
+    margin-top:18px
+  }
+  .clientJourneyStep{
+    grid-template-columns:38px minmax(0,1fr);
+    gap:11px;
+    padding:14px 0
+  }
+  .clientJourneyStep>span{
+    width:30px;height:30px
+  }
+  .clientJourneyStep strong{
+    font-size:14px
+  }
+  .clientJourneyStep p{
+    font-size:10px
+  }
+  .clientJourneyOutcome{
+    margin-top:17px;
+    padding:15px 16px
+  }
+  .clientJourneyOutcome strong{
+    font-size:13px
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2148,35 +2376,58 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </section>
 
-<section class="resultProofStrip" aria-label="Що реклама дає бізнесу">
-  <div class="wrap simpleValuePanel">
-    <div class="simpleValueHead">
-      <span>ЩО ЦЕ ДАЄ ВАШОМУ БІЗНЕСУ</span>
-      <strong>Від показу реклами — до реального звернення</strong>
-    </div>
-
-    <div class="simpleValueGrid">
-      <div class="simpleValueItem simpleBlue">
-        <i>01</i>
-        <div>
-          <strong>Потенційні клієнти бачать вас</strong>
-          <p>Реклама у Facebook та Instagram показується людям у потрібному місті</p>
+<section class="clientJourneySection" aria-label="Як реклама приводить клієнта">
+  <div class="wrap">
+    <div class="clientJourneyPanel">
+      <div class="clientJourneyVisual">
+        <div class="clientJourneyMedia">
+          <img src="assets/site/creatives/cleaning-toronto.webp" alt="Приклад реального рекламного креативу для cleaning-бізнесу" loading="lazy" decoding="async">
+          <span class="clientJourneyMediaTag">Реальний рекламний креатив</span>
         </div>
       </div>
 
-      <div class="simpleValueItem simpleSage">
-        <i>02</i>
-        <div>
-          <strong>Вони пишуть або залишають заявку</strong>
-          <p>Веду людину до повідомлення, форми або іншої цільової дії</p>
-        </div>
-      </div>
+      <div class="clientJourneyContent">
+        <div class="clientJourneyLabel">ЯК ЦЕ ВИГЛЯДАЄ В ЖИТТІ</div>
+        <h2>Уявіть: ваша реклама вже працює</h2>
+        <p class="clientJourneyIntro">Людина відкрила Facebook або Instagram, побачила вашу рекламу і зрозуміла, що їй потрібна саме ваша послуга</p>
 
-      <div class="simpleValueItem simpleChampagne">
-        <i>03</i>
-        <div>
-          <strong>Ви бачите, скільки це коштує</strong>
-          <p>Зрозуміло, скільки витрачено і яка ціна одного звернення</p>
+        <div class="clientJourneySteps">
+          <div class="clientJourneyStep stepBlue">
+            <span>01</span>
+            <div>
+              <strong>Вона побачила вашу рекламу</strong>
+              <p>Гарний креатив привернув увагу і показав, що саме ви пропонуєте</p>
+            </div>
+          </div>
+
+          <div class="clientJourneyStep stepSage">
+            <span>02</span>
+            <div>
+              <strong>Натиснула «Написати»</strong>
+              <p>Запитала про ціну, вільний час або деталі послуги</p>
+            </div>
+          </div>
+
+          <div class="clientJourneyStep stepChampagne">
+            <span>03</span>
+            <div>
+              <strong>Ви поспілкувалися і домовилися</strong>
+              <p>Відповіли на питання, підібрали час і підтвердили замовлення</p>
+            </div>
+          </div>
+
+          <div class="clientJourneyStep stepResult">
+            <span>04</span>
+            <div>
+              <strong>У вас уже є новий клієнт з реклами</strong>
+              <p>А якщо сервіс йому сподобається, він може повернутися ще раз і стати постійним</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="clientJourneyOutcome">
+          <span>ГОЛОВНА ДУМКА</span>
+          <strong>Реклама потрібна не заради кліків. Вона потрібна, щоб у ваш бізнес приходили нові клієнти</strong>
         </div>
       </div>
     </div>
