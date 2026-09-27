@@ -2863,38 +2863,6 @@ body.proofModalOpen{overflow:hidden}
 }
 
 /* Cases: tell a causal story before showing the evidence */
-.caseStory{
-  display:grid;
-  gap:0;
-  margin-top:14px;
-  border-top:1px solid rgba(20,20,20,.08)
-}
-.caseStory>div{
-  display:grid;
-  grid-template-columns:76px minmax(0,1fr);
-  gap:12px;
-  padding:10px 0;
-  border-bottom:1px solid rgba(20,20,20,.07)
-}
-.caseStory span{
-  color:#8a837b;
-  font-size:6.5px;
-  font-weight:900;
-  letter-spacing:.12em;
-  text-transform:uppercase
-}
-.caseStory b{
-  color:#343331;
-  font-size:9px;
-  line-height:1.45
-}
-.caseStory .caseStoryResult b{
-  color:#4f735e
-}
-.caseStory .caseStoryResult span{
-  color:#668f76
-}
-
 /* Human trust: a real person, not a pretend agency */
 .trustSection{
   padding:68px 0 72px
@@ -3108,12 +3076,6 @@ body.proofModalOpen{overflow:hidden}
   }
   .heroProofResult strong{font-size:16px}
 
-  .caseStory>div{
-    grid-template-columns:66px minmax(0,1fr);
-    padding:9px 0
-  }
-  .caseStory b{font-size:8.5px}
-
   .trustSection{
     padding:48px 10px 54px
   }
@@ -3315,14 +3277,6 @@ body.proofModalOpen{overflow:hidden}
 .valueStack .valueCard:nth-child(3){
   background:linear-gradient(135deg,rgba(209,164,95,.15),rgba(255,255,255,.72))!important
 }
-.caseStoryResult{
-  margin-left:-8px;
-  margin-right:-8px;
-  padding-left:8px!important;
-  padding-right:8px!important;
-  border-radius:10px;
-  background:linear-gradient(90deg,rgba(130,184,149,.12),rgba(114,172,209,.06))
-}
 .trustFacts span:nth-child(1){background:rgba(114,172,209,.12)!important}
 .trustFacts span:nth-child(2){background:rgba(130,184,149,.12)!important}
 .trustFacts span:nth-child(3){background:rgba(209,164,95,.12)!important}
@@ -3418,6 +3372,25 @@ body.proofModalOpen{overflow:hidden}
   .mobileStickyCta{
     font-size:10px!important
   }
+}
+/* 2026-09-27 · lighter consultation CTA + cleaner cases */
+.heroBtn.primary{
+  color:#173227!important;
+  background:linear-gradient(135deg,#E7F4EC 0%,#C9E5D3 48%,#A8D2B7 100%)!important;
+  border:1px solid rgba(255,255,255,.80)!important;
+  box-shadow:0 12px 30px rgba(88,142,104,.18)!important
+}
+.heroBtn.primary:hover{
+  color:#10281d!important;
+  background:linear-gradient(135deg,#F1F8F4 0%,#D6EBDD 52%,#B5D9C1 100%)!important;
+  box-shadow:0 14px 34px rgba(88,142,104,.23)!important;
+  transform:translateY(-1px)
+}
+.caseBody>h3{
+  margin-bottom:18px!important
+}
+.caseStats{
+  margin-top:0!important
 }
 </style>
 <script type="application/ld+json">
@@ -3665,11 +3638,6 @@ body.proofModalOpen{overflow:hidden}
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3>
-    <div class="caseStory">
-      <div><span>Задача</span><b>Стабільні звернення на cleaning у Toronto / GTA</b></div>
-      <div><span>Що зробив</span><b>Офер, креативи й Meta Ads під локальний ринок</b></div>
-      <div class="caseStoryResult"><span>Результат</span><b>1 097 діалогів · $2.39 CAD / діалог</b></div>
-    </div>
     <div class="caseStats"><div class="caseStat"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -3678,11 +3646,6 @@ body.proofModalOpen{overflow:hidden}
 <article class="caseCard reveal">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
   <div class="caseBody"><h3>Косметологічний центр</h3>
-    <div class="caseStory">
-      <div><span>Задача</span><b>Масштабувати потік заявок на процедури у США</b></div>
-      <div><span>Що зробив</span><b>Аудит, нові креативи, сегментація й оптимізація DM</b></div>
-      <div class="caseStoryResult"><span>Результат</span><b>1 984 заявки · $9.84 / заявка · 16% у клієнта</b></div>
-    </div>
     <div class="caseStats"><div class="caseStat"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -3700,11 +3663,6 @@ body.proofModalOpen{overflow:hidden}
 <article class="caseCard caseExtra">
   <div class="casePhoto realEstateCasePhoto"><img src="assets/site/covers/real-estate-spain-premium-v2.webp" alt="Преміальна нерухомість в Іспанії" loading="lazy" decoding="async"><span class="caseTag">Real Estate · Spain</span></div>
   <div class="caseBody"><h3>Нерухомість в Іспанії</h3>
-    <div class="caseStory">
-      <div><span>Задача</span><b>Заявки на об’єкти в Іспанії від €200 000</b></div>
-      <div><span>Що зробив</span><b>Meta Ads → lead form для аудиторії в Україні</b></div>
-      <div class="caseStoryResult"><span>Результат</span><b>2 угоди + ще 8 потенційних клієнтів у виборі</b></div>
-    </div>
     <div class="caseStats"><div class="caseStat"><strong>2</strong><span>підписані угоди</span></div><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-type="video" data-proof-creative="assets/site/videos/real-estate-spain.mp4" data-proof-ads="assets/site/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -3713,11 +3671,6 @@ body.proofModalOpen{overflow:hidden}
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг · London</h3>
-    <div class="caseStory">
-      <div><span>Задача</span><b>Отримувати заявки на cleaning через сайт</b></div>
-      <div><span>Що зробив</span><b>Meta Ads для локального cleaning service у London</b></div>
-      <div class="caseStoryResult"><span>Результат</span><b>13 website leads · £29.90 / lead</b></div>
-    </div>
     <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -3726,11 +3679,6 @@ body.proofModalOpen{overflow:hidden}
 <article class="caseCard caseExtra">
   <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
   <div class="caseBody"><h3>Детейлінг · Amsterdam</h3>
-    <div class="caseStory">
-      <div><span>Задача</span><b>Потік звернень на detailing у Amsterdam</b></div>
-      <div><span>Що зробив</span><b>Креативи + кампанія на conversations</b></div>
-      <div class="caseStoryResult"><span>Результат</span><b>147 розмов · 10% конверсії в клієнта</b></div>
-    </div>
     <div class="caseStats"><div class="caseStat"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -3739,11 +3687,6 @@ body.proofModalOpen{overflow:hidden}
 <article class="caseCard caseExtra">
   <div class="casePhoto medicalCasePhoto"><img src="assets/site/covers/medical-center-premium.webp" alt="Преміальний медичний центр New York" loading="lazy" decoding="async"><span class="caseTag">Medical · New York</span></div>
   <div class="caseBody"><h3>Медичний центр · New York</h3>
-    <div class="caseStory">
-      <div><span>Задача</span><b>Стабільний потік заявок на медичні послуги</b></div>
-      <div><span>Що зробив</span><b>Meta Ads + оптимізація під якісні ліди</b></div>
-      <div class="caseStoryResult"><span>Результат</span><b>191 заявка · $6.62 / заявка · 19% у клієнта</b></div>
-    </div>
     <div class="caseStats"><div class="caseStat"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-type="video" data-proof-creative="assets/site/videos/medical-center.mp4" data-proof-ads="assets/site/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
   </div>
@@ -3780,12 +3723,12 @@ body.proofModalOpen{overflow:hidden}
         <img src="https://github.com/VAdym9083.png?size=512" alt="Vadym — Performance Marketer" loading="lazy" decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('trustPortraitFallback')">
       </div>
       <div class="trustCopy">
-        <span class="trustLabel">ХТО БУДЕ ПРАЦЮВАТИ З ВАМИ</span>
-        <h2>Вашу рекламу веду я особисто</h2>
-        <p>Я — Vadym. Допомагаю локальному бізнесу отримувати нових клієнтів через Facebook та Instagram. Ви спілкуєтесь напряму зі мною — від першої консультації до запуску й покращення реклами</p>
+        <span class="trustLabel">ПРО МЕНЕ</span>
+        <h2>Я сам веду вашу рекламу</h2>
+        <p>Мене звати Vadym. Ви пишете мені напряму, я сам налаштовую рекламу, дивлюся результати й вношу зміни. Без менеджерів між нами</p>
         <div class="trustFacts">
-          <span><b>3+</b> роки запускаю рекламу</span>
-          <span><b>Напряму</b> без менеджерів між нами</span>
+          <span><b>3+</b> роки досвіду</span>
+          <span><b>Напряму</b> працюєте зі мною</span>
           <span><b>Cleaning</b> 1 місто = 1 клієнт</span>
         </div>
         <div class="trustActions">
