@@ -3219,6 +3219,42 @@ body.proofModalOpen{overflow:hidden}
     min-height:130px
   }
 }
+/* 2026-09-27 · free consultation messaging */
+.freeCtaMobile{display:none}
+.freeConsultationNote{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:rgba(255,255,255,.68);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.04em
+}
+.freeConsultationNote span{
+  min-width:28px;
+  height:28px;
+  padding:0 7px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  color:#1f3327;
+  background:var(--accent-sage);
+  box-shadow:0 6px 20px rgba(157,189,168,.18);
+  font-size:8px;
+  font-weight:950
+}
+@media (max-width:767px){
+  .freeCtaDesktop{display:none}
+  .freeCtaMobile{display:inline}
+  .freeConsultationHeader{
+    white-space:nowrap
+  }
+  .freeConsultationNote{
+    margin-top:9px;
+    font-size:7.5px
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -3282,7 +3318,7 @@ body.proofModalOpen{overflow:hidden}
     </nav>
     <div class="navActions">
       <a class="pill hideMobile" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram</a>
-      <a class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати →</a>
+      <a class="pill dark freeConsultationHeader" href="https://t.me/target_vadym" target="_blank" rel="noopener"><span class="freeCtaDesktop">Безкоштовна консультація →</span><span class="freeCtaMobile">Безкоштовно →</span></a>
     </div>
   </div>
 </header>
@@ -3300,9 +3336,10 @@ body.proofModalOpen{overflow:hidden}
         <p class="heroLead"><strong>Спеціалізація — клінінг.</strong> Допомагаю локальному бізнесу отримувати звернення з Facebook та Instagram. Люди бачать рекламу, пишуть вам або залишають заявку, а ви бачите ціну кожного звернення</p>
 
         <div class="heroButtons">
-          <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Обговорити рекламу →</a>
+          <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Безкоштовна консультація →</a>
           <a class="heroBtn" href="#case">Подивитися кейси</a>
         </div>
+        <div class="freeConsultationNote"><span>0€</span> Перша консультація — безкоштовна</div>
 
       </div>
 
@@ -3592,8 +3629,8 @@ body.proofModalOpen{overflow:hidden}
           <span><b>1 місто</b> = 1 cleaning-клієнт</span>
         </div>
         <div class="trustActions">
-          <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Telegram · @target_vadym →</a>
-          <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram · @lebedenkkko →</a>
+          <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Безкоштовна консультація · Telegram →</a>
+          <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Безкоштовна консультація · Instagram →</a>
         </div>
       </div>
     </div>
@@ -3704,7 +3741,7 @@ body.proofModalOpen{overflow:hidden}
           </select>
           <span class="selectArrow">⌄</span>
         </div>
-        <p class="cityHint">Не бачите місто? Напишіть у Telegram — перевірю вручну</p>
+        <p class="cityHint">Не бачите місто? Безкоштовно перевірю вручну</p>
       </div>
 
       <div class="cityResult busyResult" id="cityResult">
@@ -3712,7 +3749,7 @@ body.proofModalOpen{overflow:hidden}
         <strong id="cityResultName">Toronto / GTA</strong>
         <div class="resultBadge" id="cityResultBadge">ЗАЙНЯТО</div>
         <p id="cityResultText">У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру</p>
-        <a id="cityResultCta" class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Написати щодо іншого міста →</a>
+        <a id="cityResultCta" class="pill dark" href="https://t.me/target_vadym" target="_blank" rel="noopener">Безкоштовна консультація щодо іншого міста →</a>
       </div>
     </div>
   </div>
@@ -3731,13 +3768,13 @@ body.proofModalOpen{overflow:hidden}
   <div class="wrap">
     <div class="ctaBox reveal">
       <div>
-        <div class="label">Контакт напряму</div>
-        <h2>Спочатку перевірю потенціал</h2>
-        <p>Напишіть нішу, місто, послугу й коротко опишіть рекламу. Спочатку дивлюся на бізнес і кажу, чи бачу потенціал для Meta Ads та сенс у співпраці</p>
+        <div class="label">Безкоштовна консультація</div>
+        <h2>Безкоштовно розберу ваш бізнес і рекламу</h2>
+        <p>Перша консультація — безкоштовна. Напишіть нішу, місто, послугу й коротко опишіть рекламу. Я подивлюся на бізнес і скажу, чи бачу потенціал для Meta Ads та сенс у співпраці</p>
       </div>
       <div class="contactStack">
-        <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener"><div><b>Telegram</b><br><span>@target_vadym</span></div><strong>→</strong></a>
-        <a class="contact" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener"><div><b>Instagram</b><br><span>@lebedenkkko</span></div><strong>→</strong></a>
+        <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener"><div><b>Безкоштовна консультація</b><br><span>Telegram · @target_vadym</span></div><strong>→</strong></a>
+        <a class="contact" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener"><div><b>Безкоштовна консультація</b><br><span>Instagram · @lebedenkkko</span></div><strong>→</strong></a>
       </div>
     </div>
   </div>
@@ -3745,7 +3782,7 @@ body.proofModalOpen{overflow:hidden}
 </main>
 
 <a class="mobileStickyCta" id="mobileStickyCta" href="https://t.me/target_vadym" target="_blank" rel="noopener">
-  <span>Обговорити рекламу</span><b>→</b>
+  <span>Безкоштовна консультація</span><b>→</b>
 </a>
 
 <div class="caseProofModal" id="caseProofModal" aria-hidden="true">
@@ -3815,7 +3852,7 @@ body.proofModalOpen{overflow:hidden}
 <footer>
   <div class="wrap footer">
     <span>© 2026 Таргет LB · Vadym — Performance Marketer</span>
-    <span>Instagram @lebedenkkko · Telegram @target_vadym</span>
+    <span>Безкоштовна консультація · Instagram @lebedenkkko · Telegram @target_vadym</span>
   </div>
 </footer>
 
@@ -3864,7 +3901,7 @@ function renderCityStatus(){
     : 'Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці';
   cityResult.classList.toggle('busyResult',busy);
   cityResult.classList.toggle('freeResult',!busy);
-  cityResultCta.textContent=busy?'Написати щодо іншого міста →':'Обговорити запуск →';
+  cityResultCta.textContent=busy?'Безкоштовна консультація щодо іншого міста →':'Безкоштовна консультація →';
 }
 if(citySelect){citySelect.addEventListener('change',renderCityStatus);renderCityStatus();}
 
