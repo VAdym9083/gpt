@@ -4439,14 +4439,15 @@ function renderCityStatus(){
   if(!citySelect)return;
   const city=citySelect.value;
   const busy=occupiedCities.has(city);
+  const t=(value)=>window.siteTranslate?window.siteTranslate(value):value;
   cityResultName.textContent=city;
-  cityResultBadge.textContent=busy?'ЗАЙНЯТО':'ВІЛЬНО';
-  cityResultText.textContent=busy
+  cityResultBadge.textContent=t(busy?'ЗАЙНЯТО':'ВІЛЬНО');
+  cityResultText.textContent=t(busy
     ? 'У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру'
-    : 'Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці';
+    : 'Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці');
   cityResult.classList.toggle('busyResult',busy);
   cityResult.classList.toggle('freeResult',!busy);
-  cityResultCta.textContent=busy?'Отримати безкоштовну консультацію →':'Отримати безкоштовну консультацію →';
+  cityResultCta.textContent=t('Отримати безкоштовну консультацію →');
 }
 if(citySelect){citySelect.addEventListener('change',renderCityStatus);renderCityStatus();}
 
@@ -4462,8 +4463,9 @@ const proofAds=document.getElementById('caseProofAds');
 
 function openProofModal(button){
   const type=button.dataset.proofType||'image';
-  proofTitle.textContent=button.dataset.proofTitle||'Кейс';
-  proofCreativeLabel.textContent=type==='video'?'Відеокреатив':'Креатив';
+  const t=(value)=>window.siteTranslate?window.siteTranslate(value):value;
+  proofTitle.textContent=t(button.dataset.proofTitle||'Кейс');
+  proofCreativeLabel.textContent=t(type==='video'?'Відеокреатив':'Креатив');
   proofAds.src=button.dataset.proofAds||'';
 
   if(type==='video'){
@@ -4549,9 +4551,9 @@ if(caseZoomModal)caseZoomModal.addEventListener('click',(event)=>{
 
 function openCurrentProofCreativeLarge(){
   if(!proofCreativeVideo.hidden&&proofCreativeVideo.src){
-    openStandaloneMedia('video',proofCreativeVideo.currentSrc||proofCreativeVideo.src,proofTitle.textContent+' · Відеокреатив');
+    openStandaloneMedia('video',proofCreativeVideo.currentSrc||proofCreativeVideo.src,proofTitle.textContent+' · '+(window.siteTranslate?window.siteTranslate('Відеокреатив'):'Відеокреатив'));
   }else if(!proofCreativeImage.hidden&&proofCreativeImage.src){
-    openStandaloneMedia('image',proofCreativeImage.currentSrc||proofCreativeImage.src,proofTitle.textContent+' · Креатив');
+    openStandaloneMedia('image',proofCreativeImage.currentSrc||proofCreativeImage.src,proofTitle.textContent+' · '+(window.siteTranslate?window.siteTranslate('Креатив'):'Креатив'));
   }
 }
 if(caseCreativeFrame)caseCreativeFrame.addEventListener('click',openCurrentProofCreativeLarge);
@@ -4622,9 +4624,9 @@ function renderGalleryLightbox(){
     }else{
       galleryLightboxImage.hidden=false;
       galleryLightboxImage.src=activeStandaloneMedia?.src||'';
-      galleryLightboxImage.alt=activeStandaloneMedia?.caption||'Матеріал кейсу';
+      galleryLightboxImage.alt=activeStandaloneMedia?.caption||(window.siteTranslate?window.siteTranslate('Матеріал кейсу'):'Матеріал кейсу');
     }
-    galleryLightboxCaption.textContent=activeStandaloneMedia?.caption||'Матеріал кейсу';
+    galleryLightboxCaption.textContent=activeStandaloneMedia?.caption||(window.siteTranslate?window.siteTranslate('Матеріал кейсу'):'Матеріал кейсу');
     galleryLightbox.classList.add('mediaOnly');
     return;
   }
@@ -4644,8 +4646,8 @@ function renderGalleryLightbox(){
     galleryLightboxReview.hidden=true;
     galleryLightboxImage.hidden=false;
     galleryLightboxImage.src=img?.currentSrc||img?.src||'';
-    galleryLightboxImage.alt=img?.alt||'Креатив';
-    galleryLightboxCaption.textContent=item.querySelector('.creativeBadge')?.textContent||'Креатив';
+    galleryLightboxImage.alt=img?.alt||(window.siteTranslate?window.siteTranslate('Креатив'):'Креатив');
+    galleryLightboxCaption.textContent=item.querySelector('.creativeBadge')?.textContent||(window.siteTranslate?window.siteTranslate('Креатив'):'Креатив');
   }else{
     const img=item.querySelector('img');
     galleryLightboxVideo.pause();
@@ -4654,8 +4656,8 @@ function renderGalleryLightbox(){
     galleryLightboxReview.hidden=true;
     galleryLightboxImage.hidden=false;
     galleryLightboxImage.src=img?.currentSrc||img?.src||'';
-    galleryLightboxImage.alt=img?.alt||'Відгук клієнта';
-    galleryLightboxCaption.textContent=item.querySelector('.reviewContext')?.textContent||item.getAttribute('aria-label')||'Відгук клієнта';
+    galleryLightboxImage.alt=img?.alt||(window.siteTranslate?window.siteTranslate('Відгук клієнта'):'Відгук клієнта');
+    galleryLightboxCaption.textContent=item.querySelector('.reviewContext')?.textContent||item.getAttribute('aria-label')||(window.siteTranslate?window.siteTranslate('Відгук клієнта'):'Відгук клієнта');
   }
 }
 function openStandaloneMedia(type,src,caption){
@@ -4764,117 +4766,128 @@ document.addEventListener('keydown',(event)=>{
   const langCode={uk:"UA",en:"EN",es:"ES"};
   const htmlLang={uk:"uk",en:"en",es:"es-ES"};
   let currentLang="uk";
-  const originals=new WeakMap();
-  const attrOriginals=new WeakMap();
 
-  function isUiNode(node){
-    const el=node.nodeType===1?node:node.parentElement;
-    return !!(el&&el.closest&&el.closest("[data-i18n-ui],script,style"));
+  const hasOwn=(obj,key)=>Object.prototype.hasOwnProperty.call(obj,key);
+  const isReviewLabel=(key)=>/^Відгук клієнта \d+$/.test(key);
+
+  function translateString(key,lang=currentLang){
+    if(!key||lang==="uk")return key;
+    const table=translations[lang]||{};
+    if(hasOwn(table,key))return table[key];
+    const review=key.match(/^Відгук клієнта (\d+)$/);
+    if(review)return lang==="en"?"Client review "+review[1]:"Reseña del cliente "+review[1];
+    return key;
   }
-  function rememberText(node){
-    const raw=node.nodeValue;
-    const key=raw&&raw.trim();
-    if(!key)return;
-    if((translations.en[key]||translations.es[key])) originals.set(node,raw);
-    else if(!originals.has(node)) originals.set(node,raw);
+
+  const textTargets=[];
+  const attrTargets=[];
+  const switchers=[...document.querySelectorAll(".languageSwitcher")];
+  const languageOptions=[...document.querySelectorAll(".languageOption")];
+  const languageCurrents=[...document.querySelectorAll(".languageCurrent")];
+  const languageToggles=[...document.querySelectorAll(".languageToggle")];
+
+  function isTranslatable(key){
+    return !!key&&(hasOwn(translations.en,key)||hasOwn(translations.es,key)||isReviewLabel(key));
   }
-  function translateTextNode(node,lang){
-    if(isUiNode(node))return;
-    const current=(node.nodeValue||"").trim();
-    if(current && (translations.en[current]||translations.es[current])) originals.set(node,node.nodeValue);
-    if(!originals.has(node)) rememberText(node);
-    const original=originals.get(node);
-    if(!original)return;
-    const key=original.trim();
-    const value=lang==="uk"?key:(translations[lang][key]||key);
-    const lead=original.match(/^\s*/)?.[0]||"";
-    const trail=original.match(/\s*$/)?.[0]||"";
-    node.nodeValue=lead+value+trail;
-  }
-  function translateAllText(lang){
+
+  function buildTranslationIndex(){
     const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
     let node;
-    while((node=walker.nextNode())) translateTextNode(node,lang);
-  }
-  function attrStore(el){
-    if(!attrOriginals.has(el))attrOriginals.set(el,{});
-    return attrOriginals.get(el);
-  }
-  function translateAttribute(el,attr,lang){
-    const store=attrStore(el);
-    if(!(attr in store))store[attr]=el.getAttribute(attr);
-    const original=store[attr];
-    if(!original)return;
-    let key=original.trim();
-    let value=lang==="uk"?key:(translations[lang][key]||key);
-    let m;
-    if(lang!=="uk"&&(m=key.match(/^Відгук клієнта (\d+)$/))){
-      value=lang==="en"?"Client review "+m[1]:"Reseña del cliente "+m[1];
+    while((node=walker.nextNode())){
+      const parent=node.parentElement;
+      if(!parent||parent.closest("[data-i18n-ui],script,style"))continue;
+      const raw=node.nodeValue||"";
+      const key=raw.trim();
+      if(!isTranslatable(key))continue;
+      const pos=raw.indexOf(key);
+      textTargets.push({
+        node,
+        key,
+        prefix:pos>0?raw.slice(0,pos):"",
+        suffix:raw.slice(pos+key.length)
+      });
     }
-    el.setAttribute(attr,value);
-  }
-  function translateAttributes(lang){
+
     document.querySelectorAll("[aria-label],[alt],[title]").forEach(el=>{
       if(el.closest("[data-i18n-ui]"))return;
-      ["aria-label","alt","title"].forEach(attr=>{if(el.hasAttribute(attr))translateAttribute(el,attr,lang)});
+      ["aria-label","alt","title"].forEach(attr=>{
+        if(!el.hasAttribute(attr))return;
+        const key=(el.getAttribute(attr)||"").trim();
+        if(isTranslatable(key))attrTargets.push({el,attr,key});
+      });
     });
   }
-  function applyLanguage(lang){
+
+  function updateSwitcherUi(lang){
+    for(const btn of languageOptions)btn.classList.toggle("isActive",btn.dataset.lang===lang);
+    for(const el of languageCurrents)el.textContent=langCode[lang];
+    const aria=lang==="uk"?"Вибір мови":lang==="en"?"Choose language":"Elegir idioma";
+    for(const btn of languageToggles){
+      btn.setAttribute("aria-label",aria);
+      btn.setAttribute("aria-expanded","false");
+    }
+    for(const sw of switchers)sw.classList.remove("isOpen");
+  }
+
+  function applyLanguage(lang,force=false){
     if(!langCode[lang])lang="uk";
+    if(lang===currentLang&&!force){
+      updateSwitcherUi(lang);
+      return;
+    }
+
     currentLang=lang;
     document.documentElement.lang=htmlLang[lang];
-    translateAllText(lang);
-    translateAttributes(lang);
-    document.querySelectorAll(".languageOption").forEach(btn=>btn.classList.toggle("isActive",btn.dataset.lang===lang));
-    document.querySelectorAll(".languageCurrent").forEach(el=>el.textContent=langCode[lang]);
-    document.querySelectorAll(".languageToggle").forEach(btn=>{
-      btn.setAttribute("aria-label",lang==="uk"?"Вибір мови":lang==="en"?"Choose language":"Elegir idioma");
-      btn.setAttribute("aria-expanded","false");
-    });
-    document.querySelectorAll(".languageSwitcher").forEach(el=>el.classList.remove("isOpen"));
+
+    for(let i=0;i<textTargets.length;i++){
+      const item=textTargets[i];
+      const next=item.prefix+translateString(item.key,lang)+item.suffix;
+      if(item.node.nodeValue!==next)item.node.nodeValue=next;
+    }
+    for(let i=0;i<attrTargets.length;i++){
+      const item=attrTargets[i];
+      const next=translateString(item.key,lang);
+      if(item.el.getAttribute(item.attr)!==next)item.el.setAttribute(item.attr,next);
+    }
+
+    updateSwitcherUi(lang);
     document.dispatchEvent(new CustomEvent("siteLanguageChanged",{detail:{lang}}));
   }
+
+  function closeLanguageMenus(){
+    for(const sw of switchers)sw.classList.remove("isOpen");
+    for(const btn of languageToggles)btn.setAttribute("aria-expanded","false");
+  }
+
   function initSwitcher(){
-    document.querySelectorAll(".languageSwitcher").forEach(sw=>{
+    for(const sw of switchers){
       const toggle=sw.querySelector(".languageToggle");
-      toggle.addEventListener("click",e=>{
+      if(toggle)toggle.addEventListener("click",e=>{
         e.stopPropagation();
         const open=!sw.classList.contains("isOpen");
-        document.querySelectorAll(".languageSwitcher").forEach(x=>x.classList.remove("isOpen"));
-        sw.classList.toggle("isOpen",open);
-        toggle.setAttribute("aria-expanded",open?"true":"false");
-      });
-      sw.querySelectorAll(".languageOption").forEach(btn=>btn.addEventListener("click",()=>{
-        applyLanguage(btn.dataset.lang);
-      }));
-    });
-    document.addEventListener("click",()=>document.querySelectorAll(".languageSwitcher").forEach(sw=>{
-      sw.classList.remove("isOpen");
-      const t=sw.querySelector(".languageToggle"); if(t)t.setAttribute("aria-expanded","false");
-    }));
-    document.addEventListener("keydown",e=>{
-      if(e.key==="Escape")document.querySelectorAll(".languageSwitcher").forEach(sw=>{
-        sw.classList.remove("isOpen");
-        const t=sw.querySelector(".languageToggle"); if(t)t.setAttribute("aria-expanded","false");
-      });
-    });
-  }
-  const observer=new MutationObserver(records=>{
-    if(currentLang==="uk")return;
-    for(const record of records){
-      if(record.type==="characterData") translateTextNode(record.target,currentLang);
-      record.addedNodes&&record.addedNodes.forEach(n=>{
-        if(n.nodeType===3)translateTextNode(n,currentLang);
-        if(n.nodeType===1){
-          const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT); let t;
-          while((t=w.nextNode()))translateTextNode(t,currentLang);
+        closeLanguageMenus();
+        if(open){
+          sw.classList.add("isOpen");
+          toggle.setAttribute("aria-expanded","true");
         }
       });
+      sw.querySelectorAll(".languageOption").forEach(btn=>{
+        btn.addEventListener("click",e=>{
+          e.stopPropagation();
+          applyLanguage(btn.dataset.lang);
+        });
+      });
     }
-  });
+    document.addEventListener("click",closeLanguageMenus,{passive:true});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLanguageMenus()});
+  }
+
+  buildTranslationIndex();
   initSwitcher();
-  observer.observe(document.body,{subtree:true,childList:true,characterData:true});
-  applyLanguage("uk");
+  applyLanguage("uk",true);
+
+  window.siteTranslate=(value)=>translateString(value,currentLang);
+  window.getSiteLanguage=()=>currentLang;
   window.setSiteLanguage=applyLanguage;
 })();
 </script>
