@@ -3776,6 +3776,209 @@ body.proofModalOpen{overflow:hidden}
   .languageSwitcher.isOpen .languageMenu{transform:translateY(0)}
 }
 
+
+/* 2026-09-29 · conversion structure pass */
+
+/* Hero: unique CSS-built premium background, no generic stock photo */
+.heroShell{
+  background:
+    radial-gradient(circle at 78% 18%,rgba(143,182,210,.42),transparent 24%),
+    radial-gradient(circle at 83% 68%,rgba(157,189,168,.26),transparent 30%),
+    radial-gradient(circle at 98% 96%,rgba(213,185,138,.24),transparent 26%),
+    linear-gradient(118deg,#11171d 0%,#1d2a33 34%,#536571 64%,#c6b8a6 100%)!important
+}
+.heroShell:after{
+  content:"";
+  position:absolute;
+  right:-8%;
+  top:8%;
+  width:58%;
+  height:82%;
+  border-radius:48% 52% 54% 46%;
+  background:
+    radial-gradient(circle at 34% 30%,rgba(255,255,255,.23),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,0) 56%);
+  filter:blur(2px);
+  opacity:.78;
+  transform:rotate(-8deg);
+  pointer-events:none
+}
+.heroVeil{
+  background:
+    linear-gradient(90deg,rgba(5,7,10,.84) 0%,rgba(5,7,10,.64) 30%,rgba(5,7,10,.17) 59%,rgba(245,235,225,.04) 100%),
+    linear-gradient(180deg,rgba(5,7,10,.04) 52%,rgba(8,9,11,.55) 100%)!important
+}
+.heroProofList b{letter-spacing:.055em!important}
+.heroProofList>div:last-child b{color:#d8e7dc!important}
+
+/* Proof now arrives immediately after the first screen */
+.casePrioritySection{
+  padding-top:84px!important;
+  padding-bottom:96px!important
+}
+.casePrioritySection .sectionHead{
+  margin-bottom:34px!important
+}
+.caseNicheLine{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  margin-top:16px;
+  color:#668DA6;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.11em;
+  text-transform:uppercase
+}
+.caseStats{
+  grid-template-columns:1.24fr 1fr 1fr!important;
+  gap:7px!important
+}
+.caseStatPrimary{
+  padding:14px 11px!important;
+  background:linear-gradient(145deg,rgba(157,189,168,.29),rgba(255,255,255,.88))!important;
+  border-color:rgba(93,139,111,.25)!important
+}
+.caseStatPrimary strong{
+  font-size:36px!important;
+  line-height:.92!important;
+  color:#3f6750!important
+}
+.caseStatPrimary span{
+  color:#537460!important;
+  font-weight:900!important
+}
+
+/* 01→04 remains, but no longer delays the proof or dominates the page */
+.journeyAirSection{
+  padding:58px 0 64px!important
+}
+.journeyAirHead{
+  gap:38px!important;
+  margin-bottom:24px!important
+}
+.journeyAirTitle h2{
+  font-size:clamp(40px,4.6vw,62px)!important
+}
+.journeyAirFlow{gap:11px!important}
+.journeyAirCard{
+  min-height:356px!important;
+  padding:14px 14px 17px!important;
+  border-radius:24px!important
+}
+.journeyAirMeta{
+  margin-bottom:10px!important
+}
+.journeyAirMeta strong{
+  font-size:26px!important
+}
+.journeyAirVisual{
+  height:164px!important;
+  border-radius:17px!important
+}
+.journeyAirStudioPoster.posterLeft,
+.journeyAirStudioPoster.posterRight{
+  width:70px!important;
+  height:88px!important;
+  top:38px!important
+}
+.journeyAirStudioPoster.posterLeft{left:14px!important}
+.journeyAirStudioPoster.posterRight{right:14px!important}
+.journeyAirStudioPoster.posterCenter{
+  width:86px!important;
+  height:111px!important;
+  top:23px!important
+}
+.journeyAirStudioNote{
+  bottom:8px!important;
+  padding:5px 7px!important
+}
+.journeyAirMessage{padding:11px!important}
+.journeyAirChat{padding:10px!important}
+.journeyAirChatHead{padding-bottom:8px!important}
+.journeyAirBubble{
+  margin-top:7px!important;
+  padding:7px 8px!important;
+  font-size:6.2px!important
+}
+.journeyAirBooking{padding:12px!important}
+.journeyAirBookingCard{padding:13px!important}
+.journeyAirBookingCard>strong{
+  margin-top:11px!important;
+  font-size:16px!important
+}
+.journeyAirBookingLine{margin:11px 0 8px!important}
+.journeyAirSuccess{padding:16px!important}
+.journeyAirSuccessMark{
+  width:42px!important;
+  height:42px!important
+}
+.journeyAirSuccess>div:last-child{margin-top:12px!important}
+.journeyAirCard h3{
+  margin-top:14px!important;
+  font-size:18px!important
+}
+.journeyAirCard>p{
+  margin-top:7px!important;
+  font-size:9.5px!important
+}
+.journeyAirOutcome{
+  margin-top:14px!important;
+  padding:14px 17px!important
+}
+
+/* The next section no longer creates another oversized gap after the compact story */
+#approach.section{
+  padding-top:82px!important
+}
+
+@media (max-width:767px){
+  .heroShell:after{
+    width:94%;
+    right:-42%;
+    top:12%;
+    opacity:.52
+  }
+  .casePrioritySection{
+    padding-top:58px!important;
+    padding-bottom:66px!important
+  }
+  .caseNicheLine{
+    margin-top:12px;
+    font-size:7.5px;
+    line-height:1.55
+  }
+  .caseStats{
+    grid-template-columns:1.18fr 1fr 1fr!important
+  }
+  .caseStatPrimary strong{
+    font-size:22px!important
+  }
+  .journeyAirSection{
+    padding:44px 10px 52px!important
+  }
+  .journeyAirTitle h2{
+    font-size:35px!important
+  }
+  .journeyAirFlow{gap:11px!important}
+  .journeyAirCard{
+    padding:14px!important;
+    border-radius:21px!important
+  }
+  .journeyAirVisual{
+    height:190px!important
+  }
+  .journeyAirBubble{
+    font-size:7.8px!important
+  }
+  .journeyAirCard h3{
+    font-size:19px!important
+  }
+  #approach.section{
+    padding-top:62px!important
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -3858,15 +4061,14 @@ body.proofModalOpen{overflow:hidden}
 <main id="top">
 <section class="hero">
   <div class="wrap heroShell">
-    <img class="heroImage" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88" alt="Premium marketing workspace">
-    <div class="heroVeil"></div>
+<div class="heroVeil"></div>
 
     <div class="heroContent">
       <div class="heroCopy">
         <div class="heroFreeLead"><span></span><strong>Перша консультація — безкоштовна</strong></div>
         <div class="eyebrow">Реклама у Facebook та Instagram · Canada / USA</div>
         <h1>Вам потрібні <span>заявки</span> Не просто реклама</h1>
-        <p class="heroLead"><strong>Основна спеціалізація — клінінг.</strong> Також працюю з іншими локальними бізнесами. Нижче — реальні кейси з різних ніш.</p>
+        <p class="heroLead"><strong>Основна спеціалізація — клінінг.</strong> Також працюю з beauty, medical, real estate, detailing та іншими локальними бізнесами. Нижче — реальні результати з різних ніш.</p>
 
         <div class="heroButtons">
           <a class="heroBtn primary" href="https://t.me/target_vadym" target="_blank" rel="noopener">Отримати безкоштовну консультацію →</a>
@@ -3884,10 +4086,103 @@ body.proofModalOpen{overflow:hidden}
         <div class="heroProofList" aria-label="Спеціалізація">
           <div><span>01</span><b>Facebook + Instagram</b></div>
           <div><span>02</span><b>Local Business</b></div>
-          <div><span>03</span><b>Canada + USA</b></div>
+          <div><span>03</span><b>Cleaning + інші ніші</b></div>
         </div>
       </aside>
 
+    </div>
+  </div>
+</section>
+
+<section class="section casePrioritySection" id="case">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="label">Кейси / Results</div>
+      <div>
+        <h2>Результати з реальних запусків</h2>
+        <p>Підтверджені результати з cleaning, beauty, medical, real estate, detailing та інших локальних проєктів. Без намальованої статистики</p>
+        <div class="caseNicheLine">Cleaning · Beauty · Medical · Real Estate · Detailing</div>
+      </div>
+    </div>
+
+    <div class="caseGrid">
+<article class="caseCard reveal">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
+  <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3>
+    <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
+  </div>
+</article>
+
+<article class="caseCard reveal">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
+  <div class="caseBody"><h3>Косметологічний центр</h3>
+    <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
+    <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
+  </div>
+</article>
+    </div>
+
+    <input class="casesToggleInput" type="checkbox" id="casesToggle">
+    <label class="casesToggleLabel" for="casesToggle">
+      <span class="casesShow">Переглянути більше кейсів ↓</span>
+      <span class="casesHide">Сховати додаткові кейси ↑</span>
+    </label>
+
+    <div class="extraCasesWrap" id="extraCasesWrap">
+      <div class="caseGrid extraCaseGrid">
+<article class="caseCard caseExtra">
+  <div class="casePhoto realEstateCasePhoto"><img src="assets/site/covers/real-estate-spain-premium-v2.webp" alt="Преміальна нерухомість в Іспанії" loading="lazy" decoding="async"><span class="caseTag">Real Estate · Spain</span></div>
+  <div class="caseBody"><h3>Нерухомість в Іспанії</h3>
+    <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>2</strong><span>підписані угоди</span></div><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div></div>
+    <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-type="video" data-proof-creative="assets/site/videos/real-estate-spain.mp4" data-proof-ads="assets/site/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
+  </div>
+</article>
+
+<article class="caseCard caseExtra">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
+  <div class="caseBody"><h3>Клінінг · London</h3>
+    <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
+    <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
+  </div>
+</article>
+
+<article class="caseCard caseExtra">
+  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
+  <div class="caseBody"><h3>Детейлінг · Amsterdam</h3>
+    <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
+    <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
+  </div>
+</article>
+
+<article class="caseCard caseExtra">
+  <div class="casePhoto medicalCasePhoto"><img src="assets/site/covers/medical-center-premium.webp" alt="Преміальний медичний центр New York" loading="lazy" decoding="async"><span class="caseTag">Medical · New York</span></div>
+  <div class="caseBody"><h3>Медичний центр · New York</h3>
+    <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
+    <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-type="video" data-proof-creative="assets/site/videos/medical-center.mp4" data-proof-ads="assets/site/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
+  </div>
+</article>
+      </div>
+
+      <div class="highlightProof glassLight moreProof highlightProofSimple">
+        <div class="highlightProofCopy">
+          <span class="label">Ще більше доказів</span>
+          <h3>Більше кейсів — в Instagram</h3>
+          <p>У Highlights <b>«КЕЙСИ»</b> зібрані додаткові результати, скріни рекламного кабінету та приклади запусків</p>
+          <div class="highlightActions">
+            <button class="pill dark instagramWhereButton" id="instagramWhereButton" type="button">Де це? →</button>
+          </div>
+        </div>
+        <aside class="instagramDirectCard" aria-label="Instagram @lebedenkkko">
+          <div class="instagramDirectTop">
+            <span class="instagramDirectIcon">IG</span>
+            <span>INSTAGRAM</span>
+          </div>
+          <strong>@lebedenkkko</strong>
+          <p>Кейси · Креативи · Відгуки</p>
+          <a class="instagramDirectCta" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Перейти в Instagram <b>→</b></a>
+        </aside>
+      </div>
     </div>
   </div>
 </section>
@@ -4019,97 +4314,7 @@ body.proofModalOpen{overflow:hidden}
   </div>
 </section>
 
-<section class="section" id="case">
-  <div class="wrap">
-    <div class="sectionHead reveal">
-      <div class="label">Кейси / Results</div>
-      <div>
-        <h2>Результати з реальних запусків</h2>
-        <p>Показую тільки підтверджені цифри з реальних рекламних запусків. Без намальованих результатів і декоративної статистики</p>
-      </div>
-    </div>
 
-    <div class="caseGrid">
-<article class="caseCard reveal">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
-  <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3>
-    <div class="caseStats"><div class="caseStat"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
-  </div>
-</article>
-
-<article class="caseCard reveal">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
-  <div class="caseBody"><h3>Косметологічний центр</h3>
-    <div class="caseStats"><div class="caseStat"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
-  </div>
-</article>
-    </div>
-
-    <input class="casesToggleInput" type="checkbox" id="casesToggle">
-    <label class="casesToggleLabel" for="casesToggle">
-      <span class="casesShow">Переглянути більше кейсів ↓</span>
-      <span class="casesHide">Сховати додаткові кейси ↑</span>
-    </label>
-
-    <div class="extraCasesWrap" id="extraCasesWrap">
-      <div class="caseGrid extraCaseGrid">
-<article class="caseCard caseExtra">
-  <div class="casePhoto realEstateCasePhoto"><img src="assets/site/covers/real-estate-spain-premium-v2.webp" alt="Преміальна нерухомість в Іспанії" loading="lazy" decoding="async"><span class="caseTag">Real Estate · Spain</span></div>
-  <div class="caseBody"><h3>Нерухомість в Іспанії</h3>
-    <div class="caseStats"><div class="caseStat"><strong>2</strong><span>підписані угоди</span></div><div class="caseStat"><strong>12</strong><span>form leads</span></div><div class="caseStat"><strong>€35.21</strong><span>ціна заявки</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Нерухомість в Іспанії" data-proof-type="video" data-proof-creative="assets/site/videos/real-estate-spain.mp4" data-proof-ads="assets/site/proofs/real-estate-spain-ads.webp">Переглянути креатив + Ads Manager →</button>
-  </div>
-</article>
-
-<article class="caseCard caseExtra">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
-  <div class="caseBody"><h3>Клінінг · London</h3>
-    <div class="caseStats"><div class="caseStat"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
-  </div>
-</article>
-
-<article class="caseCard caseExtra">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
-  <div class="caseBody"><h3>Детейлінг · Amsterdam</h3>
-    <div class="caseStats"><div class="caseStat"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
-  </div>
-</article>
-
-<article class="caseCard caseExtra">
-  <div class="casePhoto medicalCasePhoto"><img src="assets/site/covers/medical-center-premium.webp" alt="Преміальний медичний центр New York" loading="lazy" decoding="async"><span class="caseTag">Medical · New York</span></div>
-  <div class="caseBody"><h3>Медичний центр · New York</h3>
-    <div class="caseStats"><div class="caseStat"><strong>191</strong><span>заявка</span></div><div class="caseStat"><strong>$6.62</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$1 264.19</strong><span>spend</span></div></div>
-    <button class="caseProofLink" type="button" data-proof-title="Медичний центр · New York" data-proof-type="video" data-proof-creative="assets/site/videos/medical-center.mp4" data-proof-ads="assets/site/proofs/medical-center-ads.webp">Переглянути креатив + Ads Manager →</button>
-  </div>
-</article>
-      </div>
-
-      <div class="highlightProof glassLight moreProof highlightProofSimple">
-        <div class="highlightProofCopy">
-          <span class="label">Ще більше доказів</span>
-          <h3>Більше кейсів — в Instagram</h3>
-          <p>У Highlights <b>«КЕЙСИ»</b> зібрані додаткові результати, скріни рекламного кабінету та приклади запусків</p>
-          <div class="highlightActions">
-            <button class="pill dark instagramWhereButton" id="instagramWhereButton" type="button">Де це? →</button>
-          </div>
-        </div>
-        <aside class="instagramDirectCard" aria-label="Instagram @lebedenkkko">
-          <div class="instagramDirectTop">
-            <span class="instagramDirectIcon">IG</span>
-            <span>INSTAGRAM</span>
-          </div>
-          <strong>@lebedenkkko</strong>
-          <p>Кейси · Креативи · Відгуки</p>
-          <a class="instagramDirectCta" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Перейти в Instagram <b>→</b></a>
-        </aside>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="trustSection" aria-label="Хто працює з рекламою">
   <div class="wrap">
@@ -4760,7 +4965,7 @@ document.addEventListener('keydown',(event)=>{
 <script>
 /* 2026-09-28 · manual UA / EN / ES switch. Default is always Ukrainian on page load. */
 (function(){
-  const translations={"en":{"Підхід":"Approach","Кейси":"Cases","Креативи":"Creatives","Відгуки":"Reviews","Процес":"Process","Міста":"Cities","Отримати безкоштовну консультацію →":"Get a free consultation →","Отримати →":"Free consult →","Перша консультація — безкоштовна":"First consultation is free","Реклама у Facebook та Instagram · Canada / USA":"Facebook & Instagram Ads · Canada / USA","Вам потрібні":"You need","заявки":"leads","Не просто реклама":"Not just ads","Основна спеціалізація — клінінг.":"Main specialization: cleaning.","Також працюю з іншими локальними бізнесами. Нижче — реальні кейси з різних ніш.":"I also work with other local businesses. Below are real cases from different niches.","Подивитися результати співпраці":"See results from working with me","РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БІЗНЕСУ":"ADS FOR LOCAL BUSINESSES","роки з Meta Ads":"years with Meta Ads","ВІД РЕКЛАМИ ДО КЛІЄНТА":"FROM AD TO CUSTOMER","Побачив. Написав. Забронював. Став клієнтом":"Saw it. Messaged. Booked. Became a customer","Простий шлях, який має пройти реклама: привернути увагу, привести звернення і закінчитися реальним замовленням":"The simple path an ad should follow: grab attention, generate an enquiry and end with a real booking","ПОБАЧИВ":"SAW IT","Побачив вашу рекламу":"Saw your ad","У стрічці Facebook або Instagram побачив зрозумілу пропозицію і зацікавився послугою":"They saw a clear offer in their Facebook or Instagram feed and became interested in the service","НАПИСАВ":"MESSAGED","Ваш бізнес":"Your business","Привіт, мене зацікавила ваша акційна пропозиція. Хочу замовити на завтра. Можна на 12:00?":"Hi, I am interested in your special offer. I would like to book for tomorrow. Is 12:00 available?","Так, 12:00 вільно. Записую вас ✅":"Yes, 12:00 is available. I will book you in ✅","Написав вам":"Messaged you","Людина вже не просто цікавиться — вона пише з конкретним наміром замовити":"They are no longer just browsing — they are messaging with a clear intent to book","ЗАБРОНЮВАВ":"BOOKED","БРОНЮВАННЯ":"BOOKING","Послуга · час · адреса підтверджені":"Service · time · address confirmed","Ви домовилися":"You agreed on the details","Відповіли на питання, узгодили час і підтвердили замовлення":"You answered the questions, agreed on a time and confirmed the booking","КЛІЄНТ":"CUSTOMER","НОВИЙ КЛІЄНТ":"NEW CUSTOMER","Замовлення виконано":"Job completed","Наступного разу він може повернутися вже без реклами":"Next time they may return without ads","Став вашим клієнтом":"Became your customer","Ви отримали реальне замовлення, а хороший сервіс може зробити клієнта постійним":"You got a real booking, and good service can turn that person into a repeat customer","РЕЗУЛЬТАТ":"RESULT","Не покази й не кліки — нова людина, яка реально звернулася у ваш бізнес і купила":"Not impressions or clicks — a new person who actually contacted your business and bought","Мій підхід":"My approach","Не запускаю рекламу за одним шаблоном":"I do not run every business from one template","Перед запуском дивлюся на послугу, гео, ціни, попит і рекламні дані — структура кампанії має відповідати конкретному бізнесу":"Before launch, I look at the service, location, prices, demand and ad data — the campaign structure has to fit the specific business","Для клінінгу":"For cleaning","1 місто":"1 city","1 клієнт":"1 client","Поки ми працюємо разом, не беру прямого cleaning-конкурента у вашому місті":"While we work together, I do not take on a direct cleaning competitor in your city","Локальна стратегія":"Local strategy","Гео, ціни й попит відрізняються — кампанію будую під конкретний ринок":"Location, prices and demand differ — I build the campaign for the specific market","Креативи під ваш ринок":"Creatives for your market","Офер, візуал і текст будую під послугу, гео та мотивацію клієнта":"I build the offer, visuals and copy around the service, location and customer motivation","Оптимізація за якістю":"Optimize for quality","Дивлюся не лише на CPL, а й на якість звернень і конверсію в клієнта":"I look beyond CPL to lead quality and conversion into customers","Кейси / Results":"Cases / Results","Результати з реальних запусків":"Results from real campaigns","Показую тільки підтверджені цифри з реальних рекламних запусків. Без намальованих результатів і декоративної статистики":"I only show verified numbers from real campaigns. No invented results or decorative statistics","діалогів":"conversations","CAD / діалог":"CAD / conversation","Переглянути креатив + Ads Manager →":"View creative + Ads Manager →","Косметологічний центр":"Beauty clinic","ціна заявки":"cost per lead","Переглянути більше кейсів ↓":"View more cases ↓","Сховати додаткові кейси ↑":"Hide additional cases ↑","Нерухомість в Іспанії":"Real estate in Spain","підписані угоди":"signed deals","лідів із сайту":"website leads","ціна ліда":"cost per lead","розмов":"conversations","Медичний центр · New York":"Medical Center · New York","заявка":"lead","Ще більше доказів":"More proof","Більше кейсів — в Instagram":"More cases — on Instagram","У Highlights":"In Highlights","«КЕЙСИ»":"“CASES”","зібрані додаткові результати, скріни рекламного кабінету та приклади запусків":"you will find more results, Ads Manager screenshots and campaign examples","Де це? →":"Where is it? →","Кейси · Креативи · Відгуки":"Cases · Creatives · Reviews","Перейти в Instagram":"Go to Instagram","ПРО МЕНЕ":"ABOUT ME","Хто буде займатися вашою рекламою?":"Who will handle your ads?","Привіт! Мене звати Вадим. Уже понад 3 роки запускаю рекламу у Facebook та Instagram для локального бізнесу. Налаштовую кампанії, стежу за результатами й покращую їх у процесі, щоб ви отримували якомога кращий результат":"Hi! My name is Vadym. I have been running Facebook and Instagram ads for local businesses for over 3 years. I set up campaigns, monitor results and improve them continuously so you get the best possible outcome","роки досвіду":"years of experience","Локальний бізнес":"Local business","cleaning, beauty, medical та інші ніші":"cleaning, beauty, medical and other niches","досвід із локальними ринками":"experience with local markets","Отримати безкоштовну консультацію · Telegram →":"Get a free consultation · Telegram →","Отримати безкоштовну консультацію · Instagram →":"Get a free consultation · Instagram →","Реклама має зупиняти погляд ще до першого кліку":"Ads should stop the scroll before the first click","Реальні рекламні креативи з локальних проєктів у різних нішах":"Real ad creatives from local projects across different niches","Що кажуть клієнти про роботу":"What clients say about working with me","Реальні повідомлення клієнтів після запусків і ведення реклами":"Real client messages after campaigns were launched and managed","Beauty · 37 бронювань / 10 днів":"Beauty · 37 bookings / 10 days","56 заявок / 14 днів":"56 leads / 14 days","Стабільніші й якісніші заявки":"More stable, higher-quality leads","Cosmetology · 1 984 ліди / місяць":"Cosmetology · 1,984 leads / month","Бронювання й доставки стабільно":"Bookings and deliveries are stable","Якісніші заявки після оптимізації":"Better-quality leads after optimization","Щоденні заявки · стабільна реклама":"Daily leads · stable ads","78 консультацій / місяць · $4.9":"78 consultations / month · $4.9","Як починаємо роботу":"How we start","Як запускаємо вашу рекламу":"How we launch your ads","4 прості кроки: розумію ваш бізнес, готую рекламу, запускаю її та покращую результат":"4 simple steps: understand your business, prepare the ads, launch the campaign and improve the result","попит":"demand","Розумію ваш бізнес":"Understand your business","Що ви продаєте, кому, за якою ціною і в якому місті":"What you sell, to whom, at what price and in which city","Готую рекламу":"Prepare the ads","Пропозиція, аудиторія, тексти й креативи під ваш бізнес":"Offer, audience, copy and creatives built around your business","Запускаю кампанію":"Launch the campaign","Налаштовую рекламу у Facebook та Instagram і запускаю трафік":"I set up Facebook and Instagram ads and launch the traffic","Покращую результат":"Improve the result","Залишаю те, що приводить якісні звернення, слабке вимикаю":"I keep what brings quality enquiries and turn off what is weak","ЕКСКЛЮЗИВНІСТЬ ДЛЯ КЛІНІНГУ":"CLEANING EXCLUSIVITY","Перевірте, чи вільне ваше місто":"Check if your city is available","Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті":"While I work with a cleaning company in a city, I do not take on a direct competitor there. Toronto / GTA and Calgary are currently taken","1 місто = 1 cleaning-клієнт":"1 city = 1 cleaning client","Ваше місто":"Your city","Не бачите місто? Безкоштовно перевірю вручну":"Do not see your city? I will check it manually for free","Статус":"Status","ЗАЙНЯТО":"TAKEN","У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру":"I already work with a cleaning company in this city, so I do not take on a second direct competitor","Зайнято":"Taken","Вільно":"Available","Отримайте безкоштовну консультацію":"Get a free consultation","Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною.":"The first consultation is free. Tell me what business or service you want to advertise and what city you operate in. This helps me understand your situation better and make the consultation as specific and useful as possible.","Отримати безкоштовну консультацію":"Get a free consultation","Підтвердження кейсу":"Case proof","Кейс":"Case","Креатив":"Creative","Де знайти кейси":"Where to find the cases","Instagram Highlights · «КЕЙСИ»":"Instagram Highlights · “CASES”","Перейти в Instagram →":"Go to Instagram →","Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym":"Get a free consultation · Instagram @lebedenkkko · Telegram @target_vadym","Виберіть місто":"Choose a city","Закрити":"Close","Попередній":"Previous","Наступний":"Next","ВІЛЬНО":"AVAILABLE","Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці":"The city is currently available to discuss. I confirm the status before we start working together","Відеокреатив":"Video creative","Матеріал кейсу":"Case material","Відгук клієнта":"Client review","Профіль performance-маркетолога":"Performance marketer profile","Спеціалізація":"Specialization","Як реклама приводить нового клієнта":"How advertising brings in a new customer","Хто працює з рекламою":"Who handles the ads","Вадим — спеціаліст з реклами Facebook та Instagram":"Vadym — Facebook and Instagram advertising specialist","Реальний beauty-креатив Toronto":"Real beauty creative · Toronto","Реальний cleaning-креатив Toronto":"Real cleaning creative · Toronto","Реальний hair extensions креатив":"Real hair extensions creative","Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки":"Instagram Highlights: Creatives, Cases, Websites, Services, Reviews"},"es":{"Підхід":"Enfoque","Кейси":"Casos","Креативи":"Creatividades","Відгуки":"Reseñas","Процес":"Proceso","Міста":"Ciudades","Отримати безкоштовну консультацію →":"Solicitar una consulta gratuita →","Отримати →":"Consulta gratis →","Перша консультація — безкоштовна":"Primera consulta gratis","Реклама у Facebook та Instagram · Canada / USA":"Publicidad en Facebook e Instagram · Canadá / EE. UU.","Вам потрібні":"Necesitas","заявки":"solicitudes","Не просто реклама":"No solo publicidad","Основна спеціалізація — клінінг.":"Mi especialización principal es el cleaning.","Також працюю з іншими локальними бізнесами. Нижче — реальні кейси з різних ніш.":"También trabajo con otros negocios locales. Más abajo puedes ver casos reales de distintos sectores.","Подивитися результати співпраці":"Ver resultados de trabajar conmigo","РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БІЗНЕСУ":"PUBLICIDAD PARA NEGOCIOS LOCALES","роки з Meta Ads":"años con Meta Ads","ВІД РЕКЛАМИ ДО КЛІЄНТА":"DEL ANUNCIO AL CLIENTE","Побачив. Написав. Забронював. Став клієнтом":"Lo vio. Escribió. Reservó. Se convirtió en cliente","Простий шлях, який має пройти реклама: привернути увагу, привести звернення і закінчитися реальним замовленням":"El recorrido simple que debe hacer la publicidad: captar atención, generar un contacto y terminar en una reserva real","ПОБАЧИВ":"LO VIO","Побачив вашу рекламу":"Vio tu anuncio","У стрічці Facebook або Instagram побачив зрозумілу пропозицію і зацікавився послугою":"Vio una oferta clara en Facebook o Instagram y se interesó por el servicio","НАПИСАВ":"ESCRIBIÓ","Ваш бізнес":"Tu negocio","Привіт, мене зацікавила ваша акційна пропозиція. Хочу замовити на завтра. Можна на 12:00?":"Hola, me interesa vuestra oferta. Quiero reservar para mañana. ¿Puede ser a las 12:00?","Так, 12:00 вільно. Записую вас ✅":"Sí, las 12:00 está libre. Te apunto ✅","Написав вам":"Te escribió","Людина вже не просто цікавиться — вона пише з конкретним наміром замовити":"Ya no solo está mirando: escribe con una intención clara de reservar","ЗАБРОНЮВАВ":"RESERVÓ","БРОНЮВАННЯ":"RESERVA","Послуга · час · адреса підтверджені":"Servicio · hora · dirección confirmados","Ви домовилися":"Habéis acordado los detalles","Відповіли на питання, узгодили час і підтвердили замовлення":"Respondiste a sus preguntas, acordaste la hora y confirmaste la reserva","КЛІЄНТ":"CLIENTE","НОВИЙ КЛІЄНТ":"NUEVO CLIENTE","Замовлення виконано":"Servicio realizado","Наступного разу він може повернутися вже без реклами":"La próxima vez puede volver sin necesidad de publicidad","Став вашим клієнтом":"Se convirtió en tu cliente","Ви отримали реальне замовлення, а хороший сервіс може зробити клієнта постійним":"Has conseguido una reserva real, y un buen servicio puede convertirlo en cliente habitual","РЕЗУЛЬТАТ":"RESULTADO","Не покази й не кліки — нова людина, яка реально звернулася у ваш бізнес і купила":"No impresiones ni clics: una persona nueva que contactó con tu negocio y compró","Мій підхід":"Mi enfoque","Не запускаю рекламу за одним шаблоном":"No lanzo la publicidad con la misma plantilla para todos","Перед запуском дивлюся на послугу, гео, ціни, попит і рекламні дані — структура кампанії має відповідати конкретному бізнесу":"Antes de lanzar, analizo el servicio, la zona, los precios, la demanda y los datos publicitarios: la estructura de la campaña debe encajar con ese negocio","Для клінінгу":"Para cleaning","1 місто":"1 ciudad","1 клієнт":"1 cliente","Поки ми працюємо разом, не беру прямого cleaning-конкурента у вашому місті":"Mientras trabajamos juntos, no acepto otro competidor directo de cleaning en tu ciudad","Локальна стратегія":"Estrategia local","Гео, ціни й попит відрізняються — кампанію будую під конкретний ринок":"La zona, los precios y la demanda cambian: construyo la campaña para ese mercado concreto","Креативи під ваш ринок":"Creatividades para tu mercado","Офер, візуал і текст будую під послугу, гео та мотивацію клієнта":"Creo la oferta, el visual y el texto según el servicio, la zona y la motivación del cliente","Оптимізація за якістю":"Optimización por calidad","Дивлюся не лише на CPL, а й на якість звернень і конверсію в клієнта":"No miro solo el CPL, también la calidad de los contactos y la conversión a cliente","Кейси / Results":"Casos / Resultados","Результати з реальних запусків":"Resultados de campañas reales","Показую тільки підтверджені цифри з реальних рекламних запусків. Без намальованих результатів і декоративної статистики":"Solo muestro cifras verificadas de campañas reales. Sin resultados inventados ni estadísticas decorativas","діалогів":"conversaciones","CAD / діалог":"CAD / conversación","Переглянути креатив + Ads Manager →":"Ver creatividad + Ads Manager →","Косметологічний центр":"Centro de estética","ціна заявки":"coste por lead","Переглянути більше кейсів ↓":"Ver más casos ↓","Сховати додаткові кейси ↑":"Ocultar casos adicionales ↑","Нерухомість в Іспанії":"Inmobiliaria en España","підписані угоди":"operaciones firmadas","лідів із сайту":"leads web","ціна ліда":"coste por lead","розмов":"conversaciones","Медичний центр · New York":"Centro médico · New York","заявка":"solicitud","Ще більше доказів":"Más pruebas","Більше кейсів — в Instagram":"Más casos en Instagram","У Highlights":"En Highlights","«КЕЙСИ»":"«CASOS»","зібрані додаткові результати, скріни рекламного кабінету та приклади запусків":"encontrarás más resultados, capturas de Ads Manager y ejemplos de campañas","Де це? →":"¿Dónde está? →","Кейси · Креативи · Відгуки":"Casos · Creatividades · Reseñas","Перейти в Instagram":"Ir a Instagram","ПРО МЕНЕ":"SOBRE MÍ","Хто буде займатися вашою рекламою?":"¿Quién se encargará de tu publicidad?","Привіт! Мене звати Вадим. Уже понад 3 роки запускаю рекламу у Facebook та Instagram для локального бізнесу. Налаштовую кампанії, стежу за результатами й покращую їх у процесі, щоб ви отримували якомога кращий результат":"¡Hola! Me llamo Vadym. Llevo más de 3 años gestionando publicidad en Facebook e Instagram para negocios locales. Configuro las campañas, sigo los resultados y las mejoro durante el proceso para conseguir el mejor resultado posible","роки досвіду":"años de experiencia","Локальний бізнес":"Negocios locales","cleaning, beauty, medical та інші ніші":"cleaning, beauty, medical y otros sectores","досвід із локальними ринками":"experiencia en mercados locales","Отримати безкоштовну консультацію · Telegram →":"Solicitar consulta gratuita · Telegram →","Отримати безкоштовну консультацію · Instagram →":"Solicitar consulta gratuita · Instagram →","Реклама має зупиняти погляд ще до першого кліку":"La publicidad debe detener el scroll antes del primer clic","Реальні рекламні креативи з локальних проєктів у різних нішах":"Creatividades publicitarias reales de proyectos locales en distintos sectores","Що кажуть клієнти про роботу":"Qué dicen los clientes sobre mi trabajo","Реальні повідомлення клієнтів після запусків і ведення реклами":"Mensajes reales de clientes después del lanzamiento y la gestión de sus campañas","Beauty · 37 бронювань / 10 днів":"Beauty · 37 reservas / 10 días","56 заявок / 14 днів":"56 solicitudes / 14 días","Стабільніші й якісніші заявки":"Solicitudes más estables y de mayor calidad","Cosmetology · 1 984 ліди / місяць":"Cosmetología · 1.984 leads / mes","Бронювання й доставки стабільно":"Reservas y entregas estables","Якісніші заявки після оптимізації":"Leads de mayor calidad tras la optimización","Щоденні заявки · стабільна реклама":"Solicitudes diarias · publicidad estable","78 консультацій / місяць · $4.9":"78 consultas / mes · $4.9","Як починаємо роботу":"Cómo empezamos","Як запускаємо вашу рекламу":"Cómo lanzamos tu publicidad","4 прості кроки: розумію ваш бізнес, готую рекламу, запускаю її та покращую результат":"4 pasos simples: entiendo tu negocio, preparo la publicidad, lanzo la campaña y mejoro el resultado","попит":"demanda","Розумію ваш бізнес":"Entiendo tu negocio","Що ви продаєте, кому, за якою ціною і в якому місті":"Qué vendes, a quién, a qué precio y en qué ciudad","Готую рекламу":"Preparo la publicidad","Пропозиція, аудиторія, тексти й креативи під ваш бізнес":"Oferta, audiencia, textos y creatividades adaptados a tu negocio","Запускаю кампанію":"Lanzo la campaña","Налаштовую рекламу у Facebook та Instagram і запускаю трафік":"Configuro la publicidad en Facebook e Instagram y lanzo el tráfico","Покращую результат":"Mejoro el resultado","Залишаю те, що приводить якісні звернення, слабке вимикаю":"Mantengo lo que trae contactos de calidad y apago lo que funciona peor","ЕКСКЛЮЗИВНІСТЬ ДЛЯ КЛІНІНГУ":"EXCLUSIVIDAD PARA CLEANING","Перевірте, чи вільне ваше місто":"Comprueba si tu ciudad está disponible","Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті":"Mientras trabajo con una empresa de cleaning en una ciudad, no acepto allí a un competidor directo. Toronto / GTA y Calgary están ocupadas actualmente","1 місто = 1 cleaning-клієнт":"1 ciudad = 1 cliente de cleaning","Ваше місто":"Tu ciudad","Не бачите місто? Безкоштовно перевірю вручну":"¿No ves tu ciudad? La compruebo manualmente gratis","Статус":"Estado","ЗАЙНЯТО":"OCUPADA","У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру":"Ya trabajo con una empresa de cleaning en esta ciudad, así que no acepto un segundo competidor directo","Зайнято":"Ocupada","Вільно":"Disponible","Отримайте безкоштовну консультацію":"Solicita una consulta gratuita","Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною.":"La primera consulta es gratuita. Cuéntame qué negocio o servicio quieres promocionar y en qué ciudad trabajas. Así podré entender mejor tu situación y hacer la consulta lo más concreta y útil posible.","Отримати безкоштовну консультацію":"Solicitar una consulta gratuita","Підтвердження кейсу":"Prueba del caso","Кейс":"Caso","Креатив":"Creatividad","Де знайти кейси":"Dónde encontrar los casos","Instagram Highlights · «КЕЙСИ»":"Instagram Highlights · «CASOS»","Перейти в Instagram →":"Ir a Instagram →","Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym":"Solicitar una consulta gratuita · Instagram @lebedenkkko · Telegram @target_vadym","Виберіть місто":"Elige una ciudad","Закрити":"Cerrar","Попередній":"Anterior","Наступний":"Siguiente","ВІЛЬНО":"DISPONIBLE","Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці":"La ciudad está disponible para hablarlo. Confirmo el estado antes de empezar a trabajar juntos","Відеокреатив":"Creatividad de vídeo","Матеріал кейсу":"Material del caso","Відгук клієнта":"Reseña del cliente","Профіль performance-маркетолога":"Perfil de performance marketer","Спеціалізація":"Especialización","Як реклама приводить нового клієнта":"Cómo la publicidad consigue un nuevo cliente","Хто працює з рекламою":"Quién gestiona la publicidad","Вадим — спеціаліст з реклами Facebook та Instagram":"Vadym — especialista en publicidad de Facebook e Instagram","Реальний beauty-креатив Toronto":"Creatividad real de beauty · Toronto","Реальний cleaning-креатив Toronto":"Creatividad real de cleaning · Toronto","Реальний hair extensions креатив":"Creatividad real de hair extensions","Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки":"Instagram Highlights: Creatividades, Casos, Webs, Servicios, Reseñas"}};
+  const translations={"en":{"Підхід":"Approach","Кейси":"Cases","Креативи":"Creatives","Відгуки":"Reviews","Процес":"Process","Міста":"Cities","Отримати безкоштовну консультацію →":"Get a free consultation →","Отримати →":"Free consult →","Перша консультація — безкоштовна":"First consultation is free","Реклама у Facebook та Instagram · Canada / USA":"Facebook & Instagram Ads · Canada / USA","Вам потрібні":"You need","заявки":"leads","Не просто реклама":"Not just ads","Основна спеціалізація — клінінг.":"Main specialization: cleaning.","Також працюю з beauty, medical, real estate, detailing та іншими локальними бізнесами. Нижче — реальні результати з різних ніш.":"I also work with beauty, medical, real estate, detailing and other local businesses. Below are real results across different niches.","Подивитися результати співпраці":"See results from working with me","РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БІЗНЕСУ":"ADS FOR LOCAL BUSINESSES","роки з Meta Ads":"years with Meta Ads","Cleaning + інші ніші":"Cleaning + other niches","ВІД РЕКЛАМИ ДО КЛІЄНТА":"FROM AD TO CUSTOMER","Побачив. Написав. Забронював. Став клієнтом":"Saw it. Messaged. Booked. Became a customer","Простий шлях, який має пройти реклама: привернути увагу, привести звернення і закінчитися реальним замовленням":"The simple path an ad should follow: grab attention, generate an enquiry and end with a real booking","ПОБАЧИВ":"SAW IT","Побачив вашу рекламу":"Saw your ad","У стрічці Facebook або Instagram побачив зрозумілу пропозицію і зацікавився послугою":"They saw a clear offer in their Facebook or Instagram feed and became interested in the service","НАПИСАВ":"MESSAGED","Ваш бізнес":"Your business","Привіт, мене зацікавила ваша акційна пропозиція. Хочу замовити на завтра. Можна на 12:00?":"Hi, I am interested in your special offer. I would like to book for tomorrow. Is 12:00 available?","Так, 12:00 вільно. Записую вас ✅":"Yes, 12:00 is available. I will book you in ✅","Написав вам":"Messaged you","Людина вже не просто цікавиться — вона пише з конкретним наміром замовити":"They are no longer just browsing — they are messaging with a clear intent to book","ЗАБРОНЮВАВ":"BOOKED","БРОНЮВАННЯ":"BOOKING","Послуга · час · адреса підтверджені":"Service · time · address confirmed","Ви домовилися":"You agreed on the details","Відповіли на питання, узгодили час і підтвердили замовлення":"You answered the questions, agreed on a time and confirmed the booking","КЛІЄНТ":"CUSTOMER","НОВИЙ КЛІЄНТ":"NEW CUSTOMER","Замовлення виконано":"Job completed","Наступного разу він може повернутися вже без реклами":"Next time they may return without ads","Став вашим клієнтом":"Became your customer","Ви отримали реальне замовлення, а хороший сервіс може зробити клієнта постійним":"You got a real booking, and good service can turn that person into a repeat customer","РЕЗУЛЬТАТ":"RESULT","Не покази й не кліки — нова людина, яка реально звернулася у ваш бізнес і купила":"Not impressions or clicks — a new person who actually contacted your business and bought","Мій підхід":"My approach","Не запускаю рекламу за одним шаблоном":"I do not run every business from one template","Перед запуском дивлюся на послугу, гео, ціни, попит і рекламні дані — структура кампанії має відповідати конкретному бізнесу":"Before launch, I look at the service, location, prices, demand and ad data — the campaign structure has to fit the specific business","Для клінінгу":"For cleaning","1 місто":"1 city","1 клієнт":"1 client","Поки ми працюємо разом, не беру прямого cleaning-конкурента у вашому місті":"While we work together, I do not take on a direct cleaning competitor in your city","Локальна стратегія":"Local strategy","Гео, ціни й попит відрізняються — кампанію будую під конкретний ринок":"Location, prices and demand differ — I build the campaign for the specific market","Креативи під ваш ринок":"Creatives for your market","Офер, візуал і текст будую під послугу, гео та мотивацію клієнта":"I build the offer, visuals and copy around the service, location and customer motivation","Оптимізація за якістю":"Optimize for quality","Дивлюся не лише на CPL, а й на якість звернень і конверсію в клієнта":"I look beyond CPL to lead quality and conversion into customers","Кейси / Results":"Cases / Results","Результати з реальних запусків":"Results from real campaigns","Підтверджені результати з cleaning, beauty, medical, real estate, detailing та інших локальних проєктів. Без намальованої статистики":"Verified results from cleaning, beauty, medical, real estate, detailing and other local projects. No invented statistics","діалогів":"conversations","CAD / діалог":"CAD / conversation","Переглянути креатив + Ads Manager →":"View creative + Ads Manager →","Косметологічний центр":"Beauty clinic","ціна заявки":"cost per lead","Переглянути більше кейсів ↓":"View more cases ↓","Сховати додаткові кейси ↑":"Hide additional cases ↑","Нерухомість в Іспанії":"Real estate in Spain","підписані угоди":"signed deals","лідів із сайту":"website leads","ціна ліда":"cost per lead","розмов":"conversations","Медичний центр · New York":"Medical Center · New York","заявка":"lead","Ще більше доказів":"More proof","Більше кейсів — в Instagram":"More cases — on Instagram","У Highlights":"In Highlights","«КЕЙСИ»":"“CASES”","зібрані додаткові результати, скріни рекламного кабінету та приклади запусків":"you will find more results, Ads Manager screenshots and campaign examples","Де це? →":"Where is it? →","Кейси · Креативи · Відгуки":"Cases · Creatives · Reviews","Перейти в Instagram":"Go to Instagram","ПРО МЕНЕ":"ABOUT ME","Хто буде займатися вашою рекламою?":"Who will handle your ads?","Привіт! Мене звати Вадим. Уже понад 3 роки запускаю рекламу у Facebook та Instagram для локального бізнесу. Налаштовую кампанії, стежу за результатами й покращую їх у процесі, щоб ви отримували якомога кращий результат":"Hi! My name is Vadym. I have been running Facebook and Instagram ads for local businesses for over 3 years. I set up campaigns, monitor results and improve them continuously so you get the best possible outcome","роки досвіду":"years of experience","Локальний бізнес":"Local business","cleaning, beauty, medical та інші ніші":"cleaning, beauty, medical and other niches","досвід із локальними ринками":"experience with local markets","Отримати безкоштовну консультацію · Telegram →":"Get a free consultation · Telegram →","Отримати безкоштовну консультацію · Instagram →":"Get a free consultation · Instagram →","Реклама має зупиняти погляд ще до першого кліку":"Ads should stop the scroll before the first click","Реальні рекламні креативи з локальних проєктів у різних нішах":"Real ad creatives from local projects across different niches","Що кажуть клієнти про роботу":"What clients say about working with me","Реальні повідомлення клієнтів після запусків і ведення реклами":"Real client messages after campaigns were launched and managed","Beauty · 37 бронювань / 10 днів":"Beauty · 37 bookings / 10 days","56 заявок / 14 днів":"56 leads / 14 days","Стабільніші й якісніші заявки":"More stable, higher-quality leads","Cosmetology · 1 984 ліди / місяць":"Cosmetology · 1,984 leads / month","Бронювання й доставки стабільно":"Bookings and deliveries are stable","Якісніші заявки після оптимізації":"Better-quality leads after optimization","Щоденні заявки · стабільна реклама":"Daily leads · stable ads","78 консультацій / місяць · $4.9":"78 consultations / month · $4.9","Як починаємо роботу":"How we start","Як запускаємо вашу рекламу":"How we launch your ads","4 прості кроки: розумію ваш бізнес, готую рекламу, запускаю її та покращую результат":"4 simple steps: understand your business, prepare the ads, launch the campaign and improve the result","попит":"demand","Розумію ваш бізнес":"Understand your business","Що ви продаєте, кому, за якою ціною і в якому місті":"What you sell, to whom, at what price and in which city","Готую рекламу":"Prepare the ads","Пропозиція, аудиторія, тексти й креативи під ваш бізнес":"Offer, audience, copy and creatives built around your business","Запускаю кампанію":"Launch the campaign","Налаштовую рекламу у Facebook та Instagram і запускаю трафік":"I set up Facebook and Instagram ads and launch the traffic","Покращую результат":"Improve the result","Залишаю те, що приводить якісні звернення, слабке вимикаю":"I keep what brings quality enquiries and turn off what is weak","ЕКСКЛЮЗИВНІСТЬ ДЛЯ КЛІНІНГУ":"CLEANING EXCLUSIVITY","Перевірте, чи вільне ваше місто":"Check if your city is available","Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті":"While I work with a cleaning company in a city, I do not take on a direct competitor there. Toronto / GTA and Calgary are currently taken","1 місто = 1 cleaning-клієнт":"1 city = 1 cleaning client","Ваше місто":"Your city","Не бачите місто? Безкоштовно перевірю вручну":"Do not see your city? I will check it manually for free","Статус":"Status","ЗАЙНЯТО":"TAKEN","У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру":"I already work with a cleaning company in this city, so I do not take on a second direct competitor","Зайнято":"Taken","Вільно":"Available","Отримайте безкоштовну консультацію":"Get a free consultation","Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною.":"The first consultation is free. Tell me what business or service you want to advertise and what city you operate in. This helps me understand your situation better and make the consultation as specific and useful as possible.","Отримати безкоштовну консультацію":"Get a free consultation","Підтвердження кейсу":"Case proof","Кейс":"Case","Креатив":"Creative","Де знайти кейси":"Where to find the cases","Instagram Highlights · «КЕЙСИ»":"Instagram Highlights · “CASES”","Перейти в Instagram →":"Go to Instagram →","Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym":"Get a free consultation · Instagram @lebedenkkko · Telegram @target_vadym","Виберіть місто":"Choose a city","Закрити":"Close","Попередній":"Previous","Наступний":"Next","ВІЛЬНО":"AVAILABLE","Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці":"The city is currently available to discuss. I confirm the status before we start working together","Відеокреатив":"Video creative","Матеріал кейсу":"Case material","Відгук клієнта":"Client review","Профіль performance-маркетолога":"Performance marketer profile","Спеціалізація":"Specialization","Як реклама приводить нового клієнта":"How advertising brings in a new customer","Хто працює з рекламою":"Who handles the ads","Вадим — спеціаліст з реклами Facebook та Instagram":"Vadym — Facebook and Instagram advertising specialist","Реальний beauty-креатив Toronto":"Real beauty creative · Toronto","Реальний cleaning-креатив Toronto":"Real cleaning creative · Toronto","Реальний hair extensions креатив":"Real hair extensions creative","Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки":"Instagram Highlights: Creatives, Cases, Websites, Services, Reviews"},"es":{"Підхід":"Enfoque","Кейси":"Casos","Креативи":"Creatividades","Відгуки":"Reseñas","Процес":"Proceso","Міста":"Ciudades","Отримати безкоштовну консультацію →":"Solicitar una consulta gratuita →","Отримати →":"Consulta gratis →","Перша консультація — безкоштовна":"Primera consulta gratis","Реклама у Facebook та Instagram · Canada / USA":"Publicidad en Facebook e Instagram · Canadá / EE. UU.","Вам потрібні":"Necesitas","заявки":"solicitudes","Не просто реклама":"No solo publicidad","Основна спеціалізація — клінінг.":"Mi especialización principal es el cleaning.","Також працюю з beauty, medical, real estate, detailing та іншими локальними бізнесами. Нижче — реальні результати з різних ніш.":"También trabajo con beauty, medical, real estate, detailing y otros negocios locales. Más abajo puedes ver resultados reales de distintos sectores.","Подивитися результати співпраці":"Ver resultados de trabajar conmigo","РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БІЗНЕСУ":"PUBLICIDAD PARA NEGOCIOS LOCALES","роки з Meta Ads":"años con Meta Ads","Cleaning + інші ніші":"Cleaning + otros sectores","ВІД РЕКЛАМИ ДО КЛІЄНТА":"DEL ANUNCIO AL CLIENTE","Побачив. Написав. Забронював. Став клієнтом":"Lo vio. Escribió. Reservó. Se convirtió en cliente","Простий шлях, який має пройти реклама: привернути увагу, привести звернення і закінчитися реальним замовленням":"El recorrido simple que debe hacer la publicidad: captar atención, generar un contacto y terminar en una reserva real","ПОБАЧИВ":"LO VIO","Побачив вашу рекламу":"Vio tu anuncio","У стрічці Facebook або Instagram побачив зрозумілу пропозицію і зацікавився послугою":"Vio una oferta clara en Facebook o Instagram y se interesó por el servicio","НАПИСАВ":"ESCRIBIÓ","Ваш бізнес":"Tu negocio","Привіт, мене зацікавила ваша акційна пропозиція. Хочу замовити на завтра. Можна на 12:00?":"Hola, me interesa vuestra oferta. Quiero reservar para mañana. ¿Puede ser a las 12:00?","Так, 12:00 вільно. Записую вас ✅":"Sí, las 12:00 está libre. Te apunto ✅","Написав вам":"Te escribió","Людина вже не просто цікавиться — вона пише з конкретним наміром замовити":"Ya no solo está mirando: escribe con una intención clara de reservar","ЗАБРОНЮВАВ":"RESERVÓ","БРОНЮВАННЯ":"RESERVA","Послуга · час · адреса підтверджені":"Servicio · hora · dirección confirmados","Ви домовилися":"Habéis acordado los detalles","Відповіли на питання, узгодили час і підтвердили замовлення":"Respondiste a sus preguntas, acordaste la hora y confirmaste la reserva","КЛІЄНТ":"CLIENTE","НОВИЙ КЛІЄНТ":"NUEVO CLIENTE","Замовлення виконано":"Servicio realizado","Наступного разу він може повернутися вже без реклами":"La próxima vez puede volver sin necesidad de publicidad","Став вашим клієнтом":"Se convirtió en tu cliente","Ви отримали реальне замовлення, а хороший сервіс може зробити клієнта постійним":"Has conseguido una reserva real, y un buen servicio puede convertirlo en cliente habitual","РЕЗУЛЬТАТ":"RESULTADO","Не покази й не кліки — нова людина, яка реально звернулася у ваш бізнес і купила":"No impresiones ni clics: una persona nueva que contactó con tu negocio y compró","Мій підхід":"Mi enfoque","Не запускаю рекламу за одним шаблоном":"No lanzo la publicidad con la misma plantilla para todos","Перед запуском дивлюся на послугу, гео, ціни, попит і рекламні дані — структура кампанії має відповідати конкретному бізнесу":"Antes de lanzar, analizo el servicio, la zona, los precios, la demanda y los datos publicitarios: la estructura de la campaña debe encajar con ese negocio","Для клінінгу":"Para cleaning","1 місто":"1 ciudad","1 клієнт":"1 cliente","Поки ми працюємо разом, не беру прямого cleaning-конкурента у вашому місті":"Mientras trabajamos juntos, no acepto otro competidor directo de cleaning en tu ciudad","Локальна стратегія":"Estrategia local","Гео, ціни й попит відрізняються — кампанію будую під конкретний ринок":"La zona, los precios y la demanda cambian: construyo la campaña para ese mercado concreto","Креативи під ваш ринок":"Creatividades para tu mercado","Офер, візуал і текст будую під послугу, гео та мотивацію клієнта":"Creo la oferta, el visual y el texto según el servicio, la zona y la motivación del cliente","Оптимізація за якістю":"Optimización por calidad","Дивлюся не лише на CPL, а й на якість звернень і конверсію в клієнта":"No miro solo el CPL, también la calidad de los contactos y la conversión a cliente","Кейси / Results":"Casos / Resultados","Результати з реальних запусків":"Resultados de campañas reales","Підтверджені результати з cleaning, beauty, medical, real estate, detailing та інших локальних проєктів. Без намальованої статистики":"Resultados verificados de proyectos locales de cleaning, beauty, medical, real estate, detailing y otros sectores. Sin estadísticas inventadas","діалогів":"conversaciones","CAD / діалог":"CAD / conversación","Переглянути креатив + Ads Manager →":"Ver creatividad + Ads Manager →","Косметологічний центр":"Centro de estética","ціна заявки":"coste por lead","Переглянути більше кейсів ↓":"Ver más casos ↓","Сховати додаткові кейси ↑":"Ocultar casos adicionales ↑","Нерухомість в Іспанії":"Inmobiliaria en España","підписані угоди":"operaciones firmadas","лідів із сайту":"leads web","ціна ліда":"coste por lead","розмов":"conversaciones","Медичний центр · New York":"Centro médico · New York","заявка":"solicitud","Ще більше доказів":"Más pruebas","Більше кейсів — в Instagram":"Más casos en Instagram","У Highlights":"En Highlights","«КЕЙСИ»":"«CASOS»","зібрані додаткові результати, скріни рекламного кабінету та приклади запусків":"encontrarás más resultados, capturas de Ads Manager y ejemplos de campañas","Де це? →":"¿Dónde está? →","Кейси · Креативи · Відгуки":"Casos · Creatividades · Reseñas","Перейти в Instagram":"Ir a Instagram","ПРО МЕНЕ":"SOBRE MÍ","Хто буде займатися вашою рекламою?":"¿Quién se encargará de tu publicidad?","Привіт! Мене звати Вадим. Уже понад 3 роки запускаю рекламу у Facebook та Instagram для локального бізнесу. Налаштовую кампанії, стежу за результатами й покращую їх у процесі, щоб ви отримували якомога кращий результат":"¡Hola! Me llamo Vadym. Llevo más de 3 años gestionando publicidad en Facebook e Instagram para negocios locales. Configuro las campañas, sigo los resultados y las mejoro durante el proceso para conseguir el mejor resultado posible","роки досвіду":"años de experiencia","Локальний бізнес":"Negocios locales","cleaning, beauty, medical та інші ніші":"cleaning, beauty, medical y otros sectores","досвід із локальними ринками":"experiencia en mercados locales","Отримати безкоштовну консультацію · Telegram →":"Solicitar consulta gratuita · Telegram →","Отримати безкоштовну консультацію · Instagram →":"Solicitar consulta gratuita · Instagram →","Реклама має зупиняти погляд ще до першого кліку":"La publicidad debe detener el scroll antes del primer clic","Реальні рекламні креативи з локальних проєктів у різних нішах":"Creatividades publicitarias reales de proyectos locales en distintos sectores","Що кажуть клієнти про роботу":"Qué dicen los clientes sobre mi trabajo","Реальні повідомлення клієнтів після запусків і ведення реклами":"Mensajes reales de clientes después del lanzamiento y la gestión de sus campañas","Beauty · 37 бронювань / 10 днів":"Beauty · 37 reservas / 10 días","56 заявок / 14 днів":"56 solicitudes / 14 días","Стабільніші й якісніші заявки":"Solicitudes más estables y de mayor calidad","Cosmetology · 1 984 ліди / місяць":"Cosmetología · 1.984 leads / mes","Бронювання й доставки стабільно":"Reservas y entregas estables","Якісніші заявки після оптимізації":"Leads de mayor calidad tras la optimización","Щоденні заявки · стабільна реклама":"Solicitudes diarias · publicidad estable","78 консультацій / місяць · $4.9":"78 consultas / mes · $4.9","Як починаємо роботу":"Cómo empezamos","Як запускаємо вашу рекламу":"Cómo lanzamos tu publicidad","4 прості кроки: розумію ваш бізнес, готую рекламу, запускаю її та покращую результат":"4 pasos simples: entiendo tu negocio, preparo la publicidad, lanzo la campaña y mejoro el resultado","попит":"demanda","Розумію ваш бізнес":"Entiendo tu negocio","Що ви продаєте, кому, за якою ціною і в якому місті":"Qué vendes, a quién, a qué precio y en qué ciudad","Готую рекламу":"Preparo la publicidad","Пропозиція, аудиторія, тексти й креативи під ваш бізнес":"Oferta, audiencia, textos y creatividades adaptados a tu negocio","Запускаю кампанію":"Lanzo la campaña","Налаштовую рекламу у Facebook та Instagram і запускаю трафік":"Configuro la publicidad en Facebook e Instagram y lanzo el tráfico","Покращую результат":"Mejoro el resultado","Залишаю те, що приводить якісні звернення, слабке вимикаю":"Mantengo lo que trae contactos de calidad y apago lo que funciona peor","ЕКСКЛЮЗИВНІСТЬ ДЛЯ КЛІНІНГУ":"EXCLUSIVIDAD PARA CLEANING","Перевірте, чи вільне ваше місто":"Comprueba si tu ciudad está disponible","Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті":"Mientras trabajo con una empresa de cleaning en una ciudad, no acepto allí a un competidor directo. Toronto / GTA y Calgary están ocupadas actualmente","1 місто = 1 cleaning-клієнт":"1 ciudad = 1 cliente de cleaning","Ваше місто":"Tu ciudad","Не бачите місто? Безкоштовно перевірю вручну":"¿No ves tu ciudad? La compruebo manualmente gratis","Статус":"Estado","ЗАЙНЯТО":"OCUPADA","У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру":"Ya trabajo con una empresa de cleaning en esta ciudad, así que no acepto un segundo competidor directo","Зайнято":"Ocupada","Вільно":"Disponible","Отримайте безкоштовну консультацію":"Solicita una consulta gratuita","Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною.":"La primera consulta es gratuita. Cuéntame qué negocio o servicio quieres promocionar y en qué ciudad trabajas. Así podré entender mejor tu situación y hacer la consulta lo más concreta y útil posible.","Отримати безкоштовну консультацію":"Solicitar una consulta gratuita","Підтвердження кейсу":"Prueba del caso","Кейс":"Caso","Креатив":"Creatividad","Де знайти кейси":"Dónde encontrar los casos","Instagram Highlights · «КЕЙСИ»":"Instagram Highlights · «CASOS»","Перейти в Instagram →":"Ir a Instagram →","Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym":"Solicitar una consulta gratuita · Instagram @lebedenkkko · Telegram @target_vadym","Виберіть місто":"Elige una ciudad","Закрити":"Cerrar","Попередній":"Anterior","Наступний":"Siguiente","ВІЛЬНО":"DISPONIBLE","Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці":"La ciudad está disponible para hablarlo. Confirmo el estado antes de empezar a trabajar juntos","Відеокреатив":"Creatividad de vídeo","Матеріал кейсу":"Material del caso","Відгук клієнта":"Reseña del cliente","Профіль performance-маркетолога":"Perfil de performance marketer","Спеціалізація":"Especialización","Як реклама приводить нового клієнта":"Cómo la publicidad consigue un nuevo cliente","Хто працює з рекламою":"Quién gestiona la publicidad","Вадим — спеціаліст з реклами Facebook та Instagram":"Vadym — especialista en publicidad de Facebook e Instagram","Реальний beauty-креатив Toronto":"Creatividad real de beauty · Toronto","Реальний cleaning-креатив Toronto":"Creatividad real de cleaning · Toronto","Реальний hair extensions креатив":"Creatividad real de hair extensions","Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки":"Instagram Highlights: Creatividades, Casos, Webs, Servicios, Reseñas"}};
   Object.assign(translations.en,{"Клінінг · Toronto / GTA":"Cleaning · Toronto / GTA","Клінінг · London":"Cleaning · London","Детейлінг · Amsterdam":"Detailing · Amsterdam"});
   Object.assign(translations.es,{"Клінінг · Toronto / GTA":"Cleaning · Toronto / GTA","Клінінг · London":"Cleaning · London","Детейлінг · Amsterdam":"Detailing · Amsterdam"});
   const langCode={uk:"UA",en:"EN",es:"ES"};
