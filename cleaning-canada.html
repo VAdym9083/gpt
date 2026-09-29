@@ -3781,32 +3781,15 @@ body.proofModalOpen{overflow:hidden}
 
 /* Hero: unique CSS-built premium background, no generic stock photo */
 .heroShell{
-  background:
-    radial-gradient(circle at 78% 18%,rgba(143,182,210,.42),transparent 24%),
-    radial-gradient(circle at 83% 68%,rgba(157,189,168,.26),transparent 30%),
-    radial-gradient(circle at 98% 96%,rgba(213,185,138,.24),transparent 26%),
-    linear-gradient(118deg,#11171d 0%,#1d2a33 34%,#536571 64%,#c6b8a6 100%)!important
+  background:#08111b url("assets/site/hero-designer-glass-20260929.webp") center center / cover no-repeat!important
 }
 .heroShell:after{
-  content:"";
-  position:absolute;
-  right:-8%;
-  top:8%;
-  width:58%;
-  height:82%;
-  border-radius:48% 52% 54% 46%;
-  background:
-    radial-gradient(circle at 34% 30%,rgba(255,255,255,.23),transparent 28%),
-    linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,0) 56%);
-  filter:blur(2px);
-  opacity:.78;
-  transform:rotate(-8deg);
-  pointer-events:none
+  display:none!important
 }
 .heroVeil{
   background:
-    linear-gradient(90deg,rgba(5,7,10,.84) 0%,rgba(5,7,10,.64) 30%,rgba(5,7,10,.17) 59%,rgba(245,235,225,.04) 100%),
-    linear-gradient(180deg,rgba(5,7,10,.04) 52%,rgba(8,9,11,.55) 100%)!important
+    linear-gradient(90deg,rgba(2,7,12,.78) 0%,rgba(2,7,12,.60) 31%,rgba(2,7,12,.26) 52%,rgba(2,7,12,.06) 72%,rgba(2,7,12,0) 100%),
+    linear-gradient(180deg,rgba(2,6,10,.04) 50%,rgba(2,6,10,.28) 100%)!important
 }
 .heroProofList b{letter-spacing:.055em!important}
 .heroProofList>div:last-child b{color:#d8e7dc!important}
@@ -3933,11 +3916,16 @@ body.proofModalOpen{overflow:hidden}
 }
 
 @media (max-width:767px){
+  .heroShell{
+    background-position:23% center!important
+  }
+  .heroVeil{
+    background:
+      linear-gradient(90deg,rgba(2,7,12,.83) 0%,rgba(2,7,12,.64) 48%,rgba(2,7,12,.26) 78%,rgba(2,7,12,.08) 100%),
+      linear-gradient(180deg,rgba(2,6,10,.08) 48%,rgba(2,6,10,.34) 100%)!important
+  }
   .heroShell:after{
-    width:94%;
-    right:-42%;
-    top:12%;
-    opacity:.52
+    display:none!important
   }
   .casePrioritySection{
     padding-top:58px!important;
