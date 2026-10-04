@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vadym9083.github.io/gpt/sitemap.xml

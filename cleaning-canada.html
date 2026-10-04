@@ -5,9 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f4f0ea">
 <title>Таргет LB · Vadym — Performance Marketer</title>
-<meta name="description" content="Meta Ads для локального бізнесу в Канаді та США. Спеціалізація — cleaning companies. Стратегія, креативи, запуск, оптимізація та реальні кейси. 3+ роки досвіду.">
+<meta name="description" content="Meta Ads для локального бізнесу: cleaning, beauty, medical, real estate, detailing та інші ніші. Реальні кейси, креативи й результати. 3+ роки досвіду.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="Vadym · Таргет LB">
+<link rel="canonical" href="https://vadym9083.github.io/gpt/">
+<link rel="alternate" hreflang="uk" href="https://vadym9083.github.io/gpt/">
+<link rel="alternate" hreflang="x-default" href="https://vadym9083.github.io/gpt/">
+<link rel="preload" as="image" href="assets/site/hero-marketing-workspace-20260929.webp" type="image/webp" fetchpriority="high">
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="dns-prefetch" href="//images.unsplash.com">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vadym9083.github.io/gpt/">
+<meta property="og:site_name" content="Таргет LB">
 <meta property="og:title" content="Таргет LB · Vadym — Performance Marketer">
-<meta property="og:description" content="Performance marketing для локального бізнесу. Спеціалізація — клінінг. Реальні кейси, креативи та результати з Meta Ads.">
+<meta property="og:description" content="Meta Ads для локального бізнесу. Cleaning — основна спеціалізація, також beauty, medical, real estate, detailing та інші ніші. Реальні кейси й результати.">
+<meta property="og:image" content="https://vadym9083.github.io/gpt/assets/site/hero-marketing-workspace-20260929.webp">
+<meta property="og:image:width" content="2560">
+<meta property="og:image:height" content="1429">
+<meta property="og:image:alt" content="Таргет LB · Vadym — Performance Marketer">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Таргет LB · Vadym — Performance Marketer">
+<meta name="twitter:description" content="Meta Ads для локального бізнесу. Реальні кейси, креативи та результати.">
+<meta name="twitter:image" content="https://vadym9083.github.io/gpt/assets/site/hero-marketing-workspace-20260929.webp">
 <style>
 :root{
   --paper:#f2eee7;
@@ -3967,6 +3991,121 @@ body.proofModalOpen{overflow:hidden}
   }
 }
 
+
+/* 2026-10-04 · proof readability + performance + case scan pass */
+
+/* 1) Hero proof: readable premium glass instead of white text over the monitor */
+.heroEditorialProof{
+  width:min(100%,326px)!important;
+  justify-self:center!important;
+  padding:24px 24px 20px!important;
+  border:1px solid rgba(255,255,255,.17)!important;
+  border-radius:24px!important;
+  background:
+    linear-gradient(145deg,rgba(6,10,15,.78),rgba(11,17,23,.58))!important;
+  box-shadow:
+    0 24px 68px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(20px) saturate(122%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(122%)!important;
+}
+.heroProofLabel{
+  margin-bottom:22px!important;
+  color:rgba(255,255,255,.63)!important
+}
+.heroProofYears{
+  padding-bottom:20px!important;
+  border-bottom-color:rgba(255,255,255,.16)!important
+}
+.heroProofYears span{color:rgba(255,255,255,.68)!important}
+.heroProofList>div{
+  min-height:47px!important;
+  border-bottom-color:rgba(255,255,255,.11)!important
+}
+.heroProofList>div:last-child{border-bottom:0!important}
+.heroProofList span{color:rgba(255,255,255,.44)!important}
+.heroProofList b{
+  color:rgba(255,255,255,.94)!important;
+  text-shadow:0 1px 8px rgba(0,0,0,.20)
+}
+
+/* 3) Keep lower sections cheap to render until they approach the viewport */
+#approach,
+.trustSection,
+.showcaseSection,
+.reviewSection,
+.processCompactSection,
+.availabilitySection,
+.cta{
+  content-visibility:auto;
+  contain-intrinsic-size:900px
+}
+
+/* Stable image areas: the browser knows the visual box before decoding */
+.casePhoto,
+.trustPortrait,
+.reviewShot,
+.creativeCard{
+  contain:layout paint
+}
+
+/* 5) Case cards: one metric dominates, the rest become context */
+.caseStats{
+  grid-template-columns:1.38fr .92fr .92fr!important;
+  gap:7px!important
+}
+.caseStatPrimary{
+  position:relative;
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(63,103,80,.08)
+}
+.caseStatPrimary strong{
+  font-size:38px!important;
+  line-height:.90!important
+}
+.caseStatPrimary span{
+  font-size:8px!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important
+}
+.caseStat:not(.caseStatPrimary){
+  background:rgba(255,255,255,.54)!important;
+  border-color:rgba(20,20,20,.055)!important
+}
+.caseStat:not(.caseStatPrimary) strong{
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:760!important;
+  color:#5f676d!important
+}
+.caseStat:not(.caseStatPrimary) span{
+  color:#908a83!important;
+  opacity:.88
+}
+
+@media (max-width:767px){
+  .heroEditorialProof{
+    width:100%!important;
+    margin-top:22px!important;
+    padding:16px 16px 14px!important;
+    border:1px solid rgba(255,255,255,.15)!important;
+    border-radius:19px!important;
+    background:linear-gradient(145deg,rgba(6,10,15,.76),rgba(11,17,23,.55))!important
+  }
+  .heroProofYears{
+    padding-bottom:12px!important
+  }
+  .heroProofList>div{
+    min-height:39px!important;
+    padding-top:10px!important
+  }
+  .caseStats{
+    grid-template-columns:1.32fr .94fr .94fr!important
+  }
+  .caseStatPrimary strong{font-size:25px!important}
+  .caseStat:not(.caseStatPrimary) strong{font-size:15px!important}
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -3974,7 +4113,9 @@ body.proofModalOpen{overflow:hidden}
   "@type":"ProfessionalService",
   "name":"Таргет LB · Vadym — Performance Marketer",
   "url":"https://vadym9083.github.io/gpt/",
-  "description":"Performance marketing and Meta Ads for local businesses in Canada and the United States. Specialization: cleaning companies. 3+ years of experience. Real case results and project examples are published on the website.",
+  "description":"Performance marketing and Meta Ads for local businesses. Main specialization: cleaning companies. Also works with beauty, medical, real estate, detailing and other local business niches. 3+ years of experience. Real case results and project examples are published on the website.",
+  "image":"https://vadym9083.github.io/gpt/assets/site/hero-marketing-workspace-20260929.webp",
+  "serviceType":["Meta Ads","Facebook Ads","Instagram Ads","Lead generation","Creative strategy","Campaign optimization"],
   "areaServed":[
     {"@type":"Country","name":"Canada"},
     {"@type":"Country","name":"United States"}
@@ -3986,6 +4127,10 @@ body.proofModalOpen{overflow:hidden}
     "Lead generation",
     "Local business marketing",
     "Cleaning company marketing",
+    "Beauty business marketing",
+    "Medical marketing",
+    "Real estate lead generation",
+    "Detailing marketing",
     "Creative strategy",
     "Campaign optimization"
   ],
@@ -4095,7 +4240,7 @@ body.proofModalOpen{overflow:hidden}
 
     <div class="caseGrid">
 <article class="caseCard reveal">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
+  <div class="casePhoto"><img loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3>
     <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -4103,7 +4248,7 @@ body.proofModalOpen{overflow:hidden}
 </article>
 
 <article class="caseCard reveal">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
+  <div class="casePhoto"><img loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
   <div class="caseBody"><h3>Косметологічний центр</h3>
     <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -4128,7 +4273,7 @@ body.proofModalOpen{overflow:hidden}
 </article>
 
 <article class="caseCard caseExtra">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
+  <div class="casePhoto"><img loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=84" alt="Клінінг London"><span class="caseTag">Cleaning · London</span></div>
   <div class="caseBody"><h3>Клінінг · London</h3>
     <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>13</strong><span>лідів із сайту</span></div><div class="caseStat"><strong>£29.90</strong><span>ціна ліда</span></div><div class="caseStat"><strong>£388.65</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · London" data-proof-type="video" data-proof-creative="assets/site/videos/london-cleaning.mp4" data-proof-ads="assets/site/proofs/london-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -4136,7 +4281,7 @@ body.proofModalOpen{overflow:hidden}
 </article>
 
 <article class="caseCard caseExtra">
-  <div class="casePhoto"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
+  <div class="casePhoto"><img loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=84" alt="Детейлінг Amsterdam"><span class="caseTag">Detailing · Amsterdam</span></div>
   <div class="caseBody"><h3>Детейлінг · Amsterdam</h3>
     <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>147</strong><span>розмов</span></div><div class="caseStat"><strong>313</strong><span>link clicks</span></div><div class="caseStat"><strong>€268.72</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Детейлінг · Amsterdam" data-proof-type="image" data-proof-creative="assets/site/proofs/detailing-amsterdam-creative.webp" data-proof-ads="assets/site/proofs/detailing-amsterdam-ads.webp">Переглянути креатив + Ads Manager →</button>
