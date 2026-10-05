@@ -4544,6 +4544,40 @@ body::before{display:none!important}
   filter:none!important
 }
 
+
+/* 2026-10-05 · safe cinematic reveal reliability pass */
+#approach,
+.trustSection,
+.showcaseSection,
+.reviewSection,
+.processCompactSection,
+.availabilitySection,
+.cta{
+  content-visibility:visible!important;
+  contain-intrinsic-size:auto!important
+}
+
+.cinematicMedia,
+.cinematicMedia.cinematicIn{
+  clip-path:none!important;
+  opacity:1!important
+}
+.cinematicMedia img,
+.cinematicMedia.cinematicIn img{
+  transform:none!important
+}
+@media (max-width:767px){
+  .cinematicMedia,
+  .cinematicMedia.cinematicIn{
+    clip-path:none!important
+  }
+}
+@media (hover:hover) and (pointer:fine){
+  .caseCard:hover .cinematicMedia img{
+    transform:scale(1.018)!important
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -4682,7 +4716,7 @@ body::before{display:none!important}
 
     <div class="caseGrid">
 <article class="caseCard reveal">
-  <div class="casePhoto"><img loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
+  <div class="casePhoto"><img loading="eager" decoding="async" fetchpriority="high" src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=1200&q=84" alt="Клінінг Toronto та GTA"><span class="caseTag">Cleaning · Toronto / GTA</span></div>
   <div class="caseBody"><h3>Клінінг · Toronto / GTA</h3>
     <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>1 097</strong><span>діалогів</span></div><div class="caseStat"><strong>$2.39</strong><span>CAD / діалог</span></div><div class="caseStat"><strong>$2 629.11</strong><span>CAD spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Клінінг · Toronto / GTA" data-proof-type="image" data-proof-creative="assets/site/proofs/toronto-cleaning-creative.webp" data-proof-ads="assets/site/proofs/toronto-cleaning-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -4690,7 +4724,7 @@ body::before{display:none!important}
 </article>
 
 <article class="caseCard reveal">
-  <div class="casePhoto"><img loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
+  <div class="casePhoto"><img loading="eager" decoding="async" fetchpriority="high" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=84" alt="Косметологічний центр"><span class="caseTag">Cosmetology · USA</span></div>
   <div class="caseBody"><h3>Косметологічний центр</h3>
     <div class="caseStats"><div class="caseStat caseStatPrimary"><strong>1 984</strong><span>заявки</span></div><div class="caseStat"><strong>$9.84</strong><span>ціна заявки</span></div><div class="caseStat"><strong>$19 497.90</strong><span>spend</span></div></div>
     <button class="caseProofLink" type="button" data-proof-title="Косметологічний центр" data-proof-type="image" data-proof-creative="assets/site/proofs/cosmetology-creative.webp" data-proof-ads="assets/site/proofs/cosmetology-ads.webp">Переглянути креатив + Ads Manager →</button>
@@ -5897,23 +5931,83 @@ document.addEventListener('keydown',(event)=>{
 
   mediaTargets.forEach((el)=>{
     el.classList.add('cinematicMedia');
-    let localIndex=0;
-    const card=el.closest('.journeyAirCard,.processCompactCard');
-    if(card&&card.parentElement)localIndex=[...card.parentElement.children].indexOf(card);
-    el.style.setProperty('--media-delay',Math.min(Math.max(localIndex,0),3)*80+'ms');
+    el.dataset.cinematicReady='1';
   });
 
-  if(reduce){
-    mediaTargets.forEach(el=>el.classList.add('cinematicIn'));
+  function localRevealDelay(el){
+    const card=el.closest('.journeyAirCard,.processCompactCard');
+    if(!card||!card.parentElement)return 0;
+    const index=[...card.parentElement.children].indexOf(card);
+    return Math.min(Math.max(index,0),3)*70;
+  }
+
+  function playCinematicReveal(el){
+    if(!el||el.dataset.cinematicPlayed==='1')return;
+    el.dataset.cinematicPlayed='1';
+    el.classList.add('cinematicIn');
+
+    if(reduce||typeof el.animate!=='function')return;
+
+    const radius=window.matchMedia('(max-width:767px)').matches?'16px':'20px';
+    const delay=localRevealDelay(el);
+
+    const maskAnim=el.animate([
+      {clipPath:'inset(0 100% 0 0 round '+radius+')'},
+      {clipPath:'inset(0 0 0 0 round '+radius+')'}
+    ],{
+      duration:920,
+      delay:delay,
+      easing:'cubic-bezier(.16,.78,.18,1)',
+      fill:'none'
+    });
+
+    const image=el.querySelector('img');
+    if(image&&typeof image.animate==='function'){
+      image.animate([
+        {transform:'scale(1.045) translate3d(-1.2%,0,0)'},
+        {transform:'scale(1) translate3d(0,0,0)'}
+      ],{
+        duration:1120,
+        delay:delay,
+        easing:'cubic-bezier(.16,.78,.18,1)',
+        fill:'none'
+      });
+    }
+
+    if(maskAnim&&maskAnim.finished)maskAnim.finished.catch(()=>{});
+  }
+
+  if(reduce||typeof IntersectionObserver==='undefined'){
+    mediaTargets.forEach((el)=>{
+      el.dataset.cinematicPlayed='1';
+      el.classList.add('cinematicIn');
+    });
   }else{
     const mediaObserver=new IntersectionObserver((entries,observer)=>{
-      entries.forEach(entry=>{
+      entries.forEach((entry)=>{
         if(!entry.isIntersecting)return;
-        entry.target.classList.add('cinematicIn');
+        playCinematicReveal(entry.target);
         observer.unobserve(entry.target);
       });
-    },{threshold:.14,rootMargin:'0px 0px -6% 0px'});
-    mediaTargets.forEach(el=>mediaObserver.observe(el));
+    },{
+      threshold:.04,
+      rootMargin:'0px 0px 12% 0px'
+    });
+
+    mediaTargets.forEach((el)=>mediaObserver.observe(el));
+
+    const casesToggle=document.getElementById('casesToggle');
+    if(casesToggle){
+      casesToggle.addEventListener('change',()=>{
+        if(!casesToggle.checked)return;
+        requestAnimationFrame(()=>{
+          document.querySelectorAll('#extraCasesWrap .cinematicMedia').forEach((el)=>{
+            const rect=el.getBoundingClientRect();
+            if(rect.top<window.innerHeight*1.12&&rect.bottom>0)playCinematicReveal(el);
+          });
+        });
+      });
+    }
   }
 
   function animateIntegerMetric(node){
@@ -5936,7 +6030,8 @@ document.addEventListener('keydown',(event)=>{
 
     const useSpaces=/\s/.test(raw);
     const duration=860;
-    const start=performance.now();
+    const started=performance.now();
+
     const render=(value)=>{
       const rounded=Math.round(value);
       node.textContent=useSpaces
@@ -5946,7 +6041,7 @@ document.addEventListener('keydown',(event)=>{
 
     render(0);
     const tick=(now)=>{
-      const p=Math.min(1,(now-start)/duration);
+      const p=Math.min(1,(now-started)/duration);
       const eased=1-Math.pow(1-p,4);
       render(target*eased);
       if(p<1)requestAnimationFrame(tick);
@@ -5959,17 +6054,17 @@ document.addEventListener('keydown',(event)=>{
   }
 
   const metricNodes=[...document.querySelectorAll('.caseStatPrimary strong')];
-  if(reduce){
-    metricNodes.forEach(node=>node.dataset.metricDone='1');
+  if(reduce||typeof IntersectionObserver==='undefined'){
+    metricNodes.forEach((node)=>node.dataset.metricDone='1');
   }else{
     const metricObserver=new IntersectionObserver((entries,observer)=>{
-      entries.forEach(entry=>{
+      entries.forEach((entry)=>{
         if(!entry.isIntersecting)return;
         animateIntegerMetric(entry.target);
         observer.unobserve(entry.target);
       });
-    },{threshold:.70});
-    metricNodes.forEach(node=>metricObserver.observe(node));
+    },{threshold:.62});
+    metricNodes.forEach((node)=>metricObserver.observe(node));
   }
 
   const hero=document.querySelector('.hero');
@@ -6007,6 +6102,19 @@ document.addEventListener('keydown',(event)=>{
   window.addEventListener('resize',requestHeroDepth,{passive:true});
   if(desktop.addEventListener)desktop.addEventListener('change',requestHeroDepth);
   updateHeroDepth();
+
+  function restoreMediaVisibility(){
+    mediaTargets.forEach((el)=>{
+      el.style.clipPath='';
+      el.style.opacity='';
+      const image=el.querySelector('img');
+      if(image)image.style.transform='';
+    });
+  }
+  window.addEventListener('pageshow',restoreMediaVisibility,{passive:true});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible')restoreMediaVisibility();
+  },{passive:true});
 })();
 </script>
 
