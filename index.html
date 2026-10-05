@@ -4375,6 +4375,160 @@ body::before{
   .loopTrack{animation:none!important}
 }
 
+
+/* 2026-10-05 · cinematic motion director pass */
+body::before{display:none!important}
+.heroBtn.primary::after,
+.pill.dark::after,
+.caseProofLink::after,
+.trustActions a::after{display:none!important}
+
+@media (hover:hover) and (pointer:fine){
+  .caseCard:hover{
+    transform:translate3d(0,-3px,0)!important;
+    box-shadow:0 30px 88px rgba(35,29,24,.13)!important
+  }
+  .journeyAirCard:hover,
+  .processCompactCard:hover{transform:translate3d(0,-2px,0)!important}
+  .creativeCard:hover,
+  .reviewCard:hover,
+  .trustPanel:hover{transform:none!important}
+  .creativeCard:hover img{transform:scale(1.018)!important}
+  .trustPanel:hover .trustPortrait img{transform:scale(1.012)!important}
+}
+
+.heroHeadline{display:block;overflow:visible}
+.hero .heroHeadlineMask{
+  display:block!important;
+  overflow:hidden;
+  color:#fff!important;
+  background:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  padding:0 0 .08em;
+  margin:0 0 -.08em
+}
+.heroHeadlineMask i{
+  display:block;
+  font-style:normal;
+  color:#fff;
+  transform:translate3d(0,0,0);
+  will-change:transform
+}
+.heroHeadlineAccent i{
+  width:max-content;
+  max-width:100%;
+  background:linear-gradient(92deg,#fff 0%,#bdd8ff 48%,#e8eef8 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent
+}
+.motion-ready .heroCopy>.heroHeadline{
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+  transition:none!important
+}
+.motion-ready .heroHeadlineMask i{
+  transform:translate3d(0,112%,0);
+  opacity:.10
+}
+.motion-ready.motion-in .heroHeadlineMask i{
+  transform:translate3d(0,0,0);
+  opacity:1;
+  transition:transform 1.02s cubic-bezier(.16,.78,.18,1),opacity .72s ease
+}
+.motion-ready.motion-in .heroHeadlineMask:nth-child(1) i{transition-delay:180ms}
+.motion-ready.motion-in .heroHeadlineMask:nth-child(2) i{transition-delay:280ms}
+.motion-ready.motion-in .heroHeadlineMask:nth-child(3) i{transition-delay:380ms}
+
+.heroShell::after{
+  animation:none!important;
+  transform:translate3d(0,var(--hero-bg-y,0px),0) scale(var(--hero-bg-scale,1.025))!important;
+  transition:none!important
+}
+.heroContent{
+  transform:translate3d(0,var(--hero-content-y,0px),0);
+  opacity:var(--hero-content-opacity,1);
+  will-change:transform,opacity
+}
+
+.cinematicMedia{
+  clip-path:inset(0 100% 0 0 round 20px);
+  transition:clip-path 1.05s cubic-bezier(.16,.78,.18,1) var(--media-delay,0ms)!important
+}
+.cinematicMedia img{
+  transform:scale(1.045) translate3d(-1.2%,0,0)!important;
+  transition:transform 1.28s cubic-bezier(.16,.78,.18,1) var(--media-delay,0ms)!important
+}
+.cinematicMedia.cinematicIn{clip-path:inset(0 0 0 0 round 20px)}
+.cinematicMedia.cinematicIn img{transform:scale(1) translate3d(0,0,0)!important}
+.caseCard:hover .cinematicMedia.cinematicIn img{transform:scale(1.018) translate3d(0,0,0)!important}
+
+.caseStatPrimary strong{
+  font-variant-numeric:tabular-nums;
+  min-width:4ch
+}
+.caseStatPrimary.metricAnimating strong{color:#365e48!important}
+
+.caseProofModal{
+  display:grid!important;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .36s ease,visibility 0s linear .42s
+}
+.caseProofModal.isOpen{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition-delay:0s
+}
+.caseProofModal.isClosing{pointer-events:none}
+.caseProofDialog{
+  will-change:transform,filter,opacity;
+  transform-origin:center center
+}
+.caseProofFrame{
+  clip-path:inset(0 0 100% 0 round 20px);
+  opacity:.45;
+  transition:clip-path .82s cubic-bezier(.16,.78,.18,1) .20s,opacity .58s ease .20s
+}
+.caseProofModal.isOpen .caseProofFrame{
+  clip-path:inset(0 0 0 0 round 20px);
+  opacity:1
+}
+.caseProofMedia:nth-child(2) .caseProofFrame{transition-delay:.30s}
+
+.reveal{
+  filter:blur(3px)!important;
+  transform:translate3d(0,24px,0)!important
+}
+.premiumReveal{
+  filter:blur(3px)!important;
+  transform:translate3d(0,24px,0)!important
+}
+
+@media (max-width:767px){
+  .heroContent{transform:none!important;opacity:1!important}
+  .heroShell::after{transform:scale(1.025)!important}
+  .cinematicMedia{clip-path:inset(0 100% 0 0 round 16px)}
+  .cinematicMedia.cinematicIn{clip-path:inset(0 0 0 0 round 16px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .heroHeadlineMask i,
+  .cinematicMedia,
+  .cinematicMedia img,
+  .caseProofFrame{
+    transform:none!important;
+    clip-path:none!important;
+    opacity:1!important;
+    transition:none!important
+  }
+  .heroContent{transform:none!important;opacity:1!important}
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -4469,7 +4623,11 @@ body::before{
       <div class="heroCopy">
         <div class="heroFreeLead"><span></span><strong>Перша консультація — безкоштовна</strong></div>
         <div class="eyebrow">Реклама у Facebook та Instagram · Canada / USA</div>
-        <h1>Вам потрібні <span>заявки</span> Не просто реклама</h1>
+        <h1 class="heroHeadline">
+          <span class="heroHeadlineMask"><i>Вам потрібні</i></span>
+          <span class="heroHeadlineMask heroHeadlineAccent"><i>заявки</i></span>
+          <span class="heroHeadlineMask"><i>Не просто реклама</i></span>
+        </h1>
         <p class="heroLead"><strong>Основна спеціалізація — клінінг.</strong> Також працюю з beauty, medical, real estate, detailing та іншими локальними бізнесами. Нижче — реальні результати з різних ніш</p>
 
         <div class="heroButtons">
@@ -5068,9 +5226,23 @@ const caseCreativeFrame=document.getElementById('caseCreativeFrame');
 const caseAdsFrame=document.getElementById('caseAdsFrame');
 const proofAds=document.getElementById('caseProofAds');
 
+let proofSourceButton=null;
+let proofIsClosing=false;
+
+function getProofSourceRect(button){
+  if(!button||!button.isConnected)return null;
+  const rect=button.getBoundingClientRect();
+  if(!rect.width||!rect.height)return null;
+  return rect;
+}
+
 function openProofModal(button){
   const type=button.dataset.proofType||'image';
   const t=(value)=>window.siteTranslate?window.siteTranslate(value):value;
+  const sourceRect=getProofSourceRect(button);
+  proofSourceButton=button&&button.isConnected?button:null;
+  proofIsClosing=false;
+
   proofTitle.textContent=t(button.dataset.proofTitle||'Кейс');
   proofCreativeLabel.textContent=t(type==='video'?'Відеокреатив':'Креатив');
   proofAds.src=button.dataset.proofAds||'';
@@ -5093,16 +5265,98 @@ function openProofModal(button){
   }
 
   proofModal.classList.add('isOpen');
+  proofModal.classList.remove('isClosing');
   proofModal.setAttribute('aria-hidden','false');
   document.body.classList.add('proofModalOpen');
+
+  const dialog=proofModal.querySelector('.caseProofDialog');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!dialog||reduce||!sourceRect)return;
+
+  requestAnimationFrame(()=>{
+    const targetRect=dialog.getBoundingClientRect();
+    const dx=(sourceRect.left+sourceRect.width/2)-(targetRect.left+targetRect.width/2);
+    const dy=(sourceRect.top+sourceRect.height/2)-(targetRect.top+targetRect.height/2);
+    const sx=Math.max(.055,Math.min(.42,sourceRect.width/targetRect.width));
+    const sy=Math.max(.045,Math.min(.28,sourceRect.height/targetRect.height));
+
+    dialog.animate([
+      {
+        transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,
+        borderRadius:'999px',
+        opacity:.38,
+        filter:'blur(5px)'
+      },
+      {
+        transform:'translate3d(0,0,0) scale(1,1)',
+        borderRadius:'28px',
+        opacity:1,
+        filter:'blur(0)'
+      }
+    ],{
+      duration:560,
+      easing:'cubic-bezier(.18,.76,.20,1)',
+      fill:'both'
+    });
+  });
 }
-function closeProofModal(){
+
+function finalizeProofClose(){
   proofCreativeVideo.pause();
   proofCreativeVideo.removeAttribute('src');
   proofCreativeVideo.load();
-  proofModal.classList.remove('isOpen');
+  proofModal.classList.remove('isOpen','isClosing');
   proofModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('proofModalOpen');
+  proofIsClosing=false;
+}
+
+function closeProofModal(){
+  if(!proofModal.classList.contains('isOpen')||proofIsClosing)return;
+  proofIsClosing=true;
+  proofModal.classList.add('isClosing');
+
+  const dialog=proofModal.querySelector('.caseProofDialog');
+  const sourceRect=getProofSourceRect(proofSourceButton);
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!dialog||reduce||!sourceRect){
+    finalizeProofClose();
+    return;
+  }
+
+  const targetRect=dialog.getBoundingClientRect();
+  const dx=(sourceRect.left+sourceRect.width/2)-(targetRect.left+targetRect.width/2);
+  const dy=(sourceRect.top+sourceRect.height/2)-(targetRect.top+targetRect.height/2);
+  const sx=Math.max(.055,Math.min(.42,sourceRect.width/targetRect.width));
+  const sy=Math.max(.045,Math.min(.28,sourceRect.height/targetRect.height));
+
+  const dialogAnimation=dialog.animate([
+    {
+      transform:'translate3d(0,0,0) scale(1,1)',
+      borderRadius:'28px',
+      opacity:1,
+      filter:'blur(0)'
+    },
+    {
+      transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,
+      borderRadius:'999px',
+      opacity:.22,
+      filter:'blur(5px)'
+    }
+  ],{
+    duration:410,
+    easing:'cubic-bezier(.55,0,.82,.24)',
+    fill:'both'
+  });
+
+  proofModal.animate([{opacity:1},{opacity:0}],{
+    duration:390,
+    easing:'ease',
+    fill:'both'
+  });
+
+  dialogAnimation.finished.then(finalizeProofClose).catch(finalizeProofClose);
 }
 document.querySelectorAll('.caseProofLink').forEach((button)=>{
   button.addEventListener('click',()=>openProofModal(button));
@@ -5584,6 +5838,134 @@ document.addEventListener('keydown',(event)=>{
       proof.style.removeProperty('--proof-y');
     },{passive:true});
   }
+})();
+</script>
+
+
+<script>
+/* 2026-10-05 · cinematic motion director */
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const mediaTargets=[
+    ...document.querySelectorAll('.casePhoto'),
+    ...document.querySelectorAll('.trustPortrait'),
+    ...document.querySelectorAll('.journeyAirVisual'),
+    ...document.querySelectorAll('.processCompactVisual')
+  ];
+
+  mediaTargets.forEach((el)=>{
+    el.classList.add('cinematicMedia');
+    let localIndex=0;
+    const card=el.closest('.journeyAirCard,.processCompactCard');
+    if(card&&card.parentElement)localIndex=[...card.parentElement.children].indexOf(card);
+    el.style.setProperty('--media-delay',Math.min(Math.max(localIndex,0),3)*80+'ms');
+  });
+
+  if(reduce){
+    mediaTargets.forEach(el=>el.classList.add('cinematicIn'));
+  }else{
+    const mediaObserver=new IntersectionObserver((entries,observer)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        entry.target.classList.add('cinematicIn');
+        observer.unobserve(entry.target);
+      });
+    },{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+    mediaTargets.forEach(el=>mediaObserver.observe(el));
+  }
+
+  function animateIntegerMetric(node){
+    if(node.dataset.metricDone==='1')return;
+    const raw=node.textContent.trim();
+    const digits=raw.replace(/[^\d]/g,'');
+    if(!digits)return;
+    const target=Number(digits);
+    if(!Number.isFinite(target))return;
+
+    node.dataset.metricDone='1';
+    const stat=node.closest('.caseStatPrimary');
+    stat?.classList.add('metricAnimating');
+
+    if(reduce||target<4){
+      node.textContent=raw;
+      stat?.classList.remove('metricAnimating');
+      return;
+    }
+
+    const useSpaces=/\s/.test(raw);
+    const duration=860;
+    const start=performance.now();
+    const render=(value)=>{
+      const rounded=Math.round(value);
+      node.textContent=useSpaces
+        ? String(rounded).replace(/\B(?=(\d{3})+(?!\d))/g,' ')
+        : String(rounded);
+    };
+
+    render(0);
+    const tick=(now)=>{
+      const p=Math.min(1,(now-start)/duration);
+      const eased=1-Math.pow(1-p,4);
+      render(target*eased);
+      if(p<1)requestAnimationFrame(tick);
+      else{
+        node.textContent=raw;
+        stat?.classList.remove('metricAnimating');
+      }
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const metricNodes=[...document.querySelectorAll('.caseStatPrimary strong')];
+  if(reduce){
+    metricNodes.forEach(node=>node.dataset.metricDone='1');
+  }else{
+    const metricObserver=new IntersectionObserver((entries,observer)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        animateIntegerMetric(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },{threshold:.70});
+    metricNodes.forEach(node=>metricObserver.observe(node));
+  }
+
+  const hero=document.querySelector('.hero');
+  const heroShell=document.querySelector('.heroShell');
+  const heroContent=document.querySelector('.heroContent');
+  const desktop=window.matchMedia('(min-width:768px)');
+  let heroFrame=0;
+
+  function updateHeroDepth(){
+    heroFrame=0;
+    if(!hero||!heroShell||!heroContent||reduce||!desktop.matches){
+      heroShell?.style.removeProperty('--hero-bg-y');
+      heroShell?.style.removeProperty('--hero-bg-scale');
+      heroContent?.style.removeProperty('--hero-content-y');
+      heroContent?.style.removeProperty('--hero-content-opacity');
+      return;
+    }
+
+    const rect=hero.getBoundingClientRect();
+    const travel=Math.max(1,hero.offsetHeight);
+    const progress=Math.max(0,Math.min(1,-rect.top/travel));
+
+    heroShell.style.setProperty('--hero-bg-y',(-18*progress).toFixed(2)+'px');
+    heroShell.style.setProperty('--hero-bg-scale',(1.025+.035*progress).toFixed(4));
+    heroContent.style.setProperty('--hero-content-y',(-24*progress).toFixed(2)+'px');
+    heroContent.style.setProperty('--hero-content-opacity',(1-.20*progress).toFixed(3));
+  }
+
+  function requestHeroDepth(){
+    if(heroFrame)return;
+    heroFrame=requestAnimationFrame(updateHeroDepth);
+  }
+
+  window.addEventListener('scroll',requestHeroDepth,{passive:true});
+  window.addEventListener('resize',requestHeroDepth,{passive:true});
+  if(desktop.addEventListener)desktop.addEventListener('change',requestHeroDepth);
+  updateHeroDepth();
 })();
 </script>
 
