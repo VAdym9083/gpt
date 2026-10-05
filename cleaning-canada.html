@@ -5228,6 +5228,9 @@ const proofAds=document.getElementById('caseProofAds');
 
 let proofSourceButton=null;
 let proofIsClosing=false;
+let proofOpenAnimation=null;
+let proofCloseAnimation=null;
+let proofOverlayAnimation=null;
 
 function getProofSourceRect(button){
   if(!button||!button.isConnected)return null;
@@ -5280,7 +5283,8 @@ function openProofModal(button){
     const sx=Math.max(.055,Math.min(.42,sourceRect.width/targetRect.width));
     const sy=Math.max(.045,Math.min(.28,sourceRect.height/targetRect.height));
 
-    dialog.animate([
+    proofOpenAnimation?.cancel();
+    const openAnimation=dialog.animate([
       {
         transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,
         borderRadius:'999px',
@@ -5298,6 +5302,12 @@ function openProofModal(button){
       easing:'cubic-bezier(.18,.76,.20,1)',
       fill:'both'
     });
+    proofOpenAnimation=openAnimation;
+    openAnimation.finished.then(()=>{
+      if(proofOpenAnimation!==openAnimation)return;
+      openAnimation.cancel();
+      proofOpenAnimation=null;
+    }).catch(()=>{});
   });
 }
 
@@ -5308,6 +5318,13 @@ function finalizeProofClose(){
   proofModal.classList.remove('isOpen','isClosing');
   proofModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('proofModalOpen');
+
+  proofOpenAnimation?.cancel();
+  proofCloseAnimation?.cancel();
+  proofOverlayAnimation?.cancel();
+  proofOpenAnimation=null;
+  proofCloseAnimation=null;
+  proofOverlayAnimation=null;
   proofIsClosing=false;
 }
 
@@ -5331,6 +5348,11 @@ function closeProofModal(){
   const sx=Math.max(.055,Math.min(.42,sourceRect.width/targetRect.width));
   const sy=Math.max(.045,Math.min(.28,sourceRect.height/targetRect.height));
 
+  proofOpenAnimation?.cancel();
+  proofOpenAnimation=null;
+  proofCloseAnimation?.cancel();
+  proofOverlayAnimation?.cancel();
+
   const dialogAnimation=dialog.animate([
     {
       transform:'translate3d(0,0,0) scale(1,1)',
@@ -5350,13 +5372,17 @@ function closeProofModal(){
     fill:'both'
   });
 
-  proofModal.animate([{opacity:1},{opacity:0}],{
+  proofCloseAnimation=dialogAnimation;
+  proofOverlayAnimation=proofModal.animate([{opacity:1},{opacity:0}],{
     duration:390,
     easing:'ease',
     fill:'both'
   });
 
-  dialogAnimation.finished.then(finalizeProofClose).catch(finalizeProofClose);
+  dialogAnimation.finished.then(()=>{
+    if(proofCloseAnimation!==dialogAnimation)return;
+    finalizeProofClose();
+  }).catch(finalizeProofClose);
 }
 document.querySelectorAll('.caseProofLink').forEach((button)=>{
   button.addEventListener('click',()=>openProofModal(button));
