@@ -4166,12 +4166,12 @@ body::before{
 .motion-ready .heroCopy>*,
 .motion-ready .heroEditorialProof{
   opacity:0;
-  filter:blur(7px);
+  filter:none;
   transform:translate3d(0,18px,0);
   transition:
     opacity .85s cubic-bezier(.2,.7,.2,1),
     transform .85s cubic-bezier(.2,.7,.2,1),
-    filter .85s cubic-bezier(.2,.7,.2,1)
+    filter .01ms linear
 }
 .motion-ready .nav{transform:translate3d(0,-12px,0)}
 .motion-ready.motion-in .nav,
@@ -4192,12 +4192,12 @@ body::before{
 /* Existing scroll reveals now feel softer and more editorial */
 .reveal{
   opacity:0!important;
-  filter:blur(7px);
+  filter:none;
   transform:translate3d(0,28px,0) scale(.988)!important;
   transition:
     opacity .82s cubic-bezier(.2,.72,.2,1) var(--reveal-delay,0ms),
     transform .82s cubic-bezier(.2,.72,.2,1) var(--reveal-delay,0ms),
-    filter .82s cubic-bezier(.2,.72,.2,1) var(--reveal-delay,0ms)!important
+    filter .01ms linear!important
 }
 .reveal.show{
   opacity:1!important;
@@ -4208,12 +4208,12 @@ body::before{
 /* Extra premium reveals for blocks that previously appeared abruptly */
 .premiumReveal{
   opacity:0;
-  filter:blur(7px);
+  filter:none;
   transform:translate3d(0,30px,0) scale(.985);
   transition:
     opacity .82s cubic-bezier(.2,.72,.2,1) var(--premium-delay,0ms),
     transform .82s cubic-bezier(.2,.72,.2,1) var(--premium-delay,0ms),
-    filter .82s cubic-bezier(.2,.72,.2,1) var(--premium-delay,0ms)
+    filter .01ms linear
 }
 .premiumReveal.premiumShow{
   opacity:1;
@@ -4501,11 +4501,11 @@ body::before{display:none!important}
 .caseProofMedia:nth-child(2) .caseProofFrame{transition-delay:.30s}
 
 .reveal{
-  filter:blur(3px)!important;
+  filter:none!important;
   transform:translate3d(0,24px,0)!important
 }
 .premiumReveal{
-  filter:blur(3px)!important;
+  filter:none!important;
   transform:translate3d(0,24px,0)!important
 }
 
@@ -4527,6 +4527,21 @@ body::before{display:none!important}
     transition:none!important
   }
   .heroContent{transform:none!important;opacity:1!important}
+}
+
+
+/* 2026-10-05 · sharp motion fix: no content blur at any animation stage */
+.motion-ready .nav,
+.motion-ready .heroCopy>*,
+.motion-ready .heroEditorialProof,
+.reveal,
+.reveal.show,
+.premiumReveal,
+.premiumReveal.premiumShow{
+  filter:none!important
+}
+.caseProofDialog{
+  filter:none!important
 }
 
 </style>
@@ -5289,13 +5304,13 @@ function openProofModal(button){
         transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,
         borderRadius:'999px',
         opacity:.38,
-        filter:'blur(5px)'
+        filter:'none'
       },
       {
         transform:'translate3d(0,0,0) scale(1,1)',
         borderRadius:'28px',
         opacity:1,
-        filter:'blur(0)'
+        filter:'none'
       }
     ],{
       duration:560,
@@ -5358,13 +5373,13 @@ function closeProofModal(){
       transform:'translate3d(0,0,0) scale(1,1)',
       borderRadius:'28px',
       opacity:1,
-      filter:'blur(0)'
+      filter:'none'
     },
     {
       transform:`translate3d(${dx}px,${dy}px,0) scale(${sx},${sy})`,
       borderRadius:'999px',
       opacity:.22,
-      filter:'blur(5px)'
+      filter:'none'
     }
   ],{
     duration:410,
