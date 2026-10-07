@@ -4682,6 +4682,77 @@ body::before{display:none!important}
   font-size:8px!important;
   line-height:1.45!important
 }
+.faqCompact{
+  display:grid;
+  gap:8px;
+  margin-bottom:4px
+}
+.faqCompactTitle{
+  margin:0 0 3px;
+  color:#668DA6;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase
+}
+.faqItem{
+  overflow:hidden;
+  border-radius:16px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(18,19,21,.08);
+  box-shadow:0 8px 24px rgba(28,24,20,.045)
+}
+.faqItem summary{
+  position:relative;
+  min-height:52px;
+  padding:0 46px 0 15px;
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  list-style:none;
+  color:#222426;
+  font-size:11px;
+  font-weight:850;
+  line-height:1.3
+}
+.faqItem summary::-webkit-details-marker{display:none}
+.faqItem summary:after{
+  content:"+";
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-52%);
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  color:#577a91;
+  background:rgba(102,141,166,.10);
+  font-size:16px;
+  font-weight:500;
+  transition:transform .2s ease,background .2s ease
+}
+.faqItem[open] summary:after{
+  content:"−";
+  background:rgba(102,141,166,.16)
+}
+.faqItem p{
+  margin:0!important;
+  padding:0 15px 14px!important;
+  color:#746e68!important;
+  font-size:9px!important;
+  line-height:1.55!important
+}
+@media(max-width:767px){
+  .faqItem summary{
+    min-height:50px;
+    font-size:10.5px
+  }
+  .faqItem p{
+    font-size:8.5px!important
+  }
+}
 .leadDirect{
   margin-top:14px;
   display:flex;
@@ -5294,6 +5365,25 @@ body::before{display:none!important}
         <p>Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною</p>
       </div>
       <div class="contactStack">
+        <div class="faqCompact">
+          <div class="faqCompactTitle">Перед стартом — 3 короткі відповіді</div>
+
+          <details class="faqItem">
+            <summary>Скільки потрібен рекламний бюджет?</summary>
+            <p>Для локального бізнесу в Канаді стартовий тест зазвичай має сенс від 20–30 CAD/день. Точний бюджет залежить від міста, послуги та конкуренції.</p>
+          </details>
+
+          <details class="faqItem">
+            <summary>Коли можна очікувати перші звернення?</summary>
+            <p>Перші звернення можуть з’явитися вже в перші дні після запуску. Стабільність оцінюю після накопичення даних — без обіцянок «результат завтра».</p>
+          </details>
+
+          <details class="faqItem">
+            <summary>Що потрібно від мене для запуску?</summary>
+            <p>На першому етапі — місто, послуги й ціни. Доступи до Meta та матеріали знадобляться вже перед запуском; решту структури підготую сам.</p>
+          </details>
+        </div>
+
         <div class="leadFormIntro">3 короткі поля — і я напишу вам сам</div>
         <form class="leadIntakeForm" id="leadIntakeForm">
           <label class="leadField">
@@ -5929,6 +6019,33 @@ document.addEventListener('keydown',(event)=>{
     "Надіслати заявку →":"Отправить заявку →",
     "Після заявки я зв'яжуся з вами у вибраній мережі":"После заявки я свяжусь с вами в выбранной сети",
     "Якщо зручніше — напишіть напряму:":"Если удобнее — напишите напрямую:"
+  });
+  Object.assign(translations.en,{
+    "Перед стартом — 3 короткі відповіді":"Before we start — 3 quick answers",
+    "Скільки потрібен рекламний бюджет?":"How much ad budget do I need?",
+    "Для локального бізнесу в Канаді стартовий тест зазвичай має сенс від 20–30 CAD/день. Точний бюджет залежить від міста, послуги та конкуренції.":"For a local business in Canada, a starting test usually makes sense from CAD 20–30/day. The exact budget depends on the city, service and competition.",
+    "Коли можна очікувати перші звернення?":"When can I expect the first enquiries?",
+    "Перші звернення можуть з’явитися вже в перші дні після запуску. Стабільність оцінюю після накопичення даних — без обіцянок «результат завтра».":"The first enquiries can appear within the first few days after launch. I judge stability after enough data is collected, without promising “results tomorrow.”",
+    "Що потрібно від мене для запуску?":"What do you need from me to launch?",
+    "На першому етапі — місто, послуги й ціни. Доступи до Meta та матеріали знадобляться вже перед запуском; решту структури підготую сам.":"At the first stage: your city, services and prices. Meta access and materials are needed only before launch; I prepare the rest of the structure myself."
+  });
+  Object.assign(translations.es,{
+    "Перед стартом — 3 короткі відповіді":"Antes de empezar — 3 respuestas rápidas",
+    "Скільки потрібен рекламний бюджет?":"¿Qué presupuesto publicitario necesito?",
+    "Для локального бізнесу в Канаді стартовий тест зазвичай має сенс від 20–30 CAD/день. Точний бюджет залежить від міста, послуги та конкуренції.":"Para un negocio local en Canadá, una prueba inicial suele tener sentido desde 20–30 CAD/día. El presupuesto exacto depende de la ciudad, el servicio y la competencia.",
+    "Коли можна очікувати перші звернення?":"¿Cuándo puedo esperar los primeros contactos?",
+    "Перші звернення можуть з’явитися вже в перші дні після запуску. Стабільність оцінюю після накопичення даних — без обіцянок «результат завтра».":"Los primeros contactos pueden aparecer en los primeros días tras el lanzamiento. Evalúo la estabilidad cuando ya hay suficientes datos, sin prometer “resultados mañana”.",
+    "Що потрібно від мене для запуску?":"¿Qué necesitas de mí para lanzar?",
+    "На першому етапі — місто, послуги й ціни. Доступи до Meta та матеріали знадобляться вже перед запуском; решту структури підготую сам.":"Al principio: ciudad, servicios y precios. Los accesos de Meta y los materiales solo harán falta antes del lanzamiento; yo preparo el resto de la estructura."
+  });
+  Object.assign(translations.ru,{
+    "Перед стартом — 3 короткі відповіді":"Перед стартом — 3 коротких ответа",
+    "Скільки потрібен рекламний бюджет?":"Сколько нужен рекламный бюджет?",
+    "Для локального бізнесу в Канаді стартовий тест зазвичай має сенс від 20–30 CAD/день. Точний бюджет залежить від міста, послуги та конкуренції.":"Для локального бизнеса в Канаде стартовый тест обычно имеет смысл от 20–30 CAD/день. Точный бюджет зависит от города, услуги и конкуренции.",
+    "Коли можна очікувати перші звернення?":"Когда можно ожидать первые обращения?",
+    "Перші звернення можуть з’явитися вже в перші дні після запуску. Стабільність оцінюю після накопичення даних — без обіцянок «результат завтра».":"Первые обращения могут появиться уже в первые дни после запуска. Стабильность оцениваю после накопления данных — без обещаний «результат завтра».",
+    "Що потрібно від мене для запуску?":"Что нужно от меня для запуска?",
+    "На першому етапі — місто, послуги й ціни. Доступи до Meta та матеріали знадобляться вже перед запуском; решту структури підготую сам.":"На первом этапе — город, услуги и цены. Доступы к Meta и материалы понадобятся уже перед запуском; остальную структуру подготовлю сам."
   });
   const langCode={uk:"UA",en:"EN",es:"ES",ru:"RU"};
   const htmlLang={uk:"uk",en:"en",es:"es-ES",ru:"ru"};
