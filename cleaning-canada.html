@@ -4683,25 +4683,39 @@ body::before{display:none!important}
   line-height:1.45!important
 }
 .leadDirect{
-  margin-top:10px;
+  margin-top:14px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  color:#827c75;
-  font-size:8px
+  gap:14px;
+  color:#706b65;
+  font-size:9.5px;
+  font-weight:700
 }
 .leadDirectLinks{
   display:flex;
-  gap:7px
+  gap:10px;
+  flex-wrap:wrap
 }
 .leadDirectLinks a{
-  padding:8px 10px;
+  min-height:44px;
+  padding:0 17px;
   border-radius:999px;
-  background:rgba(255,255,255,.58);
-  border:1px solid rgba(18,19,21,.08);
-  color:#25272a;
-  font-weight:850
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.76);
+  border:1px solid rgba(18,19,21,.12);
+  color:#202225;
+  box-shadow:0 8px 20px rgba(24,22,20,.06);
+  font-size:11px;
+  font-weight:900;
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease
+}
+.leadDirectLinks a:hover{
+  transform:translateY(-1px);
+  background:#fff;
+  box-shadow:0 10px 24px rgba(24,22,20,.09)
 }
 @media(max-width:900px){
   .ctaBox{grid-template-columns:1fr!important}
@@ -5294,7 +5308,6 @@ body::before{display:none!important}
                 <option value="telegram">Telegram</option>
                 <option value="instagram">Instagram</option>
                 <option value="whatsapp">WhatsApp</option>
-                <option value="phone">Телефон</option>
               </select>
               <span class="leadSelectChevron">⌄</span>
             </div>
@@ -6066,29 +6079,25 @@ document.addEventListener('keydown',(event)=>{
       name:'Ваше ім’я',
       telegram:{placeholder:'@username або +1 780…',hint:'Telegram: вкажіть @username або номер телефону'},
       instagram:{placeholder:'@username або посилання',hint:'Instagram: вкажіть @username або посилання на профіль'},
-      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: номер телефону з кодом країни'},
-      phone:{placeholder:'+1 780…',hint:'Телефон: номер з кодом країни'}
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: номер телефону з кодом країни'}
     },
     ru:{
       name:'Ваше имя',
       telegram:{placeholder:'@username или +1 780…',hint:'Telegram: укажите @username или номер телефона'},
       instagram:{placeholder:'@username или ссылка',hint:'Instagram: укажите @username или ссылку на профиль'},
-      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: номер телефона с кодом страны'},
-      phone:{placeholder:'+1 780…',hint:'Телефон: номер с кодом страны'}
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: номер телефона с кодом страны'}
     },
     en:{
       name:'Your name',
       telegram:{placeholder:'@username or +1 780…',hint:'Telegram: enter your @username or phone number'},
       instagram:{placeholder:'@username or profile link',hint:'Instagram: enter your @username or profile link'},
-      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: phone number with country code'},
-      phone:{placeholder:'+1 780…',hint:'Phone: number with country code'}
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: phone number with country code'}
     },
     es:{
       name:'Tu nombre',
       telegram:{placeholder:'@usuario o +1 780…',hint:'Telegram: indica tu @usuario o número de teléfono'},
       instagram:{placeholder:'@usuario o enlace',hint:'Instagram: indica tu @usuario o enlace al perfil'},
-      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: número con prefijo internacional'},
-      phone:{placeholder:'+1 780…',hint:'Teléfono: número con prefijo internacional'}
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: número con prefijo internacional'}
     }
   };
 
@@ -6104,7 +6113,7 @@ document.addEventListener('keydown',(event)=>{
     nameInput.placeholder=ui[lang].name;
     contactInput.placeholder=copy.placeholder;
     hint.textContent=copy.hint;
-    const phoneLike=network==='whatsapp'||network==='phone';
+    const phoneLike=network==='whatsapp';
     contactInput.inputMode=phoneLike?'tel':'text';
   }
 
