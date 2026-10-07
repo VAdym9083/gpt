@@ -6420,25 +6420,90 @@ document.addEventListener('keydown',(event)=>{
   document.addEventListener('siteLanguageChanged',syncContactUi);
   syncContactUi();
 
-  form.addEventListener('submit',function(event){
+  const submitButton=form.querySelector('.leadSubmit');
+  const formNote=form.querySelector('.leadFormNote');
+  const workerUrl='https://target-lb-leads.vadym9083.workers.dev/';
+
+  const submitCopy={
+    uk:{idle:'Надіслати заявку →',loading:'Надсилаю…',error:'Не вдалося надіслати. Спробуйте ще раз або напишіть мені напряму'},
+    ru:{idle:'Отправить заявку →',loading:'Отправляю…',error:'Не удалось отправить. Попробуйте ещё раз или напишите мне напрямую'},
+    en:{idle:'Send request →',loading:'Sending…',error:'Could not send. Please try again or message me directly'},
+    es:{idle:'Enviar solicitud →',loading:'Enviando…',error:'No se pudo enviar. Inténtalo de nuevo o escríbeme directamente'}
+  };
+
+  form.addEventListener('submit',async function(event){
     event.preventDefault();
     if(!form.reportValidity())return;
 
-    const name=nameInput.value.trim();
-    const contact=contactInput.value.trim();
-    const networkLabel=networkSelect.options[networkSelect.selectedIndex]?.text||networkSelect.value;
     const lang=currentLang();
+    const copy=submitCopy[lang]||submitCopy.uk;
+    const params=new URLSearchParams(window.location.search);
 
-    const messageByLang={
-      uk:`Привіт! Мене звати ${name}.\nЗручний спосіб зв’язку: ${networkLabel}.\nМій контакт: ${contact}.\nХочу отримати безкоштовну консультацію щодо Meta Ads.`,
-      ru:`Здравствуйте! Меня зовут ${name}.\nУдобный способ связи: ${networkLabel}.\nМой контакт: ${contact}.\nХочу получить бесплатную консультацию по Meta Ads.`,
-      en:`Hi! My name is ${name}.\nPreferred contact channel: ${networkLabel}.\nMy contact: ${contact}.\nI’d like a free consultation about Meta Ads.`,
-      es:`¡Hola! Me llamo ${name}.\nCanal de contacto preferido: ${networkLabel}.\nMi contacto: ${contact}.\nQuiero una consulta gratuita sobre Meta Ads.`
+    submitButton.disabled=true;
+    submitButton.textContent=copy.loading;
+    form.setAttribute('aria-busy','true');
+
+    const payload={
+      name:nameInput.value.trim(),
+      network:networkSelect.value,
+      contact:contactInput.value.trim(),
+      lang,
+      page:window.location.href,
+      utm_source:params.get('utm_source')||'',
+      utm_medium:params.get('utm_medium')||'',
+      utm_campaign:params.get('utm_campaign')||'',
+      utm_content:params.get('utm_content')||'',
+      utm_term:params.get('utm_term')||''
     };
 
-    const url='https://t.me/target_vadym?text='+encodeURIComponent(messageByLang[lang]||messageByLang.uk);
-    window.open(url,'_blank','noopener');
+    try{
+      const response=await fetch(workerUrl,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      const result=await response.json().catch(()=>({success:false}));
+      if(!response.ok||!result.success)throw new Error(result.error||'Lead delivery failed');
+
+      const leadToken=(window.crypto&&crypto.randomUUID)
+        ?crypto.randomUUID()
+        :Date.now().toString(36)+Math.random().toString(36).slice(2);
+
+      sessionStorage.setItem('targetlb_verified_lead',JSON.stringify({
+        token:leadToken,
+        ts:Date.now()
+      }));
+
+      window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
+    }catch(error){
+      console.error('Lead submit failed',error);
+      submitButton.disabled=false;
+      submitButton.textContent=copy.idle;
+      form.removeAttribute('aria-busy');
+      if(formNote)formNote.textContent=copy.error;
+    }
   });
+})();
+</script>
+
+<script>
+/* 2026-10-07 · Meta Contact tracking for direct social outreach */
+(function(){
+  document.addEventListener('click',function(event){
+    const link=event.target.closest('a[href]');
+    if(!link)return;
+    const href=link.getAttribute('href')||'';
+    let method='';
+    if(href.includes('t.me/target_vadym'))method='telegram';
+    else if(href.includes('instagram.com/lebedenkkko'))method='instagram';
+    if(!method)return;
+    if(typeof window.fbq==='function'){
+      window.fbq('track','Contact',{
+        contact_method:method,
+        page_path:window.location.pathname
+      });
+    }
+  },{capture:true,passive:true});
 })();
 </script>
 
