@@ -16,11 +16,24 @@ body{margin:0;min-height:100svh;display:grid;place-items:center;padding:24px;col
 .eyebrow{color:#668DA6;font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
 h1{margin:12px 0 14px;font-size:clamp(40px,7vw,72px);line-height:.95;letter-spacing:-.055em}
 p{max-width:560px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.6}
+.goodDay{margin:18px auto 0;font-size:17px;font-weight:900;color:#2b2d2f}
+.handshake{display:inline-block;transform-origin:50% 65%;animation:handshake 1.05s ease-in-out 2}
+@keyframes handshake{0%,100%{transform:rotate(0) translateY(0)}25%{transform:rotate(-9deg) translateY(-1px)}55%{transform:rotate(8deg) translateY(1px)}75%{transform:rotate(-4deg)}}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
 a{min-height:58px;border-radius:17px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-weight:900;color:#fff;background:#17191c;border:1px solid #17191c}
 a.secondary{color:#202225;background:rgba(255,255,255,.74);border-color:rgba(18,19,21,.10)}
 .small{margin-top:18px;font-size:11px;color:#918a83}
-@media(max-width:600px){.actions{grid-template-columns:1fr}.card{border-radius:24px}}
+.small a{display:inline;min-height:0;border:0;background:none;color:#6d7f8d;font-weight:800;text-decoration:underline}
+.cookie[hidden]{display:none!important}
+.cookie{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);width:min(760px,calc(100% - 24px));padding:14px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;border-radius:18px;background:#fff;border:1px solid rgba(18,19,21,.10);box-shadow:0 18px 54px rgba(22,20,18,.18);z-index:20;text-align:left}
+.cookieText{color:#706a64;font-size:10px;line-height:1.45}
+.cookieText b{display:block;color:#232527;font-size:12px;margin-bottom:3px}
+.cookieButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.cookie button{min-height:44px;padding:0 13px;border-radius:13px;border:1px solid rgba(18,19,21,.13);font:inherit;font-size:10px;font-weight:900;cursor:pointer}
+.cookie .yes{background:#17231d;color:#fff;border-color:#17231d}
+.cookie .no{background:#fff;color:#202225}
+@media(max-width:600px){.actions{grid-template-columns:1fr}.card{border-radius:24px}.cookie{grid-template-columns:1fr}.cookieButtons{width:100%}}
+@media(prefers-reduced-motion:reduce){.handshake{animation:none}}
 </style>
 </head>
 <body>
@@ -29,44 +42,100 @@ a.secondary{color:#202225;background:rgba(255,255,255,.74);border-color:rgba(18,
   <div class="eyebrow" id="eyebrow">Заявку успішно надіслано</div>
   <h1 id="title">Дякую, заявку отримано</h1>
   <p id="text">Я отримав ваші дані й зв’яжуся з вами найближчим часом у вибраному вами месенджері</p>
+  <div class="goodDay" id="goodDay">Гарного вам дня! <span class="handshake" aria-hidden="true">🤝</span></div>
   <div class="actions">
     <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Telegram</a>
-    <a class="secondary" href="/gpt/">Повернутися на сайт</a>
+    <a class="secondary" id="backLink" href="/gpt/">Повернутися на сайт</a>
   </div>
-  <div class="small">Таргет LB · Vadym — Performance Marketer</div>
+  <div class="small">Таргет LB · Vadym — Performance Marketer · <a id="privacyLink" href="/gpt/privacy/">Privacy</a></div>
 </main>
+
+<div class="cookie" id="cookie" hidden>
+  <div class="cookieText"><b id="cookieTitle">Аналітика та реклама</b><span id="cookieBody">Meta Pixel і Microsoft Clarity запускаються лише після вашої згоди</span></div>
+  <div class="cookieButtons"><button class="no" id="reject" type="button">Відмовитися</button><button class="yes" id="accept" type="button">Прийняти</button></div>
+</div>
+
 <script>
 (function(){
+  const KEY='targetlb_tracking_consent_v1';
   const raw=sessionStorage.getItem('targetlb_verified_lead');
   let verified=null;
   try{verified=raw?JSON.parse(raw):null}catch(e){}
   const fresh=verified&&verified.token&&verified.ts&&(Date.now()-verified.ts<10*60*1000);
   if(!fresh){window.location.replace('/gpt/');return;}
-  sessionStorage.removeItem('targetlb_verified_lead');
 
-  const lang=new URLSearchParams(location.search).get('lang')||'uk';
+  const langParam=new URLSearchParams(location.search).get('lang');
+  const lang=['uk','ru','en','es'].includes(langParam)?langParam:'uk';
   const copy={
-    uk:{eyebrow:'Заявку успішно надіслано',title:'Дякую, заявку отримано',text:'Я отримав ваші дані й зв’яжуся з вами найближчим часом у вибраному вами месенджері',back:'Повернутися на сайт'},
-    ru:{eyebrow:'Заявка успешно отправлена',title:'Спасибо, заявка получена',text:'Я получил ваши данные и свяжусь с вами в ближайшее время в выбранном вами мессенджере',back:'Вернуться на сайт'},
-    en:{eyebrow:'Request successfully sent',title:'Thank you, I received your request',text:'I received your details and will contact you shortly through your preferred messenger',back:'Back to website'},
-    es:{eyebrow:'Solicitud enviada correctamente',title:'Gracias, he recibido tu solicitud',text:'He recibido tus datos y me pondré en contacto contigo pronto por el canal que elegiste',back:'Volver al sitio'}
+    uk:{eyebrow:'Заявку успішно надіслано',title:'Дякую, заявку отримано',text:'Я отримав ваші дані й зв’яжуся з вами найближчим часом у вибраному вами месенджері',day:'Гарного вам дня!',back:'Повернутися на сайт',cookieTitle:'Аналітика та реклама',cookieBody:'Meta Pixel і Microsoft Clarity запускаються лише після вашої згоди',yes:'Прийняти',no:'Відмовитися'},
+    ru:{eyebrow:'Заявка успешно отправлена',title:'Спасибо, заявка получена',text:'Я получил ваши данные и свяжусь с вами в ближайшее время в выбранном вами мессенджере',day:'Хорошего вам дня!',back:'Вернуться на сайт',cookieTitle:'Аналитика и реклама',cookieBody:'Meta Pixel и Microsoft Clarity запускаются только после вашего согласия',yes:'Принять',no:'Отказаться'},
+    en:{eyebrow:'Request successfully sent',title:'Thank you, I received your request',text:'I received your details and will contact you shortly through your preferred messenger',day:'Have a great day!',back:'Back to website',cookieTitle:'Analytics and advertising',cookieBody:'Meta Pixel and Microsoft Clarity only start after your consent',yes:'Accept',no:'Decline'},
+    es:{eyebrow:'Solicitud enviada correctamente',title:'Gracias, he recibido tu solicitud',text:'He recibido tus datos y me pondré en contacto contigo pronto por el canal que elegiste',day:'¡Que tengas un buen día!',back:'Volver al sitio',cookieTitle:'Analítica y publicidad',cookieBody:'Meta Pixel y Microsoft Clarity solo se activan después de tu consentimiento',yes:'Aceptar',no:'Rechazar'}
   };
   const c=copy[lang]||copy.uk;
   document.documentElement.lang=lang;
   document.getElementById('eyebrow').textContent=c.eyebrow;
   document.getElementById('title').textContent=c.title;
   document.getElementById('text').textContent=c.text;
-  document.querySelector('.secondary').textContent=c.back;
+  document.getElementById('goodDay').childNodes[0].nodeValue=c.day+' ';
+  document.getElementById('backLink').textContent=c.back;
+  document.getElementById('backLink').href='/gpt/?lang='+encodeURIComponent(lang);
+  document.getElementById('privacyLink').href='/gpt/privacy/?lang='+encodeURIComponent(lang);
   document.getElementById('thankYouCard').hidden=false;
 
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','1448174640737820');
-  fbq('track','PageView');
-  fbq('track','Lead',{lead_source:'website_form'});
+  const readConsent=()=>{try{return localStorage.getItem(KEY)}catch(e){return null}};
+  const writeConsent=(v)=>{try{localStorage.setItem(KEY,v)}catch(e){}};
+
+  let leadTracked=false;
+  function trackLead(){
+    if(leadTracked)return;
+    leadTracked=true;
+
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1448174640737820');
+    fbq('track','PageView');
+    fbq('track','Lead',{lead_source:'website_form'});
+
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','ynghvhq4re');
+
+    sessionStorage.removeItem('targetlb_verified_lead');
+  }
+
+  const cookie=document.getElementById('cookie');
+  const accept=document.getElementById('accept');
+  const reject=document.getElementById('reject');
+  document.getElementById('cookieTitle').textContent=c.cookieTitle;
+  document.getElementById('cookieBody').textContent=c.cookieBody;
+  accept.textContent=c.yes;
+  reject.textContent=c.no;
+
+  const consent=readConsent();
+  if(consent==='accepted'){
+    trackLead();
+  }else if(consent==='rejected'){
+    sessionStorage.removeItem('targetlb_verified_lead');
+  }else{
+    cookie.hidden=false;
+  }
+
+  accept.addEventListener('click',()=>{
+    writeConsent('accepted');
+    cookie.hidden=true;
+    trackLead();
+  });
+  reject.addEventListener('click',()=>{
+    writeConsent('rejected');
+    cookie.hidden=true;
+    sessionStorage.removeItem('targetlb_verified_lead');
+  });
 })();
 </script>
 </body>

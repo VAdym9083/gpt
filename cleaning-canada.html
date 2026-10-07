@@ -4916,6 +4916,105 @@ body::before{display:none!important}
   -webkit-backdrop-filter:none!important
 }
 
+
+/* 2026-10-07 · privacy notice + consent UI */
+.leadPrivacyNote{
+  margin:1px 0 0;
+  color:#8a847e;
+  font-size:9px;
+  line-height:1.45
+}
+.leadPrivacyNote a,
+.footerPrivacyLink{
+  color:#5f7f95;
+  font-weight:850;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:2px
+}
+.footerPrivacyLink{white-space:nowrap}
+.cookieBanner[hidden]{display:none!important}
+.cookieBanner{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:1200;
+  width:min(860px,calc(100% - 28px));
+  padding:16px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:18px;
+  border-radius:20px;
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(18,19,21,.10);
+  box-shadow:0 18px 58px rgba(23,21,19,.18)
+}
+.cookieCopy{
+  display:grid;
+  gap:5px;
+  color:#242629
+}
+.cookieCopy strong{
+  font-size:12.5px;
+  line-height:1.2
+}
+.cookieCopy span{
+  color:#746e68;
+  font-size:10px;
+  line-height:1.45
+}
+.cookieCopy a{
+  color:#54788f;
+  font-weight:850;
+  text-decoration:underline;
+  text-underline-offset:2px
+}
+.cookieActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+.cookieActions button{
+  min-width:124px;
+  min-height:46px;
+  padding:0 16px;
+  border-radius:14px;
+  border:1px solid rgba(18,19,21,.14);
+  font:inherit;
+  font-size:10.5px;
+  font-weight:900;
+  cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease
+}
+.cookieActions button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(23,21,19,.08)
+}
+.cookieReject{
+  color:#202225;
+  background:#fff
+}
+.cookieAccept{
+  color:#fff;
+  background:#17231d;
+  border-color:#17231d!important
+}
+@media(max-width:767px){
+  .leadPrivacyNote{font-size:8.5px}
+  .cookieBanner{
+    bottom:10px;
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:14px
+  }
+  .cookieActions button{
+    min-width:0;
+    width:100%
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -4959,37 +5058,64 @@ body::before{display:none!important}
   ]
 }
 </script>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ynghvhq4re");
-</script>
-<!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1448174640737820');
-fbq('track','PageView');
+/* 2026-10-07 · consent-gated Meta Pixel + Microsoft Clarity */
+(function(){
+  const KEY='targetlb_tracking_consent_v1';
+
+  function readConsent(){
+    try{return localStorage.getItem(KEY)}catch(e){return null}
+  }
+  function writeConsent(value){
+    try{localStorage.setItem(KEY,value)}catch(e){}
+  }
+
+  function loadClarity(){
+    if(window.__targetLBClarityLoaded)return;
+    window.__targetLBClarityLoaded=true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','ynghvhq4re');
+  }
+
+  function loadMeta(){
+    if(window.__targetLBMetaLoaded)return;
+    window.__targetLBMetaLoaded=true;
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1448174640737820');
+    fbq('track','PageView');
+  }
+
+  function loadTracking(){
+    loadMeta();
+    loadClarity();
+  }
+
+  window.TargetLBConsent={
+    key:KEY,
+    get:readConsent,
+    accept:function(){
+      writeConsent('accepted');
+      loadTracking();
+      document.dispatchEvent(new CustomEvent('targetLBConsentChanged',{detail:{value:'accepted'}}));
+    },
+    reject:function(){
+      writeConsent('rejected');
+      document.dispatchEvent(new CustomEvent('targetLBConsentChanged',{detail:{value:'rejected'}}));
+    }
+  };
+
+  if(readConsent()==='accepted')loadTracking();
+})();
 </script>
-<!-- End Meta Pixel Code -->
 </head>
 <body>
-<!-- Meta Pixel Code (noscript) -->
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1448174640737820&ev=PageView&noscript=1"
-alt=""
-></noscript>
-<!-- End Meta Pixel Code (noscript) -->
-
-
 <header class="nav">
   <div class="wrap navin">
     <a class="brand" href="#top">
@@ -5551,6 +5677,7 @@ alt=""
 
           <button class="leadSubmit" type="submit">Надіслати заявку →</button>
           <p class="leadFormNote">Після заявки я зв'яжуся з вами у вибраній мережі</p>
+          <p class="leadPrivacyNote"><span>Надсилаючи заявку, ви надаєте контактні дані для відповіді щодо консультації</span> · <a class="privacyLink" href="/gpt/privacy/">Політика конфіденційності</a></p>
         </form>
 
         <div class="leadDirect">
@@ -5646,10 +5773,21 @@ alt=""
   </div>
 </div>
 
+<div class="cookieBanner" id="cookieBanner" hidden data-i18n-ui role="dialog" aria-live="polite" aria-label="Налаштування конфіденційності">
+  <div class="cookieCopy">
+    <strong id="cookieTitle">Аналітика та реклама</strong>
+    <span id="cookieText">Meta Pixel і Microsoft Clarity допомагають вимірювати рекламу та використання сайту. Вони запускаються тільки після вашої згоди. <a id="cookiePrivacyLink" href="/gpt/privacy/">Privacy Policy</a></span>
+  </div>
+  <div class="cookieActions">
+    <button class="cookieReject" id="cookieReject" type="button">Відмовитися</button>
+    <button class="cookieAccept" id="cookieAccept" type="button">Прийняти</button>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footer">
     <span>© 2026 Таргет LB · Vadym — Performance Marketer</span>
-    <span>Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym</span>
+    <span>Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym · <a class="footerPrivacyLink privacyLink" href="/gpt/privacy/">Політика конфіденційності</a></span>
   </div>
 </footer>
 
@@ -6229,6 +6367,18 @@ document.addEventListener('keydown',(event)=>{
     "Хто готує тексти та креативи?":"Кто готовит тексты и креативы?",
     "Після того як уточню потрібну інформацію, я сам підготую тексти та креативи — тобто рекламні зображення або відео для оголошень. Усе йде в роботу тільки після вашого погодження":"После того как уточню нужную информацию, я сам подготовлю тексты и креативы — то есть рекламные изображения или видео для объявлений. Всё идёт в работу только после вашего одобрения"
   });
+  Object.assign(translations.en,{
+    "Надсилаючи заявку, ви надаєте контактні дані для відповіді щодо консультації":"By sending the request, you provide contact details so I can respond about the consultation",
+    "Політика конфіденційності":"Privacy Policy"
+  });
+  Object.assign(translations.es,{
+    "Надсилаючи заявку, ви надаєте контактні дані для відповіді щодо консультації":"Al enviar la solicitud, proporcionas tus datos de contacto para que pueda responderte sobre la consulta",
+    "Політика конфіденційності":"Política de privacidad"
+  });
+  Object.assign(translations.ru,{
+    "Надсилаючи заявку, ви надаєте контактні дані для відповіді щодо консультації":"Отправляя заявку, вы предоставляете контактные данные, чтобы я мог ответить по поводу консультации",
+    "Політика конфіденційності":"Политика конфиденциальности"
+  });
   const langCode={uk:"UA",en:"EN",es:"ES",ru:"RU"};
   const htmlLang={uk:"uk",en:"en",es:"es-ES",ru:"ru"};
   let currentLang="uk";
@@ -6483,6 +6633,64 @@ document.addEventListener('keydown',(event)=>{
       if(formNote)formNote.textContent=copy.error;
     }
   });
+})();
+</script>
+
+<script>
+/* 2026-10-07 · privacy consent banner */
+(function(){
+  const banner=document.getElementById('cookieBanner');
+  const accept=document.getElementById('cookieAccept');
+  const reject=document.getElementById('cookieReject');
+  const title=document.getElementById('cookieTitle');
+  const text=document.getElementById('cookieText');
+  const privacyLink=document.getElementById('cookiePrivacyLink');
+  if(!banner||!accept||!reject||!window.TargetLBConsent)return;
+
+  const copy={
+    uk:{title:'Аналітика та реклама',text:'Meta Pixel і Microsoft Clarity допомагають вимірювати рекламу та використання сайту. Вони запускаються тільки після вашої згоди.',privacy:'Політика конфіденційності',accept:'Прийняти',reject:'Відмовитися'},
+    ru:{title:'Аналитика и реклама',text:'Meta Pixel и Microsoft Clarity помогают измерять рекламу и использование сайта. Они запускаются только после вашего согласия.',privacy:'Политика конфиденциальности',accept:'Принять',reject:'Отказаться'},
+    en:{title:'Analytics and advertising',text:'Meta Pixel and Microsoft Clarity help measure advertising and website usage. They only start after your consent.',privacy:'Privacy Policy',accept:'Accept',reject:'Decline'},
+    es:{title:'Analítica y publicidad',text:'Meta Pixel y Microsoft Clarity ayudan a medir la publicidad y el uso del sitio. Solo se activan después de tu consentimiento.',privacy:'Política de privacidad',accept:'Aceptar',reject:'Rechazar'}
+  };
+
+  function lang(){
+    if(window.getSiteLanguage)return window.getSiteLanguage();
+    const q=new URLSearchParams(location.search).get('lang');
+    return copy[q]?q:'uk';
+  }
+  function updatePrivacyLinks(){
+    const l=lang();
+    document.querySelectorAll('.privacyLink').forEach((link)=>{
+      link.href='/gpt/privacy/?lang='+encodeURIComponent(l);
+    });
+  }
+  function render(){
+    const l=lang();
+    const c=copy[l]||copy.uk;
+    title.textContent=c.title;
+    text.childNodes[0].nodeValue=c.text+' ';
+    privacyLink.textContent=c.privacy;
+    accept.textContent=c.accept;
+    reject.textContent=c.reject;
+    privacyLink.href='/gpt/privacy/?lang='+encodeURIComponent(l);
+    updatePrivacyLinks();
+  }
+  function sync(){
+    render();
+    banner.hidden=window.TargetLBConsent.get()==='accepted'||window.TargetLBConsent.get()==='rejected';
+  }
+
+  accept.addEventListener('click',()=>{
+    window.TargetLBConsent.accept();
+    banner.hidden=true;
+  });
+  reject.addEventListener('click',()=>{
+    window.TargetLBConsent.reject();
+    banner.hidden=true;
+  });
+  document.addEventListener('siteLanguageChanged',render);
+  sync();
 })();
 </script>
 

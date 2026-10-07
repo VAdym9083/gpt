@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3efe8">
+<meta name="description" content="Privacy Policy for the Таргет LB performance marketing website">
+<link rel="canonical" href="https://vadym9083.github.io/gpt/privacy/">
+<title>Політика конфіденційності · Таргет LB</title>
+<style>
+:root{--paper:#f3efe8;--ink:#111214;--muted:#6f6963;--line:rgba(18,19,21,.09);--accent:#668DA6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 80% 0,rgba(102,141,166,.12),transparent 28%),var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{width:min(920px,calc(100% - 32px));margin:0 auto}
+.top{padding:22px 0}
+.top a{color:#202225;text-decoration:none;font-size:13px;font-weight:850}
+.hero{padding:54px 0 28px}
+.label{color:var(--accent);font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+h1{max-width:760px;margin:12px 0 16px;font-size:clamp(42px,7vw,78px);line-height:.94;letter-spacing:-.055em}
+.lead{max-width:720px;margin:0;color:var(--muted);font-size:16px;line-height:1.65}
+.policy{display:grid;gap:14px;padding:20px 0 56px}
+.section{padding:24px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:0 14px 40px rgba(28,24,20,.055)}
+h2{margin:0 0 10px;font-size:22px;letter-spacing:-.025em}
+p,li{color:var(--muted);font-size:14px;line-height:1.65}
+ul{margin:10px 0 0;padding-left:20px}
+a{color:#496f89}
+.pref{display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px}
+.prefActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.prefActions button{min-height:46px;padding:0 16px;border-radius:14px;border:1px solid var(--line);font:inherit;font-size:11px;font-weight:900;cursor:pointer}
+.accept{background:#17231d;color:#fff;border-color:#17231d!important}
+.reject{background:#fff;color:#202225}
+.status{margin-top:8px;font-size:12px;font-weight:800;color:#5f7f95}
+footer{padding:20px 0 38px;border-top:1px solid var(--line);color:#8d867f;font-size:11px}
+@media(max-width:700px){.hero{padding-top:36px}.section{padding:18px}.pref{grid-template-columns:1fr}.prefActions{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap top"><a id="back" href="/gpt/">← Назад на сайт</a></div>
+<main class="wrap">
+  <section class="hero">
+    <div class="label" id="label">Конфіденційність</div>
+    <h1 id="title">Політика конфіденційності</h1>
+    <p class="lead" id="intro">Тут пояснено, які дані можуть збиратися на сайті, навіщо вони потрібні та як ви можете керувати своїми налаштуваннями</p>
+  </section>
+  <section class="policy" id="policy"></section>
+</main>
+<footer><div class="wrap">© 2026 Таргет LB · Vadym — Performance Marketer</div></footer>
+<script>
+(function(){
+  const KEY='targetlb_tracking_consent_v1';
+  const langParam=new URLSearchParams(location.search).get('lang');
+  const lang=['uk','ru','en','es'].includes(langParam)?langParam:'uk';
+  document.documentElement.lang=lang;
+
+  const content={
+    uk:{
+      back:'← Назад на сайт',label:'Конфіденційність',title:'Політика конфіденційності',
+      intro:'Тут пояснено, які дані можуть збиратися на сайті, навіщо вони потрібні та як ви можете керувати своїми налаштуваннями',
+      sections:[
+        ['Хто обробляє дані','Оператор сайту: Vadym / Таргет LB — performance-маркетинг для локального бізнесу. Для питань щодо приватності можна написати в Telegram @target_vadym або Instagram @lebedenkkko'],
+        ['Які дані збираються','Коли ви надсилаєте форму, можуть оброблятися ваше ім’я, обраний канал зв’язку, контакт, адреса сторінки та UTM-мітки. Технічні аналітичні дані через Meta Pixel і Microsoft Clarity збираються лише після вашої згоди'],
+        ['Навіщо потрібні дані','Контактні дані використовуються, щоб відповісти на вашу заявку, провести консультацію та за потреби продовжити робочу комунікацію. Аналітичні й рекламні дані використовуються для вимірювання ефективності сайту та реклами'],
+        ['Кому можуть передаватися дані','Для роботи форми та аналітики можуть використовуватися Cloudflare, Telegram, Meta та Microsoft Clarity. Ці сервіси можуть обробляти дані у своїй інфраструктурі та відповідно до власних політик конфіденційності'],
+        ['Строк зберігання','Контактні дані із заявок можуть зберігатися до 12 місяців, якщо довший строк не потрібен для активної співпраці або виконання юридичних обов’язків. Налаштування згоди зберігається локально у вашому браузері'],
+        ['Ваші права','Залежно від вашої юрисдикції ви можете мати право запросити доступ, виправлення або видалення персональних даних, а також відкликати згоду на необов’язковий tracking. Для запиту напишіть у Telegram @target_vadym або Instagram @lebedenkkko']
+      ],
+      prefTitle:'Аналітика та рекламний tracking',
+      prefText:'Meta Pixel і Microsoft Clarity не запускаються без вашої згоди. Ви можете змінити вибір у будь-який момент',
+      accept:'Прийняти',reject:'Відмовитися',statusA:'Поточний вибір: дозволено',statusR:'Поточний вибір: відмовлено',statusN:'Поточний вибір: ще не задано'
+    },
+    ru:{
+      back:'← Назад на сайт',label:'Конфиденциальность',title:'Политика конфиденциальности',
+      intro:'Здесь объясняется, какие данные могут собираться на сайте, зачем они нужны и как вы можете управлять своими настройками',
+      sections:[
+        ['Кто обрабатывает данные','Оператор сайта: Vadym / Таргет LB — performance-маркетинг для локального бизнеса. По вопросам приватности можно написать в Telegram @target_vadym или Instagram @lebedenkkko'],
+        ['Какие данные собираются','Когда вы отправляете форму, могут обрабатываться ваше имя, выбранный канал связи, контакт, адрес страницы и UTM-метки. Технические аналитические данные через Meta Pixel и Microsoft Clarity собираются только после вашего согласия'],
+        ['Зачем нужны данные','Контактные данные используются, чтобы ответить на вашу заявку, провести консультацию и при необходимости продолжить рабочую коммуникацию. Аналитические и рекламные данные используются для измерения эффективности сайта и рекламы'],
+        ['Кому могут передаваться данные','Для работы формы и аналитики могут использоваться Cloudflare, Telegram, Meta и Microsoft Clarity. Эти сервисы могут обрабатывать данные в своей инфраструктуре и в соответствии со своими политиками конфиденциальности'],
+        ['Срок хранения','Контактные данные из заявок могут храниться до 12 месяцев, если более длительный срок не нужен для активного сотрудничества или выполнения юридических обязанностей. Настройка согласия хранится локально в вашем браузере'],
+        ['Ваши права','В зависимости от вашей юрисдикции вы можете иметь право запросить доступ, исправление или удаление персональных данных, а также отозвать согласие на необязательный tracking. Для запроса напишите в Telegram @target_vadym или Instagram @lebedenkkko']
+      ],
+      prefTitle:'Аналитика и рекламный tracking',
+      prefText:'Meta Pixel и Microsoft Clarity не запускаются без вашего согласия. Вы можете изменить выбор в любой момент',
+      accept:'Принять',reject:'Отказаться',statusA:'Текущий выбор: разрешено',statusR:'Текущий выбор: отказано',statusN:'Текущий выбор: ещё не задан'
+    },
+    en:{
+      back:'← Back to website',label:'Privacy',title:'Privacy Policy',
+      intro:'This page explains what data may be collected on the website, why it is needed, and how you can manage your preferences',
+      sections:[
+        ['Who processes the data','Website operator: Vadym / Target LB — performance marketing for local businesses. For privacy questions, contact Telegram @target_vadym or Instagram @lebedenkkko'],
+        ['What data is collected','When you submit the form, your name, preferred contact channel, contact details, page URL and UTM parameters may be processed. Technical analytics data through Meta Pixel and Microsoft Clarity is collected only after your consent'],
+        ['Why the data is used','Contact details are used to respond to your enquiry, provide a consultation and continue business communication when needed. Analytics and advertising data is used to measure website and advertising performance'],
+        ['Who may receive data','Cloudflare, Telegram, Meta and Microsoft Clarity may be used to operate the form and analytics. These providers may process data in their own infrastructure under their own privacy policies'],
+        ['Retention','Contact details from enquiries may be retained for up to 12 months unless a longer period is needed for active cooperation or legal obligations. Your consent preference is stored locally in your browser'],
+        ['Your rights','Depending on your jurisdiction, you may have rights to request access, correction or deletion of personal data and to withdraw consent for non-essential tracking. Contact Telegram @target_vadym or Instagram @lebedenkkko']
+      ],
+      prefTitle:'Analytics and advertising tracking',
+      prefText:'Meta Pixel and Microsoft Clarity do not start without your consent. You can change your choice at any time',
+      accept:'Accept',reject:'Decline',statusA:'Current choice: allowed',statusR:'Current choice: declined',statusN:'Current choice: not set yet'
+    },
+    es:{
+      back:'← Volver al sitio',label:'Privacidad',title:'Política de privacidad',
+      intro:'Aquí se explica qué datos pueden recopilarse en el sitio, para qué se utilizan y cómo puedes gestionar tus preferencias',
+      sections:[
+        ['Quién trata los datos','Operador del sitio: Vadym / Target LB — performance marketing para negocios locales. Para cuestiones de privacidad, puedes escribir por Telegram @target_vadym o Instagram @lebedenkkko'],
+        ['Qué datos se recopilan','Al enviar el formulario pueden tratarse tu nombre, canal de contacto preferido, datos de contacto, URL de la página y parámetros UTM. Los datos técnicos mediante Meta Pixel y Microsoft Clarity solo se recopilan después de tu consentimiento'],
+        ['Para qué se utilizan','Los datos de contacto se utilizan para responder a tu solicitud, realizar la consulta y continuar la comunicación comercial cuando sea necesario. Los datos analíticos y publicitarios se utilizan para medir el rendimiento del sitio y de la publicidad'],
+        ['Quién puede recibir los datos','Cloudflare, Telegram, Meta y Microsoft Clarity pueden utilizarse para operar el formulario y la analítica. Estos proveedores pueden tratar datos en su propia infraestructura y conforme a sus políticas de privacidad'],
+        ['Conservación','Los datos de contacto de las solicitudes pueden conservarse hasta 12 meses, salvo que se necesite un plazo mayor por una colaboración activa u obligaciones legales. Tu preferencia de consentimiento se guarda localmente en tu navegador'],
+        ['Tus derechos','Según tu jurisdicción, puedes tener derecho a solicitar acceso, rectificación o eliminación de datos personales y a retirar el consentimiento para tracking no esencial. Contacta por Telegram @target_vadym o Instagram @lebedenkkko']
+      ],
+      prefTitle:'Analítica y tracking publicitario',
+      prefText:'Meta Pixel y Microsoft Clarity no se activan sin tu consentimiento. Puedes cambiar tu elección en cualquier momento',
+      accept:'Aceptar',reject:'Rechazar',statusA:'Elección actual: permitido',statusR:'Elección actual: rechazado',statusN:'Elección actual: aún no definida'
+    }
+  };
+
+  const c=content[lang];
+  document.title=c.title+' · Таргет LB';
+  document.getElementById('back').textContent=c.back;
+  document.getElementById('back').href='/gpt/?lang='+encodeURIComponent(lang);
+  document.getElementById('label').textContent=c.label;
+  document.getElementById('title').textContent=c.title;
+  document.getElementById('intro').textContent=c.intro;
+
+  const policy=document.getElementById('policy');
+  c.sections.forEach(([title,text])=>{
+    const s=document.createElement('section');
+    s.className='section';
+    const h=document.createElement('h2');h.textContent=title;
+    const p=document.createElement('p');p.textContent=text;
+    s.append(h,p);
+    policy.appendChild(s);
+  });
+
+  const pref=document.createElement('section');
+  pref.className='section pref';
+  pref.innerHTML='<div><h2></h2><p></p><div class="status"></div></div><div class="prefActions"><button class="reject" type="button"></button><button class="accept" type="button"></button></div>';
+  policy.appendChild(pref);
+  pref.querySelector('h2').textContent=c.prefTitle;
+  pref.querySelector('p').textContent=c.prefText;
+  pref.querySelector('.accept').textContent=c.accept;
+  pref.querySelector('.reject').textContent=c.reject;
+
+  const status=pref.querySelector('.status');
+  const read=()=>{try{return localStorage.getItem(KEY)}catch(e){return null}};
+  const write=(v)=>{try{localStorage.setItem(KEY,v)}catch(e){};renderStatus()};
+  function renderStatus(){
+    const v=read();
+    status.textContent=v==='accepted'?c.statusA:v==='rejected'?c.statusR:c.statusN;
+  }
+  pref.querySelector('.accept').addEventListener('click',()=>write('accepted'));
+  pref.querySelector('.reject').addEventListener('click',()=>write('rejected'));
+  renderStatus();
+})();
+</script>
+</body>
+</html>
