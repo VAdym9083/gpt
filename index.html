@@ -4754,39 +4754,52 @@ body::before{display:none!important}
   }
 }
 .leadDirect{
-  margin-top:14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  color:#706b65;
-  font-size:9.5px;
-  font-weight:700
+  margin-top:16px;
+  padding:17px;
+  display:grid;
+  gap:13px;
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(247,244,239,.62));
+  border:1px solid rgba(18,19,21,.10);
+  box-shadow:0 16px 42px rgba(28,24,20,.075),inset 0 1px 0 rgba(255,255,255,.90)
+}
+.leadDirect>span{
+  color:#242629;
+  font-size:13px;
+  font-weight:900;
+  line-height:1.32;
+  letter-spacing:-.015em
 }
 .leadDirectLinks{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
 }
 .leadDirectLinks a{
-  min-height:44px;
-  padding:0 17px;
-  border-radius:999px;
+  min-height:58px;
+  padding:0 18px;
+  border-radius:16px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  background:rgba(255,255,255,.76);
+  color:#fff;
+  background:linear-gradient(135deg,#171b1f,#27312d);
   border:1px solid rgba(18,19,21,.12);
-  color:#202225;
-  box-shadow:0 8px 20px rgba(24,22,20,.06);
-  font-size:11px;
+  box-shadow:0 11px 25px rgba(25,23,21,.12);
+  font-size:13px;
   font-weight:900;
-  transition:transform .2s ease,background .2s ease,box-shadow .2s ease
+  letter-spacing:.01em;
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease
+}
+.leadDirectLinks a:last-child{
+  color:#202225;
+  background:rgba(255,255,255,.92);
+  border-color:rgba(18,19,21,.14)
 }
 .leadDirectLinks a:hover{
   transform:translateY(-1px);
-  background:#fff;
-  box-shadow:0 10px 24px rgba(24,22,20,.09)
+  box-shadow:0 14px 30px rgba(25,23,21,.16);
+  filter:brightness(1.015)
 }
 @media(max-width:900px){
   .ctaBox{grid-template-columns:1fr!important}
@@ -4806,8 +4819,18 @@ body::before{display:none!important}
     min-height:56px
   }
   .leadDirect{
-    align-items:flex-start;
-    flex-direction:column
+    padding:14px
+  }
+  .leadDirect>span{
+    font-size:12px
+  }
+  .leadDirectLinks{
+    grid-template-columns:1fr
+  }
+  .leadDirectLinks a{
+    min-height:56px;
+    width:100%;
+    font-size:12.5px
   }
 }
 
@@ -5414,7 +5437,7 @@ body::before{display:none!important}
         </form>
 
         <div class="leadDirect">
-          <span>Якщо зручніше — напишіть напряму:</span>
+          <span>Не хочете залишати дані? Напишіть мені напряму</span>
           <div class="leadDirectLinks">
             <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Telegram</a>
             <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram</a>
@@ -6046,6 +6069,15 @@ document.addEventListener('keydown',(event)=>{
     "Перші звернення можуть з’явитися вже в перші дні після запуску. Стабільність оцінюю після накопичення даних — без обіцянок «результат завтра».":"Первые обращения могут появиться уже в первые дни после запуска. Стабильность оцениваю после накопления данных — без обещаний «результат завтра».",
     "Що потрібно від мене для запуску?":"Что нужно от меня для запуска?",
     "На першому етапі — місто, послуги й ціни. Доступи до Meta та матеріали знадобляться вже перед запуском; решту структури підготую сам.":"На первом этапе — город, услуги и цены. Доступы к Meta и материалы понадобятся уже перед запуском; остальную структуру подготовлю сам."
+  });
+  Object.assign(translations.en,{
+    "Не хочете залишати дані? Напишіть мені напряму":"Prefer not to leave your details? Message me directly"
+  });
+  Object.assign(translations.es,{
+    "Не хочете залишати дані? Напишіть мені напряму":"¿Prefieres no dejar tus datos? Escríbeme directamente"
+  });
+  Object.assign(translations.ru,{
+    "Не хочете залишати дані? Напишіть мені напряму":"Не хотите оставлять данные? Напишите мне напрямую"
   });
   const langCode={uk:"UA",en:"EN",es:"ES",ru:"RU"};
   const htmlLang={uk:"uk",en:"en",es:"es-ES",ru:"ru"};
