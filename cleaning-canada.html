@@ -5115,49 +5115,63 @@ body::before{display:none!important}
 })();
 </script>
 <style>
-/* 2026-10-07 · mobile readability cleanup: opaque nav + clean case content */
+/* 2026-10-07 · typography-only readability pass; liquid glass untouched */
+.sectionHead p,
+.valueCard p,
+.step p,
+.cityItem p,
+.caseBody p,
+.casesFoot p,
+.highlightProof p,
+.ctaBox p,
+.processCompactCard p,
+.faqItem p{
+  color:#57534f!important
+}
+.sectionHead p,
+.valueCard p,
+.step p,
+.cityItem p,
+.caseBody p,
+.casesFoot p,
+.highlightProof p,
+.ctaBox p,
+.processCompactCard p{
+  font-weight:500
+}
 @media(max-width:767px){
-  .navin{
-    background:rgba(250,249,246,.96)!important;
-    border-color:rgba(18,19,21,.08)!important;
-    box-shadow:0 12px 34px rgba(20,18,16,.12)!important;
-    backdrop-filter:blur(12px) saturate(112%)!important;
-    -webkit-backdrop-filter:blur(12px) saturate(112%)!important
+  .sectionHead p{
+    font-size:15px!important;
+    line-height:1.58!important;
+    color:#56524e!important
   }
-  .motion-scrolled .navin{
-    background:rgba(250,249,246,.985)!important;
-    border-color:rgba(18,19,21,.08)!important;
-    box-shadow:0 14px 36px rgba(20,18,16,.13)!important
+  .sectionHead .label{
+    font-size:9px!important;
+    letter-spacing:.18em!important
   }
-  .languageToggle{
-    background:#fff!important;
-    border-color:rgba(18,19,21,.09)!important;
-    backdrop-filter:none!important;
-    -webkit-backdrop-filter:none!important
-  }
-
-  .caseCard{
-    background:#faf8f4!important;
-    backdrop-filter:none!important;
-    -webkit-backdrop-filter:none!important;
-    border-color:rgba(18,19,21,.07)!important;
-    box-shadow:0 18px 50px rgba(32,27,22,.09)!important
-  }
-  .caseBody{
-    background:#fbfaf7!important;
-    border-top:1px solid rgba(18,19,21,.075)!important;
-    box-shadow:0 -10px 24px rgba(28,24,20,.055)!important
-  }
-  .caseBody h3{
-    color:#111214!important
+  .valueCard p{
+    font-size:12.5px!important;
+    line-height:1.52!important
   }
   .caseBody p{
-    color:#6c6660!important
+    font-size:12px!important;
+    line-height:1.5!important
   }
-  .caseStat{
-    background:#fff!important;
-    border-color:rgba(18,19,21,.075)!important;
-    box-shadow:0 5px 14px rgba(28,24,20,.035)!important
+  .step p,
+  .cityItem p,
+  .casesFoot p,
+  .highlightProof p{
+    font-size:12px!important;
+    line-height:1.5!important
+  }
+  .processCompactCard p{
+    font-size:10.5px!important;
+    line-height:1.5!important
+  }
+  .faqItem p{
+    color:#57534f!important;
+    font-size:12px!important;
+    line-height:1.55!important
   }
 }
 </style>
