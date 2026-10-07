@@ -4903,6 +4903,19 @@ body::before{display:none!important}
   }
 }
 
+
+/* 2026-10-07 · moving review cards: static translucency instead of live backdrop blur */
+.reviewCard{
+  background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(248,246,242,.82))!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important
+}
+.reviewCard .reviewContext{
+  background:rgba(15,17,19,.88)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important
+}
+
 </style>
 <script type="application/ld+json">
 {
