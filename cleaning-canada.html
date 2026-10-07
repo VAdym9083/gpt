@@ -4578,6 +4578,154 @@ body::before{display:none!important}
   }
 }
 
+
+/* 2026-10-07 · premium consultation intake */
+.ctaBox{
+  grid-template-columns:minmax(0,.86fr) minmax(420px,1.14fr)!important;
+  align-items:stretch
+}
+.leadFormIntro{
+  margin:0 0 12px;
+  color:#668DA6;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase
+}
+.leadIntakeForm{
+  display:grid;
+  gap:12px;
+  padding:18px;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(247,244,239,.58));
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:0 20px 58px rgba(31,27,23,.095),inset 0 1px 0 rgba(255,255,255,.92);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px)
+}
+.leadField{
+  display:grid;
+  gap:7px
+}
+.leadField>span{
+  color:#3d3d3f;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.02em
+}
+.leadField input,
+.leadField select{
+  width:100%;
+  min-height:54px;
+  padding:0 15px;
+  border:1px solid rgba(18,19,21,.10);
+  border-radius:15px;
+  outline:none;
+  color:#17191c;
+  background:rgba(255,255,255,.76);
+  font:700 13px/1.2 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86);
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease
+}
+.leadField input::placeholder{color:#aaa49d;font-weight:600}
+.leadField input:focus,
+.leadField select:focus{
+  border-color:rgba(102,141,166,.50);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(102,141,166,.08)
+}
+.leadSelectWrap{position:relative}
+.leadSelectWrap select{
+  appearance:none;
+  -webkit-appearance:none;
+  padding-right:46px;
+  cursor:pointer
+}
+.leadSelectChevron{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-52%);
+  pointer-events:none;
+  color:#6f757a;
+  font-size:15px
+}
+.leadContactHint{
+  min-height:15px;
+  color:#88827b;
+  font-size:8px;
+  line-height:1.4
+}
+.leadSubmit{
+  min-height:58px;
+  margin-top:2px;
+  padding:0 18px;
+  border:0;
+  border-radius:17px;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg,#15191c,#24372d);
+  box-shadow:0 12px 28px rgba(62,99,75,.16);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.01em;
+  transition:transform .2s ease,box-shadow .2s ease
+}
+.leadSubmit:hover{
+  transform:translateY(-1px);
+  box-shadow:0 15px 32px rgba(62,99,75,.20)
+}
+.leadSubmit:active{transform:translateY(0)}
+.leadFormNote{
+  margin:0!important;
+  color:#88827b!important;
+  font-size:8px!important;
+  line-height:1.45!important
+}
+.leadDirect{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  color:#827c75;
+  font-size:8px
+}
+.leadDirectLinks{
+  display:flex;
+  gap:7px
+}
+.leadDirectLinks a{
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(18,19,21,.08);
+  color:#25272a;
+  font-weight:850
+}
+@media(max-width:900px){
+  .ctaBox{grid-template-columns:1fr!important}
+}
+@media(max-width:767px){
+  .leadIntakeForm{
+    gap:10px;
+    padding:13px;
+    border-radius:19px
+  }
+  .leadField input,
+  .leadField select{
+    min-height:52px;
+    font-size:12px
+  }
+  .leadSubmit{
+    min-height:56px
+  }
+  .leadDirect{
+    align-items:flex-start;
+    flex-direction:column
+  }
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -5132,8 +5280,43 @@ body::before{display:none!important}
         <p>Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною</p>
       </div>
       <div class="contactStack">
-        <a class="contact dark" href="https://t.me/target_vadym" target="_blank" rel="noopener"><div><b>Отримати безкоштовну консультацію</b><br><span>Telegram · @target_vadym</span></div><strong>→</strong></a>
-        <a class="contact" href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener"><div><b>Отримати безкоштовну консультацію</b><br><span>Instagram · @lebedenkkko</span></div><strong>→</strong></a>
+        <div class="leadFormIntro">3 короткі поля — і я напишу вам сам</div>
+        <form class="leadIntakeForm" id="leadIntakeForm">
+          <label class="leadField">
+            <span>Ім'я</span>
+            <input id="leadName" name="name" type="text" autocomplete="name" required>
+          </label>
+
+          <label class="leadField">
+            <span>Де вам зручно спілкуватися?</span>
+            <div class="leadSelectWrap">
+              <select id="leadNetwork" name="network" required>
+                <option value="telegram">Telegram</option>
+                <option value="instagram">Instagram</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="phone">Телефон</option>
+              </select>
+              <span class="leadSelectChevron">⌄</span>
+            </div>
+          </label>
+
+          <label class="leadField">
+            <span>Як вас знайти?</span>
+            <input id="leadContact" name="contact" type="text" autocomplete="off" required>
+            <small class="leadContactHint" id="leadContactHint">Вкажіть контакт, за яким я зможу вам написати</small>
+          </label>
+
+          <button class="leadSubmit" type="submit">Надіслати заявку →</button>
+          <p class="leadFormNote">Після заявки я зв'яжуся з вами у вибраній мережі</p>
+        </form>
+
+        <div class="leadDirect">
+          <span>Якщо зручніше — напишіть напряму:</span>
+          <div class="leadDirectLinks">
+            <a href="https://t.me/target_vadym" target="_blank" rel="noopener">Telegram</a>
+            <a href="https://www.instagram.com/lebedenkkko/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5701,6 +5884,39 @@ document.addEventListener('keydown',(event)=>{
   Object.assign(translations.es,{"Клінінг · Toronto / GTA":"Cleaning · Toronto / GTA","Клінінг · London":"Cleaning · London","Детейлінг · Amsterdam":"Detailing · Amsterdam"});
   translations.ru={"Підхід":"Подход","Кейси":"Кейсы","Креативи":"Креативы","Відгуки":"Отзывы","Процес":"Процесс","Міста":"Города","Отримати безкоштовну консультацію →":"Получить бесплатную консультацию →","Отримати →":"Получить →","Перша консультація — безкоштовна":"Первая консультация — бесплатно","Реклама у Facebook та Instagram · Canada / USA":"Реклама в Facebook и Instagram · Canada / USA","Вам потрібні":"Вам нужны","заявки":"заявки","Не просто реклама":"Не просто реклама","Основна спеціалізація — клінінг.":"Основная специализация — клининг.","Також працюю з beauty, medical, real estate, detailing та іншими локальними бізнесами. Нижче — реальні результати з різних ніш":"Также работаю с beauty, medical, real estate, detailing и другими локальными бизнесами. Ниже — реальные результаты из разных ниш","Подивитися результати співпраці":"Посмотреть результаты работы","РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БІЗНЕСУ":"РЕКЛАМА ДЛЯ ЛОКАЛЬНОГО БИЗНЕСА","роки з Meta Ads":"года с Meta Ads","Cleaning + Local Business":"Cleaning + Local Business","ВІД РЕКЛАМИ ДО КЛІЄНТА":"ОТ РЕКЛАМЫ ДО КЛИЕНТА","Побачив. Написав. Забронював. Став клієнтом":"Увидел. Написал. Забронировал. Стал клиентом","Простий шлях, який має пройти реклама: привернути увагу, привести звернення і закінчитися реальним замовленням":"Простой путь, который должна пройти реклама: привлечь внимание, привести обращение и закончиться реальным заказом","ПОБАЧИВ":"УВИДЕЛ","Побачив вашу рекламу":"Увидел вашу рекламу","У стрічці Facebook або Instagram побачив зрозумілу пропозицію і зацікавився послугою":"В ленте Facebook или Instagram увидел понятное предложение и заинтересовался услугой","НАПИСАВ":"НАПИСАЛ","Ваш бізнес":"Ваш бизнес","Привіт, мене зацікавила ваша акційна пропозиція. Хочу замовити на завтра. Можна на 12:00?":"Здравствуйте, меня заинтересовало ваше предложение. Хочу заказать на завтра. Можно на 12:00?","Так, 12:00 вільно. Записую вас ✅":"Да, 12:00 свободно. Записываю вас ✅","Написав вам":"Написал вам","Людина вже не просто цікавиться — вона пише з конкретним наміром замовити":"Человек уже не просто интересуется — он пишет с конкретным намерением заказать","ЗАБРОНЮВАВ":"ЗАБРОНИРОВАЛ","БРОНЮВАННЯ":"БРОНИРОВАНИЕ","Послуга · час · адреса підтверджені":"Услуга · время · адрес подтверждены","Ви домовилися":"Вы договорились","Відповіли на питання, узгодили час і підтвердили замовлення":"Ответили на вопросы, согласовали время и подтвердили заказ","КЛІЄНТ":"КЛИЕНТ","НОВИЙ КЛІЄНТ":"НОВЫЙ КЛИЕНТ","Замовлення виконано":"Заказ выполнен","Наступного разу він може повернутися вже без реклами":"В следующий раз он может вернуться уже без рекламы","Став вашим клієнтом":"Стал вашим клиентом","Ви отримали реальне замовлення, а хороший сервіс може зробити клієнта постійним":"Вы получили реальный заказ, а хороший сервис может сделать клиента постоянным","РЕЗУЛЬТАТ":"РЕЗУЛЬТАТ","Не покази й не кліки — нова людина, яка реально звернулася у ваш бізнес і купила":"Не показы и не клики — новый человек, который реально обратился в ваш бизнес и купил","Мій підхід":"Мой подход","Не запускаю рекламу за одним шаблоном":"Не запускаю рекламу по одному шаблону","Перед запуском дивлюся на послугу, гео, ціни, попит і рекламні дані — структура кампанії має відповідати конкретному бізнесу":"Перед запуском смотрю на услугу, гео, цены, спрос и рекламные данные — структура кампании должна соответствовать конкретному бизнесу","Для клінінгу":"Для клининга","1 місто":"1 город","1 клієнт":"1 клиент","Поки ми працюємо разом, не беру прямого cleaning-конкурента у вашому місті":"Пока мы работаем вместе, не беру прямого cleaning-конкурента в вашем городе","Локальна стратегія":"Локальная стратегия","Гео, ціни й попит відрізняються — кампанію будую під конкретний ринок":"Гео, цены и спрос отличаются — кампанию строю под конкретный рынок","Креативи під ваш ринок":"Креативы под ваш рынок","Офер, візуал і текст будую під послугу, гео та мотивацію клієнта":"Оффер, визуал и текст строю под услугу, гео и мотивацию клиента","Оптимізація за якістю":"Оптимизация по качеству","Дивлюся не лише на CPL, а й на якість звернень і конверсію в клієнта":"Смотрю не только на CPL, но и на качество обращений и конверсию в клиента","Кейси / Results":"Кейсы / Results","Результати з реальних запусків":"Результаты реальных запусков","Підтверджені результати з cleaning, beauty, medical, real estate, detailing та інших локальних проєктів. Без намальованої статистики":"Подтвержденные результаты из cleaning, beauty, medical, real estate, detailing и других локальных проектов. Без нарисованной статистики","діалогів":"диалогов","CAD / діалог":"CAD / диалог","Переглянути креатив + Ads Manager →":"Посмотреть креатив + Ads Manager →","Косметологічний центр":"Косметологический центр","ціна заявки":"цена заявки","Переглянути більше кейсів ↓":"Посмотреть больше кейсов ↓","Сховати додаткові кейси ↑":"Скрыть дополнительные кейсы ↑","Нерухомість в Іспанії":"Недвижимость в Испании","підписані угоди":"подписанные сделки","лідів із сайту":"лидов с сайта","ціна ліда":"цена лида","розмов":"разговоров","Медичний центр · New York":"Медицинский центр · New York","заявка":"заявка","Ще більше доказів":"Еще больше доказательств","Більше кейсів — в Instagram":"Больше кейсов — в Instagram","У Highlights":"В Highlights","«КЕЙСИ»":"«КЕЙСЫ»","зібрані додаткові результати, скріни рекламного кабінету та приклади запусків":"собраны дополнительные результаты, скрины рекламного кабинета и примеры запусков","Де це? →":"Где это? →","Кейси · Креативи · Відгуки":"Кейсы · Креативы · Отзывы","Перейти в Instagram":"Перейти в Instagram","ПРО МЕНЕ":"ОБО МНЕ","Хто буде займатися вашою рекламою?":"Кто будет заниматься вашей рекламой?","Привіт! Мене звати Вадим. Уже понад 3 роки запускаю рекламу у Facebook та Instagram для локального бізнесу. Налаштовую кампанії, стежу за результатами й покращую їх у процесі, щоб ви отримували якомога кращий результат":"Здравствуйте! Меня зовут Вадим. Уже более 3 лет запускаю рекламу в Facebook и Instagram для локального бизнеса. Настраиваю кампании, слежу за результатами и улучшаю их в процессе, чтобы вы получали максимально хороший результат","роки досвіду":"года опыта","Локальний бізнес":"Локальный бизнес","cleaning, beauty, medical та інші напрямки":"cleaning, beauty, medical и другие направления","досвід із локальними ринками":"опыт с локальными рынками","Отримати безкоштовну консультацію · Telegram →":"Получить бесплатную консультацию · Telegram →","Отримати безкоштовну консультацію · Instagram →":"Получить бесплатную консультацию · Instagram →","Реклама має зупиняти погляд ще до першого кліку":"Реклама должна останавливать взгляд еще до первого клика","Реальні рекламні креативи з локальних проєктів у різних нішах":"Реальные рекламные креативы из локальных проектов в разных нишах","Що кажуть клієнти про роботу":"Что говорят клиенты о работе","Реальні повідомлення клієнтів після запусків і ведення реклами":"Реальные сообщения клиентов после запуска и ведения рекламы","Beauty · 37 бронювань / 10 днів":"Beauty · 37 бронирований / 10 дней","56 заявок / 14 днів":"56 заявок / 14 дней","Стабільніші й якісніші заявки":"Более стабильные и качественные заявки","Cosmetology · 1 984 ліди / місяць":"Cosmetology · 1 984 лида / месяц","Бронювання й доставки стабільно":"Бронирования и доставки стабильно","Якісніші заявки після оптимізації":"Более качественные заявки после оптимизации","Щоденні заявки · стабільна реклама":"Ежедневные заявки · стабильная реклама","78 консультацій / місяць · $4.9":"78 консультаций / месяц · $4.9","Як починаємо роботу":"Как начинаем работу","Як запускаємо вашу рекламу":"Как запускаем вашу рекламу","4 прості кроки: розумію ваш бізнес, готую рекламу, запускаю її та покращую результат":"4 простых шага: понимаю ваш бизнес, готовлю рекламу, запускаю ее и улучшаю результат","попит":"спрос","Розумію ваш бізнес":"Понимаю ваш бизнес","Що ви продаєте, кому, за якою ціною і в якому місті":"Что вы продаете, кому, по какой цене и в каком городе","Готую рекламу":"Готовлю рекламу","Пропозиція, аудиторія, тексти й креативи під ваш бізнес":"Предложение, аудитория, тексты и креативы под ваш бизнес","Запускаю кампанію":"Запускаю кампанию","Налаштовую рекламу у Facebook та Instagram і запускаю трафік":"Настраиваю рекламу в Facebook и Instagram и запускаю трафик","Покращую результат":"Улучшаю результат","Залишаю те, що приводить якісні звернення, слабке вимикаю":"Оставляю то, что приводит качественные обращения, слабое отключаю","ЕКСКЛЮЗИВНІСТЬ ДЛЯ КЛІНІНГУ":"ЭКСКЛЮЗИВНОСТЬ ДЛЯ КЛИНИНГА","Перевірте, чи вільне ваше місто":"Проверьте, свободен ли ваш город","Поки я працюю з cleaning-компанією в місті, прямого конкурента там не беру. Toronto / GTA і Calgary зараз зайняті":"Пока я работаю с cleaning-компанией в городе, прямого конкурента там не беру. Toronto / GTA и Calgary сейчас заняты","1 місто = 1 cleaning-клієнт":"1 город = 1 cleaning-клиент","Ваше місто":"Ваш город","Не бачите місто? Безкоштовно перевірю вручну":"Не видите город? Бесплатно проверю вручную","Статус":"Статус","ЗАЙНЯТО":"ЗАНЯТО","У цьому місті вже працюю з cleaning-компанією, тому другого прямого конкурента не беру":"В этом городе уже работаю с cleaning-компанией, поэтому второго прямого конкурента не беру","Зайнято":"Занято","Вільно":"Свободно","Отримайте безкоштовну консультацію":"Получите бесплатную консультацию","Перша консультація — безкоштовна. Напишіть, який бізнес або послугу хочете рекламувати та в якому місті працюєте. Це допоможе мені краще зрозуміти вашу ситуацію й зробити консультацію максимально конкретною та корисною":"Первая консультация — бесплатно. Напишите, какой бизнес или услугу хотите рекламировать и в каком городе работаете. Это поможет мне лучше понять вашу ситуацию и сделать консультацию максимально конкретной и полезной","Отримати безкоштовну консультацію":"Получить бесплатную консультацию","Підтвердження кейсу":"Подтверждение кейса","Кейс":"Кейс","Креатив":"Креатив","Де знайти кейси":"Где найти кейсы","Instagram Highlights · «КЕЙСИ»":"Instagram Highlights · «КЕЙСЫ»","Перейти в Instagram →":"Перейти в Instagram →","Отримати безкоштовну консультацію · Instagram @lebedenkkko · Telegram @target_vadym":"Получить бесплатную консультацию · Instagram @lebedenkkko · Telegram @target_vadym","Виберіть місто":"Выберите город","Закрити":"Закрыть","Попередній":"Предыдущий","Наступний":"Следующий","ВІЛЬНО":"СВОБОДНО","Місто зараз доступне для обговорення. Статус підтверджую перед стартом співпраці":"Город сейчас доступен для обсуждения. Статус подтверждаю перед началом сотрудничества","Відеокреатив":"Видеокреатив","Матеріал кейсу":"Материал кейса","Відгук клієнта":"Отзыв клиента","Профіль performance-маркетолога":"Профиль performance-маркетолога","Спеціалізація":"Специализация","Як реклама приводить нового клієнта":"Как реклама приводит нового клиента","Хто працює з рекламою":"Кто работает с рекламой","Вадим — спеціаліст з реклами Facebook та Instagram":"Вадим — специалист по рекламе Facebook и Instagram","Реальний beauty-креатив Toronto":"Реальный beauty-креатив Toronto","Реальний cleaning-креатив Toronto":"Реальный cleaning-креатив Toronto","Реальний hair extensions креатив":"Реальный hair extensions креатив","Instagram Highlights: Креативи, Кейси, Сайти, Послуги, Відгуки":"Instagram Highlights: Креативы, Кейсы, Сайты, Услуги, Отзывы"};
   Object.assign(translations.ru,{"Клінінг · Toronto / GTA":"Клининг · Toronto / GTA","Клінінг · London":"Клининг · London","Детейлінг · Amsterdam":"Детейлинг · Amsterdam"});
+  Object.assign(translations.en,{
+    "3 короткі поля — і я напишу вам сам":"3 quick fields — and I’ll contact you myself",
+    "Ім'я":"Name",
+    "Де вам зручно спілкуватися?":"Where is it easiest to reach you?",
+    "Телефон":"Phone",
+    "Як вас знайти?":"How can I find you?",
+    "Вкажіть контакт, за яким я зможу вам написати":"Enter the contact I can use to reach you",
+    "Надіслати заявку →":"Send request →",
+    "Після заявки я зв'яжуся з вами у вибраній мережі":"After you send it, I’ll contact you through your preferred channel",
+    "Якщо зручніше — напишіть напряму:":"Prefer to message directly?"
+  });
+  Object.assign(translations.es,{
+    "3 короткі поля — і я напишу вам сам":"3 campos rápidos y te escribiré personalmente",
+    "Ім'я":"Nombre",
+    "Де вам зручно спілкуватися?":"¿Dónde prefieres que te contacte?",
+    "Телефон":"Teléfono",
+    "Як вас знайти?":"¿Cómo puedo encontrarte?",
+    "Вкажіть контакт, за яким я зможу вам написати":"Indica el contacto por el que puedo escribirte",
+    "Надіслати заявку →":"Enviar solicitud →",
+    "Після заявки я зв'яжуся з вами у вибраній мережі":"Después de enviarla, te contactaré por el canal que elijas",
+    "Якщо зручніше — напишіть напряму:":"Si te resulta más cómodo, escríbeme directamente:"
+  });
+  Object.assign(translations.ru,{
+    "3 короткі поля — і я напишу вам сам":"3 коротких поля — и я напишу вам сам",
+    "Ім'я":"Имя",
+    "Де вам зручно спілкуватися?":"Где вам удобно общаться?",
+    "Телефон":"Телефон",
+    "Як вас знайти?":"Как вас найти?",
+    "Вкажіть контакт, за яким я зможу вам написати":"Укажите контакт, по которому я смогу вам написать",
+    "Надіслати заявку →":"Отправить заявку →",
+    "Після заявки я зв'яжуся з вами у вибраній мережі":"После заявки я свяжусь с вами в выбранной сети",
+    "Якщо зручніше — напишіть напряму:":"Если удобнее — напишите напрямую:"
+  });
   const langCode={uk:"UA",en:"EN",es:"ES",ru:"RU"};
   const htmlLang={uk:"uk",en:"en",es:"es-ES",ru:"ru"};
   let currentLang="uk";
@@ -5832,6 +6048,89 @@ document.addEventListener('keydown',(event)=>{
   window.siteTranslate=(value)=>translateString(value,currentLang);
   window.getSiteLanguage=()=>currentLang;
   window.setSiteLanguage=applyLanguage;
+})();
+</script>
+
+<script>
+/* 2026-10-07 · consultation intake helper */
+(function(){
+  const form=document.getElementById('leadIntakeForm');
+  const nameInput=document.getElementById('leadName');
+  const networkSelect=document.getElementById('leadNetwork');
+  const contactInput=document.getElementById('leadContact');
+  const hint=document.getElementById('leadContactHint');
+  if(!form||!nameInput||!networkSelect||!contactInput||!hint)return;
+
+  const ui={
+    uk:{
+      name:'Ваше ім’я',
+      telegram:{placeholder:'@username або +1 780…',hint:'Telegram: вкажіть @username або номер телефону'},
+      instagram:{placeholder:'@username або посилання',hint:'Instagram: вкажіть @username або посилання на профіль'},
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: номер телефону з кодом країни'},
+      phone:{placeholder:'+1 780…',hint:'Телефон: номер з кодом країни'}
+    },
+    ru:{
+      name:'Ваше имя',
+      telegram:{placeholder:'@username или +1 780…',hint:'Telegram: укажите @username или номер телефона'},
+      instagram:{placeholder:'@username или ссылка',hint:'Instagram: укажите @username или ссылку на профиль'},
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: номер телефона с кодом страны'},
+      phone:{placeholder:'+1 780…',hint:'Телефон: номер с кодом страны'}
+    },
+    en:{
+      name:'Your name',
+      telegram:{placeholder:'@username or +1 780…',hint:'Telegram: enter your @username or phone number'},
+      instagram:{placeholder:'@username or profile link',hint:'Instagram: enter your @username or profile link'},
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: phone number with country code'},
+      phone:{placeholder:'+1 780…',hint:'Phone: number with country code'}
+    },
+    es:{
+      name:'Tu nombre',
+      telegram:{placeholder:'@usuario o +1 780…',hint:'Telegram: indica tu @usuario o número de teléfono'},
+      instagram:{placeholder:'@usuario o enlace',hint:'Instagram: indica tu @usuario o enlace al perfil'},
+      whatsapp:{placeholder:'+1 780…',hint:'WhatsApp: número con prefijo internacional'},
+      phone:{placeholder:'+1 780…',hint:'Teléfono: número con prefijo internacional'}
+    }
+  };
+
+  function currentLang(){
+    const value=window.getSiteLanguage?window.getSiteLanguage():'uk';
+    return ui[value]?value:'uk';
+  }
+
+  function syncContactUi(){
+    const lang=currentLang();
+    const network=networkSelect.value;
+    const copy=ui[lang][network]||ui[lang].telegram;
+    nameInput.placeholder=ui[lang].name;
+    contactInput.placeholder=copy.placeholder;
+    hint.textContent=copy.hint;
+    const phoneLike=network==='whatsapp'||network==='phone';
+    contactInput.inputMode=phoneLike?'tel':'text';
+  }
+
+  networkSelect.addEventListener('change',syncContactUi);
+  document.addEventListener('siteLanguageChanged',syncContactUi);
+  syncContactUi();
+
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    if(!form.reportValidity())return;
+
+    const name=nameInput.value.trim();
+    const contact=contactInput.value.trim();
+    const networkLabel=networkSelect.options[networkSelect.selectedIndex]?.text||networkSelect.value;
+    const lang=currentLang();
+
+    const messageByLang={
+      uk:`Привіт! Мене звати ${name}.\nЗручний спосіб зв’язку: ${networkLabel}.\nМій контакт: ${contact}.\nХочу отримати безкоштовну консультацію щодо Meta Ads.`,
+      ru:`Здравствуйте! Меня зовут ${name}.\nУдобный способ связи: ${networkLabel}.\nМой контакт: ${contact}.\nХочу получить бесплатную консультацию по Meta Ads.`,
+      en:`Hi! My name is ${name}.\nPreferred contact channel: ${networkLabel}.\nMy contact: ${contact}.\nI’d like a free consultation about Meta Ads.`,
+      es:`¡Hola! Me llamo ${name}.\nCanal de contacto preferido: ${networkLabel}.\nMi contacto: ${contact}.\nQuiero una consulta gratuita sobre Meta Ads.`
+    };
+
+    const url='https://t.me/target_vadym?text='+encodeURIComponent(messageByLang[lang]||messageByLang.uk);
+    window.open(url,'_blank','noopener');
+  });
 })();
 </script>
 
