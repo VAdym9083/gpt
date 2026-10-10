@@ -1,0 +1,61 @@
+name: Mobile form diagnostic (temporary)
+
+on:
+  push:
+    branches: ["test/mobile-lead-form-diagnostics-2026-10-10"]
+
+permissions:
+  contents: read
+
+jobs:
+  browser-mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Run real Chromium mobile form test
+        run: |
+          cat > /tmp/test-mobile.cjs <<'NODE'
+          const { chromium, devices }=require(process.cwd()+'/node_modules/playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const context=await browser.newContext({...devices['Pixel 7'],locale:'ru-RU'});
+            const page=await context.newPage();
+            page.on('console',m=>{ if(m.type()==='error') console.log('BROWSER_CONSOLE_ERROR:',m.text().slice(0,700));});
+            page.on('pageerror',e=>console.log('PAGE_ERROR:',e.message.slice(0,900)));
+            page.on('requestfailed',r=>console.log('REQUEST_FAILED:',r.url().slice(0,190),r.failure()?.errorText));
+            page.on('response',async r=>{if(r.url().includes('target-lb-leads.'))console.log('WORKER_RESPONSE:',r.status(),JSON.stringify(r.headers()).slice(0,700));});
+            await page.goto('https://vadym9083.github.io/gpt/?lang=ru&utm_source=qa_mobile',{
+              waitUntil:'domcontentloaded',timeout:45000
+            });
+            await page.locator('#contact').scrollIntoViewIfNeeded();
+            const b=page.locator('#leadIntakeForm button[type="submit"]');
+            console.log('FORM_STATE:',JSON.stringify(await page.evaluate(()=>{
+              const b=document.querySelector('#leadIntakeForm button[type="submit"]');
+              const r=b.getBoundingClientRect(),el=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+              return {lang:window.getSiteLanguage?.(),buttonDisabled:b.disabled,buttonRect:{x:r.x,y:r.y,w:r.width,h:r.height},topElement:el?.outerHTML.slice(0,300)};
+            })));
+            await page.locator('#leadName').fill('Mobile Browser QA TEST ignore');
+            await page.locator('#leadNetwork').selectOption('telegram');
+            await page.locator('#leadContact').fill('@target_vadym');
+            await b.click({timeout:15000});
+            console.log('AFTER_CLICK:',JSON.stringify(await page.evaluate(()=>({
+              buttonText:document.querySelector('.leadSubmit')?.textContent,
+              ariaBusy:document.querySelector('#leadIntakeForm')?.getAttribute('aria-busy')
+            }))));
+            try{await page.waitForURL('**/thank-you/**',{timeout:19000})}catch(e){console.log('WAIT_FOR_URL_TIMEOUT');}
+            console.log('FINAL:',JSON.stringify({
+              url:page.url(),
+              buttonText:await b.textContent().catch(()=>'<gone>'),
+              message:await page.locator('.leadFormNote').textContent().catch(()=>'<gone>')
+            }));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node /tmp/test-mobile.cjs
