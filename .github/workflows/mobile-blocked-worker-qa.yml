@@ -1,0 +1,80 @@
+name: Mobile blocked Worker fallback QA
+on:
+  push:
+    branches: ["test/mobile-telegram-draft-fallback-2026-10-10"]
+permissions:
+  contents: read
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Test blocked and successful network cases
+        run: |
+          python3 -m http.server 8787 --directory .. >/tmp/server.log 2>&1 &
+          cat > /tmp/test.cjs <<'NODE'
+          const {chromium,devices}=require(process.cwd()+'/node_modules/playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            for(const scenario of ['blocked','success','invalid']){
+              const ctx=await browser.newContext({...devices['Pixel 7'],locale:'uk-UA'});
+              const page=await ctx.newPage();
+              let attempts=0;
+              await page.route('**/target-lb-leads.vadym9083.workers.dev/**',async route=>{
+                attempts++;
+                if(scenario==='blocked') return route.abort('failed');
+                return route.fulfill({
+                  status:200,contentType:'application/json',
+                  headers:{'access-control-allow-origin':'http://127.0.0.1:8787'},
+                  body:'{"success":true}'
+                });
+              });
+              await page.goto('http://127.0.0.1:8787/gpt/?lang=ru',
+                {waitUntil:'domcontentloaded',timeout:30000});
+              await page.locator('#contact').scrollIntoViewIfNeeded();
+              await page.locator('#leadName').fill('Mobile QA');
+              await page.locator('#leadContact').fill(scenario==='invalid'?'q':'@target_vadym');
+              await page.locator('.leadSubmit').click();
+              if(scenario==='blocked'){
+                await page.locator('#leadManualSend:visible').waitFor({timeout:9000});
+                const state=await page.evaluate(()=>{
+                  const link=document.querySelector('#leadManualSend');
+                  const u=new URL(link.href);
+                  return {
+                    buttonDisabled:document.querySelector('.leadSubmit').disabled,
+                    host:u.hostname,user:u.pathname,
+                    draft:u.searchParams.get('text'),
+                    note:document.querySelector('.leadFormNote').textContent,
+                    verified:sessionStorage.getItem('targetlb_verified_lead')
+                  };
+                });
+                if(state.host!=='t.me'||state.user!=='/target_vadym'||
+                   !state.draft.includes('Mobile QA')||
+                   !state.draft.includes('@target_vadym')||
+                   state.buttonDisabled||state.verified!==null||
+                   attempts!==1)throw Error('BAD_BLOCKED_CASE '+JSON.stringify({state,attempts}));
+                console.log('PASS_BLOCKED',JSON.stringify({attempts,buttonDisabled:state.buttonDisabled,draft:state.draft,note:state.note}));
+              }else if(scenario==='success'){
+                await page.waitForURL('**/thank-you/**',{timeout:9000});
+                if(attempts!==1)throw Error('BAD_SUCCESS_ATTEMPTS '+attempts);
+                console.log('PASS_SUCCESS',attempts,page.url());
+              }else{
+                await page.waitForTimeout(400);
+                if(attempts!==0||!await page.locator('#leadManualSend').isHidden())
+                  throw Error('BAD_INVALID_CASE '+attempts);
+                console.log('PASS_INVALID',attempts);
+              }
+              await ctx.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1;});
+          NODE
+          node /tmp/test.cjs
