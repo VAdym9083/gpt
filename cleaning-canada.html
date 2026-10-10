@@ -4682,6 +4682,17 @@ body::before{display:none!important}
   .leadSubmit{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 }
 .leadSubmit:disabled{cursor:wait;opacity:.88}
+.leadManualSend[hidden]{display:none!important}
+.leadManualSend{
+  display:flex;align-items:center;justify-content:center;min-height:56px;
+  padding:13px 17px;border-radius:16px;
+  color:#fff!important;background:linear-gradient(135deg,#173e50,#1f688a);
+  font-size:12px;font-weight:900;text-decoration:none!important;
+  line-height:1.35;text-align:center;box-shadow:0 12px 27px rgba(20,73,95,.16);
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent
+}
+.leadManualSend:focus-visible{outline:3px solid rgba(53,141,170,.55);outline-offset:3px}
+.leadManualSend:active{transform:scale(.99)}
 .leadFormNote{
   margin:0!important;
   color:#88827b!important;
@@ -5819,7 +5830,7 @@ body::before{display:none!important}
         <form class="leadIntakeForm" id="leadIntakeForm">
           <label class="leadField">
             <span>Ім'я</span>
-            <input id="leadName" name="name" type="text" autocomplete="name" required>
+            <input id="leadName" name="name" type="text" autocomplete="name" maxlength="80" required>
           </label>
 
           <label class="leadField">
@@ -5836,11 +5847,12 @@ body::before{display:none!important}
 
           <label class="leadField">
             <span>Як вас знайти?</span>
-            <input id="leadContact" name="contact" type="text" autocomplete="off" required>
+            <input id="leadContact" name="contact" type="text" autocomplete="off" maxlength="160" required>
             <small class="leadContactHint" id="leadContactHint">Вкажіть контакт, за яким я зможу вам написати</small>
           </label>
 
           <button class="leadSubmit" type="submit">Надіслати заявку →</button>
+          <a id="leadManualSend" class="leadManualSend" href="https://t.me/target_vadym" target="_blank" rel="noopener noreferrer" hidden>Відкрити готову заявку в Telegram →</a>
           <p class="leadFormNote">Після заявки я зв'яжуся з вами у вибраній мережі</p>
           <p class="leadPrivacyNote"><span>Надсилаючи заявку, ви надаєте контактні дані для відповіді щодо консультації</span> · <a class="privacyLink" href="/gpt/privacy/">Політика конфіденційності</a></p>
         </form>
@@ -6904,6 +6916,7 @@ document.addEventListener('keydown',(event)=>{
 
   const submitButton=form.querySelector('.leadSubmit');
   const formNote=form.querySelector('.leadFormNote');
+  const manualSend=form.querySelector('#leadManualSend');
   const workerUrl='https://target-lb-leads.vadym9083.workers.dev/';
 
   const submitCopy={
@@ -6957,6 +6970,55 @@ document.addEventListener('keydown',(event)=>{
     }
   };
 
+  const manualCopy={
+    uk:{
+      cta:'Відкрити готову заявку в Telegram →',
+      explanation:'З’єднання із сервером недоступне. Відкрийте Telegram: ваша заявка вже заповнена, залишиться натиснути «Надіслати»',
+      heading:'Заявка на безкоштовну консультацію (Target LB)',
+      name:'Ім’я',channel:'Спосіб зв’язку',contact:'Контакт',source:'Джерело'
+    },
+    ru:{
+      cta:'Открыть готовую заявку в Telegram →',
+      explanation:'Нет связи с сервером заявок. Откройте Telegram: сообщение уже заполнено, останется нажать «Отправить»',
+      heading:'Заявка на бесплатную консультацию (Target LB)',
+      name:'Имя',channel:'Способ связи',contact:'Контакт',source:'Источник'
+    },
+    en:{
+      cta:'Open ready-to-send request in Telegram →',
+      explanation:'The lead server is unreachable. Open Telegram: your message is ready, just press Send',
+      heading:'Free consultation request (Target LB)',
+      name:'Name',channel:'Preferred channel',contact:'Contact',source:'Source'
+    },
+    es:{
+      cta:'Abrir solicitud preparada en Telegram →',
+      explanation:'No se puede conectar al servidor. Abre Telegram: tu mensaje está preparado; solo pulsa Enviar',
+      heading:'Solicitud de consulta gratuita (Target LB)',
+      name:'Nombre',channel:'Canal',contact:'Contacto',source:'Origen'
+    }
+  };
+
+  function clearManualFallback(){
+    if(manualSend)manualSend.hidden=true;
+  }
+  function enableManualFallback(payload,lang){
+    if(!manualSend)return false;
+    const copy=manualCopy[lang]||manualCopy.uk;
+    const channel={telegram:'Telegram',instagram:'Instagram',whatsapp:'WhatsApp'}[payload.network]||'Telegram';
+    const rows=[
+      copy.heading,
+      copy.name+': '+payload.name,
+      copy.channel+': '+channel,
+      copy.contact+': '+payload.contact
+    ];
+    if(payload.utm_source||payload.utm_campaign){
+      rows.push(copy.source+': '+[payload.utm_source,payload.utm_campaign].filter(Boolean).join(' / ').slice(0,140));
+    }
+    manualSend.href='https://t.me/target_vadym?text='+encodeURIComponent(rows.join('\n'));
+    manualSend.textContent=copy.cta;
+    manualSend.hidden=false;
+    return copy.explanation;
+  }
+
   if(formNote){
     formNote.setAttribute('role','status');
     formNote.setAttribute('aria-live','polite');
@@ -6966,7 +7028,7 @@ document.addEventListener('keydown',(event)=>{
     formNote.classList.toggle('isError',!!isError);
     formNote.classList.toggle('isUnverified',!!isUnverified);
     formNote.textContent=message;
-    if(isError||isUnverified){
+    if((isError||isUnverified)&&(!manualSend||manualSend.hidden)){
       formNote.appendChild(document.createTextNode(' '));
       const link=document.createElement('a');
       link.href='https://t.me/target_vadym';
@@ -7068,6 +7130,7 @@ document.addEventListener('keydown',(event)=>{
     submitButton.disabled=true;
     submitButton.textContent=copy.loading;
     form.setAttribute('aria-busy','true');
+    clearManualFallback();
     showFeedback('',copy,false,false);
 
     const payload={
@@ -7116,7 +7179,12 @@ document.addEventListener('keydown',(event)=>{
       else if(error.httpStatus===400||error.httpStatus===422)feedback=copy.invalid;
       else if(error.httpStatus>=500)feedback=copy.server;
       else if(error.name==='NetworkError'||error.name==='TypeError')feedback=copy.network;
-      showFeedback(feedback,copy,true,false);
+      // A manual Telegram message is the only route independent of workers.dev.
+      // Opening the chat does NOT count as a submitted lead or fire Pixel Lead.
+      const allowManual=error.name==='TimeoutError'||error.name==='AbortError'||
+        error.name==='NetworkError'||error.name==='TypeError'||error.httpStatus>=500;
+      const manualMessage=allowManual?enableManualFallback(payload,lang):false;
+      showFeedback(manualMessage||feedback,copy,true,false);
       // No automatic second POST: a CORS/network error may hide a successful
       // first delivery, so silently retrying could duplicate a real lead.
     }
