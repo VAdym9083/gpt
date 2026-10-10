@@ -4682,6 +4682,18 @@ body::before{display:none!important}
   font-size:8px!important;
   line-height:1.45!important
 }
+.leadIntakeForm .leadFormNote.isError{
+  color:#9b352d!important;
+  font-size:12px!important;
+  font-weight:700;
+  line-height:1.5!important
+}
+.leadIntakeForm .leadFormNote.isError a{
+  color:#165b88;
+  font-weight:900;
+  text-decoration:underline;
+  text-underline-offset:2px
+}
 .faqStandaloneSection{
   padding:34px 0 8px
 }
@@ -6788,14 +6800,58 @@ document.addEventListener('keydown',(event)=>{
   const workerUrl='https://target-lb-leads.vadym9083.workers.dev/';
 
   const submitCopy={
-    uk:{idle:'Надіслати заявку →',loading:'Надсилаю…',error:'Не вдалося надіслати. Спробуйте ще раз або напишіть мені напряму'},
-    ru:{idle:'Отправить заявку →',loading:'Отправляю…',error:'Не удалось отправить. Попробуйте ещё раз или напишите мне напрямую'},
-    en:{idle:'Send request →',loading:'Sending…',error:'Could not send. Please try again or message me directly'},
-    es:{idle:'Enviar solicitud →',loading:'Enviando…',error:'No se pudo enviar. Inténtalo de nuevo o escríbeme directamente'}
+    uk:{
+      idle:'Надіслати заявку →',loading:'Надсилаю…',sent:'Заявку надіслано ✓',
+      success:'Заявку успішно отримано — я напишу вам у вибраний месенджер',
+      timeout:'Не отримано підтвердження за 15 секунд. Заявку могло бути доставлено — перевірте повідомлення або напишіть напряму',
+      error:'Не вдалося підтвердити надсилання. Дані у формі збережені — можете спробувати ще раз або написати напряму',
+      direct:'Написати в Telegram →'
+    },
+    ru:{
+      idle:'Отправить заявку →',loading:'Отправляю…',sent:'Заявка отправлена ✓',
+      success:'Заявка успешно получена — я напишу вам в выбранный мессенджер',
+      timeout:'Нет подтверждения за 15 секунд. Заявка могла дойти — проверьте сообщения или напишите напрямую',
+      error:'Не удалось подтвердить отправку. Данные в форме сохранены — попробуйте ещё раз или напишите напрямую',
+      direct:'Написать в Telegram →'
+    },
+    en:{
+      idle:'Send request →',loading:'Sending…',sent:'Request sent ✓',
+      success:'Your request was received — I will contact you via your selected messenger',
+      timeout:'No confirmation within 15 seconds. Your request may have arrived — check your messages or contact me directly',
+      error:'Could not confirm submission. Your details are still in the form — retry or contact me directly',
+      direct:'Message on Telegram →'
+    },
+    es:{
+      idle:'Enviar solicitud →',loading:'Enviando…',sent:'Solicitud enviada ✓',
+      success:'Solicitud recibida — te escribiré por el canal elegido',
+      timeout:'Sin confirmación después de 15 segundos. Puede haberse enviado — revisa tus mensajes o contacta directamente',
+      error:'No se pudo confirmar el envío. Los datos siguen en el formulario — inténtalo de nuevo o contacta directamente',
+      direct:'Escribir por Telegram →'
+    }
   };
+
+  if(formNote){
+    formNote.setAttribute('role','status');
+    formNote.setAttribute('aria-live','polite');
+  }
+  function showFeedback(message,copy,isError){
+    if(!formNote)return;
+    formNote.classList.toggle('isError',!!isError);
+    formNote.textContent=message;
+    if(isError){
+      formNote.appendChild(document.createTextNode(' '));
+      const link=document.createElement('a');
+      link.href='https://t.me/target_vadym';
+      link.target='_blank';
+      link.rel='noopener noreferrer';
+      link.textContent=copy.direct;
+      formNote.appendChild(link);
+    }
+  }
 
   form.addEventListener('submit',async function(event){
     event.preventDefault();
+    if(form.getAttribute('aria-busy')==='true')return;
     if(!form.reportValidity())return;
 
     const lang=currentLang();
@@ -6805,6 +6861,7 @@ document.addEventListener('keydown',(event)=>{
     submitButton.disabled=true;
     submitButton.textContent=copy.loading;
     form.setAttribute('aria-busy','true');
+    showFeedback('',copy,false);
 
     const payload={
       name:nameInput.value.trim(),
@@ -6819,31 +6876,60 @@ document.addEventListener('keydown',(event)=>{
       utm_term:params.get('utm_term')||''
     };
 
+    const controller=typeof AbortController==='function'?new AbortController():null;
+    let timeoutHandle;
+    let timedOut=false;
     try{
-      const response=await fetch(workerUrl,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(payload)
+      const networkRequest=(async()=>{
+        const response=await fetch(workerUrl,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(payload),
+          ...(controller?{signal:controller.signal}:{})
+        });
+        const result=await response.json().catch(()=>null);
+        if(!response.ok||!result||result.success!==true){
+          throw new Error('Lead delivery not confirmed');
+        }
+      })();
+      const deadline=new Promise((resolve,reject)=>{
+        timeoutHandle=setTimeout(()=>{
+          timedOut=true;
+          if(controller)controller.abort();
+          reject(new Error('Lead request timed out'));
+        },15000);
       });
-      const result=await response.json().catch(()=>({success:false}));
-      if(!response.ok||!result.success)throw new Error(result.error||'Lead delivery failed');
+      await Promise.race([networkRequest,deadline]);
 
-      const leadToken=(window.crypto&&crypto.randomUUID)
-        ?crypto.randomUUID()
-        :Date.now().toString(36)+Math.random().toString(36).slice(2);
+      // Only a confirmed success from the Worker may mark the form as sent.
+      showFeedback(copy.success,copy,false);
+      submitButton.textContent=copy.sent;
+      form.removeAttribute('aria-busy');
 
-      sessionStorage.setItem('targetlb_verified_lead',JSON.stringify({
-        token:leadToken,
-        ts:Date.now()
-      }));
-
-      window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
+      let saved=false;
+      try{
+        const leadToken=(window.crypto&&typeof crypto.randomUUID==='function')
+          ?crypto.randomUUID()
+          :Date.now().toString(36)+Math.random().toString(36).slice(2);
+        sessionStorage.setItem('targetlb_verified_lead',JSON.stringify({
+          token:leadToken,
+          ts:Date.now()
+        }));
+        saved=true;
+      }catch(storageError){
+        console.warn('Lead delivered, but the mobile browser blocks storage',storageError);
+      }
+      // If sessionStorage is blocked (some in-app/private browsers), the
+      // inline success stays visible rather than falsely reporting a failure.
+      if(saved)window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
     }catch(error){
       console.error('Lead submit failed',error);
       submitButton.disabled=false;
       submitButton.textContent=copy.idle;
       form.removeAttribute('aria-busy');
-      if(formNote)formNote.textContent=copy.error;
+      showFeedback(timedOut||error.name==='AbortError'?copy.timeout:copy.error,copy,true);
+    }finally{
+      if(timeoutHandle)clearTimeout(timeoutHandle);
     }
   });
 })();
