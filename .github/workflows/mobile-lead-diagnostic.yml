@@ -55,6 +55,32 @@ jobs:
               buttonText:await b.textContent().catch(()=>'<gone>'),
               message:await page.locator('.leadFormNote').textContent().catch(()=>'<gone>')
             }));
+
+            // Force the first CORS request to fail, and ensure the backup
+            // request visibly reaches the browser's unconfirmed state.
+            const fallbackPage=await context.newPage();
+            let requests=0;
+            await fallbackPage.route('**/target-lb-leads.vadym9083.workers.dev/**',async route=>{
+              requests++;
+              if(requests===1)return route.abort('failed');
+              return route.fulfill({
+                status:200,body:'{"success":true}',
+                headers:{'content-type':'application/json','access-control-allow-origin':'*'}
+              });
+            });
+            await fallbackPage.goto('https://vadym9083.github.io/gpt/?lang=ru',{waitUntil:'domcontentloaded',timeout:45000});
+            await fallbackPage.locator('#contact').scrollIntoViewIfNeeded();
+            await fallbackPage.locator('#leadName').fill('QA fallback mocked');
+            await fallbackPage.locator('#leadContact').fill('@target_vadym');
+            await fallbackPage.locator('.leadSubmit').click();
+            await fallbackPage.locator('.leadFormNote.isUnverified').waitFor({timeout:18000});
+            const state=await fallbackPage.evaluate(()=>({
+              text:document.querySelector('.leadFormNote')?.textContent,
+              disabled:document.querySelector('.leadSubmit')?.disabled,
+              label:document.querySelector('.leadSubmit')?.textContent
+            }));
+            console.log('FALLBACK_MOCK:',JSON.stringify({requests,...state}));
+            if(requests<2||!state.disabled||!state.text.includes('резервным способом'))throw Error('Backup UX failed');
             await browser.close();
           })().catch(e=>{console.error(e);process.exitCode=1});
           NODE
