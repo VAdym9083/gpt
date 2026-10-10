@@ -4700,18 +4700,6 @@ body::before{display:none!important}
   text-decoration:underline;
   text-underline-offset:2px
 }
-.leadIntakeForm .leadFormNote.isUnverified{
-  color:#886012!important;
-  font-size:12px!important;
-  font-weight:700;
-  line-height:1.5!important
-}
-.leadIntakeForm .leadFormNote.isUnverified a{
-  color:#165b88;
-  font-weight:900;
-  text-decoration:underline;
-  text-underline-offset:2px
-}
 .faqStandaloneSection{
   padding:34px 0 8px
 }
@@ -6928,8 +6916,7 @@ document.addEventListener('keydown',(event)=>{
       blocked:'Сервер відхилив запит з вашого браузера. Напишіть мені напряму',
       invalid:'Не вдалося прийняти заявку. Перевірте заповнені поля або напишіть напряму',
       error:'Не вдалося підтвердити відправлення. Дані залишились у формі — напишіть мені напряму',
-      fallback:'Заявку передано резервним способом, але отримання ще не підтверджено. Якщо я не відповім, звʼяжіться зі мною напряму',
-      unverifiedButton:'Передано без підтвердження',
+
       direct:'Написати в Telegram →'
     },
     ru:{
@@ -6941,8 +6928,7 @@ document.addEventListener('keydown',(event)=>{
       blocked:'Сервер отклонил запрос из вашего браузера. Напишите мне напрямую',
       invalid:'Не удалось принять заявку. Проверьте поля или напишите напрямую',
       error:'Не удалось подтвердить отправку. Данные остались в форме — напишите мне напрямую',
-      fallback:'Заявка передана резервным способом, но получение пока не подтверждено. Если я не отвечу, напишите мне напрямую',
-      unverifiedButton:'Передано без подтверждения',
+
       direct:'Написать в Telegram →'
     },
     en:{
@@ -6954,8 +6940,7 @@ document.addEventListener('keydown',(event)=>{
       blocked:'The service rejected this browser request. Message me directly',
       invalid:'Could not accept the request. Review the fields or message me directly',
       error:'Could not confirm delivery. Your details remain in the form — message me directly',
-      fallback:'Submitted via a backup method, but delivery could not be confirmed. If I do not respond, message me directly',
-      unverifiedButton:'Sent without confirmation',
+
       direct:'Message on Telegram →'
     },
     es:{
@@ -6967,8 +6952,7 @@ document.addEventListener('keydown',(event)=>{
       blocked:'El servicio rechazó la solicitud desde este navegador. Escríbeme directamente',
       invalid:'No se pudo aceptar la solicitud. Revisa los campos o escríbeme',
       error:'No se pudo confirmar la entrega. Los datos siguen en el formulario — escríbeme directamente',
-      fallback:'Enviado por un método alternativo, pero no se pudo confirmar la recepción. Si no respondo, escríbeme directamente',
-      unverifiedButton:'Sin confirmación',
+
       direct:'Escribir por Telegram →'
     }
   };
@@ -6993,52 +6977,83 @@ document.addEventListener('keydown',(event)=>{
     }
   }
 
-  // A few in-app/mobile browsers block reading third-party CORS responses.
-  // This backup POST uses no-cors, so its result is *never* treated as confirmed.
-  async function tryBackupPost(payload){
-    const body=new Blob([JSON.stringify(payload)],{type:'text/plain;charset=UTF-8'});
-    const ctrl=typeof AbortController==='function'?new AbortController():null;
-    let timeout;
-    try{
-      await Promise.race([
-        fetch(workerUrl,{
-          method:'POST',
-          mode:'no-cors',
-          credentials:'omit',
-          cache:'no-store',
-          body,
-          ...(ctrl?{signal:ctrl.signal}:{})
-        }),
-        new Promise((resolve,reject)=>{
-          timeout=setTimeout(()=>{
-            if(ctrl)ctrl.abort();
-            reject(new Error('Backup transport timeout'));
-          },6000);
-        })
-      ]);
-      return true; // Browser sent the request; the Worker response is opaque.
-    }catch(backupError){
-      try{
-        // Beacon is supported in many restricted in-app browsers; it only
-        // confirms queue acceptance, not actual lead delivery.
-        return typeof navigator.sendBeacon==='function'
-          ?navigator.sendBeacon(workerUrl,body)
-          :false;
-      }catch(beaconError){
-        console.warn('Backup lead transport not available',beaconError);
-        return false;
-      }
-    }finally{
-      if(timeout)clearTimeout(timeout);
-    }
+  // Android and embedded mobile browsers sometimes fail to expose a fetch()
+  // response even after sending a request. Use one confirmed XHR request on
+  // mobile instead of retrying an ambiguous POST with no-cors.
+  function sendConfirmedXHR(payload){
+    return new Promise((resolve,reject)=>{
+      const xhr=new XMLHttpRequest();
+      xhr.open('POST',workerUrl,true);
+      xhr.timeout=18000;
+      xhr.withCredentials=false;
+      xhr.setRequestHeader('Content-Type','text/plain;charset=UTF-8');
+      xhr.onload=()=>{
+        let responseData=null;
+        try{responseData=JSON.parse(xhr.responseText)}catch(parseError){}
+        if(xhr.status>=200&&xhr.status<300&&responseData&&responseData.success===true){
+          resolve();
+        }else{
+          const err=new Error('Worker did not confirm lead delivery');
+          err.httpStatus=xhr.status;
+          reject(err);
+        }
+      };
+      xhr.onerror=()=>{
+        const err=new Error('Mobile XHR transport/network/CORS failure');
+        err.name='NetworkError';
+        reject(err);
+      };
+      xhr.ontimeout=()=>{
+        const err=new Error('Mobile XHR request timed out');
+        err.name='TimeoutError';
+        reject(err);
+      };
+      xhr.onabort=()=>{
+        const err=new Error('Mobile XHR was aborted');
+        err.name='AbortError';
+        reject(err);
+      };
+      try{xhr.send(JSON.stringify(payload))}catch(err){reject(err)}
+    });
   }
 
-  // Safari/embedded browsers may preserve a disabled button after back navigation.
-  window.addEventListener('pageshow',function(e){
-    if(!e.persisted||!submitButton)return;
+  function sendConfirmedFetch(payload){
+    const controller=typeof AbortController==='function'?new AbortController():null;
+    let timer;
+    const request=fetch(workerUrl,{
+      method:'POST',
+      mode:'cors',
+      credentials:'omit',
+      headers:{'Content-Type':'text/plain;charset=UTF-8'},
+      body:JSON.stringify(payload),
+      ...(controller?{signal:controller.signal}:{})
+    }).then(async response=>{
+      let data=null;
+      try{data=await response.json()}catch(parseError){}
+      if(response.ok&&data&&data.success===true)return;
+      const err=new Error('Worker did not confirm lead delivery');
+      err.httpStatus=response.status;
+      throw err;
+    });
+    const deadline=new Promise((resolve,reject)=>{
+      timer=setTimeout(()=>{
+        if(controller)controller.abort();
+        const err=new Error('Request timed out');
+        err.name='TimeoutError';
+        reject(err);
+      },18000);
+    });
+    return Promise.race([request,deadline]).finally(()=>clearTimeout(timer));
+  }
+
+  function restoreButton(){
+    if(!submitButton)return;
     form.removeAttribute('aria-busy');
     submitButton.disabled=false;
     submitButton.textContent=(submitCopy[currentLang()]||submitCopy.uk).idle;
+  }
+  window.addEventListener('pageshow',function(e){
+    if(e.persisted)restoreButton();
   });
 
   form.addEventListener('submit',async function(event){
@@ -7053,7 +7068,7 @@ document.addEventListener('keydown',(event)=>{
     submitButton.disabled=true;
     submitButton.textContent=copy.loading;
     form.setAttribute('aria-busy','true');
-    showFeedback('',copy,false);
+    showFeedback('',copy,false,false);
 
     const payload={
       name:nameInput.value.trim(),
@@ -7068,84 +7083,42 @@ document.addEventListener('keydown',(event)=>{
       utm_term:params.get('utm_term')||''
     };
 
-    const controller=typeof AbortController==='function'?new AbortController():null;
-    let timeoutHandle;
-    let timedOut=false;
     try{
-      const networkRequest=(async()=>{
-        // text/plain is a CORS-safelisted content type: no OPTIONS preflight.
-        // The Worker uses request.json() to parse the JSON body regardless of its MIME.
-        const response=await fetch(workerUrl,{
-          method:'POST',
-          mode:'cors',
-          credentials:'omit',
-          cache:'no-store',
-          headers:{'Content-Type':'text/plain;charset=UTF-8'},
-          body:JSON.stringify(payload),
-          ...(controller?{signal:controller.signal}:{})
-        });
-        const result=await response.json().catch(()=>null);
-        if(!response.ok||!result||result.success!==true){
-          const failure=new Error('Lead service did not confirm delivery');
-          failure.httpStatus=response.status;
-          throw failure;
-        }
-      })();
-      const deadline=new Promise((resolve,reject)=>{
-        timeoutHandle=setTimeout(()=>{
-          timedOut=true;
-          if(controller)controller.abort();
-          reject(new Error('Lead request timed out'));
-        },12000);
-      });
-      await Promise.race([networkRequest,deadline]);
+      const isMobile=/(Android|iPhone|iPad|iPod)/i.test(navigator.userAgent)||
+        (typeof window.matchMedia==='function'&&window.matchMedia('(pointer:coarse)').matches);
+      await (isMobile&&typeof XMLHttpRequest==='function'
+        ?sendConfirmedXHR(payload)
+        :sendConfirmedFetch(payload));
 
-      // Only a confirmed success from the Worker may mark the form as sent.
-      showFeedback(copy.success,copy,false);
+      // A verified server response is required before thank-you or Pixel Lead.
+      showFeedback(copy.success,copy,false,false);
       submitButton.textContent=copy.sent;
       form.removeAttribute('aria-busy');
 
-      let saved=false;
       try{
         const leadToken=(window.crypto&&typeof crypto.randomUUID==='function')
           ?crypto.randomUUID()
           :Date.now().toString(36)+Math.random().toString(36).slice(2);
         sessionStorage.setItem('targetlb_verified_lead',JSON.stringify({
-          token:leadToken,
-          ts:Date.now()
+          token:leadToken,ts:Date.now()
         }));
-        saved=true;
+        window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
       }catch(storageError){
-        console.warn('Lead delivered, but the mobile browser blocks storage',storageError);
+        // Successful delivery may still happen when storage is blocked.
+        console.warn('Lead confirmed; session storage unavailable',storageError);
       }
-      // If sessionStorage is blocked (some in-app/private browsers), the
-      // inline success stays visible rather than falsely reporting a failure.
-      if(saved)window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
     }catch(error){
-      console.error('Lead submit failed',error);
-      // Never attempt opaque backup submission for malformed data or explicit
-      // server errors. Validated leads can use backup transport on network failure.
-      const transportFailed=timedOut||error.name==='AbortError'||error.name==='TypeError';
-      if(transportFailed&&await tryBackupPost(payload)){
-        // Never fire Pixel Lead or redirect without a verified success response.
-        submitButton.disabled=true;
-        submitButton.textContent=copy.unverifiedButton;
-        form.removeAttribute('aria-busy');
-        showFeedback(copy.fallback,copy,false,true);
-        return;
-      }
-      submitButton.disabled=false;
-      submitButton.textContent=copy.idle;
-      form.removeAttribute('aria-busy');
+      console.error('Lead submit failed',error.name,error.message,error.httpStatus||0);
+      restoreButton();
       let feedback=copy.error;
-      if(timedOut||error.name==='AbortError')feedback=copy.timeout;
+      if(error.name==='TimeoutError'||error.name==='AbortError')feedback=copy.timeout;
       else if(error.httpStatus===403)feedback=copy.blocked;
       else if(error.httpStatus===400||error.httpStatus===422)feedback=copy.invalid;
       else if(error.httpStatus>=500)feedback=copy.server;
-      else if(error.name==='TypeError')feedback=copy.network;
+      else if(error.name==='NetworkError'||error.name==='TypeError')feedback=copy.network;
       showFeedback(feedback,copy,true,false);
-    }finally{
-      if(timeoutHandle)clearTimeout(timeoutHandle);
+      // No automatic second POST: a CORS/network error may hide a successful
+      // first delivery, so silently retrying could duplicate a real lead.
     }
   });
 })();

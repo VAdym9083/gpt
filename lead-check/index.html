@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Перевірка мобільної форми | Target LB</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f6f3;color:#25292c;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:600px;margin:4vh auto;padding:24px}
+h1{font-size:25px;line-height:1.2;margin:15px 0}
+p{font-size:15px;color:#4b5157}
+section{background:white;padding:23px;border-radius:24px;border:1px solid #e7e5e1;box-shadow:0 14px 44px rgba(0,0,0,.04)}
+button{font:inherit;min-height:52px;width:100%;border:0;border-radius:15px;background:#18221e;color:#fff;font-weight:800;cursor:pointer;padding:12px;margin:9px 0}
+button:disabled{opacity:.6}
+.secondary{background:#e5e9e6;color:#243d33}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.7 ui-monospace,Menlo,Consolas,monospace;background:#f0f1ef;border-radius:14px;padding:16px}
+a{color:#176588}
+.note{font-size:12px;color:#626767}
+</style>
+</head>
+<body>
+<main>
+<section>
+<a href="/gpt/?lang=uk">← Повернутися на сайт</a>
+<h1>Перевірка надсилання з телефону</h1>
+<p>Ця сторінка перевіряє доступ до Cloudflare Worker і чи може саме ваш браузер отримати підтвердження заявки.</p>
+<p class="note">Натискання кнопки відправить <strong>одну тестову заявку</strong> в Telegram з позначкою TEST. Ваше ім’я чи контакт не запитуються.</p>
+<button id="run" type="button">Перевірити з'єднання і відправку</button>
+<pre id="out" role="status" aria-live="polite">Тест ще не запускався</pre>
+<button id="copy" type="button" class="secondary">Скопіювати звіт</button>
+<p class="note">Якщо тест завершується з помилкою, скопіюйте звіт і надішліть його для діагностики. Він не містить введених у форму даних.</p>
+</section>
+</main>
+<script>
+(function(){
+  const btn=document.getElementById('run');
+  const out=document.getElementById('out');
+  const copy=document.getElementById('copy');
+  const url='https://target-lb-leads.vadym9083.workers.dev/';
+  const report=[];
+  const add=(str)=>{report.push(str);out.textContent=report.join('\n')};
+  function networkTest(){
+    return new Promise(resolve=>{
+      const xhr=new XMLHttpRequest(),started=Date.now();
+      xhr.open('POST',url,true);
+      xhr.timeout=17000;
+      xhr.withCredentials=false;
+      xhr.setRequestHeader('Content-Type','text/plain;charset=UTF-8');
+      xhr.onload=()=>{
+        let received=false;
+        try{received=JSON.parse(xhr.responseText).success===true}catch(e){}
+        resolve('POST: HTTP '+xhr.status+', success='+received+', '+(Date.now()-started)+' ms');
+      };
+      xhr.onerror=()=>resolve('POST: network/CORS error, HTTP 0, '+(Date.now()-started)+' ms');
+      xhr.ontimeout=()=>resolve('POST: timeout, '+(Date.now()-started)+' ms');
+      xhr.onabort=()=>resolve('POST: aborted, '+(Date.now()-started)+' ms');
+      try{xhr.send(JSON.stringify({
+        name:'TEST from mobile diagnostic - ignore',
+        network:'telegram',contact:'@target_vadym',lang:'uk',
+        page:window.location.href,utm_source:'mobile_connection_diagnostic'
+      }))}catch(e){resolve('POST: '+e.name+': '+e.message)}
+    });
+  }
+  async function reachabilityTest(){
+    const ctrl=typeof AbortController==='function'?new AbortController():null;
+    let timer;const started=Date.now();
+    try{
+      const request=fetch(url,{mode:'no-cors',cache:'no-store',...(ctrl?{signal:ctrl.signal}:{})});
+      const deadline=new Promise((resolve,reject)=>{
+        timer=setTimeout(()=>{
+          if(ctrl)ctrl.abort();
+          reject(new Error('timeout'));
+        },9000);
+      });
+      await Promise.race([request,deadline]);
+      return 'Доступ до домену: є, '+(Date.now()-started)+' ms (без CORS)';
+    }catch(e){return 'Доступ до домену: помилка '+e.name+', '+(Date.now()-started)+' ms'}
+    finally{if(timer)clearTimeout(timer)}
+  }
+  btn.addEventListener('click',async()=>{
+    btn.disabled=true;report.length=0;
+    add('Тест почався: '+new Date().toISOString());
+    add('Браузер: '+navigator.userAgent);
+    add(await reachabilityTest());
+    add(await networkTest());
+    add('Тест завершено');
+    btn.disabled=false;
+  });
+  copy.addEventListener('click',()=>{
+    const value=report.join('\n')||out.textContent;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(value).then(()=>{copy.textContent='Звіт скопійовано ✓'}).catch(()=>{
+        const selection=window.getSelection();
+        const range=document.createRange();range.selectNodeContents(out);
+        selection.removeAllRanges();selection.addRange(range);
+      });
+    }else{
+      const sel=window.getSelection(),range=document.createRange();
+      range.selectNodeContents(out);sel.removeAllRanges();sel.addRange(range);
+    }
+  });
+})();
+</script>
+</body>
+</html>
