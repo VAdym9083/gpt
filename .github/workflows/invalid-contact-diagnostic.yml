@@ -1,23 +1,79 @@
-name: Diagnose invalid contact response
+name: Mobile lead validation and confirmation QA
 on:
   push:
     branches: ["test/mobile-lead-form-diagnostics-2026-10-10"]
 permissions:
   contents: read
 jobs:
-  invalid-request:
+  mobile-qa:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
-      - name: Probe Worker with invalid fields without real contact
-        shell: bash
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
         run: |
-          set -euo pipefail
-          url='https://target-lb-leads.vadym9083.workers.dev/'
-          status=$(curl --silent --show-error --max-time 18 -o /tmp/body -D /tmp/headers -w '%{http_code}' \
-            -X POST -H 'Origin: https://vadym9083.github.io' \
-            -H 'Content-Type: text/plain;charset=UTF-8' \
-            --data '{"name":"й","network":"telegram","contact":"й","lang":"ru","page":"https://vadym9083.github.io/gpt/","utm_source":"validation_diag"}' \
-            "$url")
-          echo "INVALID_HTTP_STATUS=$status"
-          echo "INVALID_RESPONSE_BODY=$(head -c 400 /tmp/body)"
-          echo "INVALID_CORS_HEADERS=$(grep -i '^access-control-' /tmp/headers | tr '\r\n' ' ' || true)"
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Mobile browser QA against live site with mocked Worker
+        run: |
+          cat > /tmp/qa.cjs <<'NODE'
+          const {chromium,devices}=require(process.cwd()+'/node_modules/playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const ctx=await browser.newContext({...devices['Pixel 7'],locale:'ru-RU'});
+            async function newPage(){
+              const page=await ctx.newPage();
+              let requests=0;
+              page.on('pageerror',e=>console.log('PAGE_ERROR:',e.message));
+              await page.route('**/target-lb-leads.vadym9083.workers.dev/**',async route=>{
+                requests++;
+                await route.fulfill({status:200,contentType:'application/json',headers:{
+                  'access-control-allow-origin':'https://vadym9083.github.io'
+                },body:'{"success":true}'});
+              });
+              await page.goto('https://vadym9083.github.io/gpt/?lang=ru&qa=contact-validation-1010',
+                {waitUntil:'domcontentloaded',timeout:45000});
+              await page.locator('#contact').scrollIntoViewIfNeeded();
+              return {page,count:()=>requests};
+            }
+            {
+              const {page,count}=await newPage();
+              await page.locator('#leadName').fill('й');
+              await page.locator('#leadContact').fill('й');
+              await page.locator('.leadSubmit').click();
+              await page.waitForTimeout(450);
+              const state=await page.evaluate(()=>({
+                button:document.querySelector('.leadSubmit').textContent.trim(),
+                contactError:document.querySelector('#leadContactHint')?.textContent.trim(),
+                nameError:document.querySelector('#leadName')?.validationMessage,
+                contactValidation:document.querySelector('#leadContact')?.validationMessage,
+                busy:document.querySelector('#leadIntakeForm')?.getAttribute('aria-busy')
+              }));
+              console.log('INVALID:',JSON.stringify({state,requests:count()}));
+              if(count()!==0||!state.contactError.includes('Telegram:')||!state.nameError||state.busy==='true')
+                throw Error('Invalid form submission was not blocked correctly');
+              await page.close();
+            }
+            for(const [network,contact] of [
+              ['telegram','@target_vadym'],
+              ['instagram','https://www.instagram.com/lebedenkkko/'],
+              ['whatsapp','+1 780 555 0198']
+            ]){
+              const {page,count}=await newPage();
+              await page.locator('#leadName').fill('Вадим');
+              await page.locator('#leadNetwork').selectOption(network);
+              await page.locator('#leadContact').fill(contact);
+              await Promise.all([
+                page.waitForURL('**/thank-you/**',{timeout:12000}),
+                page.locator('.leadSubmit').click()
+              ]);
+              console.log('VALID:',JSON.stringify({network,requests:count(),url:page.url()}));
+              if(count()!==1)throw Error('Worker requests should equal one for '+network);
+              await page.close();
+            }
+            await browser.close();
+          })().catch(err=>{console.error(err);process.exitCode=1;});
+          NODE
+          node /tmp/qa.cjs
