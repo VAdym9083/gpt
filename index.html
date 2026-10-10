@@ -6843,27 +6843,27 @@ document.addEventListener('keydown',(event)=>{
   };
 
   function phoneValid(v){
-    if(!/^\\+?[0-9 ()-]{7,25}$/.test(v))return false;
-    const digits=v.replace(/\\D/g,'');
+    if(!/^\+?[0-9 ()-]{7,25}$/.test(v))return false;
+    const digits=v.replace(/\D/g,'');
     return digits.length>=8&&digits.length<=15;
   }
   function socialHandle(v,kind){
     let value=v.trim();
-    if(/^https?:\\/\\//i.test(value)||/^(www\\.)?(?:t\\.me|telegram\\.me|instagram\\.com)\\//i.test(value)){
+    if(/^https?:\/\//i.test(value)||/^(www\.)?(?:t\.me|telegram\.me|instagram\.com)\//i.test(value)){
       try{
-        const u=new URL(/^https?:\\/\\//i.test(value)?value:'https://'+value);
-        const hostname=u.hostname.toLowerCase().replace(/^www\\./,'');
+        const u=new URL(/^https?:\/\//i.test(value)?value:'https://'+value);
+        const hostname=u.hostname.toLowerCase().replace(/^www\./,'');
         const allowed=kind==='telegram'
           ?hostname==='t.me'||hostname==='telegram.me'
           :hostname==='instagram.com';
         if(!allowed)return false;
-        value=decodeURIComponent(u.pathname.replace(/^\\/+|\\/+$/g,''));
+        value=decodeURIComponent(u.pathname.replace(/^\/+|\/+$/g,''));
       }catch(e){return false;}
     }
     value=value.replace(/^@/,'');
     return kind==='telegram'
       ?/^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(value)
-      :/^(?!\\.)(?!.*\\.$)[A-Za-z0-9._]{1,30}$/.test(value);
+      :/^(?!\.)(?!.*\.$)[A-Za-z0-9._]{1,30}$/.test(value);
   }
   function contactValid(value,network){
     if(network==='whatsapp')return phoneValid(value);
