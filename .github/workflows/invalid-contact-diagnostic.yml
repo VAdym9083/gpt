@@ -1,0 +1,23 @@
+name: Diagnose invalid contact response
+on:
+  push:
+    branches: ["test/mobile-lead-form-diagnostics-2026-10-10"]
+permissions:
+  contents: read
+jobs:
+  invalid-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Worker with invalid fields without real contact
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://target-lb-leads.vadym9083.workers.dev/'
+          status=$(curl --silent --show-error --max-time 18 -o /tmp/body -D /tmp/headers -w '%{http_code}' \
+            -X POST -H 'Origin: https://vadym9083.github.io' \
+            -H 'Content-Type: text/plain;charset=UTF-8' \
+            --data '{"name":"й","network":"telegram","contact":"й","lang":"ru","page":"https://vadym9083.github.io/gpt/","utm_source":"validation_diag"}' \
+            "$url")
+          echo "INVALID_HTTP_STATUS=$status"
+          echo "INVALID_RESPONSE_BODY=$(head -c 400 /tmp/body)"
+          echo "INVALID_CORS_HEADERS=$(grep -i '^access-control-' /tmp/headers | tr '\r\n' ' ' || true)"
