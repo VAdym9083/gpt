@@ -4676,6 +4676,10 @@ body::before{display:none!important}
   box-shadow:0 15px 32px rgba(62,99,75,.20)
 }
 .leadSubmit:active{transform:translateY(0)}
+@media(pointer:coarse){
+  .leadSubmit{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+}
+.leadSubmit:disabled{cursor:wait;opacity:.88}
 .leadFormNote{
   margin:0!important;
   color:#88827b!important;
@@ -4689,6 +4693,18 @@ body::before{display:none!important}
   line-height:1.5!important
 }
 .leadIntakeForm .leadFormNote.isError a{
+  color:#165b88;
+  font-weight:900;
+  text-decoration:underline;
+  text-underline-offset:2px
+}
+.leadIntakeForm .leadFormNote.isUnverified{
+  color:#886012!important;
+  font-size:12px!important;
+  font-weight:700;
+  line-height:1.5!important
+}
+.leadIntakeForm .leadFormNote.isUnverified a{
   color:#165b88;
   font-weight:900;
   text-decoration:underline;
@@ -6809,6 +6825,8 @@ document.addEventListener('keydown',(event)=>{
       blocked:'Сервер відхилив запит з вашого браузера. Напишіть мені напряму',
       invalid:'Не вдалося прийняти заявку. Перевірте заповнені поля або напишіть напряму',
       error:'Не вдалося підтвердити відправлення. Дані залишились у формі — напишіть мені напряму',
+      fallback:'Заявку передано резервним способом, але отримання ще не підтверджено. Якщо я не відповім, звʼяжіться зі мною напряму',
+      unverifiedButton:'Передано без підтвердження',
       direct:'Написати в Telegram →'
     },
     ru:{
@@ -6820,6 +6838,8 @@ document.addEventListener('keydown',(event)=>{
       blocked:'Сервер отклонил запрос из вашего браузера. Напишите мне напрямую',
       invalid:'Не удалось принять заявку. Проверьте поля или напишите напрямую',
       error:'Не удалось подтвердить отправку. Данные остались в форме — напишите мне напрямую',
+      fallback:'Заявка передана резервным способом, но получение пока не подтверждено. Если я не отвечу, напишите мне напрямую',
+      unverifiedButton:'Передано без подтверждения',
       direct:'Написать в Telegram →'
     },
     en:{
@@ -6831,6 +6851,8 @@ document.addEventListener('keydown',(event)=>{
       blocked:'The service rejected this browser request. Message me directly',
       invalid:'Could not accept the request. Review the fields or message me directly',
       error:'Could not confirm delivery. Your details remain in the form — message me directly',
+      fallback:'Submitted via a backup method, but delivery could not be confirmed. If I do not respond, message me directly',
+      unverifiedButton:'Sent without confirmation',
       direct:'Message on Telegram →'
     },
     es:{
@@ -6842,6 +6864,8 @@ document.addEventListener('keydown',(event)=>{
       blocked:'El servicio rechazó la solicitud desde este navegador. Escríbeme directamente',
       invalid:'No se pudo aceptar la solicitud. Revisa los campos o escríbeme',
       error:'No se pudo confirmar la entrega. Los datos siguen en el formulario — escríbeme directamente',
+      fallback:'Enviado por un método alternativo, pero no se pudo confirmar la recepción. Si no respondo, escríbeme directamente',
+      unverifiedButton:'Sin confirmación',
       direct:'Escribir por Telegram →'
     }
   };
@@ -6850,11 +6874,12 @@ document.addEventListener('keydown',(event)=>{
     formNote.setAttribute('role','status');
     formNote.setAttribute('aria-live','polite');
   }
-  function showFeedback(message,copy,isError){
+  function showFeedback(message,copy,isError,isUnverified){
     if(!formNote)return;
     formNote.classList.toggle('isError',!!isError);
+    formNote.classList.toggle('isUnverified',!!isUnverified);
     formNote.textContent=message;
-    if(isError){
+    if(isError||isUnverified){
       formNote.appendChild(document.createTextNode(' '));
       const link=document.createElement('a');
       link.href='https://t.me/target_vadym';
@@ -6864,6 +6889,54 @@ document.addEventListener('keydown',(event)=>{
       formNote.appendChild(link);
     }
   }
+
+  // A few in-app/mobile browsers block reading third-party CORS responses.
+  // This backup POST uses no-cors, so its result is *never* treated as confirmed.
+  async function tryBackupPost(payload){
+    const body=new Blob([JSON.stringify(payload)],{type:'text/plain;charset=UTF-8'});
+    const ctrl=typeof AbortController==='function'?new AbortController():null;
+    let timeout;
+    try{
+      await Promise.race([
+        fetch(workerUrl,{
+          method:'POST',
+          mode:'no-cors',
+          credentials:'omit',
+          cache:'no-store',
+          body,
+          ...(ctrl?{signal:ctrl.signal}:{})
+        }),
+        new Promise((resolve,reject)=>{
+          timeout=setTimeout(()=>{
+            if(ctrl)ctrl.abort();
+            reject(new Error('Backup transport timeout'));
+          },6000);
+        })
+      ]);
+      return true; // Browser sent the request; the Worker response is opaque.
+    }catch(backupError){
+      try{
+        // Beacon is supported in many restricted in-app browsers; it only
+        // confirms queue acceptance, not actual lead delivery.
+        return typeof navigator.sendBeacon==='function'
+          ?navigator.sendBeacon(workerUrl,body)
+          :false;
+      }catch(beaconError){
+        console.warn('Backup lead transport not available',beaconError);
+        return false;
+      }
+    }finally{
+      if(timeout)clearTimeout(timeout);
+    }
+  }
+
+  // Safari/embedded browsers may preserve a disabled button after back navigation.
+  window.addEventListener('pageshow',function(e){
+    if(!e.persisted||!submitButton)return;
+    form.removeAttribute('aria-busy');
+    submitButton.disabled=false;
+    submitButton.textContent=(submitCopy[currentLang()]||submitCopy.uk).idle;
+  });
 
   form.addEventListener('submit',async function(event){
     event.preventDefault();
@@ -6920,7 +6993,7 @@ document.addEventListener('keydown',(event)=>{
           timedOut=true;
           if(controller)controller.abort();
           reject(new Error('Lead request timed out'));
-        },15000);
+        },12000);
       });
       await Promise.race([networkRequest,deadline]);
 
@@ -6947,6 +7020,15 @@ document.addEventListener('keydown',(event)=>{
       if(saved)window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
     }catch(error){
       console.error('Lead submit failed',error);
+      const transportFailed=timedOut||error.name==='AbortError'||error.name==='TypeError';
+      if(transportFailed&&await tryBackupPost(payload)){
+        // Never fire Pixel Lead or redirect without a verified success response.
+        submitButton.disabled=true;
+        submitButton.textContent=copy.unverifiedButton;
+        form.removeAttribute('aria-busy');
+        showFeedback(copy.fallback,copy,false,true);
+        return;
+      }
       submitButton.disabled=false;
       submitButton.textContent=copy.idle;
       form.removeAttribute('aria-busy');
@@ -6956,7 +7038,7 @@ document.addEventListener('keydown',(event)=>{
       else if(error.httpStatus===400||error.httpStatus===422)feedback=copy.invalid;
       else if(error.httpStatus>=500)feedback=copy.server;
       else if(error.name==='TypeError')feedback=copy.network;
-      showFeedback(feedback,copy,true);
+      showFeedback(feedback,copy,true,false);
     }finally{
       if(timeoutHandle)clearTimeout(timeoutHandle);
     }
