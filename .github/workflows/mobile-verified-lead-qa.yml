@@ -1,0 +1,71 @@
+name: Mobile verified lead QA
+on:
+  push:
+    branches: ["test/mobile-confirmed-xhr-2026-10-10"]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Run local mobile submission checks (no real leads)
+        run: |
+          python3 -m http.server 8787 --directory .. >/tmp/lead-local-http.log 2>&1 &
+          cat >/tmp/test.cjs <<'NODE'
+          const {chromium,devices}=require(process.cwd()+'/node_modules/playwright');
+          const origin='http://127.0.0.1:8787';
+          async function scenario(browser,name,device,contact,fail){
+            const context=await browser.newContext(device?{...devices['Pixel 7'],locale:'uk-UA'}:{viewport:{width:1200,height:900}});
+            const page=await context.newPage();
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            let posts=0;
+            await page.route('**/target-lb-leads.vadym9083.workers.dev/**',async route=>{
+              posts++;
+              if(fail)return route.abort('failed');
+              return route.fulfill({status:200,contentType:'application/json',headers:{
+                'access-control-allow-origin':origin,
+                'access-control-allow-methods':'POST, OPTIONS'
+              },body:'{"success":true}'});
+            });
+            await page.goto(origin+'/gpt/?lang=ru',{waitUntil:'domcontentloaded',timeout:30000});
+            await page.locator('#contact').scrollIntoViewIfNeeded();
+            await page.locator('#leadName').fill(fail?'Mobile QA failed':'Mobile QA validation');
+            await page.locator('#leadContact').fill(contact);
+            await page.locator('.leadSubmit').click();
+            if(contact==='й'){
+              await page.waitForTimeout(250);
+              if(posts!==0)throw Error(name+': invalid contact sent to Worker');
+              if(!await page.locator('#leadContact').evaluate(e=>!e.validity.valid))
+                throw Error(name+': invalid contact not flagged');
+            }else if(fail){
+              await page.locator('.leadFormNote.isError').waitFor({timeout:12000});
+              const state=await page.locator('.leadSubmit').evaluate(el=>({disabled:el.disabled,text:el.textContent}));
+              if(state.disabled||posts!==1||!state.text.includes('Отправить'))
+                throw Error(name+': error recovery broken '+JSON.stringify({posts,state}));
+            }else{
+              await page.waitForURL('**/thank-you/**',{timeout:12000});
+              if(posts!==1)throw Error(name+': unexpected submit count '+posts);
+            }
+            console.log('PASS:',JSON.stringify({name,posts,url:page.url(),pageErrors:errors.filter(x=>!x.includes('clarity'))}));
+            await context.close();
+          }
+          (async()=>{
+            const b=await chromium.launch({headless:true});
+            await scenario(b,'mobile valid XHR',true,'@target_vadym',false);
+            await scenario(b,'mobile invalid blocked',true,'й',false);
+            await scenario(b,'mobile XHR connection failure',true,'@target_vadym',true);
+            await scenario(b,'desktop fetch unchanged',false,'@target_vadym',false);
+            await b.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node /tmp/test.cjs
