@@ -24,6 +24,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: One-time live lead transport test (non-blocking)
+        if: github.event.head_commit.message == 'Fix mobile lead form without CORS preflight'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://target-lb-leads.vadym9083.workers.dev/'
+          echo 'Checking Worker health...'
+          health_status=$(curl --silent --show-error --max-time 15 --output /tmp/lead-health.txt --write-out '%{http_code}' "$endpoint")
+          echo "GET status: $health_status"
+          test "$health_status" = "200"
+          echo 'Checking actual form POST with CORS-safelisted text/plain JSON payload...'
+          post_status=$(curl --silent --show-error --max-time 20 --output /tmp/lead-result.txt --dump-header /tmp/lead-headers.txt --write-out '%{http_code}' \
+            --request POST \
+            --header 'Origin: https://vadym9083.github.io' \
+            --header 'Content-Type: text/plain;charset=UTF-8' \
+            --data '{"name":"Target LB mobile form smoke test (ignore)","network":"telegram","contact":"@target_vadym","lang":"ru","page":"https://vadym9083.github.io/gpt/?lang=ru","utm_source":"automated_test"}' \
+            "$endpoint")
+          echo "POST status: $post_status"
+          grep -i 'access-control-allow-origin: https://vadym9083.github.io' /tmp/lead-headers.txt >/dev/null || (echo 'Missing CORS origin header' && exit 1)
+          test "$post_status" = "200" || (echo 'Worker POST failed, response:' && head -c 500 /tmp/lead-result.txt && exit 1)
+          grep -q '"success":true' /tmp/lead-result.txt || (echo 'Worker did not return success:true' && head -c 500 /tmp/lead-result.txt && exit 1)
+          echo 'Worker POST delivered successfully: check Telegram for the one-time TEST lead'
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

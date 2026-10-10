@@ -6803,29 +6803,45 @@ document.addEventListener('keydown',(event)=>{
     uk:{
       idle:'Надіслати заявку →',loading:'Надсилаю…',sent:'Заявку надіслано ✓',
       success:'Заявку успішно отримано — я напишу вам у вибраний месенджер',
-      timeout:'Не отримано підтвердження за 15 секунд. Заявку могло бути доставлено — перевірте повідомлення або напишіть напряму',
-      error:'Не вдалося підтвердити надсилання. Дані у формі збережені — можете спробувати ще раз або написати напряму',
+      timeout:'Сервер не відповів за 15 секунд. Заявка могла надійти — перевірте повідомлення перед повторною спробою',
+      network:'Зʼєднання із сервером заявки заблоковане або недоступне. Напишіть мені напряму',
+      server:'Сервіс отримання заявок тимчасово недоступний. Напишіть мені напряму',
+      blocked:'Сервер відхилив запит з вашого браузера. Напишіть мені напряму',
+      invalid:'Не вдалося прийняти заявку. Перевірте заповнені поля або напишіть напряму',
+      error:'Не вдалося підтвердити відправлення. Дані залишились у формі — напишіть мені напряму',
       direct:'Написати в Telegram →'
     },
     ru:{
       idle:'Отправить заявку →',loading:'Отправляю…',sent:'Заявка отправлена ✓',
       success:'Заявка успешно получена — я напишу вам в выбранный мессенджер',
-      timeout:'Нет подтверждения за 15 секунд. Заявка могла дойти — проверьте сообщения или напишите напрямую',
-      error:'Не удалось подтвердить отправку. Данные в форме сохранены — попробуйте ещё раз или напишите напрямую',
+      timeout:'Сервер не ответил за 15 секунд. Заявка могла дойти — проверьте сообщения перед повторной попыткой',
+      network:'Подключение к серверу заявок заблокировано или недоступно. Напишите мне напрямую',
+      server:'Сервис получения заявок временно недоступен. Напишите мне напрямую',
+      blocked:'Сервер отклонил запрос из вашего браузера. Напишите мне напрямую',
+      invalid:'Не удалось принять заявку. Проверьте поля или напишите напрямую',
+      error:'Не удалось подтвердить отправку. Данные остались в форме — напишите мне напрямую',
       direct:'Написать в Telegram →'
     },
     en:{
       idle:'Send request →',loading:'Sending…',sent:'Request sent ✓',
       success:'Your request was received — I will contact you via your selected messenger',
-      timeout:'No confirmation within 15 seconds. Your request may have arrived — check your messages or contact me directly',
-      error:'Could not confirm submission. Your details are still in the form — retry or contact me directly',
+      timeout:'No response within 15 seconds. Your request may have arrived — check messages before retrying',
+      network:'Connection to the lead service was blocked or unavailable. Message me directly',
+      server:'The lead service is temporarily unavailable. Message me directly',
+      blocked:'The service rejected this browser request. Message me directly',
+      invalid:'Could not accept the request. Review the fields or message me directly',
+      error:'Could not confirm delivery. Your details remain in the form — message me directly',
       direct:'Message on Telegram →'
     },
     es:{
       idle:'Enviar solicitud →',loading:'Enviando…',sent:'Solicitud enviada ✓',
       success:'Solicitud recibida — te escribiré por el canal elegido',
-      timeout:'Sin confirmación después de 15 segundos. Puede haberse enviado — revisa tus mensajes o contacta directamente',
-      error:'No se pudo confirmar el envío. Los datos siguen en el formulario — inténtalo de nuevo o contacta directamente',
+      timeout:'Sin respuesta en 15 segundos. Es posible que se haya enviado — comprueba los mensajes antes de reintentar',
+      network:'Conexión al servicio bloqueada o no disponible. Escríbeme directamente',
+      server:'El servicio de solicitudes no está disponible temporalmente. Escríbeme directamente',
+      blocked:'El servicio rechazó la solicitud desde este navegador. Escríbeme directamente',
+      invalid:'No se pudo aceptar la solicitud. Revisa los campos o escríbeme',
+      error:'No se pudo confirmar la entrega. Los datos siguen en el formulario — escríbeme directamente',
       direct:'Escribir por Telegram →'
     }
   };
@@ -6881,15 +6897,22 @@ document.addEventListener('keydown',(event)=>{
     let timedOut=false;
     try{
       const networkRequest=(async()=>{
+        // text/plain is a CORS-safelisted content type: no OPTIONS preflight.
+        // The Worker uses request.json() to parse the JSON body regardless of its MIME.
         const response=await fetch(workerUrl,{
           method:'POST',
-          headers:{'Content-Type':'application/json'},
+          mode:'cors',
+          credentials:'omit',
+          cache:'no-store',
+          headers:{'Content-Type':'text/plain;charset=UTF-8'},
           body:JSON.stringify(payload),
           ...(controller?{signal:controller.signal}:{})
         });
         const result=await response.json().catch(()=>null);
         if(!response.ok||!result||result.success!==true){
-          throw new Error('Lead delivery not confirmed');
+          const failure=new Error('Lead service did not confirm delivery');
+          failure.httpStatus=response.status;
+          throw failure;
         }
       })();
       const deadline=new Promise((resolve,reject)=>{
@@ -6927,7 +6950,13 @@ document.addEventListener('keydown',(event)=>{
       submitButton.disabled=false;
       submitButton.textContent=copy.idle;
       form.removeAttribute('aria-busy');
-      showFeedback(timedOut||error.name==='AbortError'?copy.timeout:copy.error,copy,true);
+      let feedback=copy.error;
+      if(timedOut||error.name==='AbortError')feedback=copy.timeout;
+      else if(error.httpStatus===403)feedback=copy.blocked;
+      else if(error.httpStatus===400||error.httpStatus===422)feedback=copy.invalid;
+      else if(error.httpStatus>=500)feedback=copy.server;
+      else if(error.name==='TypeError')feedback=copy.network;
+      showFeedback(feedback,copy,true);
     }finally{
       if(timeoutHandle)clearTimeout(timeoutHandle);
     }
