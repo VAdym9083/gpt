@@ -4656,6 +4656,8 @@ body::before{display:none!important}
   font-size:8px;
   line-height:1.4
 }
+.leadContactHint.isInvalid{color:#9b352d;font-size:11px;font-weight:750}
+.leadField input.isInvalid{border-color:#bf594e;box-shadow:0 0 0 3px rgba(191,89,78,.11)}
 .leadSubmit{
   min-height:58px;
   margin-top:2px;
@@ -6803,8 +6805,109 @@ document.addEventListener('keydown',(event)=>{
     nameInput.placeholder=ui[lang].name;
     contactInput.placeholder=copy.placeholder;
     hint.textContent=copy.hint;
+    hint.classList.remove('isInvalid');
+    contactInput.classList.remove('isInvalid');
+    contactInput.removeAttribute('aria-invalid');
+    contactInput.setCustomValidity('');
     const phoneLike=network==='whatsapp';
     contactInput.inputMode=phoneLike?'tel':'text';
+  }
+
+  // Validate the messenger address before touching the network. An arbitrary
+  // character such as "й" is not a Telegram handle or a phone number.
+  const validationCopy={
+    uk:{
+      name:'Вкажіть ім’я щонайменше з 2 символів',
+      telegram:'Telegram: @username від 5 символів або номер телефону з кодом країни',
+      instagram:'Instagram: введіть @username або посилання instagram.com',
+      whatsapp:'WhatsApp: вкажіть міжнародний номер із кодом країни'
+    },
+    ru:{
+      name:'Укажите имя минимум из 2 символов',
+      telegram:'Telegram: @username от 5 символов или номер с кодом страны',
+      instagram:'Instagram: укажите @username или ссылку instagram.com',
+      whatsapp:'WhatsApp: укажите международный номер с кодом страны'
+    },
+    en:{
+      name:'Enter a name of at least 2 characters',
+      telegram:'Telegram: @username of 5+ characters or an international phone number',
+      instagram:'Instagram: enter @username or an instagram.com link',
+      whatsapp:'WhatsApp: enter a phone number with country code'
+    },
+    es:{
+      name:'Escribe un nombre de al menos 2 caracteres',
+      telegram:'Telegram: @usuario de 5 o más caracteres o número internacional',
+      instagram:'Instagram: escribe @usuario o enlace instagram.com',
+      whatsapp:'WhatsApp: escribe el número con prefijo internacional'
+    }
+  };
+
+  function phoneValid(v){
+    if(!/^\\+?[0-9 ()-]{7,25}$/.test(v))return false;
+    const digits=v.replace(/\\D/g,'');
+    return digits.length>=8&&digits.length<=15;
+  }
+  function socialHandle(v,kind){
+    let value=v.trim();
+    if(/^https?:\\/\\//i.test(value)||/^(www\\.)?(?:t\\.me|telegram\\.me|instagram\\.com)\\//i.test(value)){
+      try{
+        const u=new URL(/^https?:\\/\\//i.test(value)?value:'https://'+value);
+        const hostname=u.hostname.toLowerCase().replace(/^www\\./,'');
+        const allowed=kind==='telegram'
+          ?hostname==='t.me'||hostname==='telegram.me'
+          :hostname==='instagram.com';
+        if(!allowed)return false;
+        value=decodeURIComponent(u.pathname.replace(/^\\/+|\\/+$/g,''));
+      }catch(e){return false;}
+    }
+    value=value.replace(/^@/,'');
+    return kind==='telegram'
+      ?/^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(value)
+      :/^(?!\\.)(?!.*\\.$)[A-Za-z0-9._]{1,30}$/.test(value);
+  }
+  function contactValid(value,network){
+    if(network==='whatsapp')return phoneValid(value);
+    if(network==='telegram')return phoneValid(value)||socialHandle(value,'telegram');
+    return socialHandle(value,'instagram');
+  }
+  function clearValidation(input){
+    input.setCustomValidity('');
+    input.classList.remove('isInvalid');
+    input.removeAttribute('aria-invalid');
+    if(input===contactInput)syncContactUi();
+  }
+  nameInput.addEventListener('input',()=>clearValidation(nameInput));
+  contactInput.addEventListener('input',()=>clearValidation(contactInput));
+
+  function validateLead(){
+    const lang=currentLang();
+    const copy=validationCopy[lang]||validationCopy.uk;
+    const name=nameInput.value.trim();
+    const contact=contactInput.value.trim();
+    nameInput.setCustomValidity('');
+    contactInput.setCustomValidity('');
+    nameInput.classList.remove('isInvalid');
+    contactInput.classList.remove('isInvalid');
+    const validName=Array.from(name).length>=2;
+    const validContact=contactValid(contact,networkSelect.value);
+    if(!validName){
+      nameInput.setCustomValidity(copy.name);
+      nameInput.classList.add('isInvalid');
+      nameInput.setAttribute('aria-invalid','true');
+    }
+    if(!validContact){
+      const message=copy[networkSelect.value]||copy.telegram;
+      contactInput.setCustomValidity(message);
+      contactInput.classList.add('isInvalid');
+      contactInput.setAttribute('aria-invalid','true');
+      hint.textContent=message;
+      hint.classList.add('isInvalid');
+    }
+    if(!validName||!validContact){
+      form.reportValidity();
+      return false;
+    }
+    return form.reportValidity();
   }
 
   networkSelect.addEventListener('change',syncContactUi);
@@ -6941,7 +7044,7 @@ document.addEventListener('keydown',(event)=>{
   form.addEventListener('submit',async function(event){
     event.preventDefault();
     if(form.getAttribute('aria-busy')==='true')return;
-    if(!form.reportValidity())return;
+    if(!validateLead())return;
 
     const lang=currentLang();
     const copy=submitCopy[lang]||submitCopy.uk;
@@ -7020,6 +7123,8 @@ document.addEventListener('keydown',(event)=>{
       if(saved)window.location.assign('/gpt/thank-you/?lang='+encodeURIComponent(lang));
     }catch(error){
       console.error('Lead submit failed',error);
+      // Never attempt opaque backup submission for malformed data or explicit
+      // server errors. Validated leads can use backup transport on network failure.
       const transportFailed=timedOut||error.name==='AbortError'||error.name==='TypeError';
       if(transportFailed&&await tryBackupPost(payload)){
         // Never fire Pixel Lead or redirect without a verified success response.
