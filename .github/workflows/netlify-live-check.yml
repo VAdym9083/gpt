@@ -20,19 +20,20 @@ jobs:
           set -u
           DOMAIN="lively-elf-ba1204.netlify.app"
           echo "CHECK_SITE=$DOMAIN"
-          echo "DNS:"
           getent ahostsv4 "$DOMAIN" | head -3 || true
-          for PATH_SUFFIX in "/" "/.netlify/functions/lead"; do
-            URL="https://$DOMAIN$PATH_SUFFIX"
-            echo "URL=$URL"
-            CODE=$(curl -sSL --max-time 18 -o /tmp/check-body -D /tmp/check-headers -w '%{http_code}' "$URL")
-            EXIT=$?
-            echo "CURL_EXIT=$EXIT HTTP_STATUS=$CODE"
-            echo "CONTENT_TYPE=$(grep -i '^content-type:' /tmp/check-headers | tail -1 | tr -d '\r' || true)"
-            if [ "$PATH_SUFFIX" = "/" ]; then
-              if grep -q "Target LB · Сервіс заявок" /tmp/check-body; then echo "EXPECTED_PAGE=YES"; else echo "EXPECTED_PAGE=NO"; fi
-            else
-              echo -n "FUNCTION_BODY="; head -c 240 /tmp/check-body; echo
-              if grep -q '"status":"ready"' /tmp/check-body; then echo "FUNCTION_READY=YES"; else echo "FUNCTION_READY=NO"; fi
+          for ATTEMPT in 1 2 3 4 5 6 7 8 9; do
+            echo "ATTEMPT=$ATTEMPT"
+            SITE_CODE=$(curl -sSL --max-time 10 -o /tmp/site-body -w '%{http_code}' "https://$DOMAIN/" || true)
+            FUNCTION_CODE=$(curl -sSL --max-time 10 -o /tmp/function-body -w '%{http_code}' "https://$DOMAIN/.netlify/functions/lead" || true)
+            echo "SITE_HTTP=$SITE_CODE FUNCTION_HTTP=$FUNCTION_CODE"
+            if grep -q "Target LB · Сервіс заявок" /tmp/site-body 2>/dev/null; then echo "EXPECTED_PAGE=YES"; else echo "EXPECTED_PAGE=NO"; fi
+            if grep -q '"status":"ready"' /tmp/function-body 2>/dev/null; then echo "FUNCTION_READY=YES"; else echo "FUNCTION_READY=NO"; fi
+            if [ "$SITE_CODE" = "200" ] && [ "$FUNCTION_CODE" = "200" ] && grep -q "Target LB · Сервіс заявок" /tmp/site-body && grep -q '"status":"ready"' /tmp/function-body; then
+              echo "NETLIFY_VERIFIED=YES"
+              exit 0
             fi
+            [ "$ATTEMPT" = "9" ] && break
+            sleep 12
           done
+          echo "NETLIFY_VERIFIED=NO"
+          exit 1
