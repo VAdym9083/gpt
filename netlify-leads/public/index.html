@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Target LB · Сервіс заявок</title>
+  <style>
+    body{font-family:system-ui,-apple-system,sans-serif;margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f8f8;color:#243039}
+    main{max-width:440px;padding:28px;margin:20px;background:white;border:1px solid #e3e7e9;border-radius:20px}
+    h1{font-size:21px;margin-top:0}p{line-height:1.6;color:#55646b}button{padding:14px 18px;border-radius:12px;border:0;background:#173e50;color:white;font-weight:700}
+    #status{font-size:14px;color:#18674d;margin-top:15px}
+  </style>
+</head>
+<body><main>
+  <h1>Target LB · Сервіс заявок</h1>
+  <p>Ця безплатна Netlify-адреса потрібна для приймання заявок із сайту. Портфоліо залишається на GitHub Pages.</p>
+  <button id="check" type="button">Перевірити доступ із телефону</button>
+  <p id="status" role="status" aria-live="polite">Тест не надсилає заявок у Telegram</p>
+  <p><a href="https://vadym9083.github.io/gpt/">Повернутися на портфоліо</a></p>
+</main>
+<script>
+document.getElementById('check').addEventListener('click', async () => {
+ const status=document.getElementById('status');status.textContent='Перевіряю…';
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),8000);
+ try {
+  const r=await fetch('/.netlify/functions/lead',{signal:controller.signal,cache:'no-store'});
+  const d=await r.json();
+  status.textContent=r.ok&&d.status==='ready'?'✅ Сервер доступний із вашого телефону':'❌ Сервер відповів з помилкою';
+ } catch(e){status.textContent='❌ Немає з’єднання: '+e.name}
+ finally{clearTimeout(timer)}
+});
+</script></body></html>

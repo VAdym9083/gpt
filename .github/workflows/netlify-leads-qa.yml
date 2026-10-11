@@ -1,0 +1,16 @@
+name: Netlify lead proxy tests
+on:
+  push:
+    branches: ["netlify-leads"]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate gateway without sending real leads
+        run: node --test netlify-leads/tests/lead.test.cjs

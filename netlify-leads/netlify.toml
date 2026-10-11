@@ -1,0 +1,9 @@
+# This folder is deployed as a standalone Netlify project.
+# In Netlify import VAdym9083/gpt, choose branch "netlify-leads",
+# then set Base directory to "netlify-leads".
+[build]
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
