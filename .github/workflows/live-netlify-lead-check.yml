@@ -1,0 +1,73 @@
+name: Live mobile conversion QA
+
+on:
+  push:
+    branches: ["test/live-netlify-lead-check-2026-10-11"]
+    paths: [".github/workflows/live-netlify-lead-check.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install mobile Chromium
+        run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: One real mobile-browser lead and Lead event
+        shell: bash
+        run: |
+          cat >/tmp/qa-live.cjs <<'NODE'
+          const {chromium,devices}=require(process.cwd()+'/node_modules/playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const context=await browser.newContext({...devices['Pixel 7'],locale:'ru-RU'});
+            const page=await context.newPage();
+            const calls=[];
+            const errors=[];
+            let gatewayRequests=0,gatewayStatus=0,oldWorkerRequests=0;
+            await page.addInitScript(()=>{
+              localStorage.setItem('targetlb_tracking_consent_v1','accepted');
+              window.__qaFbqEvents=[];
+              window.fbq=(...args)=>{window.__qaFbqEvents.push(args)};
+            });
+            page.on('pageerror',e=>errors.push(e.message));
+            page.on('request',r=>{
+              if(r.url().includes('lively-elf-ba1204.netlify.app/.netlify/functions/lead'))gatewayRequests++;
+              if(r.url().includes('target-lb-leads.vadym9083.workers.dev'))oldWorkerRequests++;
+            });
+            page.on('response',r=>{
+              if(r.url().includes('lively-elf-ba1204.netlify.app/.netlify/functions/lead'))gatewayStatus=r.status();
+            });
+            await page.goto('https://vadym9083.github.io/gpt/?lang=ru&utm_source=meta&utm_campaign=edmonton_cleaning&utm_content=qa_ignore',{waitUntil:'domcontentloaded',timeout:40000});
+            await page.locator('#contact').scrollIntoViewIfNeeded();
+            await page.locator('#leadName').fill('QA IGNORE Netlify Live Mobile');
+            await page.locator('#leadNetwork').selectOption('telegram');
+            await page.locator('#leadContact').fill('@target_vadym');
+            await Promise.all([
+              page.waitForURL('**/gpt/thank-you/**',{timeout:25000}),
+              page.locator('.leadSubmit').click()
+            ]);
+            await page.waitForFunction(()=>window.__qaFbqEvents&&window.__qaFbqEvents.some(a=>a[0]==='track'&&a[1]==='Lead'),{timeout:10000});
+            const events=await page.evaluate(()=>window.__qaFbqEvents||[]);
+            const leads=events.filter(a=>a[0]==='track'&&a[1]==='Lead');
+            console.log('LIVE_MOBILE_QA=',JSON.stringify({
+              gatewayRequests,gatewayStatus,oldWorkerRequests,
+              thankYouURL:page.url(),
+              pixelLeadCount:leads.length,
+              pageErrors:errors.slice(0,3)
+            }));
+            if(gatewayRequests!==1||gatewayStatus!==200||oldWorkerRequests!==0||leads.length!==1||errors.length) {
+              throw Error('Live mobile form verification failed');
+            }
+            console.log('LIVE_MOBILE_NETLIFY_LEAD_AND_PIXEL=PASS');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node /tmp/qa-live.cjs
