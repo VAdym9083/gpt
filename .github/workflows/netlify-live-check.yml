@@ -1,0 +1,38 @@
+name: Check live Netlify deployment
+
+on:
+  push:
+    branches: ["netlify-leads"]
+    paths: [".github/workflows/netlify-live-check.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Verify site and function without sending a lead
+        shell: bash
+        run: |
+          set -u
+          DOMAIN="lively-elf-ba1204.netlify.app"
+          echo "CHECK_SITE=$DOMAIN"
+          echo "DNS:"
+          getent ahostsv4 "$DOMAIN" | head -3 || true
+          for PATH_SUFFIX in "/" "/.netlify/functions/lead"; do
+            URL="https://$DOMAIN$PATH_SUFFIX"
+            echo "URL=$URL"
+            CODE=$(curl -sSL --max-time 18 -o /tmp/check-body -D /tmp/check-headers -w '%{http_code}' "$URL")
+            EXIT=$?
+            echo "CURL_EXIT=$EXIT HTTP_STATUS=$CODE"
+            echo "CONTENT_TYPE=$(grep -i '^content-type:' /tmp/check-headers | tail -1 | tr -d '\r' || true)"
+            if [ "$PATH_SUFFIX" = "/" ]; then
+              if grep -q "Target LB · Сервіс заявок" /tmp/check-body; then echo "EXPECTED_PAGE=YES"; else echo "EXPECTED_PAGE=NO"; fi
+            else
+              echo -n "FUNCTION_BODY="; head -c 240 /tmp/check-body; echo
+              if grep -q '"status":"ready"' /tmp/check-body; then echo "FUNCTION_READY=YES"; else echo "FUNCTION_READY=NO"; fi
+            fi
+          done
