@@ -1,0 +1,38 @@
+name: Verify live Netlify lead forwarding
+
+on:
+  push:
+    branches: ["netlify-leads"]
+    paths: [".github/workflows/netlify-integration-smoke.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify OPTIONS and send exactly one test request
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://lively-elf-ba1204.netlify.app/.netlify/functions/lead"
+          echo "Checking preflight from GitHub Pages..."
+          OPTIONS_CODE=$(curl --silent --show-error --max-time 15 --output /tmp/opts --dump-header /tmp/opts-headers --write-out '%{http_code}' \
+             -X OPTIONS -H 'Origin: https://vadym9083.github.io' -H 'Access-Control-Request-Method: POST' \
+             -H 'Access-Control-Request-Headers: content-type' "$URL")
+          echo "OPTIONS_HTTP=$OPTIONS_CODE"
+          grep -qi 'access-control-allow-origin: https://vadym9083.github.io' /tmp/opts-headers
+          test "$OPTIONS_CODE" = "204"
+          echo "Sending one test lead to Telegram, tag NETLIFY_GATEWAY_TEST_IGNORE"
+          POST_CODE=$(curl --silent --show-error --max-time 24 --output /tmp/body --dump-header /tmp/headers --write-out '%{http_code}' \
+            -X POST -H 'Origin: https://vadym9083.github.io' \
+            -H 'Content-Type: text/plain;charset=UTF-8' \
+            --data '{"name":"NETLIFY_GATEWAY_TEST_IGNORE","network":"telegram","contact":"@target_vadym","lang":"ru","page":"https://vadym9083.github.io/gpt/?lang=ru","utm_source":"netlify_gateway_test"}' "$URL")
+          echo "POST_HTTP=$POST_CODE"
+          echo -n "BODY="; head -c 250 /tmp/body; echo
+          grep -qi 'access-control-allow-origin: https://vadym9083.github.io' /tmp/headers
+          test "$POST_CODE" = "200"
+          grep -q '"success":true' /tmp/body
+          echo "NETLIFY_LIVE_LEAD_CONFIRMED=YES"
