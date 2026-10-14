@@ -20,6 +20,7 @@ jobs:
           set -e
           export ANDROID_HOME="$HOME/android-sdk"
           echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
           mkdir -p "$ANDROID_HOME/cmdline-tools"
           curl -fsSL https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o /tmp/commandlinetools.zip
           unzip -q /tmp/commandlinetools.zip -d /tmp/android-cmd
