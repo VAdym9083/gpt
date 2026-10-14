@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+  <UserConfigurations>
+    <ColorConfiguration id="theme" displayName="palette_title" defaultValue="0">
+      <ColorOption id="0" displayName="palette_0" colors="#37D7C3 #15A48D #DFFBF5" />
+      <ColorOption id="1" displayName="palette_1" colors="#D99B5B #B16F35 #FFF0D9" />
+      <ColorOption id="2" displayName="palette_2" colors="#F04D65 #A02A40 #FCE4E9" />
+      <ColorOption id="3" displayName="palette_3" colors="#56AFFF #3071D0 #E5F3FF" />
+      <ColorOption id="4" displayName="palette_4" colors="#BB8BFA #7547D8 #F3E8FF" />
+      <ColorOption id="5" displayName="palette_5" colors="#60C998 #2D8E67 #E4FFEF" />
+      <ColorOption id="6" displayName="palette_6" colors="#B6E8F5 #699EAD #FFFFFF" />
+      <ColorOption id="7" displayName="palette_7" colors="#DC7C4B #A94D31 #FBE8DF" />
+      <ColorOption id="8" displayName="palette_8" colors="#E4C17A #A88A50 #FFF4D5" />
+    </ColorConfiguration>
+  </UserConfigurations>
+  <Scene backgroundColor="#ff000000">
+    <PartImage x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Image resource="background"/>
+    </PartImage>
+    <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.theme.0]">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Image resource="accent"/>
+    </PartImage>
+    <DigitalClock x="134" y="90" width="182" height="42">
+      <TimeText x="0" y="0" width="182" height="42" align="CENTER" format="hh:mm" hourFormat="24">
+        <Font family="SYNC_TO_DEVICE" size="35" weight="BOLD" color="[CONFIGURATION.theme.2]" />
+      </TimeText>
+    </DigitalClock>
+    <PartText x="281" y="139" width="54" height="22">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="18" weight="BOLD" color="[CONFIGURATION.theme.2]">
+        <Template>%d<Parameter expression="[HEART_RATE]"/></Template>
+      </Font></Text>
+    </PartText>
+    <PartText x="80" y="237" width="96" height="35">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="[CONFIGURATION.theme.2]">
+        <Template>%d<Parameter expression="[STEP_COUNT]"/></Template>
+      </Font></Text>
+    </PartText>
+    <PartText x="177" y="341" width="96" height="30">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="23" weight="BOLD" color="[CONFIGURATION.theme.2]">
+        <Template>%d%%<Parameter expression="[BATTERY_PERCENT]"/></Template>
+      </Font></Text>
+    </PartText>
+    <PartText x="91" y="337" width="48" height="23">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="14" weight="BOLD" color="[CONFIGURATION.theme.2]">
+        <Template>%s<Parameter expression="[MONTH_S]"/></Template>
+      </Font></Text>
+    </PartText>
+    <PartText x="313" y="339" width="48" height="27">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="19" weight="BOLD" color="[CONFIGURATION.theme.2]">
+        <Template>%d<Parameter expression="[DAY]"/></Template>
+      </Font></Text>
+    </PartText>
+    <ComplicationSlot slotId="1" displayName="slot_activity" supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY" x="278" y="232" width="88" height="40">
+      <BoundingOval x="0" y="0" width="88" height="40"/>
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="0" width="88" height="38">
+          <Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="BOLD" color="[CONFIGURATION.theme.2]">
+            <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+          </Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="RANGED_VALUE">
+        <PartText x="0" y="0" width="88" height="38">
+          <Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="BOLD" color="[CONFIGURATION.theme.2]">
+            <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+          </Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="EMPTY"/>
+    </ComplicationSlot>
+    <ComplicationSlot slotId="2" displayName="slot_weather" supportedTypes="SHORT_TEXT EMPTY" x="136" y="139" width="95" height="25">
+      <BoundingRoundBox x="0" y="0" width="95" height="25" cornerRadius="6"/>
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="0" width="95" height="25">
+          <Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15" color="[CONFIGURATION.theme.2]">
+            <Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template>
+          </Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="EMPTY"/>
+    </ComplicationSlot>
+    <AnalogClock x="0" y="0" width="450" height="450">
+      <HourHand resource="hour" x="210" y="106" width="30" height="138" pivotX="0.5" pivotY="0.865"/>
+      <MinuteHand resource="minute" x="213" y="73" width="24" height="176" pivotX="0.5" pivotY="0.865"/>
+    </AnalogClock>
+    <PartDraw x="210" y="210" width="30" height="30">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Ellipse x="1" y="1" width="28" height="28"><Fill color="#182027"/></Ellipse>
+      <Ellipse x="6" y="6" width="18" height="18"><Fill color="[CONFIGURATION.theme.0]"/></Ellipse>
+      <Ellipse x="11" y="11" width="8" height="8"><Fill color="#DDE4E4"/></Ellipse>
+    </PartDraw>
+  </Scene>
+</WatchFace>

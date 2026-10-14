@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <string name="app_name">Chronograph One</string>
+ <string name="palette_title">Accent metal color</string>
+ <string name="palette_0">Emerald Titanium</string>
+ <string name="palette_1">Bronze</string>
+ <string name="palette_2">Ruby</string>
+ <string name="palette_3">Arctic Blue</string>
+ <string name="palette_4">Amethyst</string>
+ <string name="palette_5">Forest</string>
+ <string name="palette_6">Platinum</string>
+ <string name="palette_7">Copper</string>
+ <string name="palette_8">Gold</string>
+ <string name="slot_activity">Active calories</string>
+ <string name="slot_weather">Weather</string>
+</resources>
