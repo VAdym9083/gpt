@@ -1,0 +1,41 @@
+name: Verify public Telegram share preview
+
+on:
+  push:
+    branches: ["feature/telegram-og-preview-2026-10-17"]
+    paths: [".github/workflows/check-og-preview-live.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check GitHub Pages metadata and OG image as a crawler
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTML='https://vadym9083.github.io/gpt/?lang=ru&share=20261017'
+          IMG='https://vadym9083.github.io/gpt/assets/site/og-meta-ads-business-20261017.jpg'
+          for attempt in $(seq 1 12); do
+            STATUS=$(curl -A 'TelegramBot (like TwitterBot)' -sSL --max-time 12 -o /tmp/preview.html -w '%{http_code}' "$HTML" || true)
+            IMAGE_STATUS=$(curl -sSL --max-time 12 -o /tmp/preview.jpg -w '%{http_code}' "$IMG" || true)
+            if [ "$STATUS" = "200" ] && [ "$IMAGE_STATUS" = "200" ] && grep -q 'og-meta-ads-business-20261017.jpg' /tmp/preview.html && grep -q 'Meta Ads для бизнеса' /tmp/preview.html; then
+              echo "HTML_HTTP=200 IMAGE_HTTP=200 OG_TITLE=OK IMAGE_URL=OK"
+              file /tmp/preview.jpg
+              python - <<'PY'
+          import struct
+          from pathlib import Path
+          b=Path('/tmp/preview.jpg').read_bytes()
+          assert len(b)>20000 and b[:2]==b'\xff\xd8', 'Expected real JPEG'
+          assert '1200' in Path('/tmp/preview.html').read_text() and '630' in Path('/tmp/preview.html').read_text()
+          print('OG_PREVIEW_LIVE_CONFIRMED=YES')
+          PY
+              exit 0
+            fi
+            echo "Attempt $attempt, HTML=$STATUS IMAGE=$IMAGE_STATUS; waiting for deployment..."
+            sleep 6
+          done
+          echo 'ERROR: Public preview not ready'; exit 1
