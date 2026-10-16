@@ -1,0 +1,76 @@
+name: Build share preview image (temporary staging)
+
+on:
+  push:
+    branches: ["feature/telegram-og-preview-2026-10-17"]
+    paths: [".github/workflows/generate-og-preview.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Generate Telegram OG 1200x630 JPEG
+        shell: bash
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont, ImageOps
+          from pathlib import Path
+
+          src=Image.open('assets/site/hero-marketing-workspace-20260929.webp').convert('RGB')
+          W,H=1200,630
+          bg=ImageOps.fit(src,(W,H),Image.Resampling.LANCZOS,centering=(.5,.5))
+          overlay=Image.new('RGBA',(W,H),(0,0,0,0))
+          p=overlay.load()
+          for x in range(W):
+              if x<=545: opacity=136
+              elif x>=760: opacity=0
+              else: opacity=int(136*(760-x)/215)
+              for y in range(H):
+                  p[x,y]=(5,9,15,opacity)
+          bg=Image.alpha_composite(bg.convert('RGBA'),overlay)
+          d=ImageDraw.Draw(bg,'RGBA')
+          fontb='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          fontr='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          def font_fit(text,sz,maxw,bold=True):
+              f=ImageFont.truetype(fontb if bold else fontr,sz)
+              while d.textbbox((0,0),text,font=f)[2]>maxw and sz>15:
+                  sz-=1
+                  f=ImageFont.truetype(fontb if bold else fontr,sz)
+              return f
+          def label(x,y,txt,font,fill,stroke=0):
+              d.text((x,y),txt,font=font,fill=fill,stroke_width=stroke,stroke_fill=(2,5,10,170))
+          gold=(217,181,128,255)
+          ivory=(244,242,238,255)
+          soft=(211,213,212,255)
+          label(76,64,'ТАРГЕТ',font_fit('ТАРГЕТ',31,250),ivory)
+          label(275,64,'LB',font_fit('LB',31,100),gold)
+          label(77,124,'VADYM   /   PERFORMANCE MARKETER',font_fit('VADYM   /   PERFORMANCE MARKETER',16,485,False),soft)
+          d.rounded_rectangle((77,175,146,179),radius=2,fill=gold)
+          label(70,215,'META ADS',font_fit('META ADS',80,535),ivory,1)
+          label(73,328,'ДЛЯ БИЗНЕСА',font_fit('ДЛЯ БИЗНЕСА',52,540),ivory,1)
+          label(78,424,'КЛИНИНГ  •  ЛОКАЛЬНЫЙ БИЗНЕС',font_fit('КЛИНИНГ  •  ЛОКАЛЬНЫЙ БИЗНЕС',19,530,False),gold)
+          d.rounded_rectangle((70,514,576,581),radius=13,fill=(13,20,30,226),outline=(216,180,125,100),width=2)
+          label(91,530,'РЕАЛЬНЫЕ КЕЙСЫ  •  РЕЗУЛЬТАТЫ',font_fit('РЕАЛЬНЫЕ КЕЙСЫ  •  РЕЗУЛЬТАТЫ',21,466,True),ivory)
+          out=Path('assets/site/og-meta-ads-business-20261017.jpg')
+          bg.convert('RGB').save(out,'JPEG',quality=89,optimize=True,progressive=True,subsampling=0)
+          check=Image.open(out)
+          assert check.size==(1200,630)
+          assert out.stat().st_size<550000
+          print('OG_IMAGE_READY',out,'pixels',check.size,'bytes',out.stat().st_size)
+          PY
+      - name: Commit generated image to staging branch
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add assets/site/og-meta-ads-business-20261017.jpg
+          git commit -m "Generate dedicated Russian Telegram social preview artwork"
+          git push origin HEAD:feature/telegram-og-preview-2026-10-17
