@@ -1,0 +1,76 @@
+name: Smoke test four language pages
+
+on:
+  push:
+    branches: ["multilingual-og-20261017"]
+    paths: [".github/workflows/test-multilingual-og.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Browser test full locale landing and navigation
+        shell: bash
+        run: |
+          mkdir -p /tmp/preview-www/gpt
+          cp -a . /tmp/preview-www/gpt/
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/preview-www >/tmp/http.log 2>&1 &
+          cat >/tmp/locale-check.cjs <<'NODE'
+          const {chromium,devices}=require(process.cwd()+'/node_modules/playwright');
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const browser=await chromium.launch();
+            const ctx=await browser.newContext({...devices['Pixel 7'],locale:'en-US'});
+            const page=await ctx.newPage();
+            const errors=[];
+            page.on('pageerror',e=>errors.push(e.message));
+            const root='http://127.0.0.1:8765/gpt/';
+            const locales={uk:'',ru:'ru/',en:'en/',es:'es/'};
+            for(const [code,path] of Object.entries(locales)){
+              const dest=root+path;
+              const resp=await page.goto(dest,{waitUntil:'domcontentloaded',timeout:20000});
+              assert.equal(resp.status(),200);
+              await page.waitForFunction(c=>window.getSiteLanguage?.()===c,code);
+              assert.equal(new URL(page.url()).pathname,'/gpt/'+path);
+              assert.equal(await page.locator('html').getAttribute('lang'),code==='es'?'es-ES':code);
+              const meta=await page.locator('meta[property="og:image"]').getAttribute('content');
+              assert(meta.includes('og-target-lb-'+code+'-20261017.jpg'));
+              const imgResp=await page.request.get(meta.replace('https://vadym9083.github.io/',root.replace('/gpt/','/') ));
+              assert.equal(imgResp.status(),200);
+              assert.equal(await page.locator('#leadIntakeForm').count(),1);
+              assert.equal(await page.locator('#leadNetwork').count(),1);
+              const firstLogo=await page.locator('img[src*="target-lb-logo.svg"]').first().evaluate(el=>el.complete&&el.naturalWidth>0);
+              assert.equal(firstLogo,true,'logo must load');
+              console.log('LANGUAGE_PAGE_OK',code,'title',await page.title());
+            }
+            await page.goto(root+'?lang=ru&utm_source=telegram',{waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.getSiteLanguage?.()==='ru');
+            assert.equal(new URL(page.url()).pathname,'/gpt/ru/');
+            assert(new URL(page.url()).searchParams.get('utm_source')==='telegram');
+            assert(!new URL(page.url()).searchParams.has('lang'));
+            console.log('LEGACY_RU_LINK_NORMALIZED_OK');
+            await page.goto(root,{waitUntil:'domcontentloaded'});
+            await page.locator('.languageToggle').first().click();
+            await page.locator('.languageOption[data-lang="en"]').first().click();
+            assert.equal(new URL(page.url()).pathname,'/gpt/en/');
+            assert.equal(await page.evaluate(()=>window.getSiteLanguage()),'en');
+            await page.reload({waitUntil:'domcontentloaded'});
+            assert.equal(await page.evaluate(()=>window.getSiteLanguage()),'en');
+            console.log('LIVE_LANGUAGE_SWITCH_AND_RELOAD_OK');
+            assert.deepEqual(errors,[]);
+            console.log('FOUR_LANG_BROWSER_SMOKE_PASS');
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node /tmp/locale-check.cjs
