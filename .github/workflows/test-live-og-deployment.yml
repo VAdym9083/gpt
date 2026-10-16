@@ -1,0 +1,54 @@
+name: Verify live four-language GitHub Pages deployment
+
+on:
+  push:
+    branches: ["multilingual-og-20261017"]
+    paths: [".github/workflows/test-live-og-deployment.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validate actual public URLs and OG images
+        run: |
+          python3 - <<'PY'
+          from urllib.request import urlopen, Request
+          from html.parser import HTMLParser
+          from urllib.parse import urljoin
+          import time
+          BASE="https://vadym9083.github.io/gpt/"
+          locales={"uk":("","uk_UA"),"ru":("ru/","ru_RU"),"en":("en/","en_US"),"es":("es/","es_ES")}
+          class Meta(HTMLParser):
+              def __init__(self):super().__init__();self.d={}
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag=="meta":self.d[a.get("property",a.get("name"))]=a.get("content","")
+          for lang,(path,loc) in locales.items():
+              url=BASE+path
+              for attempt in range(12):
+                  try:
+                      with urlopen(Request(url,headers={"User-Agent":"Mozilla/5.0 (share-preview-qa)"}),timeout=15) as r:
+                          content=r.read().decode("utf-8")
+                          assert r.status==200
+                      p=Meta();p.feed(content)
+                      image_url=p.d["og:image"]
+                      assert p.d["og:locale"]==loc,(lang,p.d)
+                      assert p.d["og:url"]==url,(lang,p.d["og:url"])
+                      assert "og-target-lb-"+lang+"-20261017.jpg" in image_url
+                      assert "<form" in content and "leadIntakeForm" in content
+                      with urlopen(image_url,timeout=15) as im:
+                          assert im.status==200
+                          assert "image/jpeg" in im.headers.get("content-type","")
+                          assert len(im.read())>50000
+                      print("LIVE_SITE_AND_OG_OK",lang,url,image_url)
+                      break
+                  except Exception as e:
+                      if attempt==11:raise
+                      print("RETRY",lang,attempt+1,str(e)[:200],flush=True)
+                      time.sleep(8)
+          print("FOUR_LANGUAGE_PUBLIC_DEPLOYMENT=PASS")
+          PY
