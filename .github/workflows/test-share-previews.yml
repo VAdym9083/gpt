@@ -35,8 +35,8 @@ jobs:
               assert parser.d["og:url"]==base+f"share/{code}/"
               assert parser.d["og:locale"]==locale
               assert parser.d["og:image"]==parser.d["twitter:image"]
-              assert parser.d["og:image"].endswith(f"og-target-lb-{code}-20261017.jpg")
-              assert Path("assets/site",f"og-target-lb-{code}-20261017.jpg").is_file()
+              assert parser.d["og:image"].endswith(f"og-target-lb-premium-{code}-20261017.jpg")
+              assert Path("assets/site",f"og-target-lb-premium-{code}-20261017.jpg").is_file()
               assert parser.d["og:image:width"]=="1200" and parser.d["og:image:height"]=="630"
               assert parser.d["og:title"] and parser.d["og:description"]
               assert 'window.location.replace(' in doc
@@ -71,7 +71,7 @@ jobs:
                       assert p.d["og:title"] and p.d["og:description"]
                       im=p.d["og:image"]
                       assert im==p.d["twitter:image"]
-                      assert im.endswith(f"og-target-lb-{code}-20261017.jpg")
+                      assert im.endswith(f"og-target-lb-premium-{code}-20261017.jpg")
                       with urlopen(Request(im,headers={"User-Agent":"TelegramBot (compatible; preview-check)"}),timeout=15) as pic:
                           assert pic.status==200
                           assert "image/jpeg" in pic.headers.get("Content-Type","")
