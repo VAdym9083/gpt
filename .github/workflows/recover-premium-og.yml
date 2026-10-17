@@ -1,0 +1,53 @@
+name: Recover and publish premium OG staging
+on:
+  push:
+    branches: ["feature/publish-premium-og-2026-10-17"]
+    paths: [".github/workflows/recover-premium-og.yml"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install --disable-pip-version-check pillow
+      - name: Fetch approved source imagery and build localized OG images
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,re,subprocess
+          from pathlib import Path
+          from PIL import Image,ImageOps
+          workflow=Path('.github/workflows/publish-premium-og.yml').read_text()
+          matches=re.findall(r'^\s+(uk|ru|en|es):\s+("https://[^"]+")\s*$',workflow,re.M)
+          assert len(matches)==4,matches
+          urls={code:json.loads(url) for code,url in matches}
+          for lang,url in urls.items():
+              src=Path('/tmp/premium-'+lang+'.png')
+              subprocess.run(['curl','--fail','--location','--silent','--show-error','--retry','2','--max-time','35','--output',str(src),url],check=True)
+              img=Image.open(src).convert('RGB')
+              assert img.size==(1731,909),(lang,img.size)
+              out=Path('assets/site/og-target-lb-premium-'+lang+'-20261017.jpg')
+              ImageOps.fit(img,(1200,630),method=Image.Resampling.LANCZOS).save(out,'JPEG',quality=93,subsampling=0,optimize=True,progressive=True)
+              assert 85000 < out.stat().st_size < 900000,(lang,out.stat().st_size)
+              paths=[Path('index.html') if lang=='uk' else Path(lang+'/index.html'),Path('share/'+lang+'/index.html')]
+              if lang=='uk': paths.append(Path('cleaning-canada.html'))
+              for p in paths:
+                  old=p.read_text(encoding='utf8')
+                  new,n=re.subn(r'og-target-lb-'+lang+r'-20261017[.]jpg',out.name,old)
+                  assert n>=2,(p,n)
+                  p.write_text(new,encoding='utf8')
+              print('PREMIUM_IMAGE_READY',lang,img.size,out.stat().st_size,flush=True)
+          assert Path('index.html').read_bytes()==Path('cleaning-canada.html').read_bytes()
+          print('PREMIUM_PREVIEWS_BUILD_AND_METADATA_PASS',flush=True)
+          PY
+      - name: Commit premium previews on staging
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html cleaning-canada.html ru/index.html en/index.html es/index.html share/uk/index.html share/ru/index.html share/en/index.html share/es/index.html assets/site/
+          git diff --cached --check
+          git commit -m "Publish premium high fidelity multilingual Telegram previews"
+          git push origin HEAD:feature/publish-premium-og-2026-10-17
