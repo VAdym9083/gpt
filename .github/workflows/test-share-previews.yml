@@ -1,0 +1,86 @@
+name: Verify fresh multilingual sharing pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "share/**"
+      - ".github/workflows/test-share-previews.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate all localized share metadata and redirects in source
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          base="https://vadym9083.github.io/gpt/"
+          langs={"uk":("","uk_UA"),"ru":("ru/","ru_RU"),"en":("en/","en_US"),"es":("es/","es_ES")}
+          class Meta(HTMLParser):
+              def __init__(self): super().__init__(); self.d={}
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  if tag=="meta": self.d[d.get("property",d.get("name"))]=d.get("content","")
+          for code,(path,locale) in langs.items():
+              doc=Path(f"share/{code}/index.html").read_text(encoding="utf8")
+              parser=Meta(); parser.feed(doc)
+              assert parser.d["og:url"]==base+f"share/{code}/"
+              assert parser.d["og:locale"]==locale
+              assert parser.d["og:image"]==parser.d["twitter:image"]
+              assert parser.d["og:image"].endswith(f"og-target-lb-{code}-20261017.jpg")
+              assert Path("assets/site",f"og-target-lb-{code}-20261017.jpg").is_file()
+              assert parser.d["og:image:width"]=="1200" and parser.d["og:image:height"]=="630"
+              assert parser.d["og:title"] and parser.d["og:description"]
+              assert 'window.location.replace(' in doc
+              assert base+path in doc
+              assert 'window.location.search + window.location.hash' in doc
+              print("SOURCE_SHARE_PAGE_OK",code)
+          print("SHARE_SOURCE_CHECK_PASS")
+          PY
+      - name: Verify actual deployed share pages and images
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from urllib.request import urlopen,Request
+          import time
+          base="https://vadym9083.github.io/gpt/"
+          langs={"uk":"uk_UA","ru":"ru_RU","en":"en_US","es":"es_ES"}
+          class Meta(HTMLParser):
+              def __init__(self): super().__init__(); self.d={}
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  if tag=="meta": self.d[d.get("property",d.get("name"))]=d.get("content","")
+          for code,locale in langs.items():
+              url=base+f"share/{code}/"
+              for attempt in range(15):
+                  try:
+                      with urlopen(Request(url,headers={"User-Agent":"TelegramBot (compatible; preview-check)"}),timeout=15) as res:
+                          assert res.status==200
+                          text=res.read().decode("utf8")
+                      p=Meta();p.feed(text)
+                      assert p.d["og:url"]==url,(code,p.d.get("og:url"))
+                      assert p.d["og:locale"]==locale,(code,p.d.get("og:locale"))
+                      assert p.d["og:title"] and p.d["og:description"]
+                      im=p.d["og:image"]
+                      assert im==p.d["twitter:image"]
+                      assert im.endswith(f"og-target-lb-{code}-20261017.jpg")
+                      with urlopen(Request(im,headers={"User-Agent":"TelegramBot (compatible; preview-check)"}),timeout=15) as pic:
+                          assert pic.status==200
+                          assert "image/jpeg" in pic.headers.get("Content-Type","")
+                          assert len(pic.read())>50000
+                      print("LIVE_SHARE_PAGE_OK",code,url,im)
+                      break
+                  except Exception as e:
+                      if attempt==14: raise
+                      print("RETRY",code,attempt+1,str(e)[:150],flush=True)
+                      time.sleep(8)
+          print("LIVE_FOUR_LANGUAGE_SHARING=PASS")
+          PY
