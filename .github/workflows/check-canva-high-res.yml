@@ -1,0 +1,50 @@
+name: Test full resolution temporary media transfer
+on:
+  push:
+    branches: [feature/premium-og-cdn-test]
+    paths: ['.github/workflows/check-canva-high-res.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Test asset quality and CDN link
+        shell: bash
+        run: |
+          set +e
+          echo 'TRY uk-orig'
+          curl -L -sS --max-time 30 --output /tmp/uk-orig --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:105/quality:100/uri:ifs%3A%2F%2FM%2F018b983f-c8bd-4acf-b2fe-8ba1fc4b8b1f/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAADBNsjvL1YMVD0wKqGIDRENqB5brLmg5rBS4wZDLZ7tP&exp=1792257299&osig=AAAAAAAAAAAAAAAAAAAAAPERv8-IAByM88BmqoHbSDXbaYj7XWZV_VfmNNvzrQgN&signer=media-rpc&token=AAIAAU0AJDAxOGI5ODNmLWM4YmQtNGFjZi1iMmZlLThiYTFmYzRiOGIxZgAAAAABoUrcEjgdrTw-r-ZYN51q1IwlB75CSVSNs3Gji4hnCxIVv7R0HA&x-canva-quality=thumbnail" || true
+          echo 'TRY uk-full'
+          curl -L -sS --max-time 30 --output /tmp/uk-full --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2F018b983f-c8bd-4acf-b2fe-8ba1fc4b8b1f/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAADBNsjvL1YMVD0wKqGIDRENqB5brLmg5rBS4wZDLZ7tP&exp=1792257299&osig=AAAAAAAAAAAAAAAAAAAAAPERv8-IAByM88BmqoHbSDXbaYj7XWZV_VfmNNvzrQgN&signer=media-rpc&token=AAIAAU0AJDAxOGI5ODNmLWM4YmQtNGFjZi1iMmZlLThiYTFmYzRiOGIxZgAAAAABoUrcEjgdrTw-r-ZYN51q1IwlB75CSVSNs3Gji4hnCxIVv7R0HA&x-canva-quality=thumbnail" || true
+          echo 'TRY uk-max'
+          curl -L -sS --max-time 30 --output /tmp/uk-max --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2F018b983f-c8bd-4acf-b2fe-8ba1fc4b8b1f/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAADBNsjvL1YMVD0wKqGIDRENqB5brLmg5rBS4wZDLZ7tP&exp=1792257299&osig=AAAAAAAAAAAAAAAAAAAAAPERv8-IAByM88BmqoHbSDXbaYj7XWZV_VfmNNvzrQgN&signer=media-rpc&token=AAIAAU0AJDAxOGI5ODNmLWM4YmQtNGFjZi1iMmZlLThiYTFmYzRiOGIxZgAAAAABoUrcEjgdrTw-r-ZYN51q1IwlB75CSVSNs3Gji4hnCxIVv7R0HA" || true
+          echo 'TRY ru-orig'
+          curl -L -sS --max-time 30 --output /tmp/ru-orig --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:105/quality:100/uri:ifs%3A%2F%2FM%2Fe16a1a1b-5a01-4196-97b1-e81f480a9aad/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAEE5yaAUihflp23mxBSZ11e1e1Na8Z8crj_P6N8avEcY&exp=1792255160&osig=AAAAAAAAAAAAAAAAAAAAADr6RVr3Cw_QOwvytn0A_YK-zJdCcc4eleocu4baJU3D&signer=media-rpc&token=AAIAAU0AJGUxNmExYTFiLTVhMDEtNDE5Ni05N2IxLWU4MWY0ODBhOWFhZAAAAAABoUq7bsBFh8K5FQecgcOKVaLVbGOa4ogqpTLR3BfBZsp-UvcdZg&x-canva-quality=thumbnail" || true
+          echo 'TRY ru-full'
+          curl -L -sS --max-time 30 --output /tmp/ru-full --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2Fe16a1a1b-5a01-4196-97b1-e81f480a9aad/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAAEE5yaAUihflp23mxBSZ11e1e1Na8Z8crj_P6N8avEcY&exp=1792255160&osig=AAAAAAAAAAAAAAAAAAAAADr6RVr3Cw_QOwvytn0A_YK-zJdCcc4eleocu4baJU3D&signer=media-rpc&token=AAIAAU0AJGUxNmExYTFiLTVhMDEtNDE5Ni05N2IxLWU4MWY0ODBhOWFhZAAAAAABoUq7bsBFh8K5FQecgcOKVaLVbGOa4ogqpTLR3BfBZsp-UvcdZg&x-canva-quality=thumbnail" || true
+          echo 'TRY ru-max'
+          curl -L -sS --max-time 30 --output /tmp/ru-max --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2Fe16a1a1b-5a01-4196-97b1-e81f480a9aad/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAAEE5yaAUihflp23mxBSZ11e1e1Na8Z8crj_P6N8avEcY&exp=1792255160&osig=AAAAAAAAAAAAAAAAAAAAADr6RVr3Cw_QOwvytn0A_YK-zJdCcc4eleocu4baJU3D&signer=media-rpc&token=AAIAAU0AJGUxNmExYTFiLTVhMDEtNDE5Ni05N2IxLWU4MWY0ODBhOWFhZAAAAAABoUq7bsBFh8K5FQecgcOKVaLVbGOa4ogqpTLR3BfBZsp-UvcdZg" || true
+          echo 'TRY en-orig'
+          curl -L -sS --max-time 30 --output /tmp/en-orig --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:105/quality:100/uri:ifs%3A%2F%2FM%2Fa61d5be2-8d4e-4797-915c-1a0b80a26713/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAAPYOP17ih1mJfL7pyVYZB2ggHx6iToONPF0ayO8fxTC&exp=1792257328&osig=AAAAAAAAAAAAAAAAAAAAANynrwizRmbcOnT15Z5K5hnOOpYsKvl9EM461q0rLnud&signer=media-rpc&token=AAIAAU0AJGE2MWQ1YmUyLThkNGUtNDc5Ny05MTVjLTFhMGI4MGEyNjcxMwAAAAABoUrcg4DywyCrZ86UZOd1J17h3H22n-U990xFQYLIYC6atRq8rg&x-canva-quality=thumbnail" || true
+          echo 'TRY en-full'
+          curl -L -sS --max-time 30 --output /tmp/en-full --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2Fa61d5be2-8d4e-4797-915c-1a0b80a26713/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAAAPYOP17ih1mJfL7pyVYZB2ggHx6iToONPF0ayO8fxTC&exp=1792257328&osig=AAAAAAAAAAAAAAAAAAAAANynrwizRmbcOnT15Z5K5hnOOpYsKvl9EM461q0rLnud&signer=media-rpc&token=AAIAAU0AJGE2MWQ1YmUyLThkNGUtNDc5Ny05MTVjLTFhMGI4MGEyNjcxMwAAAAABoUrcg4DywyCrZ86UZOd1J17h3H22n-U990xFQYLIYC6atRq8rg&x-canva-quality=thumbnail" || true
+          echo 'TRY en-max'
+          curl -L -sS --max-time 30 --output /tmp/en-max --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2Fa61d5be2-8d4e-4797-915c-1a0b80a26713/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAAAPYOP17ih1mJfL7pyVYZB2ggHx6iToONPF0ayO8fxTC&exp=1792257328&osig=AAAAAAAAAAAAAAAAAAAAANynrwizRmbcOnT15Z5K5hnOOpYsKvl9EM461q0rLnud&signer=media-rpc&token=AAIAAU0AJGE2MWQ1YmUyLThkNGUtNDc5Ny05MTVjLTFhMGI4MGEyNjcxMwAAAAABoUrcg4DywyCrZ86UZOd1J17h3H22n-U990xFQYLIYC6atRq8rg" || true
+          echo 'TRY es-orig'
+          curl -L -sS --max-time 30 --output /tmp/es-orig --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:105/quality:100/uri:ifs%3A%2F%2FM%2F18a1690d-0c06-402c-b29d-50e4bc157d34/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAOG2Go9ddg_91BVEDfxRW_4h8wPBW5H1wxNRKRqTBCjW&exp=1792257967&osig=AAAAAAAAAAAAAAAAAAAAAEBFDf12QPz2LmO8vPaPGCHOd1j4Ju-MB6QRdWTrAqYi&signer=media-rpc&token=AAIAAU0AJDE4YTE2OTBkLTBjMDYtNDAyYy1iMjlkLTUwZTRiYzE1N2QzNAAAAAABoUrmQ5j0T18N_grm80QO15juzpdeFlPRAYUD4q2UnZaWxvZWAg&x-canva-quality=thumbnail" || true
+          echo 'TRY es-full'
+          curl -L -sS --max-time 30 --output /tmp/es-full --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2F18a1690d-0c06-402c-b29d-50e4bc157d34/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAAOG2Go9ddg_91BVEDfxRW_4h8wPBW5H1wxNRKRqTBCjW&exp=1792257967&osig=AAAAAAAAAAAAAAAAAAAAAEBFDf12QPz2LmO8vPaPGCHOd1j4Ju-MB6QRdWTrAqYi&signer=media-rpc&token=AAIAAU0AJDE4YTE2OTBkLTBjMDYtNDAyYy1iMjlkLTUwZTRiYzE1N2QzNAAAAAABoUrmQ5j0T18N_grm80QO15juzpdeFlPRAYUD4q2UnZaWxvZWAg&x-canva-quality=thumbnail" || true
+          echo 'TRY es-max'
+          curl -L -sS --max-time 30 --output /tmp/es-max --write-out 'HTTP %{http_code} bytes=%{size_download}\n' "https://media.canva.com/v2/image-resize/format:PNG/height:909/quality:100/uri:ifs%3A%2F%2FM%2F18a1690d-0c06-402c-b29d-50e4bc157d34/watermark:F/width:1731?csig=AAAAAAAAAAAAAAAAAAAAAOG2Go9ddg_91BVEDfxRW_4h8wPBW5H1wxNRKRqTBCjW&exp=1792257967&osig=AAAAAAAAAAAAAAAAAAAAAEBFDf12QPz2LmO8vPaPGCHOd1j4Ju-MB6QRdWTrAqYi&signer=media-rpc&token=AAIAAU0AJDE4YTE2OTBkLTBjMDYtNDAyYy1iMjlkLTUwZTRiYzE1N2QzNAAAAAABoUrmQ5j0T18N_grm80QO15juzpdeFlPRAYUD4q2UnZaWxvZWAg" || true
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          for x in sorted(Path('/tmp').glob('??-*')):
+              try:
+                  im=Image.open(x)
+                  print('RESULT',x.name,im.size,im.format)
+              except Exception as e:
+                  print('RESULT_ERROR',x.name,repr(e)[:120])
+          PY
