@@ -1,0 +1,65 @@
+name: Publish approved premium social previews
+on:
+  push:
+    branches: ["feature/publish-premium-og-2026-10-17"]
+    paths: [".github/workflows/publish-premium-og.yml"]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - run: python3 -m pip install --disable-pip-version-check pillow
+      - name: Download approved 1731x909 originals and publish 1200x630 optimized previews
+        env:
+          IMAGE_URLS: |
+          uk: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/9d36605b-45a6-4d5d-b833-8f345d9c8442.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOTBkMjkzYzBjMWJmMDE5YSIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MjM0NjY4OH0.Lf-ZelcLTwUdNmOq0PUjsg77lDqjSWXarFwRZrBzFiw"
+          ru: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/e91897bb-b5bc-4337-aa12-075fe98951ff.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMWUwODQxYmE5Nzk2YzQ0YiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MjM0MDc5NH0.3RAC_8n6t0W-v1LnHSZCvn2eek0WTx7ys1XbUEn6_a8"
+          en: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/4b739721-5114-47dc-8224-62cd4f19269e.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiY2FjNDExMDg2NDBlM2ZiNyIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MjM4Nzg0OH0.fPXUrh-7WtgBeYvdYnb0mP3VZKDkNPPxaKBPSU0eIMQ"
+          es: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/41381cbe-65d5-48d5-b619-c2576b93b484.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzlhN2EzN2E4OTNiNzU1YiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MjQwOTk3OH0.-1R2KZhfsPP7FU28xAvB4drX3Wzt7593fKzx4_VSxPA"
+        run: |
+          python3 - <<'PY'
+          import os, re, subprocess
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          urls=dict(line.strip().split(': ',1) for line in os.environ['IMAGE_URLS'].splitlines() if line.strip())
+          # Strip JSON string quotes and preserve URL query.
+          import json
+          urls={k:json.loads(v) for k,v in urls.items()}
+          for lang,url in urls.items():
+              src=Path('/tmp/approved-'+lang+'.png')
+              subprocess.run(['curl','--fail','--location','--silent','--show-error','--retry','3','--max-time','40','--output',str(src),url],check=True)
+              img=Image.open(src).convert('RGB')
+              assert img.size==(1731,909),(lang,img.size)
+              out=Path('assets/site/og-target-lb-premium-'+lang+'-20261017.jpg')
+              ImageOps.fit(img,(1200,630),method=Image.Resampling.LANCZOS).save(out,'JPEG',quality=93,subsampling=0,optimize=True,progressive=True)
+              assert Image.open(out).size==(1200,630)
+              assert out.stat().st_size>85000,(lang,out.stat().st_size)
+              print('PREMIUM_IMAGE_READY',lang,out.stat().st_size)
+              paths=[Path('index.html') if lang=='uk' else Path(lang+'/index.html'),Path('share/'+lang+'/index.html')]
+              if lang=='uk': paths.append(Path('cleaning-canada.html'))
+              for path in paths:
+                  old=path.read_text(encoding='utf-8')
+                  new,n=re.subn(r'og-target-lb-(?:premium-)?'+lang+r'-20261017\\.jpg','og-target-lb-premium-'+lang+'-20261017.jpg',old)
+                  assert n>=2,(str(path),n)
+                  path.write_text(new,encoding='utf-8')
+          assert Path('index.html').read_bytes()==Path('cleaning-canada.html').read_bytes()
+          for lang in urls:
+              for p in ([Path('index.html'),Path('cleaning-canada.html')] if lang=='uk' else [Path(lang+'/index.html')])+[Path('share/'+lang+'/index.html')]:
+                  text=p.read_text()
+                  expected='og-target-lb-premium-'+lang+'-20261017.jpg'
+                  assert text.count(expected)>=2,(p,expected)
+          print('PREMIUM_OG_STATIC_CHECKS_PASS')
+          PY
+      - name: Commit published preview assets and markup
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add index.html cleaning-canada.html ru/index.html en/index.html es/index.html share/uk/index.html share/ru/index.html share/en/index.html share/es/index.html assets/site/og-target-lb-premium-*-20261017.jpg
+          git diff --cached --check
+          git commit -m "Publish four approved high quality premium share previews"
+          git push origin HEAD:feature/publish-premium-og-2026-10-17
