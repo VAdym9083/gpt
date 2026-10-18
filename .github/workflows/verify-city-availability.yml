@@ -1,0 +1,71 @@
+name: Verify city availability across languages
+
+on:
+  push:
+    branches: ["feature/city-availability-2026-10-18"]
+    paths: [".github/workflows/verify-city-availability.yml", "index.html", "cleaning-canada.html", "ru/index.html", "en/index.html", "es/index.html"]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Verify city finder and both ticker copies in browser
+        shell: bash
+        run: |
+          mkdir -p /tmp/www/gpt
+          cp -a . /tmp/www/gpt/
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/www >/tmp/cityserver.log 2>&1 &
+          cat >/tmp/city-check.cjs <<'NODE'
+          const {chromium}=require(process.cwd()+'/node_modules/playwright');
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const browser=await chromium.launch();
+            const context=await browser.newContext({locale:'en-US'});
+            const statuses={
+              'Toronto / GTA':false,'Calgary':true,'Edmonton':true,'Vancouver':true,
+              'Ottawa':false,'Montreal':false,'Winnipeg':false,'Hamilton':false,
+              'Kitchener / Waterloo':false,'New York':true,'Miami':false,'Chicago':true,
+              'Los Angeles':false,'Philadelphia':false,'Boston':true,'Seattle':false,'Denver':false
+            };
+            for(const [lang,part] of Object.entries({uk:'',ru:'ru/',en:'en/',es:'es/'})){
+              const page=await context.newPage(),errors=[];
+              page.on('pageerror',e=>errors.push(e.message));
+              const response=await page.goto('http://127.0.0.1:8765/gpt/'+part,{waitUntil:'domcontentloaded'});
+              assert.equal(response.status(),200);
+              await page.waitForFunction(l=>window.getSiteLanguage?.()===l,lang);
+              assert.equal(await page.locator('.cityTickerGroup').count(),2);
+              assert.equal(await page.locator('#citySelect').inputValue(),'Toronto / GTA');
+              assert(await page.locator('#cityResult').evaluate(el=>el.classList.contains('freeResult')));
+              for(const group of await page.locator('.cityTickerGroup').all()){
+                for(const [city,busy] of Object.entries(statuses)){
+                  const badge=group.locator('.tickerCity').filter({has:page.locator('b').getByText(city,{exact:true})});
+                  // Select via textContent instead: duplicated cities must each exist exactly once per group.
+                  const classes=await group.locator('.tickerCity').evaluateAll((els,c)=>els.filter(el=>el.querySelector('b')?.textContent===c).map(el=>el.className),city);
+                  assert.equal(classes.length,1,lang+' ticker entry '+city);
+                  assert(classes[0].includes(busy?'tickerBusy':'tickerFree'),lang+' ticker wrong '+city);
+                }
+              }
+              for(const [city,busy] of Object.entries(statuses)){
+                await page.selectOption('#citySelect',city);
+                const classOk=await page.locator('#cityResult').evaluate((el,b)=>el.classList.contains(b?'busyResult':'freeResult'),busy);
+                assert(classOk,lang+' finder wrong '+city);
+                const badge=await page.locator('#cityResultBadge').innerText();
+                assert(badge.trim().length>0);
+              }
+              assert.deepEqual(errors,[],lang+' javascript errors');
+              console.log('CITY_RUNTIME_OK',lang,'17/17 city statuses; two ticker copies');
+              await page.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          node /tmp/city-check.cjs
