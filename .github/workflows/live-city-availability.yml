@@ -1,0 +1,46 @@
+name: Verify published city statuses in four languages
+on:
+  push:
+    branches: ["feature/city-availability-2026-10-18"]
+    paths: [".github/workflows/live-city-availability.yml"]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Check public GitHub Pages city status
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import re,time
+          from urllib.request import Request,urlopen
+          root="https://vadym9083.github.io/gpt/"
+          cities={"Toronto / GTA":False,"Calgary":True,"Edmonton":True,"Vancouver":True,"New York":True,"Chicago":True,"Boston":True}
+          for lang,path in {"uk":"","ru":"ru/","en":"en/","es":"es/"}.items():
+              url=root+path
+              for retry in range(12):
+                  try:
+                      with urlopen(Request(url,headers={"User-Agent":"Mozilla/5.0 (city-availability-check)"}),timeout=15) as r:
+                          assert r.status==200
+                          html=r.read().decode("utf-8")
+                      assert "const occupiedCities=new Set(['Calgary','Edmonton','Vancouver','New York','Chicago','Boston']);" in html
+                      assert '<div class="cityResult freeResult" id="cityResult">' in html
+                      assert '<div class="resultBadge" id="cityResultBadge">ВІЛЬНО</div>' in html
+                      assert 'Toronto / GTA вільний;' in html
+                      for city,busy in cities.items():
+                          label='Зайнято' if busy else 'Вільно'
+                          klass='tickerBusy' if busy else 'tickerFree'
+                          exact=f'<span class="tickerCity {klass}"><b>{city}</b><i>{label}</i></span>'
+                          assert html.count(exact)==2,(lang,city,html.count(exact))
+                      print('PUBLIC_CITY_STATUSES_PASS',lang,url,len(html),flush=True)
+                      break
+                  except Exception as e:
+                      if retry==11:raise
+                      print('RETRY',lang,retry+1,str(e)[:180],flush=True)
+                      time.sleep(6)
+          with urlopen(root,timeout=15) as a, urlopen(root+'cleaning-canada.html',timeout=15) as b:
+              assert a.read()==b.read()
+          print('LIVE_FOUR_LANGUAGES_AND_MIRRORED_HTML_PASS')
+          PY
