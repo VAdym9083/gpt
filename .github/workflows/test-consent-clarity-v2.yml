@@ -1,0 +1,99 @@
+name: Test Clarity consent and compact cookie controls
+on:
+  push:
+    branches: ["feature/consent-clarity-v2-2026-10-19"]
+    paths: ["index.html", "cleaning-canada.html", "ru/index.html", "en/index.html", "es/index.html", "thank-you/index.html", ".github/workflows/test-consent-clarity-v2.yml"]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Verify privacy UX and tracking in real browser for 4 languages
+        run: |
+          mkdir -p /tmp/consentwww/gpt
+          cp index.html cleaning-canada.html /tmp/consentwww/gpt/
+          cp -a ru en es thank-you privacy assets /tmp/consentwww/gpt/
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory /tmp/consentwww >/tmp/consent-server.log 2>&1 &
+          cat >/tmp/consent-test.cjs <<'NODE'
+          const {chromium}=require(process.cwd()+'/node_modules/playwright');
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const browser=await chromium.launch();
+            const codes={uk:'',ru:'ru/',en:'en/',es:'es/'};
+            for(const [code,dir] of Object.entries(codes)){
+              const ctx=await browser.newContext(),page=await ctx.newPage(),remote=[];
+              page.on('pageerror',e=>{throw e;});
+              page.on('request',req=>{if(/clarity\.ms\/tag|connect\.facebook\.net\/en_US\/fbevents/.test(req.url()))remote.push(req.url())});
+              await page.route(/(clarity\.ms|connect\.facebook\.net)/,r=>r.abort());
+              await page.goto('http://127.0.0.1:8766/gpt/'+dir,{waitUntil:'domcontentloaded'});
+              await page.waitForFunction(c=>window.getSiteLanguage?.()===c,code);
+              assert.equal(await page.locator('#cookieBanner').isVisible(),true,code+' new banner');
+              assert.equal(await page.locator('#cookieReject').isVisible(),true);
+              assert.equal(await page.locator('#cookieAccept').isVisible(),true);
+              assert.equal(await page.locator('#footerConsentPrefs').count(),1);
+              let state=await page.evaluate(()=>({
+                cookie:window.TargetLBConsent.get(),meta:typeof window.fbq,clarity:typeof window.clarity
+              }));
+              assert.equal(state.cookie,null,code+' initial consent');
+              assert.equal(state.meta,'undefined',code+' pixel must not auto-start');
+              assert.equal(state.clarity,'undefined',code+' clarity must not auto-start');
+              assert.equal(remote.length,0,code+' no remote trackers without consent');
+              await page.locator('#cookieReject').click();
+              state=await page.evaluate(()=>({cookie:window.TargetLBConsent.get(),meta:typeof window.fbq,clarity:typeof window.clarity}));
+              assert.equal(state.cookie,'rejected');
+              assert.equal(state.meta,'undefined');
+              assert.equal(state.clarity,'undefined');
+              await page.reload({waitUntil:'domcontentloaded'});
+              assert.equal(await page.locator('#cookieBanner').isVisible(),false,code+' reject persistent');
+              await page.locator('#footerConsentPrefs').click();
+              assert.equal(await page.locator('#cookieBanner').isVisible(),true,code+' can reopen');
+              await page.locator('#cookieAccept').click();
+              state=await page.evaluate(()=>({
+                cookie:window.TargetLBConsent.get(),meta:typeof window.fbq,clarity:typeof window.clarity,queue:window.clarity?.q?.map(x=>[...x])
+              }));
+              assert.equal(state.cookie,'accepted');
+              assert.equal(state.meta,'function',code+' pixel after accepted');
+              assert.equal(state.clarity,'function',code+' Clarity after accepted');
+              assert(state.queue.some(x=>x[0]==='consentv2'&&x[1]?.analytics_Storage==='granted'&&x[1]?.ad_Storage==='denied'),code+' v2 analytics consent');
+              await page.reload({waitUntil:'domcontentloaded'});
+              assert.equal(await page.locator('#cookieBanner').isVisible(),false,code+' accepted persistent');
+              await page.locator('#footerConsentPrefs').click();
+              await page.locator('#cookieReject').click();
+              await page.waitForLoadState('domcontentloaded');
+              await page.waitForFunction(()=>window.TargetLBConsent.get()==='rejected');
+              state=await page.evaluate(()=>({meta:typeof window.fbq,clarity:typeof window.clarity}));
+              assert.equal(state.meta,'undefined',code+' revoke stops Meta after reload');
+              assert.equal(state.clarity,'undefined',code+' revoke stops Clarity after reload');
+              assert.equal(await page.locator('#leadIntakeForm').count(),1);
+              console.log('CONSENT_BROWSER_PASS',code);
+              await ctx.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          node /tmp/consent-test.cjs
+      - name: Verify source mirror and pixel event in thank-you page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          assert Path('index.html').read_bytes()==Path('cleaning-canada.html').read_bytes()
+          t=Path('thank-you/index.html').read_text()
+          assert "fbq('track','Lead'" in t
+          assert "analytics_Storage:'granted'" in t
+          for p in ['index.html','cleaning-canada.html','ru/index.html','en/index.html','es/index.html']:
+              s=Path(p).read_text()
+              assert "if(readConsent()==='accepted')loadTracking()" in s
+              assert "ad_Storage:'denied',analytics_Storage:'granted'" in s
+              assert "https://lively-elf-ba1204.netlify.app/.netlify/functions/lead" in s
+              assert 'id="footerConsentPrefs"' in s
+          print('CONSENT_SOURCE_VALIDATION_PASS')
+          PY
