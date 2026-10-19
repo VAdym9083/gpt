@@ -1,0 +1,45 @@
+name: Check live automatic cookieless Clarity without visual changes
+on:
+  push:
+    branches: ["feature/automatic-cookieless-clarity-2026-10-19"]
+    paths: [".github/workflows/check-live-cookieless-clarity.yml"]
+permissions:
+  contents: read
+jobs:
+  verify-public:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify all four languages, privacy, mirror and live content
+        run: |
+          python3 - <<'PY'
+          import time
+          from urllib.request import Request,urlopen
+          root="https://vadym9083.github.io/gpt/"
+          seen={}
+          for lang,p in {"uk":"","ru":"ru/","en":"en/","es":"es/"}.items():
+            for a in range(25):
+              try:
+                with urlopen(Request(root+p,headers={"User-Agent":"Mozilla/5.0 ClarityCheck"}),timeout=12) as r:
+                  assert r.status==200
+                  data=r.read().decode("utf-8")
+                assert "else if(readConsent()===null)loadClarity(false);" in data
+                assert "analytics_Storage:analyticsConsent?'granted':'denied'" in data
+                assert 'id="footerConsentPrefs"' in data
+                assert "https://lively-elf-ba1204.netlify.app/.netlify/functions/lead" in data
+                assert "window.TargetLBConsent" in data
+                assert "1448174640737820" in data
+                seen[lang]=data
+                print("LIVE_CLARITY_PASS",lang,len(data),flush=True)
+                break
+              except Exception as e:
+                if a==24:raise
+                print("WAIT",lang,a+1,str(e)[:80],flush=True)
+                time.sleep(5)
+          with urlopen(root+"cleaning-canada.html",timeout=12) as r:
+            assert r.read().decode("utf-8")==seen["uk"]
+          with urlopen(root+"privacy/",timeout=12) as r:
+            privacy=r.read().decode("utf-8")
+          assert "До вибору налаштувань Microsoft Clarity" in privacy
+          print("LIVE_PRIVACY_AND_MIRROR_PASS")
+          PY
