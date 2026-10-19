@@ -1,0 +1,111 @@
+name: Test automatic cookieless Clarity without visual redesign
+on:
+  push:
+    branches: ["feature/automatic-cookieless-clarity-2026-10-19"]
+    paths: ["index.html","cleaning-canada.html","ru/index.html","en/index.html","es/index.html","privacy/index.html",".github/workflows/test-cookieless-clarity.yml"]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Preserve all styling and backup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,re
+          old='dceca2540be4a12fc5c7ed06012c7b39e21b8f30'
+          paths=['index.html','cleaning-canada.html','ru/index.html','en/index.html','es/index.html']
+          for path in paths:
+              before=subprocess.check_output(['git','show',old+':'+path]).decode('utf-8')
+              after=Path(path).read_text()
+              styles=lambda s:re.findall(r'<style\b[^>]*>.*?</style>',s,re.S)
+              assert styles(before)==styles(after),path+' styles changed'
+              assert len(re.findall(r'<script\b',before))==len(re.findall(r'<script\b',after)),path+' script count changed'
+              for x in ['leadIntakeForm','citySelect','cityTicker','cookieBanner','cookieAccept','cookieReject','footerConsentPrefs']:
+                  assert x in before and x in after,(path,x)
+              assert "if(readConsent()==='accepted')loadTracking()" in after
+              assert "else if(readConsent()===null)loadClarity(false);" in after
+              assert "ad_Storage:'denied',analytics_Storage:analyticsConsent?'granted':'denied'" in after
+              assert "https://lively-elf-ba1204.netlify.app/.netlify/functions/lead" in after
+              print("NO_VISUAL_STYLE_CHANGE",path)
+          assert Path('index.html').read_bytes()==Path('cleaning-canada.html').read_bytes()
+          priv=Path('privacy/index.html').read_text()
+          for lang in ["uk","ru","en","es"]:
+              assert lang+':{' in priv
+          print("STYLES_MIRROR_PRIVACY_PASS")
+          PY
+      - name: Browser verify no cookies by default and real consent states
+        run: |
+          mkdir -p /tmp/claritysite/gpt
+          cp index.html cleaning-canada.html /tmp/claritysite/gpt/
+          cp -a ru en es privacy assets thank-you /tmp/claritysite/gpt/
+          python3 -m http.server 8777 --bind 127.0.0.1 --directory /tmp/claritysite >/tmp/clweb.log 2>&1 &
+          cat >/tmp/cookieless-test.cjs <<'NODE'
+          const {chromium}=require(process.cwd()+'/node_modules/playwright'),assert=require('node:assert/strict');
+          (async()=>{
+          const browser=await chromium.launch();
+          for(const [lang,path] of Object.entries({uk:'',ru:'ru/',en:'en/',es:'es/'})){
+            const context=await browser.newContext();
+            const page=await context.newPage(),errors=[],reqs=[];
+            page.on('pageerror',e=>errors.push(String(e)));
+            page.on('request',r=>{if(/clarity\.ms\/tag|connect\.facebook\.net/.test(r.url()))reqs.push(r.url());});
+            await page.route(/(clarity\.ms|connect\.facebook\.net)/,r=>r.abort());
+            await page.goto('http://127.0.0.1:8777/gpt/'+path,{waitUntil:'domcontentloaded'});
+            await page.waitForFunction(l=>window.getSiteLanguage?.()===l,lang);
+            let value=await page.evaluate(()=>({
+              consent:window.TargetLBConsent.get(),
+              fb:typeof window.fbq,clarity:typeof window.clarity,
+              signals:(window.clarity?.q||[]).map(args=>Array.from(args))
+            }));
+            assert.equal(value.consent,null,lang+' default no consent');
+            assert.equal(value.fb,'undefined',lang+' do not load advertising pixel');
+            assert.equal(value.clarity,'function',lang+' load cookieless Clarity');
+            assert(value.signals.some(x=>x[0]==='consentv2' && x[1].analytics_Storage==='denied' && x[1].ad_Storage==='denied'),lang+' explicit denied default');
+            assert.equal(await page.locator('#cookieBanner').isVisible(),true);
+            assert.equal(await page.locator('#cookieReject').isVisible(),true);
+            assert.equal(await page.locator('#cookieAccept').isVisible(),true);
+            assert(reqs.some(u=>u.includes('clarity.ms/tag')),lang+' Clarity script requested');
+            assert(!reqs.some(u=>u.includes('facebook.net')),lang+' Meta not requested');
+            await page.locator('#cookieReject').click();
+            await page.waitForLoadState('domcontentloaded');
+            await page.waitForFunction(()=>window.TargetLBConsent.get()==='rejected');
+            value=await page.evaluate(()=>({fb:typeof window.fbq,clarity:typeof window.clarity}));
+            assert.equal(value.fb,'undefined',lang+' reject pixel');
+            assert.equal(value.clarity,'undefined',lang+' reject clarity');
+            assert.equal(await page.locator('#cookieBanner').isVisible(),false);
+            await page.locator('#footerConsentPrefs').click();
+            await page.locator('#cookieAccept').click();
+            value=await page.evaluate(()=>({
+              status:window.TargetLBConsent.get(),fb:typeof window.fbq,clarity:typeof window.clarity,
+              signals:(window.clarity?.q||[]).map(args=>Array.from(args))
+            }));
+            assert.equal(value.status,'accepted');
+            assert.equal(value.fb,'function');
+            assert.equal(value.clarity,'function');
+            assert(value.signals.some(x=>x[0]==='consentv2'&&x[1].analytics_Storage==='granted'));
+            await page.locator('#footerConsentPrefs').click();
+            await page.locator('#cookieReject').click();
+            await page.waitForLoadState('domcontentloaded');
+            value=await page.evaluate(()=>({status:window.TargetLBConsent.get(),fb:typeof window.fbq,clarity:typeof window.clarity}));
+            assert.equal(value.status,'rejected');
+            assert.equal(value.clarity,'undefined');
+            assert.equal(value.fb,'undefined');
+            assert.equal(errors.length,0,lang+' errors: '+errors.join(', '));
+            console.log('CLARITY_BROWSER_PASS',lang);
+            await context.close();
+          }
+          await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          node /tmp/cookieless-test.cjs

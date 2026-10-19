@@ -5080,16 +5080,21 @@ body::before{display:none!important}
   function readConsent(){try{return localStorage.getItem(KEY)}catch(e){return null}}
   function writeConsent(value){try{localStorage.setItem(KEY,value)}catch(e){}}
 
-  function loadClarity(){
-    if(window.__targetLBClarityLoaded)return;
+  function loadClarity(analyticsConsent){
+    if(window.__targetLBClarityLoaded){
+      if(analyticsConsent&&typeof window.clarity==='function'){
+        window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});
+      }
+      return;
+    }
     window.__targetLBClarityLoaded=true;
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window,document,'clarity','script','ynghvhq4re');
-    // Analytics consent does not imply consent to Microsoft advertising storage.
-    window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});
+    // No cookies before explicit consent. A declined choice disables the script completely.
+    window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:analyticsConsent?'granted':'denied'});
   }
 
   function loadMeta(){
@@ -5104,7 +5109,7 @@ body::before{display:none!important}
     fbq('track','PageView');
   }
 
-  function loadTracking(){loadMeta();loadClarity()}
+  function loadTracking(){loadMeta();loadClarity(true)}
   window.TargetLBConsent={
     key:KEY,
     get:readConsent,
@@ -5115,16 +5120,18 @@ body::before{display:none!important}
     },
     reject:function(){
       const wasTracking=readConsent()==='accepted';
+      const wasClarityLoaded=!!window.__targetLBClarityLoaded;
       writeConsent('rejected');
       if(window.__targetLBClarityLoaded&&typeof window.clarity==='function'){
         window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'denied'});
       }
       document.dispatchEvent(new CustomEvent('targetLBConsentChanged',{detail:{value:'rejected'}}));
       // Reload stops the already loaded Meta script when permission is withdrawn.
-      if(wasTracking)window.location.reload();
+      if(wasTracking||wasClarityLoaded)window.location.reload();
     }
   };
   if(readConsent()==='accepted')loadTracking();
+  else if(readConsent()===null)loadClarity(false);
 })();
 </script>
 <style>
@@ -5937,7 +5944,7 @@ body::before{display:none!important}
 <div class="cookieBanner" id="cookieBanner" hidden data-i18n-ui role="dialog" aria-live="polite" aria-label="Налаштування конфіденційності">
   <div class="cookieCopy">
     <strong id="cookieTitle">Аналітика та реклама</strong>
-    <span id="cookieText">Meta Pixel і Microsoft Clarity допомагають вимірювати рекламу та використання сайту. Вони запускаються тільки після вашої згоди. <a id="cookiePrivacyLink" href="/gpt/privacy/">Privacy Policy</a></span>
+    <span id="cookieText">Clarity може збирати базові дані без cookies. Повні записи сесій і Meta Pixel працюють лише після згоди. <a id="cookiePrivacyLink" href="/gpt/privacy/">Privacy Policy</a></span>
   </div>
   <div class="cookieActions">
     <button class="cookieReject" id="cookieReject" type="button">Відмовитися</button>
@@ -7201,10 +7208,10 @@ document.addEventListener('keydown',(event)=>{
   const footerPrefs=document.getElementById('footerConsentPrefs');
   if(!banner||!accept||!reject||!window.TargetLBConsent)return;
   const copy={
-    uk:{title:'Аналітика та реклама',text:'Microsoft Clarity записує взаємодії із сайтом, а Meta Pixel вимірює рекламу. Обидва працюють лише з вашої згоди.',privacy:'Політика конфіденційності',accept:'Прийняти',reject:'Відмовитися',prefs:'Налаштування cookies'},
-    ru:{title:'Аналитика и реклама',text:'Microsoft Clarity записывает взаимодействия с сайтом, а Meta Pixel измеряет рекламу. Оба работают только с вашего согласия.',privacy:'Политика конфиденциальности',accept:'Принять',reject:'Отказаться',prefs:'Настройки cookies'},
-    en:{title:'Analytics and advertising',text:'Microsoft Clarity records site interactions, and Meta Pixel measures ads. Both run only with your consent.',privacy:'Privacy Policy',accept:'Accept',reject:'Decline',prefs:'Cookie settings'},
-    es:{title:'Analítica y publicidad',text:'Microsoft Clarity registra las interacciones con la web y Meta Pixel mide los anuncios. Ambos funcionan solo con tu consentimiento.',privacy:'Política de privacidad',accept:'Aceptar',reject:'Rechazar',prefs:'Configurar cookies'}
+    uk:{title:'Аналітика та реклама',text:'Clarity може збирати базові дані без cookies. Повні записи сесій і Meta Pixel працюють лише після згоди.',privacy:'Політика конфіденційності',accept:'Прийняти',reject:'Відмовитися',prefs:'Налаштування cookies'},
+    ru:{title:'Аналитика и реклама',text:'Clarity может собирать базовые данные без cookies. Полные записи сессий и Meta Pixel работают только после согласия.',privacy:'Политика конфиденциальности',accept:'Принять',reject:'Отказаться',prefs:'Настройки cookies'},
+    en:{title:'Analytics and advertising',text:'Clarity may collect basic data without cookies. Full session tracking and Meta Pixel require your consent.',privacy:'Privacy Policy',accept:'Accept',reject:'Decline',prefs:'Cookie settings'},
+    es:{title:'Analítica y publicidad',text:'Clarity puede recopilar datos básicos sin cookies. Las sesiones completas y Meta Pixel requieren tu consentimiento.',privacy:'Política de privacidad',accept:'Aceptar',reject:'Rechazar',prefs:'Configurar cookies'}
   };
   function lang(){
     if(window.getSiteLanguage)return window.getSiteLanguage();
