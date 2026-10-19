@@ -1,0 +1,50 @@
+name: Verify live Clarity consent deployment
+on:
+  push:
+    branches: ["feature/consent-clarity-v2-2026-10-19"]
+    paths: [".github/workflows/live-consent-clarity-v2.yml"]
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Check deployed public language pages and thank-you page
+        run: |
+          python3 - <<'PY'
+          import time
+          from urllib.request import Request,urlopen
+          root='https://vadym9083.github.io/gpt/'
+          pages={'uk':'','ru':'ru/','en':'en/','es':'es/'}
+          html={}
+          for code,sub in pages.items():
+              for attempt in range(18):
+                  try:
+                      url=root+sub
+                      with urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0 (Clarity-Privacy-Check)'}),timeout=16) as r:
+                          assert r.status==200
+                          text=r.read().decode('utf-8')
+                      assert "if(readConsent()==='accepted')loadTracking()" in text
+                      assert "window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});" in text
+                      assert 'id="footerConsentPrefs"' in text
+                      assert "const wasTracking=readConsent()==='accepted';" in text
+                      assert 'id="cookieAccept"' in text and 'id="cookieReject"' in text
+                      assert 'https://lively-elf-ba1204.netlify.app/.netlify/functions/lead' in text
+                      assert "Toronto / GTA вільний;" in text
+                      assert 'og-target-lb-premium-'+code+'-20261017.jpg' in text
+                      html[code]=text
+                      print("PUBLIC_CONSENT_OK",code,len(text),flush=True)
+                      break
+                  except Exception as e:
+                      if attempt==17:raise
+                      print('RETRY',code,attempt+1,str(e)[:110],flush=True)
+                      time.sleep(6)
+          with urlopen(root+'cleaning-canada.html',timeout=16) as r:
+              assert r.read().decode('utf-8')==html['uk']
+          with urlopen(root+'thank-you/',timeout=16) as r:
+              thank=r.read().decode('utf-8')
+          assert "fbq('track','Lead'" in thank
+          assert "window.clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});" in thank
+          print('FOUR_PUBLIC_LOCALES_AND_THANK_YOU_PASS')
+          PY
