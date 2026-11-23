@@ -311,65 +311,35 @@ if(state.last){let p=PRIZES[state.last];$('prizeTitle').textContent=p.title;$('p
  $('againHint').textContent=can?(wheelLocale?wheelLocale.hint:'Якщо бажаєте отримати інший подарунок, спробуйте ще раз'):'';const msg=wheelLocale?wheelLocale.wa.replace('{prize}',p.title):`Вітаю! Я виграв(ла) в колесі подарунків Target LB: ${p.title}. Надсилаю скриншот для підтвердження`; $('wa').href='https://wa.me/34642683873?text='+encodeURIComponent(msg)}}
 
 /* Superprize-only celebration: two subtle confetti cannons and an original chime. */
+
+/* CC0 recording: "MaleVoiceWoohoo.wav" by melisandepope,
+   https://freesound.org/people/melisandepope/sounds/557125/
+   Genuine human voice, not generated. Hosted locally in assets/sounds/. */
+const victoryVoiceUrl='/gpt/assets/sounds/target-lb-woohoo.wav';
+let victoryVoiceBuffer=null, victoryVoicePromise=null;
+function prepareVictoryVoice(){
+ if(victoryVoiceBuffer||victoryVoicePromise||!audioCtx)return;
+ victoryVoicePromise=fetch(victoryVoiceUrl,{cache:'force-cache'})
+  .then(res=>{if(!res.ok)throw new Error('Voice sound unavailable');return res.arrayBuffer()})
+  .then(data=>audioCtx.decodeAudioData(data))
+  .then(buffer=>{victoryVoiceBuffer=buffer;return buffer})
+  .catch(()=>{victoryVoicePromise=null;return null});
+}
 function playSuperprizeSound(){
  if(muted||!audioCtx||audioCtx.state!=='running')return;
+ if(!victoryVoiceBuffer){prepareVictoryVoice();return}
  try{
-  const ctx=audioCtx,now=ctx.currentTime+.025;
-  const master=ctx.createGain(),limiter=ctx.createDynamicsCompressor();
-  master.gain.value=.73;
-  limiter.threshold.value=-22;limiter.knee.value=18;limiter.ratio.value=2;
-  limiter.attack.value=.004;limiter.release.value=.26;
-  master.connect(limiter);limiter.connect(ctx.destination);
-  const dry=ctx.createGain(),wet=ctx.createGain();
-  dry.gain.value=.90;wet.gain.value=.20;
-  dry.connect(master);wet.connect(master);
-  const sr=ctx.sampleRate,impulse=ctx.createBuffer(2,Math.round(sr*1.35),sr);
-  for(let ch=0;ch<2;ch++){
-   const d=impulse.getChannelData(ch);
-   for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3.4);
-  }
-  const room=ctx.createConvolver();room.buffer=impulse;room.connect(wet);
-  function output(node){node.connect(dry);node.connect(room)}
-  // One expressive ascending "веййй" swell; not a series of ringtone beeps.
-  function sweep(from,to,delay,duration,gain,type='triangle'){
-   const start=now+delay,finish=start+duration;
-   const osc=ctx.createOscillator(),filter=ctx.createBiquadFilter(),env=ctx.createGain();
-   osc.type=type;
-   osc.frequency.setValueAtTime(from,start);
-   osc.frequency.exponentialRampToValueAtTime(to,finish);
-   filter.type='lowpass';filter.frequency.setValueAtTime(1350,start);
-   filter.frequency.exponentialRampToValueAtTime(3900,finish);
-   env.gain.setValueAtTime(.0001,start);
-   env.gain.exponentialRampToValueAtTime(gain,start+duration*.31);
-   env.gain.setValueAtTime(gain*.9,start+duration*.47);
-   env.gain.exponentialRampToValueAtTime(.0001,finish);
-   osc.connect(filter);filter.connect(env);output(env);
-   osc.start(start);osc.stop(finish+.03);
-  }
-  sweep(360,1050,.035,.92,.048);
-  sweep(555,1480,.16,.84,.018,'sine');
-  function pad(hz,volume,delay,duration){
-   const start=now+delay,finish=start+duration;
-   const osc=ctx.createOscillator(),env=ctx.createGain();
-   osc.type='triangle';osc.frequency.setValueAtTime(hz,start);
-   env.gain.setValueAtTime(.0001,start);
-   env.gain.exponentialRampToValueAtTime(volume,start+.22);
-   env.gain.setValueAtTime(volume*.8,start+.56);
-   env.gain.exponentialRampToValueAtTime(.0001,finish);
-   osc.connect(env);output(env);osc.start(start);osc.stop(finish+.03);
-  }
-  // Warm luminous resolution that fades beneath the confetti.
-  [[261.63,.013],[329.63,.012],[392,.010],[493.88,.009],[587.33,.007]].forEach(([hz,v])=>pad(hz,v,.53,2.25));
-  function shimmer(hz,delay,volume){
-   const start=now+delay,duration=1.15;
-   const osc=ctx.createOscillator(),env=ctx.createGain();
-   osc.type='sine';osc.frequency.setValueAtTime(hz,start);
-   env.gain.setValueAtTime(.0001,start);
-   env.gain.exponentialRampToValueAtTime(volume,start+.035);
-   env.gain.exponentialRampToValueAtTime(.0001,start+duration);
-   osc.connect(env);output(env);osc.start(start);osc.stop(start+duration+.02);
-  }
-  shimmer(1046.5,.89,.013);shimmer(1567.98,1.10,.008);
+  const now=audioCtx.currentTime;
+  const source=audioCtx.createBufferSource();
+  const output=audioCtx.createGain();
+  source.buffer=victoryVoiceBuffer;
+  output.gain.setValueAtTime(.0001,now);
+  output.gain.linearRampToValueAtTime(.74,now+.025);
+  const end=now+victoryVoiceBuffer.duration;
+  output.gain.setValueAtTime(.74,Math.max(now+.03,end-.12));
+  output.gain.linearRampToValueAtTime(.0001,end);
+  source.connect(output);output.connect(audioCtx.destination);
+  source.start(now);source.stop(end+.015);
  }catch(e){}
 }
 let confettiFrame=0;
@@ -430,7 +400,7 @@ function launchSuperprizeConfetti(){
 function scrollToNode(id){if(innerWidth<941){setTimeout(() => $(id).scrollIntoView({behavior:'smooth',block:'nearest'}),120)}}
 function spin(){
  if(spinning||state.last||state.n>=5)return;
- prepareAudio();spinning=true;update();
+ prepareAudio();prepareVictoryVoice();spinning=true;update();
  const key=outcome(),options=SECTORS.filter(s=>s.key===key),chosen=options[Math.floor(Math.random()*options.length)];
  const endMod=approachTooth(chosen),nearMod=((endMod+3.05)%360+360)%360;
  const currentMod=((state.angle%360)+360)%360;
