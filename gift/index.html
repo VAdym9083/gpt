@@ -280,25 +280,74 @@ if(state.last){let p=PRIZES[state.last];$('prizeTitle').textContent=p.title;$('p
 function playSuperprizeSound(){
  if(muted||!audioCtx||audioCtx.state!=='running')return;
  try{
-  const now=audioCtx.currentTime+.035;
-  const master=audioCtx.createGain();
-  master.gain.setValueAtTime(.68,now);
-  master.connect(audioCtx.destination);
-  const notes=[
-   [523.25,0,.22,.048],[659.25,.14,.22,.047],
-   [783.99,.28,.24,.048],[1046.5,.45,.48,.062],
-   [523.25,.73,.66,.028],[659.25,.73,.66,.03],[783.99,.73,.66,.031]
-  ];
-  for(const [hz,offset,length,vol] of notes){
-   const begin=now+offset,end=begin+length;
-   const osc=audioCtx.createOscillator(),env=audioCtx.createGain();
-   osc.type='sine';osc.frequency.setValueAtTime(hz,begin);
-   env.gain.setValueAtTime(.0001,begin);
-   env.gain.exponentialRampToValueAtTime(vol,begin+.022);
-   env.gain.exponentialRampToValueAtTime(.0001,end);
-   osc.connect(env);env.connect(master);
-   osc.start(begin);osc.stop(end+.015);
+  const ctx=audioCtx,now=ctx.currentTime+.025;
+  // Original 2.5-second boutique-style success cue: warm major-nine harmony,
+  // felt-piano-like plucks, a delicate glass shimmer and a quiet room tail.
+  // No sampled ringtone, external audio file or abrupt synthetic beeps.
+  const master=ctx.createGain();
+  master.gain.value=.67;
+  const limiter=ctx.createDynamicsCompressor();
+  limiter.threshold.value=-20;limiter.knee.value=18;limiter.ratio.value=2;
+  limiter.attack.value=.005;limiter.release.value=.23;
+  master.connect(limiter);limiter.connect(ctx.destination);
+  const dry=ctx.createGain();dry.gain.value=.87;dry.connect(master);
+  const wet=ctx.createGain();wet.gain.value=.20;wet.connect(master);
+  const reverb=ctx.createConvolver();
+  const duration=1.65,sr=ctx.sampleRate;
+  const impulse=ctx.createBuffer(2,Math.round(sr*duration),sr);
+  for(let channel=0;channel<2;channel++){
+   const samples=impulse.getChannelData(channel);
+   for(let i=0;i<samples.length;i++){
+    const t=i/samples.length;
+    samples[i]=(Math.random()*2-1)*Math.pow(1-t,3)*(.5+.5*Math.sin(i*.037+channel));
+   }
   }
+  reverb.buffer=impulse;reverb.connect(wet);
+  const toRoom=(node)=>{node.connect(dry);node.connect(reverb)};
+  function warmTone(hz,vol,delay,hold){
+   const start=now+delay,end=start+hold;
+   const osc=ctx.createOscillator(),env=ctx.createGain();
+   osc.type='triangle';osc.frequency.setValueAtTime(hz,start);
+   env.gain.setValueAtTime(.0001,start);
+   env.gain.exponentialRampToValueAtTime(vol,start+.16);
+   env.gain.setValueAtTime(vol*.72,start+.42);
+   env.gain.exponentialRampToValueAtTime(.0001,end);
+   osc.connect(env);toRoom(env);osc.start(start);osc.stop(end+.02);
+  }
+  // One soft sustained Cmaj9 chord: richness without a telephone-like jingle.
+  [
+   [261.63,.025],[329.63,.019],[392,.017],
+   [493.88,.012],[587.33,.009]
+  ].forEach(([hz,v])=>warmTone(hz,v,0,2.45));
+  function softBell(hz,delay,volume){
+   const t=now+delay;
+   // Slightly inharmonic overtones make this sound more like glass/harp than sine beeps.
+   [[1,1,1.32],[2.012,.20,.56],[3.93,.065,.30]].forEach(([ratio,v,life])=>{
+    const osc=ctx.createOscillator(),env=ctx.createGain();
+    osc.type='sine';osc.frequency.setValueAtTime(hz*ratio,t);
+    env.gain.setValueAtTime(.0001,t);
+    env.gain.exponentialRampToValueAtTime(Math.max(.0002,volume*v),t+.012);
+    env.gain.exponentialRampToValueAtTime(.0001,t+life);
+    osc.connect(env);toRoom(env);osc.start(t);osc.stop(t+life+.02);
+   });
+  }
+  // A rolled, understated resolving flourish, overlapping instead of three SMS pings.
+  softBell(659.25,.18,.026);
+  softBell(783.99,.56,.020);
+  softBell(1046.5,.80,.022);
+  // Airy, quiet swell to soften the first transient.
+  const air=ctx.createBuffer(1,Math.round(sr*.52),sr);
+  const a=air.getChannelData(0);
+  for(let i=0;i<a.length;i++){let t=i/a.length;a[i]=(Math.random()*2-1)*Math.sin(Math.PI*t)**2}
+  const noise=ctx.createBufferSource(),airFilter=ctx.createBiquadFilter(),airEnv=ctx.createGain();
+  noise.buffer=air;airFilter.type='lowpass';
+  airFilter.frequency.setValueAtTime(900,now);
+  airFilter.frequency.exponentialRampToValueAtTime(2200,now+.38);
+  airEnv.gain.setValueAtTime(.0001,now);
+  airEnv.gain.exponentialRampToValueAtTime(.012,now+.18);
+  airEnv.gain.exponentialRampToValueAtTime(.0001,now+.51);
+  noise.connect(airFilter);airFilter.connect(airEnv);toRoom(airEnv);
+  noise.start(now);noise.stop(now+.52);
  }catch(e){}
 }
 let confettiFrame=0;
