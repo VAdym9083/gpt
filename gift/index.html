@@ -315,73 +315,61 @@ function playSuperprizeSound(){
  if(muted||!audioCtx||audioCtx.state!=='running')return;
  try{
   const ctx=audioCtx,now=ctx.currentTime+.025;
-  // Original 2.5-second boutique-style success cue: warm major-nine harmony,
-  // felt-piano-like plucks, a delicate glass shimmer and a quiet room tail.
-  // No sampled ringtone, external audio file or abrupt synthetic beeps.
-  const master=ctx.createGain();
-  master.gain.value=.67;
-  const limiter=ctx.createDynamicsCompressor();
-  limiter.threshold.value=-20;limiter.knee.value=18;limiter.ratio.value=2;
-  limiter.attack.value=.005;limiter.release.value=.23;
+  const master=ctx.createGain(),limiter=ctx.createDynamicsCompressor();
+  master.gain.value=.73;
+  limiter.threshold.value=-22;limiter.knee.value=18;limiter.ratio.value=2;
+  limiter.attack.value=.004;limiter.release.value=.26;
   master.connect(limiter);limiter.connect(ctx.destination);
-  const dry=ctx.createGain();dry.gain.value=.87;dry.connect(master);
-  const wet=ctx.createGain();wet.gain.value=.20;wet.connect(master);
-  const reverb=ctx.createConvolver();
-  const duration=1.65,sr=ctx.sampleRate;
-  const impulse=ctx.createBuffer(2,Math.round(sr*duration),sr);
-  for(let channel=0;channel<2;channel++){
-   const samples=impulse.getChannelData(channel);
-   for(let i=0;i<samples.length;i++){
-    const t=i/samples.length;
-    samples[i]=(Math.random()*2-1)*Math.pow(1-t,3)*(.5+.5*Math.sin(i*.037+channel));
-   }
+  const dry=ctx.createGain(),wet=ctx.createGain();
+  dry.gain.value=.90;wet.gain.value=.20;
+  dry.connect(master);wet.connect(master);
+  const sr=ctx.sampleRate,impulse=ctx.createBuffer(2,Math.round(sr*1.35),sr);
+  for(let ch=0;ch<2;ch++){
+   const d=impulse.getChannelData(ch);
+   for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3.4);
   }
-  reverb.buffer=impulse;reverb.connect(wet);
-  const toRoom=(node)=>{node.connect(dry);node.connect(reverb)};
-  function warmTone(hz,vol,delay,hold){
-   const start=now+delay,end=start+hold;
+  const room=ctx.createConvolver();room.buffer=impulse;room.connect(wet);
+  function output(node){node.connect(dry);node.connect(room)}
+  // One expressive ascending "веййй" swell; not a series of ringtone beeps.
+  function sweep(from,to,delay,duration,gain,type='triangle'){
+   const start=now+delay,finish=start+duration;
+   const osc=ctx.createOscillator(),filter=ctx.createBiquadFilter(),env=ctx.createGain();
+   osc.type=type;
+   osc.frequency.setValueAtTime(from,start);
+   osc.frequency.exponentialRampToValueAtTime(to,finish);
+   filter.type='lowpass';filter.frequency.setValueAtTime(1350,start);
+   filter.frequency.exponentialRampToValueAtTime(3900,finish);
+   env.gain.setValueAtTime(.0001,start);
+   env.gain.exponentialRampToValueAtTime(gain,start+duration*.31);
+   env.gain.setValueAtTime(gain*.9,start+duration*.47);
+   env.gain.exponentialRampToValueAtTime(.0001,finish);
+   osc.connect(filter);filter.connect(env);output(env);
+   osc.start(start);osc.stop(finish+.03);
+  }
+  sweep(360,1050,.035,.92,.048);
+  sweep(555,1480,.16,.84,.018,'sine');
+  function pad(hz,volume,delay,duration){
+   const start=now+delay,finish=start+duration;
    const osc=ctx.createOscillator(),env=ctx.createGain();
    osc.type='triangle';osc.frequency.setValueAtTime(hz,start);
    env.gain.setValueAtTime(.0001,start);
-   env.gain.exponentialRampToValueAtTime(vol,start+.16);
-   env.gain.setValueAtTime(vol*.72,start+.42);
-   env.gain.exponentialRampToValueAtTime(.0001,end);
-   osc.connect(env);toRoom(env);osc.start(start);osc.stop(end+.02);
+   env.gain.exponentialRampToValueAtTime(volume,start+.22);
+   env.gain.setValueAtTime(volume*.8,start+.56);
+   env.gain.exponentialRampToValueAtTime(.0001,finish);
+   osc.connect(env);output(env);osc.start(start);osc.stop(finish+.03);
   }
-  // One soft sustained Cmaj9 chord: richness without a telephone-like jingle.
-  [
-   [261.63,.025],[329.63,.019],[392,.017],
-   [493.88,.012],[587.33,.009]
-  ].forEach(([hz,v])=>warmTone(hz,v,0,2.45));
-  function softBell(hz,delay,volume){
-   const t=now+delay;
-   // Slightly inharmonic overtones make this sound more like glass/harp than sine beeps.
-   [[1,1,1.32],[2.012,.20,.56],[3.93,.065,.30]].forEach(([ratio,v,life])=>{
-    const osc=ctx.createOscillator(),env=ctx.createGain();
-    osc.type='sine';osc.frequency.setValueAtTime(hz*ratio,t);
-    env.gain.setValueAtTime(.0001,t);
-    env.gain.exponentialRampToValueAtTime(Math.max(.0002,volume*v),t+.012);
-    env.gain.exponentialRampToValueAtTime(.0001,t+life);
-    osc.connect(env);toRoom(env);osc.start(t);osc.stop(t+life+.02);
-   });
+  // Warm luminous resolution that fades beneath the confetti.
+  [[261.63,.013],[329.63,.012],[392,.010],[493.88,.009],[587.33,.007]].forEach(([hz,v])=>pad(hz,v,.53,2.25));
+  function shimmer(hz,delay,volume){
+   const start=now+delay,duration=1.15;
+   const osc=ctx.createOscillator(),env=ctx.createGain();
+   osc.type='sine';osc.frequency.setValueAtTime(hz,start);
+   env.gain.setValueAtTime(.0001,start);
+   env.gain.exponentialRampToValueAtTime(volume,start+.035);
+   env.gain.exponentialRampToValueAtTime(.0001,start+duration);
+   osc.connect(env);output(env);osc.start(start);osc.stop(start+duration+.02);
   }
-  // A rolled, understated resolving flourish, overlapping instead of three SMS pings.
-  softBell(659.25,.18,.026);
-  softBell(783.99,.56,.020);
-  softBell(1046.5,.80,.022);
-  // Airy, quiet swell to soften the first transient.
-  const air=ctx.createBuffer(1,Math.round(sr*.52),sr);
-  const a=air.getChannelData(0);
-  for(let i=0;i<a.length;i++){let t=i/a.length;a[i]=(Math.random()*2-1)*Math.sin(Math.PI*t)**2}
-  const noise=ctx.createBufferSource(),airFilter=ctx.createBiquadFilter(),airEnv=ctx.createGain();
-  noise.buffer=air;airFilter.type='lowpass';
-  airFilter.frequency.setValueAtTime(900,now);
-  airFilter.frequency.exponentialRampToValueAtTime(2200,now+.38);
-  airEnv.gain.setValueAtTime(.0001,now);
-  airEnv.gain.exponentialRampToValueAtTime(.012,now+.18);
-  airEnv.gain.exponentialRampToValueAtTime(.0001,now+.51);
-  noise.connect(airFilter);airFilter.connect(airEnv);toRoom(airEnv);
-  noise.start(now);noise.stop(now+.52);
+  shimmer(1046.5,.89,.013);shimmer(1567.98,1.10,.008);
  }catch(e){}
 }
 let confettiFrame=0;
