@@ -2,7 +2,7 @@
 <html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#172838"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Лише сьогодні: подарунок для бізнесу від Target LB. Крутіть колесо та отримуйте консультацію, аудит або знижку $100"><title>Спробуйте удачу — подарунки для бізнесу | Target LB</title>
 <style>
 :root{--ink:#1e2730;--slate:#334b5e;--blue:#6f899d;--muted:#6b7680;--edge:rgba(59,67,74,.12);--gold:#ac7d45;--bg:#f6f3ed}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 80% -23%,#e7e0d7 0%,transparent 48%),linear-gradient(160deg,#fbfaf8,#f3efe9 78%);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;-webkit-font-smoothing:antialiased}button,a,summary{touch-action:manipulation}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #3e6a8f;outline-offset:3px}.wrap{max-width:1180px;width:calc(100% - 48px);margin:auto}
+*{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 80% -23%,#e7e0d7 0%,transparent 48%),linear-gradient(160deg,#fbfaf8,#f3efe9 78%);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;-webkit-font-smoothing:antialiased}button,a,summary{touch-action:manipulation}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #3e6a8f;outline-offset:3px}.wrap{max-width:1180px;width:calc(100% - 48px);margin:auto}
 .header{height:88px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:14px}.brand img{width:47px;height:47px;object-fit:contain}.brandText strong{display:block;font-size:13px;letter-spacing:.18em;white-space:nowrap}.brandText small{display:block;font-size:9px;letter-spacing:.17em;color:#8b9197;margin-top:4px;white-space:nowrap}.site-link{border:1px solid #d9dad9;background:rgba(255,255,255,.7);padding:11px 17px;border-radius:999px;font-weight:670;font-size:12px}.site-link:hover{background:#fff}
 .panel{position:relative;isolation:isolate;overflow:hidden;border-radius:29px;border:1px solid rgba(255,255,255,.92);background:linear-gradient(120deg,rgba(255,255,255,.88),rgba(250,248,244,.92) 52%,rgba(235,235,232,.9));box-shadow:0 30px 85px rgba(45,41,35,.1),inset 0 1px 0 #fff}
 .panel:before{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(117deg,transparent 47%,rgba(217,222,224,.2) 47.2%,transparent 47.8%),radial-gradient(ellipse at 99% 1%,rgba(124,156,176,.13),transparent 40%);z-index:-1}
@@ -155,7 +155,7 @@ h1 em{color:#c4d5df;text-shadow:none}
 </main><footer class="footer"><span>© Target LB · Meta Ads</span><a href="https://vadym9083.github.io/gpt/">Основний сайт ↗</a></footer></div>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id);const NS='http://www.w3.org/2000/svg',rotor=$('rotor');const KEY='target_lb_wheel_v4';const PRIZES={consult:{title:'Безкоштовна консультація',desc:'Обговоримо ваш бізнес і можливості залучення клієнтів через Facebook та Instagram'},audit:{title:'Безкоштовний аудит соцмереж',desc:'Перегляну ваші соцмережі й підкажу, що можна покращити для залучення клієнтів'},super:{title:'Суперприз −$100',desc:'Знижка $100 на мої послуги з налаштування або ведення таргетованої реклами'}};
-const config=[{key:'super',size:36,fill:'url(#gold)',txt:'#3e2e1d'},{key:'audit',size:54,fill:'url(#ivory)',txt:'#25343f'},{key:'consult',size:54,fill:'url(#steel)',txt:'#ffffff'},{key:'audit',size:54,fill:'url(#ivory)',txt:'#25343f'},{key:'consult',size:54,fill:'url(#steel)',txt:'#ffffff'},{key:'audit',size:54,fill:'url(#ivory)',txt:'#25343f'},{key:'consult',size:54,fill:'url(#steel)',txt:'#ffffff'}];const SECTORS=[];
+const config=[{key:'super',size:36,fill:'url(#gold)',txt:'#3e2e1d'},{key:'audit',size:54,fill:'url(#ivory)',txt:'#25343f'},{key:'consult',size:54,fill:'url(#steel)',txt:'#ffffff'},{key:'audit',size:54,fill:'url(#ivory)',txt:'#25343f'},{key:'consult',size:54,fill:'url(#steel)',txt:'#ffffff'},{key:'audit',size:54,fill:'url(#ivory)',txt:'#25343f'},{key:'consult',size:54,fill:'url(#steel)',txt:'#ffffff'}];const SECTORS=[],uprightLabels=[];
 function elt(tag,attrs,container=rotor){let e=document.createElementNS(NS,tag);for(let [k,v]of Object.entries(attrs||{}))e.setAttribute(k,v);container.appendChild(e);return e}
 function xy(r,a){const t=(a-90)*Math.PI/180;return [300+Math.cos(t)*r,300+Math.sin(t)*r]}
 // Rim and separate enamel face, all rotating as one object.
@@ -170,10 +170,12 @@ for(let i=0;i<config.length;i++){
  // Instead of radial / sideways text, give each segment its own readable icon and centred label.
  let [cx,cy]=xy(s.key==='super'?165:171,mid);
  let g=elt('g',{transform:`translate(${cx.toFixed(2)} ${cy.toFixed(2)})`});
+ // Keep all icons and labels upright while the physical wheel spins.
+ let face=elt('g',{},g);uprightLabels.push(face);
  let icon=s.key==='super'?'#crownIcon':s.key==='audit'?'#auditIcon':'#chatIcon';
- elt('use',{href:icon,x:-18,y:-55,width:36,height:36,color:s.key==='super'?'#906229':s.key==='consult'?'#ffffff':'#263847'},g);
+ elt('use',{href:icon,x:-18,y:-55,width:36,height:36,color:s.key==='super'?'#906229':s.key==='consult'?'#ffffff':'#263847'},face);
  let lines=s.key==='super'?['СУПЕРПРИЗ','−$100']:s.key==='audit'?['Аудит','соцмереж']:['Консультація'];
- let txt=elt('text',{'text-anchor':'middle','font-size':s.key==='super'?'17.5':s.key==='consult'?'18':'20.2','font-weight':'750','font-family':'Inter, system-ui, sans-serif','letter-spacing':'-.55',fill:s.txt},g);
+ let txt=elt('text',{'text-anchor':'middle','font-size':s.key==='super'?'17.5':s.key==='consult'?'18':'20.2','font-weight':'750','font-family':'Inter, system-ui, sans-serif','letter-spacing':'-.55',fill:s.txt},face);
  lines.forEach((label,j)=>{let t=elt('tspan',{x:0,y:lines.length===1?16:9+j*23},txt);t.textContent=label});
  SECTORS.push({...s,index:i,mid});start=end;
 }
@@ -182,11 +184,18 @@ elt('circle',{cx:300,cy:300,r:262,fill:'none',stroke:'#8b9fae','stroke-width':5}
 elt('circle',{cx:300,cy:300,r:270,fill:'none',stroke:'#ffffff','stroke-width':3.6});
 for(let i=0;i<28;i++){let [x,y]=xy(267,i*360/28);elt('circle',{cx:x,cy:y,r:3.7,fill:'#fffefd',stroke:'#d1d8da','stroke-width':.7})}
 let state={n:0,h:[],last:null,claimed:false,angle:0};try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Number.isInteger(x.n)&&x.n>=0&&x.n<=5&&Array.isArray(x.h)){state={...state,...x,claimed:!!x.claimed,angle:Number(x.angle)||0}}}catch{};
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}};rotor.setAttribute('transform',`rotate(${state.angle} 300 300)`);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}};
+function setWheelAngle(angle){
+ rotor.setAttribute('transform',`rotate(${angle} 300 300)`);
+ const counter=((angle%360)+360)%360;
+ for(const face of uprightLabels)face.setAttribute('transform',`rotate(${-counter})`);
+}
+setWheelAngle(state.angle);
 let spinning=false;const outcome=()=>{let n=state.n+1;let last=state.h.at(-1),two=last&&state.h.at(-2)===last;let k;if(n===5)k='super';else if(n===1)k=Math.random()<.5?'consult':'audit';else {let r=Math.random();k=r<.33?'super':r<.665?'consult':'audit'}if(two&&k===last&&k!=='super')k=k==='consult'?'audit':'consult';return k};
 function update(){let rem=Math.max(0,5-state.n);$('spinBtn').disabled=spinning||!!state.last||rem===0;$('triesText').textContent=spinning?'Колесо обертається…':state.last==='super'?'Вітаємо із суперпризом':rem?`Залишилося ${rem} ${rem===1?'спроба':rem<5?'спроби':'спроб'}`:'Спроби використано';$('progress').replaceChildren();for(let i=0;i<5;i++){let n=document.createElement('i');if(i<state.n)n.className='done';if(i===state.n-1&&state.last==='super')n.className='gold';$('progress').appendChild(n)};
 $('win').classList.toggle('show',!!state.last&&!state.claimed);$('win').classList.toggle('gold',state.last==='super');$('claim').classList.toggle('show',!!state.last&&state.claimed);
-if(state.last){let p=PRIZES[state.last];$('prizeTitle').textContent=p.title;$('prizeDesc').textContent=p.desc;$('claimTitle').textContent=p.title;let can=state.n<5&&state.last!=='super';$('againBtn').hidden=!can;$('againHint').hidden=!can;$('backBtn').hidden=!can;const msg=`Вітаю! Я виграв(ла) в колесі подарунків Target LB: ${p.title}. Надсилаю скриншот для підтвердження`; $('wa').href='https://wa.me/34642683873?text='+encodeURIComponent(msg)}}
+if(state.last){let p=PRIZES[state.last];$('prizeTitle').textContent=p.title;$('prizeDesc').textContent=p.desc;$('claimTitle').textContent=p.title;let can=state.n<5&&state.last!=='super';$('againBtn').hidden=!can;$('againHint').hidden=!can;$('backBtn').hidden=!can;
+ $('againHint').textContent=can?'Якщо бажаєте отримати інший подарунок, спробуйте ще раз':'';const msg=`Вітаю! Я виграв(ла) в колесі подарунків Target LB: ${p.title}. Надсилаю скриншот для підтвердження`; $('wa').href='https://wa.me/34642683873?text='+encodeURIComponent(msg)}}
 function scrollToNode(id){if(innerWidth<941){setTimeout(() => $(id).scrollIntoView({behavior:'smooth',block:'nearest'}),120)}}
 function spin(){if(spinning||state.last||state.n>=5)return;spinning=true;update();const key=outcome(),opt=SECTORS.filter(s=>s.key===key);const chosen=opt[Math.floor(Math.random()*opt.length)];const jitter=(Math.random()-.5)*Math.min(7,chosen.size*.2);let target=(((360-chosen.mid+jitter)%360)+360)%360;let current=((state.angle%360)+360)%360;let delta=((target-current+360)%360)+360*(5+Math.floor(Math.random()*2));let end=state.angle+delta;let reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
  const duration=reduce?100:5200,startAngle=state.angle,range=end-startAngle;
@@ -196,9 +205,9 @@ function spin(){if(spinning||state.last||state.n>=5)return;spinning=true;update(
    // Sine acceleration/deceleration with zero angular velocity at either end
    // The SVG viewBox is static; only the rotor's transform ATTR rotates around 300,300.
    const eased=(1-Math.cos(Math.PI*t))/2;
-   rotor.setAttribute('transform',`rotate(${startAngle+range*eased} 300 300)`);
+   setWheelAngle(startAngle+range*eased);
    if(t<1){requestAnimationFrame(frame);return}
-   rotor.setAttribute('transform',`rotate(${end} 300 300)`);
+   setWheelAngle(end);
    state.n++;state.h.push(key);state.last=key;state.claimed=false;state.angle=end;
    spinning=false;save();update();scrollToNode('win');
  }
