@@ -129,8 +129,9 @@ h1 em{color:#c4d5df;text-shadow:none}
   .claim h2{font-size:23px}
 }
 @media(max-width:360px){.hero{padding:16px 10px 13px}.wheelwrap{width:min(100%,285px)}.spin,.tries{width:min(100%,290px)}}
+#superConfetti{position:fixed;inset:0;z-index:150;pointer-events:none;display:none;width:100vw;height:100dvh;contain:strict}
 </style></head>
-<body><div class="wrap"><header class="header"><a class="brand" href="https://vadym9083.github.io/gpt/" aria-label="Target LB головний сайт"><img src="/gpt/assets/target-lb-logo.svg" alt="LB"><span class="brandText"><strong>TARGET LB</strong><small>META ADS / PERFORMANCE</small></span></a><a href="https://vadym9083.github.io/gpt/" class="site-link">Переглянути сайт ↗</a></header>
+<body><canvas id="superConfetti" aria-hidden="true"></canvas><div class="wrap"><header class="header"><a class="brand" href="https://vadym9083.github.io/gpt/" aria-label="Target LB головний сайт"><img src="/gpt/assets/target-lb-logo.svg" alt="LB"><span class="brandText"><strong>TARGET LB</strong><small>META ADS / PERFORMANCE</small></span></a><a href="https://vadym9083.github.io/gpt/" class="site-link">Переглянути сайт ↗</a></header>
 <main><section class="panel"><div class="hero"><div class="copy"><div class="eyebrow">Подарунок для нових клієнтів</div><h1>Спробуйте <em>удачу</em></h1><div class="today"><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="m12 0 2.8 8.5L24 12l-9.2 3.5L12 24l-2.8-8.5L0 12l9.2-3.5Z"/></svg>Тільки сьогодні</div><p class="lead">Крутіть колесо та отримайте подарунок для просування вашого бізнесу у Facebook та Instagram</p><ul class="offers"><li><span class="check">✓</span>Безкоштовна консультація</li><li><span class="check">✓</span>Безкоштовний аудит соцмереж</li><li><span class="check">✦</span>Суперприз −$100 на мої послуги з реклами</li></ul><p class="mini">До 5 обертань · Один фінальний подарунок</p></div>
 <div class="game" id="game"><div class="wheelwrap"><svg id="wheel" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Колесо подарунків: консультація, аудит соцмереж і суперприз мінус сто доларів" viewBox="0 0 600 600">
 <defs>
@@ -274,6 +275,87 @@ function update(){let rem=Math.max(0,5-state.n);$('spinBtn').disabled=spinning||
 $('win').classList.toggle('show',!!state.last&&!state.claimed);$('win').classList.toggle('gold',state.last==='super');$('claim').classList.toggle('show',!!state.last&&state.claimed);
 if(state.last){let p=PRIZES[state.last];$('prizeTitle').textContent=p.title;$('prizeDesc').textContent=p.desc;$('claimTitle').textContent=p.title;let can=state.n<5&&state.last!=='super';$('againBtn').hidden=!can;$('againHint').hidden=!can;$('backBtn').hidden=!can;
  $('againHint').textContent=can?'Якщо бажаєте отримати інший подарунок, спробуйте ще раз':'';const msg=`Вітаю! Я виграв(ла) в колесі подарунків Target LB: ${p.title}. Надсилаю скриншот для підтвердження`; $('wa').href='https://wa.me/34642683873?text='+encodeURIComponent(msg)}}
+
+/* Superprize-only celebration: two subtle confetti cannons and an original chime. */
+function playSuperprizeSound(){
+ if(muted||!audioCtx||audioCtx.state!=='running')return;
+ try{
+  const now=audioCtx.currentTime+.035;
+  const master=audioCtx.createGain();
+  master.gain.setValueAtTime(.68,now);
+  master.connect(audioCtx.destination);
+  const notes=[
+   [523.25,0,.22,.048],[659.25,.14,.22,.047],
+   [783.99,.28,.24,.048],[1046.5,.45,.48,.062],
+   [523.25,.73,.66,.028],[659.25,.73,.66,.03],[783.99,.73,.66,.031]
+  ];
+  for(const [hz,offset,length,vol] of notes){
+   const begin=now+offset,end=begin+length;
+   const osc=audioCtx.createOscillator(),env=audioCtx.createGain();
+   osc.type='sine';osc.frequency.setValueAtTime(hz,begin);
+   env.gain.setValueAtTime(.0001,begin);
+   env.gain.exponentialRampToValueAtTime(vol,begin+.022);
+   env.gain.exponentialRampToValueAtTime(.0001,end);
+   osc.connect(env);env.connect(master);
+   osc.start(begin);osc.stop(end+.015);
+  }
+ }catch(e){}
+}
+let confettiFrame=0;
+function launchSuperprizeConfetti(){
+ const canvas=$('superConfetti');
+ if(!canvas)return;
+ const ctx=canvas.getContext('2d');
+ if(!ctx)return;
+ if(confettiFrame)cancelAnimationFrame(confettiFrame);
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const dpr=Math.min(window.devicePixelRatio||1,2);
+ const w=window.innerWidth,h=window.innerHeight;
+ canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ canvas.style.display='block';
+ const wheel=$('wheel').getBoundingClientRect();
+ const originY=Math.max(70,Math.min(h-48,wheel.top+wheel.height*.50));
+ const colors=['#c8a36a','#e7c58c','#f7e9c8','#8298a9','#e9e4db','#fffdf7','#b9ccd9'];
+ const bits=[];
+ for(let side=0;side<2;side++){
+  const ox=Math.max(24,Math.min(w-24,wheel.left+wheel.width*(side? .85:.15)));
+  const dir=side? -1:1;
+  for(let i=0;i<(reduced?17:85);i++){
+   const spread=(Math.random()-.5)*2.1;
+   const speed=2.5+Math.random()*5.8;
+   bits.push({
+    x:ox,y:originY,vx:dir*(speed*.63+Math.random()*2)+spread,
+    vy:-(speed+Math.random()*4),rot:Math.random()*6.283,
+    vr:(Math.random()-.5)*.22,
+    width:3+Math.random()*5,height:5+Math.random()*8,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    born:Math.random()*100,opacity:1
+   });
+  }
+ }
+ let last=performance.now(),start=last;
+ function frame(now){
+  const step=Math.min(2.1,Math.max(0,(now-last)/16.667));last=now;
+  const elapsed=now-start;
+  ctx.clearRect(0,0,w,h);
+  for(const bit of bits){
+   if(elapsed<bit.born)continue;
+   bit.x+=bit.vx*step;bit.y+=bit.vy*step;bit.vy+=.16*step;
+   bit.vx*=Math.pow(.995,step);bit.rot+=bit.vr*step;
+   const fade=reduced?800:2700;
+   const alpha=Math.max(0,Math.min(1,(fade-elapsed)/650));
+   if(alpha<=0||bit.y>h+28)continue;
+   ctx.save();ctx.translate(bit.x,bit.y);ctx.rotate(bit.rot);
+   ctx.globalAlpha=alpha;ctx.fillStyle=bit.color;
+   ctx.fillRect(-bit.width/2,-bit.height/2,bit.width,bit.height);
+   ctx.restore();
+  }
+  if(elapsed<(reduced?900:2750))confettiFrame=requestAnimationFrame(frame);
+  else{ctx.clearRect(0,0,w,h);canvas.style.display='none';confettiFrame=0}
+ }
+ confettiFrame=requestAnimationFrame(frame);
+}
 function scrollToNode(id){if(innerWidth<941){setTimeout(() => $(id).scrollIntoView({behavior:'smooth',block:'nearest'}),120)}}
 function spin(){
  if(spinning||state.last||state.n>=5)return;
@@ -309,7 +391,7 @@ function spin(){
    setWheelAngle(finalAngle);
    pointer.removeAttribute('transform');
    state.n++;state.h.push(key);state.last=key;state.claimed=false;state.angle=finalAngle;
-   spinning=false;save();update();scrollToNode('win');
+   spinning=false;save();update();if(key==='super'){playSuperprizeSound();launchSuperprizeConfetti()}scrollToNode('win');
   }
   requestAnimationFrame(settleFrame);
  }
