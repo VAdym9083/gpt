@@ -5370,8 +5370,8 @@ body::before{display:none!important}
         <div class="luckWheelRow" data-i18n-ui>
           <a class="luckWheelCTA" id="luckWheelCTA" href="/gpt/gift/?lang=uk" aria-label="Перевірте свою удачу">
             <span class="luckWheelIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v10h16V10"/><path d="M2.5 7.5h19v4h-19z"/><path d="M12 7.5V20"/><path d="M12 7.4C6 7.8 4.5 5.5 6 3.8c1.8-2.1 5 .8 6 3.6Zm0 0c6 .4 7.5-1.9 6-3.6-1.8-2.1-5 .8-6 3.6Z"/></svg></span>
-            <span class="luckWheelText"><strong id="luckWheelTitle">Перевірте свою удачу</strong><small id="luckWheelCaption">Подарунок для нових клієнтів · Тільки сьогодні</small></span>
-            <span class="luckWheelArrow" aria-hidden="true">→</span>
+            <span class="luckWheelText"><strong id="luckWheelTitle">Перевірте свою удачу</strong><small id="luckWheelCaption">Подарунок для нових клієнтів</small></span>
+            <span class="luckWheelArrow" aria-hidden="true">←</span>
           </a>
         </div>
         <script>
@@ -5381,10 +5381,10 @@ body::before{display:none!important}
           const caption=document.getElementById('luckWheelCaption');
           if(!btn||!heading||!caption)return;
           const languages={
-            uk:['Перевірте свою удачу','Подарунок для нових клієнтів · Тільки сьогодні'],
-            ru:['Проверьте свою удачу','Подарок для новых клиентов · Только сегодня'],
-            en:['Try your luck','A gift for new clients · Today only'],
-            es:['Prueba tu suerte','Un regalo para nuevos clientes · Solo hoy']
+            uk:['Перевірте свою удачу','Подарунок для нових клієнтів'],
+            ru:['Проверьте свою удачу','Подарок для новых клиентов'],
+            en:['Try your luck','A gift for new clients'],
+            es:['Prueba tu suerte','Un regalo para nuevos clientes']
           };
           function sync(lang){
             const code=Object.prototype.hasOwnProperty.call(languages,lang)?lang:'uk';
