@@ -10,6 +10,10 @@
 h1{font-size:clamp(59px,6.1vw,86px);line-height:.92;letter-spacing:-.075em;font-weight:800;margin:28px 0 15px}h1 em{display:block;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;letter-spacing:-.065em;color:#6f899e;font-size:1.02em;margin-top:5px}.today{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid #e3d2bb;border-radius:999px;background:#f7f0e5;color:#8b6033;font-size:11px;font-weight:730}.today svg{width:13px;height:13px}.lead{font-size:16px;color:#66717c;line-height:1.57;max-width:415px;margin:20px 0 25px}.offers{display:grid;gap:13px;margin:0;padding:0;list-style:none}.offers li{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:690}.offers .check{display:grid;place-items:center;flex:0 0 27px;height:27px;border:1px solid #cfdae1;border-radius:9px;color:#50728b;background:#edf3f5}.offers li:last-child{color:#946a38}.offers li:last-child .check{color:#9c743f;border-color:#eadbc4;background:#f7eee0}.mini{font-size:11px;color:#8d959c;margin-top:25px}
 .game{min-width:0;display:flex;flex-direction:column;align-items:center;gap:0}.wheelwrap{position:relative;width:min(100%,447px);aspect-ratio:1;filter:drop-shadow(0 20px 22px rgba(32,48,59,.10))}.wheelwrap svg{width:100%;height:100%;display:block;overflow:visible}.rotor{transform-box:view-box;transform-origin:50% 50%;will-change:transform}.spin{margin-top:9px;width:min(100%,390px);min-height:55px;border:1px solid #263e51;border-radius:15px;color:#fff;background:linear-gradient(110deg,#3c566b,#263b4e);font-weight:760;font-size:15px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 9px 22px #334b5e2a,0 1px 0 #ffffff2e inset;transition:filter .16s,transform .16s}.spin:hover:not(:disabled){filter:brightness(1.06);transform:translateY(-1px)}.spin:active:not(:disabled){transform:translateY(0)}.spin:disabled{opacity:.6;box-shadow:none}.spin svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}.tries{display:flex;justify-content:space-between;align-items:center;width:min(100%,390px);margin:12px 0 0;gap:12px;font-size:11px;color:#8b939b}.dots{display:flex;gap:5px}.dots i{display:block;width:22px;height:3px;border-radius:3px;background:#d8dddf}.dots i.done{background:#7890a1}.dots i.gold{background:#bb935c}
 .win{width:min(100%,425px);border:1px solid #d7dedd;border-radius:19px;background:#ffffffbd;box-shadow:0 13px 34px #32435312;margin-top:17px;padding:18px 18px 17px;text-align:center;display:none}.win.show{display:block;animation:reveal .26s ease-out}.win.gold{border-color:#dfc9a7;background:linear-gradient(130deg,#fff9ed,#fff)}.win .kicker{font-size:10px;text-transform:uppercase;letter-spacing:.17em;font-weight:780;color:#a17c50}.win h2{font-size:24px;line-height:1.09;letter-spacing:-.045em;margin:7px 0 7px}.win p{font-size:12px;line-height:1.5;color:#75808b;margin:0 0 14px}.winBtns{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.secondary,.primary{border-radius:11px;padding:11px 14px;min-height:43px;font-size:12px;font-weight:760}.primary{border:1px solid #334c61;background:#334c61;color:#fff}.secondary{border:1px solid #cfd8df;background:#f4f7f9;color:#334c61}.win small{display:block;margin-top:10px;color:#8a939a;font-size:10px}.claim{display:none;margin:17px auto 0;width:min(860px,calc(100% - 38px));padding:23px 26px;border:1px solid #dcd8d0;background:#fffdfa;border-radius:20px;text-align:center;box-shadow:0 15px 40px #343b3a10}.claim.show{display:block;animation:reveal .26s ease-out}.claim .kicker{font-size:10px;font-weight:770;color:#a37745;letter-spacing:.16em}.claim h2{font-size:29px;letter-spacing:-.05em;margin:8px 0}.claim p{color:#6c7880;font-size:13px;line-height:1.6;margin:0 auto;max-width:600px}.channels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px auto 0;max-width:630px}.channel{min-height:46px;color:#fff;font-size:13px;font-weight:760;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:9px}.channel.wa{background:#1fad62}.channel.tg{background:#258fc8}.channel.ig{background:linear-gradient(115deg,#6550c8,#d83b89 56%,#f49c43)}.channel svg{width:19px;height:19px;fill:currentColor}.return{border:0;background:none;color:#546d7e;margin-top:12px;font-size:11px;font-weight:690;padding:6px}.terms{max-width:980px;margin:22px auto 0;border:1px solid #deded9;border-radius:15px;background:#ffffff7a}.terms summary{padding:16px 21px;list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:12px;font-weight:710}.terms summary::-webkit-details-marker{display:none}.terms summary:after{content:'+';font-size:21px;font-weight:400}.terms[open] summary:after{content:'−'}.terms .content{padding:0 22px 18px;font-size:11px;line-height:1.65;color:#616b73}.terms .content p{margin:8px 0}.endline{margin:15px auto 0;text-align:center;font-size:10px;color:#92979a}.footer{display:flex;justify-content:space-between;color:#959a9d;font-size:10px;padding:22px 0 30px}.footer a:hover{text-decoration:underline}@keyframes reveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* Mechanical wheel audio control: minimal chrome, accessible on mobile */
+.sound-toggle{margin:6px auto 0;padding:5px 12px;border:1px solid rgba(76,100,119,.25);border-radius:99px;background:rgba(255,255,255,.56);color:#4b6272;font-size:10px;font-weight:700;letter-spacing:.015em;min-height:29px;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,border-color .2s}
+.sound-toggle:hover{background:#fff;border-color:#9bafbc}.sound-toggle[aria-pressed="false"]{color:#81909a}
+#pointer{pointer-events:none} 
 @media(max-width:940px){.hero{grid-template-columns:1fr;gap:14px;padding:30px 30px 29px}.copy{text-align:center}.eyebrow{justify-content:center}.eyebrow:before{display:none}h1{font-size:53px;margin:12px 0 11px}.lead{max-width:580px;margin:12px auto 14px}.offers{display:none}.mini{display:none}.wheelwrap{width:min(100%,400px)}.game{gap:0}.spin{margin-top:5px}}
 @media(max-width:540px){.wrap{width:calc(100% - 22px)}.header{height:61px}.brand{gap:7px}.brand img{height:34px;width:34px}.brandText strong{font-size:10px;letter-spacing:.12em}.brandText small{font-size:7px;letter-spacing:.11em}.site-link{padding:8px 10px;font-size:10px}.panel{border-radius:22px}.hero{padding:20px 14px 20px;gap:10px}.eyebrow{font-size:9px;letter-spacing:.13em}h1{font-size:clamp(35px,10vw,48px);margin:9px 0 10px}h1 em{display:inline-block;margin-left:4px}.today{padding:6px 10px;font-size:10px}.lead{font-size:12px;line-height:1.45;max-width:320px;margin:9px auto 5px}.wheelwrap{width:min(100%,328px)}.spin{min-height:51px;margin-top:3px;width:min(100%,332px);font-size:14px;border-radius:14px}.tries{width:min(100%,332px);margin-top:9px}.win{margin-top:13px;padding:16px 13px}.win h2{font-size:21px}.win p{font-size:11px}.claim{padding:20px 13px;width:calc(100% - 4px)}.claim h2{font-size:23px}.channels{grid-template-columns:1fr;gap:8px}.channel{min-height:42px}.footer{padding:20px 0}.terms{margin-top:16px}.terms summary{padding:14px 15px}.endline{line-height:1.4;padding:0 16px}}
 @media(max-width:360px){.wheelwrap{width:min(100%,290px)}.hero{padding:18px 12px}.lead{font-size:11px}.headline{font-size:32px}}
@@ -146,7 +150,7 @@ h1 em{color:#c4d5df;text-shadow:none}
 <g id="hub" aria-hidden="true" filter="url(#hubShadow)"><circle cx="300" cy="300" r="54" fill="#f9f8f3" stroke="#fff" stroke-width="4"/><circle cx="300" cy="300" r="48" fill="url(#hubFill)" stroke="url(#hubGold)" stroke-width="3.5"/><circle cx="300" cy="300" r="40" fill="none" stroke="#fff" stroke-width="1.6"/><image href="/gpt/assets/target-lb-logo.svg" x="274" y="273" width="52" height="54" preserveAspectRatio="xMidYMid meet"/></g>
 <g id="pointer" aria-hidden="true" filter="url(#hubShadow)"><path d="M283 18Q283 11 292 11H308Q317 11 317 18V32L300 67 283 32Z" fill="#304859" stroke="#fdfaf7" stroke-width="4" stroke-linejoin="round"/><circle cx="300" cy="24" r="5.5" fill="#f9f9f5"/></g>
 </svg></div>
-<button id="spinBtn" class="spin" type="button">Крутити колесо <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="tries"><div id="progress" class="dots" aria-label="Прогрес обертань"></div><span id="triesText">Залишилося 5 спроб</span></div>
+<button id="spinBtn" class="spin" type="button">Крутити колесо <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="tries"><div id="progress" class="dots" aria-label="Прогрес обертань"></div><span id="triesText">Залишилося 5 спроб</span></div><button id="soundBtn" class="sound-toggle" type="button" aria-pressed="true" title="Увімкнути або вимкнути клацання колеса">♫ Звук: увімкнено</button>
 <div id="win" class="win" aria-live="polite"><div class="kicker">Ваш подарунок</div><h2 id="prizeTitle">Консультація</h2><p id="prizeDesc"></p><div class="winBtns"><button id="takeBtn" class="primary" type="button">Забрати подарунок</button><button id="againBtn" class="secondary" type="button">Спробувати ще раз ↻</button></div><small id="againHint">Якщо бажаєте отримати інший подарунок, спробуйте ще раз</small></div>
 </div></div></section>
 <section id="claim" class="claim" aria-live="polite"><div class="kicker">Вітаємо з виграшем</div><h2 id="claimTitle"></h2><p>Зробіть скриншот результату та надішліть його мені в будь-яку зручну соцмережу, щоб підтвердити подарунок</p>
@@ -191,27 +195,126 @@ function setWheelAngle(angle){
  for(const face of uprightLabels)face.setAttribute('transform',`rotate(${-counter})`);
 }
 setWheelAngle(state.angle);
+// Twenty-eight physical detents match the twenty-eight dots on the rim.
+const pointer=$('pointer'), toothStep=360/28;
+let muted=false, audioCtx=null, noiseBuffer=null, lastAudioAt=-1, pointerImpact=-10000, pointerKick=0;
+const AC=window.AudioContext||window.webkitAudioContext;
+function prepareAudio(){
+ if(muted||!AC)return;
+ try{
+  if(!audioCtx){
+   audioCtx=new AC();const rate=audioCtx.sampleRate;
+   noiseBuffer=audioCtx.createBuffer(1,Math.max(64,Math.round(rate*.035)),rate);
+   const samples=noiseBuffer.getChannelData(0);
+   for(let i=0;i<samples.length;i++)samples[i]=(Math.random()*2-1)*Math.pow(1-i/samples.length,3);
+  }
+  if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});
+ }catch(e){audioCtx=null}
+}
+function tickSound(force=false){
+ if(muted||!audioCtx||audioCtx.state!=='running'||!noiseBuffer)return;
+ const now=audioCtx.currentTime;
+ if(!force&&now-lastAudioAt<.050)return;
+ lastAudioAt=now;
+ try{
+  const source=audioCtx.createBufferSource();source.buffer=noiseBuffer;
+  const filter=audioCtx.createBiquadFilter();filter.type='highpass';filter.frequency.value=1200;
+  const gain=audioCtx.createGain();gain.gain.setValueAtTime(force?.075:.045,now);
+  gain.gain.exponentialRampToValueAtTime(.0001,now+.033);
+  source.connect(filter);filter.connect(gain);gain.connect(audioCtx.destination);
+  source.start(now);source.stop(now+.035);
+  const oscillator=audioCtx.createOscillator(),tone=audioCtx.createGain();
+  oscillator.type='triangle';oscillator.frequency.setValueAtTime(force?720:580,now);
+  oscillator.frequency.exponentialRampToValueAtTime(180,now+.026);
+  tone.gain.setValueAtTime(force?.018:.011,now);
+  tone.gain.exponentialRampToValueAtTime(.0001,now+.026);
+  oscillator.connect(tone);tone.connect(audioCtx.destination);
+  oscillator.start(now);oscillator.stop(now+.028);
+ }catch(e){}
+}
+function ratchetClick(now,force=false){if(!force&&now-pointerImpact<42)return;pointerImpact=now;pointerKick=force?12:8;tickSound(force)}
+function movePointer(now){
+ const elapsed=Math.max(0,now-pointerImpact);
+ const angle=elapsed>500?0:pointerKick*Math.exp(-elapsed/103)*Math.sin(elapsed*.060);
+ pointer.setAttribute('transform',`rotate(${angle.toFixed(3)} 300 17)`);
+}
+$('soundBtn').addEventListener('click',()=>{
+ muted=!muted;
+ $('soundBtn').setAttribute('aria-pressed',String(!muted));
+ $('soundBtn').textContent=muted?'♫ Звук: вимкнено':'♫ Звук: увімкнено';
+ if(!muted)prepareAudio();
+});
+// Quick run-up followed by frictional deceleration; keeps clicks aligned with rim markers.
+const spinCurve=[0];let accumulated=0;
+for(let i=1;i<=360;i++){
+ const t=i/360, velocity=(1-Math.exp(-t/.052))*Math.pow(Math.max(0,1-t),2.35);
+ accumulated+=velocity;spinCurve.push(accumulated);
+}
+function inertiaProgress(t){
+ const p=Math.max(0,Math.min(359.9999,t*360)),i=Math.floor(p),f=p-i;
+ return (spinCurve[i]*(1-f)+spinCurve[i+1]*f)/accumulated;
+}
+function approachTooth(chosen){
+ // Stop 3–5 degrees BEFORE a detent in the awarded segment (never at its centre).
+ const options=[];
+ for(let k=0;k<28;k++){
+  const tooth=k*toothStep, margin=3.7;
+  const alpha=((( - (tooth-margin))%360)+360)%360;
+  const dist=(alpha-chosen.mid+chosen.size/2+360)%360;
+  if(dist>2.5&&dist<chosen.size-2.5)options.push({tooth,dist});
+ }
+ if(!options.length)return ((360-chosen.mid)%360+360)%360;
+ // Prefer a stop near the NEXT sector boundary while staying securely in awarded sector.
+ options.sort((a,b)=>a.dist-b.dist);
+ const tooth=options[0].tooth;
+ return ((tooth-(3.7+Math.random()*.9))%360+360)%360;
+}
 let spinning=false;const outcome=()=>{let n=state.n+1;let last=state.h.at(-1),two=last&&state.h.at(-2)===last;let k;if(n===5)k='super';else if(n===1)k=Math.random()<.5?'consult':'audit';else {let r=Math.random();k=r<.33?'super':r<.665?'consult':'audit'}if(two&&k===last&&k!=='super')k=k==='consult'?'audit':'consult';return k};
 function update(){let rem=Math.max(0,5-state.n);$('spinBtn').disabled=spinning||!!state.last||rem===0;$('triesText').textContent=spinning?'Колесо обертається…':state.last==='super'?'Вітаємо із суперпризом':rem?`Залишилося ${rem} ${rem===1?'спроба':rem<5?'спроби':'спроб'}`:'Спроби використано';$('progress').replaceChildren();for(let i=0;i<5;i++){let n=document.createElement('i');if(i<state.n)n.className='done';if(i===state.n-1&&state.last==='super')n.className='gold';$('progress').appendChild(n)};
 $('win').classList.toggle('show',!!state.last&&!state.claimed);$('win').classList.toggle('gold',state.last==='super');$('claim').classList.toggle('show',!!state.last&&state.claimed);
 if(state.last){let p=PRIZES[state.last];$('prizeTitle').textContent=p.title;$('prizeDesc').textContent=p.desc;$('claimTitle').textContent=p.title;let can=state.n<5&&state.last!=='super';$('againBtn').hidden=!can;$('againHint').hidden=!can;$('backBtn').hidden=!can;
  $('againHint').textContent=can?'Якщо бажаєте отримати інший подарунок, спробуйте ще раз':'';const msg=`Вітаю! Я виграв(ла) в колесі подарунків Target LB: ${p.title}. Надсилаю скриншот для підтвердження`; $('wa').href='https://wa.me/34642683873?text='+encodeURIComponent(msg)}}
 function scrollToNode(id){if(innerWidth<941){setTimeout(() => $(id).scrollIntoView({behavior:'smooth',block:'nearest'}),120)}}
-function spin(){if(spinning||state.last||state.n>=5)return;spinning=true;update();const key=outcome(),opt=SECTORS.filter(s=>s.key===key);const chosen=opt[Math.floor(Math.random()*opt.length)];const jitter=(Math.random()-.5)*Math.min(7,chosen.size*.2);let target=(((360-chosen.mid+jitter)%360)+360)%360;let current=((state.angle%360)+360)%360;let delta=((target-current+360)%360)+360*(5+Math.floor(Math.random()*2));let end=state.angle+delta;let reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
- const duration=reduce?100:5200,startAngle=state.angle,range=end-startAngle;
+function spin(){
+ if(spinning||state.last||state.n>=5)return;
+ prepareAudio();spinning=true;update();
+ const key=outcome(),options=SECTORS.filter(s=>s.key===key),chosen=options[Math.floor(Math.random()*options.length)];
+ const endMod=approachTooth(chosen),nearMod=((endMod+3.05)%360+360)%360;
+ const currentMod=((state.angle%360)+360)%360;
+ const delta=((nearMod-currentMod+360)%360)+360*(4+Math.floor(Math.random()*2));
+ const startAngle=state.angle,nearAngle=startAngle+delta;
+ const finalAngle=nearAngle-3.05;
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const mainDuration=reduced?180:5900,settleDuration=reduced?120:940;
  const born=performance.now();
- function frame(now){
-   const t=Math.min(1,(now-born)/duration);
-   // Sine acceleration/deceleration with zero angular velocity at either end
-   // The SVG viewBox is static; only the rotor's transform ATTR rotates around 300,300.
-   const eased=(1-Math.cos(Math.PI*t))/2;
-   setWheelAngle(startAngle+range*eased);
-   if(t<1){requestAnimationFrame(frame);return}
-   setWheelAngle(end);
-   state.n++;state.h.push(key);state.last=key;state.claimed=false;state.angle=end;
+ let lastTooth=Math.floor(startAngle/toothStep);
+ function mainFrame(now){
+  const t=Math.min(1,(now-born)/mainDuration);
+  const angle=startAngle+delta*inertiaProgress(t);
+  setWheelAngle(angle);
+  const tooth=Math.floor(angle/toothStep);
+  if(tooth>lastTooth){lastTooth=tooth;ratchetClick(now)}
+  movePointer(now);
+  if(t<1){requestAnimationFrame(mainFrame);return}
+  // A final near-miss at the next detent, then a short spring-back.
+  ratchetClick(now,true);
+  const settleStart=now;
+  function settleFrame(timestamp){
+   const u=Math.min(1,(timestamp-settleStart)/settleDuration);
+   const spring=1-Math.exp(-8*u)*Math.cos(4.4*Math.PI*u);
+   const angle=u===1?finalAngle:nearAngle+(finalAngle-nearAngle)*spring;
+   setWheelAngle(angle);
+   movePointer(timestamp);
+   if(u<1){requestAnimationFrame(settleFrame);return}
+   setWheelAngle(finalAngle);
+   pointer.removeAttribute('transform');
+   state.n++;state.h.push(key);state.last=key;state.claimed=false;state.angle=finalAngle;
    spinning=false;save();update();scrollToNode('win');
+  }
+  requestAnimationFrame(settleFrame);
  }
- requestAnimationFrame(frame)}
+ requestAnimationFrame(mainFrame);
+}
 $('spinBtn').addEventListener('click',spin);$('againBtn').addEventListener('click',()=>{if(spinning||state.n>=5||state.last==='super')return;state.last=null;state.claimed=false;save();update();scrollToNode('game')});$('takeBtn').addEventListener('click',()=>{if(!state.last)return;state.claimed=true;save();update();scrollToNode('claim')});$('backBtn').addEventListener('click',()=>{if(state.n>=5||state.last==='super')return;state.claimed=false;save();update();scrollToNode('win')});
 window.__LB_WHEEL_TEST={state,SECTORS};update();})();
 </script></body></html>
