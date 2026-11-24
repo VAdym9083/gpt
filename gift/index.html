@@ -340,10 +340,14 @@ function playSuperprizeSound(){
   output.gain.linearRampToValueAtTime(.18,now+.16);
   output.gain.linearRampToValueAtTime(.35,now+.56);
   output.gain.linearRampToValueAtTime(.55,now+1.18);
-  output.gain.setValueAtTime(.55,now+Math.max(1.2,victoryVoiceBuffer.duration-.42));
-  output.gain.linearRampToValueAtTime(.0001,now+victoryVoiceBuffer.duration);
+  // Keep the exact licensed fanfare and pitch, trim its extended tail by ~one third.
+  const playDuration=Math.min(2.12,victoryVoiceBuffer.duration);
+  const end=now+playDuration;
+  output.gain.setValueAtTime(.55,now+1.18);
+  output.gain.setValueAtTime(.55,Math.max(now+1.19,end-.48));
+  output.gain.linearRampToValueAtTime(.0001,end);
   source.connect(output);output.connect(audioCtx.destination);
-  source.start(now);source.stop(now+victoryVoiceBuffer.duration+.015);
+  source.start(now,0,playDuration);source.stop(end+.015);
  }catch(e){}
 }
 let confettiFrame=0;
